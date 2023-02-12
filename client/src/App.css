@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins';
+  background-color: #f6f6f2;
+  scroll-behavior: smooth;
+}
+
+.App{
+  background-color: #f6f6f2;
+}
+
+.home{
+  background-color: #f6f6f2;
+}
+/* 1st page */
+.navbar{
+  height: 100px;
+  background-color: #f6f6f2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  padding: 35px;
+}
+
+.navbar a{
+  text-decoration: none;
+  color: black;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+
+.hero-main{
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 530px;
+}
+
+.hero-text{
+  /* border: 1px solid brown; */
+  text-align: center;
+  width: 500px;
+}
+
+.hero-text > *{
+  margin-bottom: 60px;
+}
+
+ button{
+  background-color: #222;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0;
+  max-width: none;
+  min-height: 44px;
+  min-width: 10px;
+  outline: none;
+  overflow: hidden;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+ button:hover,
+ button:focus {
+  opacity: .75;
+}
+
+/* 3rd page */
+.HelpPage{
+  height: 100vh;
+  border: 1px solid orange;
+  position: relative;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.HelpPage-container{
+  border: 1px solid aquamarine;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  max-width: 60%;
+}
+
+.HelpPage-container .help-text{
+  text-align: center;
+  word-wrap: break-word;
+}
+.HelpPage .help-buttons{
+  display: flex;
+  border: 1px solid black;
+  max-width: 70%;
+  justify-content: center;
+  gap: 10px;
+  /* margin: auto; */
+}
+.HelpPage img{
+  position:inherit;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  top: 0;
+  height: max-content;
+  opacity: .7;
+}
+
