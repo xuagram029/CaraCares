@@ -13,7 +13,7 @@ const HumaneEduc = () => {
             <p className='mb-5'>Through our program we aim to cultivate in children a spirit of kindness to animals. They are made aware of the numerous responsibilities, costs and time commitment associated with caring for an animal. Ultimately, our goal is to empower students to speak up for animals and not be passive observers to their abuse. Instilling such a foundation in children will make them just, kind and compassionate individuals in every respect.</p>
             <p className='mb-5'>We alter our session content depending on the age level we are presenting to.</p>
             <p className=' inline-block'>For further enquiries, please contact: </p>
-            <a href="mailto:secretary@caraphil.org"> secretary@caraphil.org</a>
+            <a href="mailto:secretary@caraphil.org" className="underline font-bold"> secretary@caraphil.org</a>
         </div>
     </div>
   )

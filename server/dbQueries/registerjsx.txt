@@ -1,0 +1,47 @@
+import React, { useState } from 'react';
+
+const RegisterForm = () => {
+  const [user, setUser] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+
+    // Submit the user and password to the server
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user, pwd }),
+    });
+
+    if (response.ok) {
+      // Registration successful, show success message
+      const data = await response.json();
+      setMessage(data.success);
+    } else {
+      // Registration failed, show error message
+      const data = await response.json();
+      setMessage(data.message);
+    }
+  };
+
+  return (
+    <form onSubmit={handleRegister}>
+      <label>
+        Username:
+        <input type="text" value={user} onChange={(e) => setUser(e.target.value)} />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input type="password" value={pwd} onChange={(e) => setPwd(e.target.value)} />
+      </label>
+      <br />
+      <button type="submit">Register</button>
+      {message && <div>{message}</div>}
+    </form>
+  );
+};
+
+export default RegisterForm;

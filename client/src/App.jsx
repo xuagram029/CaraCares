@@ -19,7 +19,7 @@ import LagunaPit from './pages/LagunaPit';
 import Sponsor from './pages/Sponsor';
 import Tnvr from './pages/Tnvr';
 import Dropdown from './pages/Dropdown';
-import Nav2 from './pages/Nav2';
+import Reg from './pages/Reg';
 
 function App() {
 
@@ -39,8 +39,8 @@ const Layout = () => {
       element: <Home />,
     },
     {
-      path: "/nav2",
-      element: <Nav2 />,
+      path: "/reg",
+      element: <Reg />,
     },
     {
       path: "/dropdown",
