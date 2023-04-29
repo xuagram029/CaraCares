@@ -9,7 +9,7 @@ const handleLogin = (req, res) => {
         return res.status(400).json({ message: 'Username and password are required' });
     }
     db.query(
-        "SELECT * FROM users WHERE username = ?", 
+        "SELECT * FROM testuser WHERE username = ?", //
         user,
         (err, result) => {
             if(err) return res.json(err)
@@ -18,8 +18,14 @@ const handleLogin = (req, res) => {
                 const userFromDb = result[0]
                 // if(userFromDb.password === pwd){
                 if (bcrypt.compareSync(pwd, userFromDb.password)) {
+                    const roles = [userFromDb.roles]
                     const accessToken = jwt.sign(
-                        { "username": user },
+                        { 
+                            "UserInfo": {
+                                "username": user, 
+                                "roles": roles
+                            }
+                        },
                         process.env.ACCESS_TOKEN_SECRET,
                         { expiresIn: '30s'}
                       );
@@ -29,7 +35,7 @@ const handleLogin = (req, res) => {
                         { expiresIn: '1d'}
                       );
                       db.query(
-                        "UPDATE users SET refreshToken = ? WHERE id = ?",
+                        "UPDATE testuser SET refreshToken = ? WHERE id = ?",
                         [refreshToken, userFromDb.id],
                         (err, result) => {
                             if(err){

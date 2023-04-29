@@ -1,7 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const { getUsers } = require('../controllers/users')
+const { getUsers, postUser } = require('../controllers/usersController')
+const ROLES_LIST = require('../config/roles_list')
+const verifyRoles = require('../middleware/verifyRoles')
 
-router.get('/', getUsers)
+router.route('/')
+    .get(getUsers)
+    .post(postUser)
 
 module.exports = router
