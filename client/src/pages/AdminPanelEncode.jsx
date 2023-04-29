@@ -2,8 +2,44 @@ import React from 'react'
 import Max from '../assets/ui/CARA_PICTURES/dogs/MAX.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const AdminPanelEncode = () => {
+  const [data,setData] = useState([])
+
+  const navigate = useNavigate()
+
+  const [name, setName] = useState('')
+  const [gender, setGender] = useState('')
+  const [color, setColor] = useState('')
+  const [age, setAge] = useState('')
+  const [breed, setBreed] = useState([])
+  const [shelternumber, setShelterNumber] = useState('')
+  const [sheltername, setShelterName] = useState('')
+  const [shelteremail, setShelterEmail] = useState('')
+  const [shelteraddress, setShelterAddress] = useState('')
+
+  const handleSubmit = async(e) =>{
+    await axios.post('http://localhost:8000/admin-encode', {name, gender, color, age, breed, shelternumber, sheltername, shelteremail, shelteraddress})
+    navigate('/admin-panel-encode')
+}
+
+  useEffect(() =>{
+    const getData = async () =>{
+        try {
+            const res = await axios.get('http://localhost:8000/admin-encode')
+            setData(res.data)
+            console.log(res.data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    getData()
+}, [])
+
+
   return (
     <div className='m-10 p-5 h-max sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto'>
 
@@ -26,23 +62,33 @@ const AdminPanelEncode = () => {
         <form>
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="name">Animal Name:</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text"/>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text"
+            value={name} onChange={(e) => {setName (e.target.value)}}/>
           </div>
           <div class="mb-6">
             <label class="block text-gray-700 font-bold mb-2" for="email">Gender:</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="gender" type="text"/>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="gender" type="text"
+            value={gender} onChange={(e) => {setGender (e.target.value)}}/>
           </div>
           <div class="mb-6">
             <label class="block text-gray-700 font-bold mb-2" for="email">Color:</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="color" type="text"/>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="color" type="text"
+            value={color} onChange={(e) => {setColor (e.target.value)}}/>
           </div>
           <div class="mb-6">
-            <label class="block text-gray-700 font-bold mb-2" for="email">Age</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="age" type="text"/>
+            <label class="block text-gray-700 font-bold mb-2" for="email">Age:</label>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="age" type="text"
+            value={age} onChange={(e) => {setAge (e.target.value)}}/>
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2" for="email">Breed:</label>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="breed" type="text"
+            value={breed} onChange={(e) => {setBreed (e.target.value)}}/>
           </div>
           <div class="mb-6">
             <label class="block text-gray-700 font-bold mb-2" for="email">Shelter Number:</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="shelternum" type="text"/>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="shelternum" type="text"
+            value={shelternumber} onChange={(e) => {setShelterNumber (e.target.value)}}/>
           </div>
         </form>
       </div>
@@ -52,21 +98,24 @@ const AdminPanelEncode = () => {
       <form>
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="name">Shelter Name:</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text"/>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text"
+            value={sheltername} onChange={(e) => {setShelterName (e.target.value)}}/>
           </div>
           <div class="mb-6">
             <label class="block text-gray-700 font-bold mb-2" for="email">Shelter Email:</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="gender" type="text"/>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="gender" type="text"
+            value={shelteremail} onChange={(e) => {setShelterEmail (e.target.value)}}/>
           </div>
           <div class="mb-6">
             <label class="block text-gray-700 font-bold mb-2" for="email">Shelter Address:</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="color" type="text"/>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="color" type="text"
+            value={shelteraddress} onChange={(e) => {setShelterAddress (e.target.value)}}/>
           </div>
       </form>
       </div>
       </div>
       <div class="flex justify-center">
-        <button class=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-[13px] px-8 mt-4 rounded-lg mx-auto">Submit</button>
+        <button class=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-[13px] px-8 mt-4 rounded-lg mx-auto" onClick={handleSubmit}>Submit</button>
       </div>
 
     </div>

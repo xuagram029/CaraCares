@@ -24,6 +24,11 @@ import AdminVisitation from './pages/AdminVisitation';
 import AdminVisitationReport from './pages/AdminVisitationReport';
 import AdminPanelEncode from './pages/AdminPanelEncode';
 import FosterPDF from './pages/FosterPDF';
+import FoundPets from './pages/FoundPets';
+import FoundPetsAll from './pages/Foundpetsall';
+import FoundPetsMore from './pages/Foundpetsmore';
+import Reportpets from './pages/Reportpets';
+import FoundReport from './pages/Foundreport';
 
 function App() {
 
@@ -96,6 +101,32 @@ const Layout = () => {
         {
           path: '/admin-panel-encode',
           element: <AdminPanelEncode />
+        }
+      ]
+    },
+    {
+      path: "/foundpets",
+      element: <FoundPets />,
+    },
+    {
+      path: "/foundpetsall",
+      element: <FoundPetsAll />,
+    },
+    {
+      path: "/foundpetsmore",
+      element: <FoundPetsMore />,
+    },
+    {
+      path: "/reportpets",
+      element: <Reportpets />,
+    },
+    {
+      path: '/Foundreport',
+      element:<Layout />,
+      children: [
+        {
+          path: '/Foundreport',
+          element: <FoundReport />
         }
       ]
     },

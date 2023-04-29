@@ -13,6 +13,7 @@ function FosterPDF() {
         input4: '',
         input5: '',
         input6: '',
+        input6: '',
         file: null,
       };
     
@@ -23,6 +24,7 @@ function FosterPDF() {
         input4: Yup.string().required(),
         input5: Yup.string().required(),
         input6: Yup.string().required(),
+        input7: Yup.string().required(),
         file: Yup.mixed().required(),
         
       });
@@ -40,6 +42,7 @@ function FosterPDF() {
     
       const generatePDF = (values) => {
         const doc = new jsPDF('p', 'pt');
+        doc.text(250, 60,"FOSTER CONTRACTS")
         doc.text(20, 60, values.input);
         doc.addFont('helvetica', 'normal');
         doc.text(20, 100, values.input2);
@@ -47,6 +50,7 @@ function FosterPDF() {
         doc.text(20, 180, values.input4);
         doc.text(20, 220, values.input5);
         doc.text(20, 260, values.input6);
+        doc.text(20, 260, values.input7);
         doc.addImage(values.file, 'PNG', 30, 140, 300, 200);
         doc.save('demo.pdf');
       };
@@ -115,6 +119,15 @@ function FosterPDF() {
               type="email"
               id="input6"
               name="input6"
+              className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="input7">Phone # *</label>
+            <Field
+              type="tel"
+              id="input7"
+              name="input7"
               className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
             />
           </div>

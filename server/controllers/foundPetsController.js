@@ -16,9 +16,10 @@ const addFoundPet = (req, res) =>{
     const color = req.body.color
     const found = req.body.found
     const description = req.body.description
+    const typeofpet = req.body.typeofpet
 
-    db.query("INSERT INTO foundpet(`name`, `phone`, `email`,`breed`,`gender`,`color`, `found`,`description`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-    [name, phone, email, breed, gender, color, found, description],
+    db.query("INSERT INTO foundpet(`name`, `phone`, `email`,`breed`,`gender`,`color`, `found`,`description`,`typeofpet`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [name, phone, email, breed, gender, color, found, description, typeofpet],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)
