@@ -9,17 +9,17 @@ const JoinTeam = () => {
     const [message, setMessage] = useState("");
   return (
     <div className='bg-slate-400 m-10 p-5 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto'>
-        <div className='flex justify-around h-fit bg-slate-600'>
-            <div className='bg-slate-200 h-fit w-[45%] p-5 my-10'>
+        <div className='flex flex-col items-center sm:flex-col sm:items-center lg:flex-row lg:justify-evenly h-fit bg-slate-600'>
+            <div className='bg-slate-200 h-fit w-[75%] sm:w-[75%] md:w-[80%] lg:w-[45%] p-5 my-10 '>
                 <div className='bg-slate-400 px-14 pt-5 text-center'>
-                    <p>“Never doubt that a small, group of thoughtful, committed citizens can change the world. Indeed, it is the only thing that ever has.”</p>
+                    <p className='indent-10 text-justify'>“Never doubt that a small, group of thoughtful, committed citizens can change the world. Indeed, it is the only thing that ever has.”</p>
                     <br />
                     <p>— Margaret Mead</p>
                 </div>
 
-                <div className='bg-slate-300 px-8 pt-5 my-10'>
-                    <p className='py-4 text-justify'>CARA continues to thrive with the help of dedicated animal lovers who generously volunteer their time each week. From fostering kittens to computer work; our members improve the quality of life for so many pets.</p>
-                    <p className='py-4 text-justify'>Commitment and communication are the keys to a successful group of people who are all here for the same reason: because they love animals.</p>
+                <div className='bg-slate-300  px-8 pt-5 my-10'>
+                    <p className='py-4 indent-10 text-justify'>CARA continues to thrive with the help of dedicated animal lovers who generously volunteer their time each week. From fostering kittens to computer work; our members improve the quality of life for so many pets.</p>
+                    <p className='py-4 indent-10 text-justify'>Commitment and communication are the keys to a successful group of people who are all here for the same reason: because they love animals.</p>
                 </div>
 
                 <div className='bg-slate-300 px-8 pt-5 my-10'>
@@ -33,7 +33,7 @@ const JoinTeam = () => {
                 </div>
             </div>
 
-            <div className='bg-slate-200 h-fit w-[45%] p-5 mt-10'>
+            <div className='bg-slate-200 h-fit w-[75%] sm:w-[75%] md:w-[80%] lg:w-[45%] p-5 mt-10'>
                 <div className="bg-slate-400 p-5 mb-5">
                     <h1 className='text-4xl font-medium text-center mb-5'>Why Become a Volunteer</h1>
                     <ul className="list-disc ml-10">
@@ -60,8 +60,8 @@ const JoinTeam = () => {
             </div>
         </div>
 
-        <div className='flex justify-around h-fit bg-slate-600'>
-            <div className='bg-slate-200 h-fit w-[45%] p-5 my-10'>
+        <div className='flex flex-col items-center sm:flex-col sm:items-center lg:flex-row lg:justify-evenly h-fit bg-slate-600'>
+            <div className='bg-slate-200 h-fit w-[75%] sm:w-[75%] md:w-[80%] lg:w-[45%] p-5 m-10'>
                 <h1 className='text-4xl font-medium text-center mb-5'>Volunteer Requirements</h1>
                 <ul class="list-disc ml-10">
                     <li className='mb-1'>Time commitment – 20 hours of volunteer work per quarter.</li>
@@ -75,7 +75,7 @@ const JoinTeam = () => {
                 </ul>
             </div>
 
-            <div className='bg-slate-200 h-fit w-[45%] p-5 mt-10 relative md:block'>
+            <div className='bg-slate-200 h-fit w-[75%] sm:w-[75%] md:w-[80%] lg:w-[45%] p-5 m-10 relative md:block'>
                     <form className="bg-white shadow-md rounded-lg p-8 w-full left-[1px]  md:static">
                         <div className="mb-4">
                             <label htmlFor="firstName" className="block mb-1 font-medium"> First Name </label>

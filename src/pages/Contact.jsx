@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Contact = () => {
   return (
-    <div className='bg-slate-400 m-10 px-3 max-h-fit relative'>
+    <div className='bg-slate-400 m-10 px-3 max-h-fit'>
         <div className=''>
             <p className='font-bold  text-center p-10 text-4xl sm:text-4xl md:text-5xl'>We would love to hear from you.</p>
             <p className='font-bold text-center my-5 text-2xl sm:text-2xl md:text-3xl'>Drop us a line or send us an email.</p>

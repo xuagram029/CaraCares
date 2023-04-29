@@ -8,7 +8,7 @@ import bpi from '../assets/ui/CARA_PICTURES/donation/bpi-1@2x.png'
 
 const Donate = () => {
   return (
-      <div className='bg-slate-400 m-10 px-3 max-h-fit relative overflow-auto'>
+      <div className='bg-slate-400 m-10 px-3 max-h-fit overflow-auto'>
         <div className='text-center text-3xl font-semibold bg-slate-300 p-5 my-3'> 
             <p>CARA appreciates all your help!</p>
         </div>

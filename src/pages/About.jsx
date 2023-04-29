@@ -5,7 +5,7 @@ import clinic from '../assets/ui/CARA_PICTURES/facilities/CARA-Clinic-outer-faca
 
 const About = () => {
   return (
-    <div className='bg-slate-400 m-10 px-3 relative'>
+    <div className='bg-slate-400 m-10 px-3'>
         {/* about cara */}
         <section className='flex flex-col sm:flex-col sm:justify-center sm:items-center md:flex-col lg:flex-row'>
             <img src={cath} alt="" className='max-w-[400px] max-h-[300px] mt-10 inline-block mx-auto'/>

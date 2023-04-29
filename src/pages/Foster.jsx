@@ -1,8 +1,8 @@
 const Foster = () => {
   return (
-    <div className="bg-slate-400 ">
-        <div className='md:grid md:grid-cols-2 lg:grid lg:grid-cols-2 max-w-full'>
-        <section className="p-5 m-10 bg-primary  md:flex md:flex-col md:justify-between lg:flex lg:flex-col lg:justify-between w-[600px] sm:w-[555px] md:w-[500px] lg:w-[450px] xl:w-[600px]">
+
+        <div className='flex flex-col sm:flex-col lg:flex-row bg-slate-400 items-center sm:items-center lg:items-start'>
+        <section className="p-5 m-10 bg-primary flex flex-col justify-between w-4/5 sm:w-4/5 lg:w-2/3">
             <div className="outline-dashed p-4 mb-10">
                 <p className="font-semibold">Thank you for considering becoming a foster parent to a CARA rescue!</p>
                     <p className="mt-6">Because CARA is not an animal shelter, rescued animals need to be placed in a good home with fosters that are interested in investing energy and time as well as possibly financial resources in rehabilitating the animal and preparing it for its forever home.</p>
@@ -61,7 +61,7 @@ const Foster = () => {
             </div>
         </section>
 
-        <section className="p-5 m-10 bg-primary  md:flex md:flex-col md:justify-between lg:flex lg:flex-col lg:justify-between w-[600px] sm:w-[555px] md:w-[500px] lg:w-[450px] xl:w-[600px]">
+        <section className="p-5 m-10 bg-primary flex flex-col w-4/5 sm:w-4/5 lg:w-2/3">
             <form className="outline-dashed p-4 relative">
                 <label className="font-normal text-2xl ">Foster Contract</label>
                 <label className="block font-medium">Name of pet/s you are interested in fostering: *</label>
@@ -253,10 +253,6 @@ const Foster = () => {
             </form>
         </section>
         </div>
-
-
-        
-    </div>
   )
 }
 

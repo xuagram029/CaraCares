@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import adoption_process from '../assets/ui/CARA_PICTURES/posters/adoption_process.jpg'
 const AdoptAPet = () => {
   return (
-    <div className='bg-slate-400 m-10 px-3 max-h-fit relative'>
+    <div className='bg-slate-400 m-10 px-3 max-h-fit'>
         <section>
             <div className='p-5'>
                 <h1 className='font-bold text-center text-2xl p-3 sm:text-2xl md:text-4xl'>Is there a place in your heart for one of our delightful, rescued pets?</h1>

@@ -3,6 +3,7 @@ import {createBrowserRouter,RouterProvider, Outlet} from "react-router-dom";
 import Home from './pages/Home';
 import Blogs from './pages/Blogs';
 import Admin from './pages/Admin';
+import AdminPetBoarding from './pages/AdminPetBoarding';
 import Navbar from './components/Navbar';
 import About from './pages/About';
 import Footer from './components/Footer';
@@ -17,13 +18,19 @@ import LagunaPit from './pages/LagunaPit';
 import HumaneEduc from './pages/HumaneEduc';
 import JoinTeam from './pages/JoinTeam';
 import ErrorPage from './pages/ErrorPage';
+import Nav2 from './pages/Nav2';
+import Nav3 from './pages/Nav3';
+import AdminVisitation from './pages/AdminVisitation';
+import AdminVisitationReport from './pages/AdminVisitationReport';
+import AdminPanelEncode from './pages/AdminPanelEncode';
+import FosterPDF from './pages/FosterPDF';
 
 function App() {
 
 const Layout = () => {
   return(
     <>
-      <Navbar />
+      <Nav3 />
       <Outlet />
       <Footer />
     </>
@@ -36,6 +43,10 @@ const Layout = () => {
       element: <Home />,
     },
     {
+      path: "/nav2",
+      element: <Nav2 />,
+    },
+    {
       path: "/blogs",
       element: <Blogs />,
     },
@@ -43,9 +54,50 @@ const Layout = () => {
       path: "/admin",
       element: <Admin />,
     },
+
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: '/admin-pet-boarding',
+      element:<Layout />,
+      children: [
+        {
+          path: '/admin-pet-boarding',
+          element: <AdminPetBoarding />
+        }
+      ]
+    },
+    {
+      path: '/admin-visitation',
+      element:<Layout />,
+      children: [
+        {
+          path: '/admin-visitation',
+          element: <AdminVisitation />
+        }
+      ]
+    },
+    {
+      path: '/admin-visitation-report',
+      element:<Layout />,
+      children: [
+        {
+          path: '/admin-visitation-report',
+          element: <AdminVisitationReport />
+        }
+      ]
+    },
+    {
+      path: '/admin-panel-encode',
+      element:<Layout />,
+      children: [
+        {
+          path: '/admin-panel-encode',
+          element: <AdminPanelEncode />
+        }
+      ]
     },
     {
       path: '/about',
@@ -94,6 +146,16 @@ const Layout = () => {
         {
           path: '/foster-a-pet',
           element: <Foster />
+        }
+      ]
+    },
+        {
+      path: "/foster-pdf",
+      element: <Layout />,
+      children: [
+        {
+          path: '/foster-pdf',
+          element: <FosterPDF />
         }
       ]
     },
