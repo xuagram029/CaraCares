@@ -1,7 +1,7 @@
 const db = require('../db')
 
 const getEncodedPets = (req, res) =>{
-    db.query("SELECT * FROM shelterencode", (err, data) =>{
+    db.query("SELECT * FROM shelterencode LIMIT 4", (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)
     })
@@ -17,9 +17,10 @@ const addEncodedPet = (req, res) =>{
     const sheltername = req.body.sheltername
     const shelteremail = req.body.shelteremail
     const shelteraddress = req.body.shelteraddress
+    const datefound = req.body.datefound
 
-    db.query("INSERT INTO shelterencode(`name`, `gender`, `color`,`age`, `breed`, `shelternumber`, `sheltername`,`shelteremail`, `shelteraddress`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [name, gender, color, age, breed, shelternumber, sheltername, shelteremail, shelteraddress],
+    db.query("INSERT INTO shelterencode(`name`, `gender`, `color`,`age`, `breed`, `shelternumber`, `sheltername`,`shelteremail`, `shelteraddress`, `datefound`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [name, gender, color, age, breed, shelternumber, sheltername, shelteremail, shelteraddress, datefound],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)

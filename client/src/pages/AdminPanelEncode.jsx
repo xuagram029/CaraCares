@@ -20,9 +20,11 @@ const AdminPanelEncode = () => {
   const [sheltername, setShelterName] = useState('')
   const [shelteremail, setShelterEmail] = useState('')
   const [shelteraddress, setShelterAddress] = useState('')
+  const [datefound, setDateFound] = useState(null)
+
 
   const handleSubmit = async(e) =>{
-    await axios.post('http://localhost:8000/admin-encode', {name, gender, color, age, breed, shelternumber, sheltername, shelteremail, shelteraddress})
+    await axios.post('http://localhost:8000/admin-encode', {name, gender, color, age, breed, shelternumber, sheltername, shelteremail, shelteraddress, datefound})
     navigate('/admin-panel-encode')
 }
 
@@ -110,6 +112,11 @@ const AdminPanelEncode = () => {
             <label class="block text-gray-700 font-bold mb-2" for="email">Shelter Address:</label>
             <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="color" type="text"
             value={shelteraddress} onChange={(e) => {setShelterAddress (e.target.value)}}/>
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2" for="email">Date Found:</label>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="color" type="date"
+            value={datefound} onChange={(e) => {setDateFound (e.target.value)}}/>
           </div>
       </form>
       </div>

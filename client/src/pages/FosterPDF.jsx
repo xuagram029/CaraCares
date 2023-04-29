@@ -13,7 +13,8 @@ function FosterPDF() {
         input4: '',
         input5: '',
         input6: '',
-        input6: '',
+        input7: '',
+        input8: '',
         file: null,
       };
     
@@ -25,6 +26,7 @@ function FosterPDF() {
         input5: Yup.string().required(),
         input6: Yup.string().required(),
         input7: Yup.string().required(),
+        input8: Yup.string().required(),
         file: Yup.mixed().required(),
         
       });
@@ -39,19 +41,45 @@ function FosterPDF() {
     
         reader.readAsDataURL(file);
       };
-    
+
+      const [selectoption, setSelectedOption] = useState('');
+
+      const handleSelectChange = (e) => {
+        setSelectedOption(e.target.value);
+      };
+
       const generatePDF = (values) => {
         const doc = new jsPDF('p', 'pt');
-        doc.text(250, 60,"FOSTER CONTRACTS")
-        doc.text(20, 60, values.input);
         doc.addFont('helvetica', 'normal');
-        doc.text(20, 100, values.input2);
-        doc.text(20, 140, values.input3);
-        doc.text(20, 180, values.input4);
-        doc.text(20, 220, values.input5);
-        doc.text(20, 260, values.input6);
-        doc.text(20, 260, values.input7);
-        doc.addImage(values.file, 'PNG', 30, 140, 300, 200);
+        doc.text(225, 30,"FOSTER CONTRACTS")
+        doc.text(20, 80,"Name of pet/s you are interested in fostering:")
+        doc.text(20, 100, values.input);
+
+        doc.text(20, 130,"Full Name:")
+        doc.text(20, 150, values.input2);
+
+        doc.text(20, 180,"Age")
+        doc.text(20, 200, values.input3);
+
+        doc.text(20, 230,"Nationality")
+        doc.text(20, 250, values.input4);
+
+        doc.text(20, 280,"Occupation")
+        doc.text(20, 300, values.input5);
+
+        doc.text(20, 330,"Email")
+        doc.text(20, 350, values.input6);
+
+        doc.text(20, 380,"Phone #")
+        doc.text(20, 400, values.input7);
+
+        doc.text(20, 430,"Address")
+        doc.text(20, 450, values.input8);
+
+        doc.text(20, 480,"What type of home do you live in? *")
+        doc.text(20, 500, selectoption);
+
+        doc.addImage(values.file, 'PNG', 330, 140, 300, 200);
         doc.save('demo.pdf');
       };
     
@@ -131,8 +159,29 @@ function FosterPDF() {
               className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
             />
           </div>
+          <div className="mb-4">
+            <label htmlFor="input8">Address*</label>
+            <Field
+              type="address"
+              id="input8"
+              name="input8"
+              className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
+            />
+          </div>
 
+          <div className="mb-4">
+            <label htmlFor="input9">What type of home do you live in? *</label>
+            <select
+              value={selectoption}
+              onChange={handleSelectChange}
+              className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
+            >            
+            <option value="Iownmyhouse">I own my house</option>
+            <option value="Imrentingmyhouse">I'm renting my house</option>
+            <option value="Iownmyondo">I own my condo</option>
+            </select>
 
+          </div>
 
 
 
