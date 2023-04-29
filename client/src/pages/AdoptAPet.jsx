@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom'
 import adoption_process from '../assets/ui/CARA_PICTURES/posters/adoption_process.jpg'
 const AdoptAPet = () => {
   return (
-    <div className='bg-slate-400 m-10 px-3 max-h-fit relative'>
+    <div className='bg-slate-400 m-10 px-3 max-h-fit'>
         <section>
-            <div>
-                <h2 className='font-semibold text-center'>Is there a place in your heart for one of our delightful, rescued pets?</h2>
-                <h2 className='font-normal text-center'>Before deciding to adopt, learn more about pet adoption.</h2>
+            <div className='p-5'>
+                <h1 className='font-bold text-center text-2xl p-3 sm:text-2xl md:text-4xl'>Is there a place in your heart for one of our delightful, rescued pets?</h1>
+                <h2 className='font-normal text-center p-3'>Before deciding to adopt, learn more about pet adoption.</h2>
             </div>
             <div className='p-5'>
                 <div className="flex justify-center gap-10 mb-4 ">
@@ -23,6 +23,8 @@ const AdoptAPet = () => {
                     </ul>
             </div>
         </section>
+
+
 
         <section>
             <img src={adoption_process} alt="" className='m-auto my-3'/>
@@ -47,9 +49,9 @@ const AdoptAPet = () => {
                 </div>
         </section>
 
-        <section className='mt-10'>
+        <section className=' mt-10'>
             <p className='text-center font-bold text-[50px]'>CARA Adoption Policies</p>
-            <div className="flex justify-around max-w-[100%] ">
+            <div className="flex flex-col sm:flex-col sm:justify-center md:flex-row xl:flex-row max-w-[100%] ">
                 <div>
                     <p className='font-medium text-[20px] text-center my-5'>CARA Adoption Policy for Cats</p>
                     <ol className='list-decimal leading-7 max-w-[80%] m-auto'>
@@ -83,6 +85,9 @@ const AdoptAPet = () => {
                 </div>
             </div>
         </section>
+
+
+        
 
         <div className="flex justify-center gap-10 my-8 p-6 ">
             <button className='border rounded-l border-black p-2'>Download the Pet Adoption Form</button>
