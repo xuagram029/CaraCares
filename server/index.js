@@ -31,6 +31,7 @@ app.use('/refresh',  require('./routes/refresh'))
 app.use('/logout',  require('./routes/logout'))
 app.use('/blogs', require('./routes/blogs'))
 app.use('/foundpet', require('./routes/foundpet'))
+app.use('/admin-encode', require('./routes/shelterencode'))
 
 // app.use(verifyJWT)
 app.use('/users', require('./routes/user'))
