@@ -2,3 +2,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.radial{
+    background: radial-gradient(rgb(172, 170, 170), rgb(205, 242, 255));
+}
