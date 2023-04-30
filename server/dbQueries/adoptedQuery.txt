@@ -1,0 +1,3 @@
+UPDATE cara_db.foundpet
+SET adopted = 0
+WHERE adopted = 'false';
