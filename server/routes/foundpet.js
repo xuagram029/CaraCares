@@ -14,6 +14,9 @@ router.route('/available')
     .get(availFoundPet)
     .put(adoptFoundPet)
 
+router.route('/adopt/:id')
+    .put(adoptFoundPet)
+
 
 router.route('/:id')
     .get(getFoundPet)

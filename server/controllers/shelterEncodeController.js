@@ -17,9 +17,10 @@ const addEncodedPet = (req, res) =>{
     const sheltername = req.body.sheltername
     const shelteremail = req.body.shelteremail
     const shelteraddress = req.body.shelteraddress
+    const type = req.body.type
 
-    db.query("INSERT INTO shelterencode(`name`, `gender`, `color`,`age`, `breed`, `shelternumber`, `sheltername`,`shelteremail`, `shelteraddress`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [name, gender, color, age, breed, shelternumber, sheltername, shelteremail, shelteraddress],
+    db.query("INSERT INTO shelterencode(`name`, `gender`, `color`,`age`, `breed`, `shelternumber`, `sheltername`,`shelteremail`, `shelteraddress`, `type`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [name, gender, color, age, breed, shelternumber, sheltername, shelteremail, shelteraddress, type],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)

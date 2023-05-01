@@ -80,7 +80,6 @@ const adoptFoundPet = (req, res) => {
 }
 
 const availFoundPet = (req, res) => {
-    const foundPetId = req.params.id;
     db.query("SELECT * FROM foundpet WHERE adopted = 'false'", (err, data) => {
       if (err) {
         console.error(err);

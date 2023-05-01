@@ -1,9 +1,8 @@
 const bcrypt = require('bcrypt')
 const db = require('../db');
 
-const getUsers = () => {
-    db.query("SELECT * FROM newusers",
-    (err, data) => {
+const getUsers = (req, res) =>{
+    db.query("SELECT * FROM newusers", (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)
     })
@@ -39,4 +38,25 @@ const handleNewUser = (req, res) => {
     })
 }
 
-module.exports = { getUsers, handleNewUser }
+const verifyUser = (req, res) =>{
+    const fullname = req.body.fullname
+    const email = req.body.email
+    const address = req.body.address
+    const birthdate = req.body.birthdate
+    const verified = req.body.verified
+    const userId = req.params.id
+    db.query("UPDATE newusers SET `fullname` = ? ,  `email` = ?,  `address` = ?,  `birthdate` = ?,  `verified` = ? WHERE id = ? ", [fullname, email, address, birthdate, verified, userId], (err, result) => {
+        if(err) return res.json(err)
+        return res.json({"message": "user updated"})
+    })
+}
+
+const getUser = (req, res) =>{
+    const userId = req.params.id
+    db.query("SELECT * FROM newusers WHERE id = ? ", [userId], (err, result) => {
+        if(err) return res.json(err)
+        return res.json(result)
+    })
+}
+
+module.exports = { getUsers, handleNewUser, verifyUser, getUser }

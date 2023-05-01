@@ -13,7 +13,6 @@ function FosterPDF() {
         input4: '',
         input5: '',
         input6: '',
-        input7: '',
         file: null,
       };
     
@@ -24,7 +23,6 @@ function FosterPDF() {
         input4: Yup.string().required(),
         input5: Yup.string().required(),
         input6: Yup.string().required(),
-        input7: Yup.string().required(),
         file: Yup.mixed().required(),
         
       });
@@ -42,16 +40,13 @@ function FosterPDF() {
     
       const generatePDF = (values) => {
         const doc = new jsPDF('p', 'pt');
-        doc.text(250,30, "Foster Contract")
-        doc.text(20,80, "Name of pet/s you are interested in fostering:")
-        doc.text(20, 100, values.input);
+        doc.text(20, 60, values.input);
         doc.addFont('helvetica', 'normal');
-        doc.text(20, 140, values.input2);
-        doc.text(20, 180, values.input3);
-        doc.text(20, 210, values.input4);
-        doc.text(20, 240, values.input5);
-        doc.text(20, 270, values.input6);
-        doc.text(20, 300, values.input7);
+        doc.text(20, 100, values.input2);
+        doc.text(20, 140, values.input3);
+        doc.text(20, 180, values.input4);
+        doc.text(20, 220, values.input5);
+        doc.text(20, 260, values.input6);
         doc.addImage(values.file, 'PNG', 30, 140, 300, 200);
         doc.save('demo.pdf');
       };
@@ -86,7 +81,7 @@ function FosterPDF() {
               id="input2"
               name="input2"
               className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
-              placeholder="Last Name, First Name, Middle Initial"
+              placeholder="LN,FN,MI"
             />
           </div>
 
@@ -121,16 +116,6 @@ function FosterPDF() {
               id="input6"
               name="input6"
               className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="input7">Phone # *</label>
-            <Field
-              type="tel"
-              id="input7"
-              name="input7"
-              className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
-              placeholder="09...."
             />
           </div>
 

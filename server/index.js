@@ -25,16 +25,19 @@ app.use(cookieParser()) //
 // middleware for cookies
 
 // routes
-app.use('/register', require('./routes/register'))
+// app.use('/register', require('./routes/register'))
 app.use('/login',  require('./routes/auth'))
 app.use('/refresh',  require('./routes/refresh'))
 app.use('/logout',  require('./routes/logout'))
 app.use('/blogs', require('./routes/blogs'))
 app.use('/foundpet', require('./routes/foundpet'))
+app.use('/typeofpet', require('./routes/pettype'))
 app.use('/admin-encode', require('./routes/shelterencode'))
+app.use('/user', require('./routes/user'))
+app.use('/volunteer', require('./routes/volunteer'))
 
 // app.use(verifyJWT)
-app.use('/users', require('./routes/user'))
+// app.use('/users', require('./routes/users'))
 
 app.listen(PORT, () => {
     console.log(`Connected To back-end on port ${PORT}`)
