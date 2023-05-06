@@ -63,7 +63,7 @@ function LostReport(){
                         </div>
                         <div>
                              <label htmlFor="" className="text-sm text-neutral-500  mt-6">PET GENDER</label>
-                             <select onChange={(e) => {setPetGender(e.target.value)}} className="w-full text-sm shadow-l" >
+                             <select onChange={(e) => {setPetGender(e.target.value)}} className="w-full text-sm shadow-l p-4" >
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                              </select>

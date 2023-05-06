@@ -8,37 +8,51 @@ const getLostPets = (req, res) =>{
 }
 
 const addLostPet = (req, res) =>{
-    const name = req.body.name
+    const petname = req.body.petname
     const phone = req.body.phone
     const email = req.body.email
-    const breed = req.body.breed
+    const typeofpet = req.body.typeofpet
     const gender = req.body.gender
     const color = req.body.color
+    const breed = req.body.breed
     const lost = req.body.lost
     const description = req.body.description
-    const typeofpet = req.body.typeofpet
+    const address = req.body.address
+    const age = req.body.age
+    const ownername = req.body.ownername
 
-    db.query("INSERT INTO lostpet(`name`, `phone`, `email`,`breed`,`gender`,`color`, `lost`,`description`,`typeofpet`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [name, phone, email, breed, gender, color, lost, description, typeofpet],
+
+    db.query("INSERT INTO lostpet(`petname`, `phone`, `email`, `typeofpet`, `gender`, `color`, `breed`, `lost`,`description`, `address`, `age`, `ownername`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [petname, phone, email, typeofpet, gender, color, breed, lost, description, address, age, ownername],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)
     })
 }
 
-// const updatelostpets = (req, res) =>{
-//     const foundPetId = req.params.id
+const updateLostPets = (req, res) =>{
+    const foundPetId = req.params.id
 
-//     const title = req.body.title
-//     const description = req.body.description
+    const petname = req.body.petname
+    const phone = req.body.phone
+    const email = req.body.email
+    const typeofpet = req.body.typeofpet
+    const gender = req.body.gender
+    const color = req.body.color
+    const breed = req.body.breed
+    const lost = req.body.lost
+    const description = req.body.description
+    const address = req.body.address
+    const age = req.body.age
+    const ownername = req.body.ownername
 
-//     db.query("UPDATE books SET `title`= ?, `description` = ?, `price` = ? WHERE id = ?",
-//     [title, description, price, bookId],
-//     (err, data) =>{
-//         if(err) return res.json(err)
-//         return res.json(data)
-//     })
-// }
+    db.query("UPDATE lostpet SET `petname` = ?, `phone` = ?, `email` = ?, `typeofpet` = ?, `gender` = ?, `color` = ?, `breed` = ?, `lost` = ?, `description` = ?, `address` = ?, `age` = ?, `ownername` = ?   WHERE id = ?",
+    [petname, phone, email, typeofpet, gender, color, breed, lost, description, address, age, ownername, foundPetId],
+    (err, data) =>{
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+}
 
 const deleteLostPet = (req, res) =>{
     const lostPetId = req.params.id
@@ -62,4 +76,4 @@ const getLostPet = (req, res) => {
     })
 }
 
-module.exports = { getLostPets, getLostPet, addLostPet, deleteLostPet}
+module.exports = { getLostPets, getLostPet, addLostPet, deleteLostPet, updateLostPets}

@@ -110,7 +110,6 @@ const Foster = () => {
                 <textarea name="pet_name" id="" class="block w-full px-4 py-2 leading-tight text-gray-700 bg-gray-100 border border-gray-300 rounded-md appearance-none focus:outline-none focus:bg-white focus:border-gray-500" rows="2" placeholder="Sample format: Ana / Mother / 35, Tony / Father / 37, "></textarea>
 
 
-                
                 <label className="text-sm block font-normal">List all members (excluding pets) of the household including children in order of Name / Relationship / Age.</label>
 
                 <label className="block font-medium mt-3">Does any member of your household have any known allergies to animals? *</label>

@@ -9,14 +9,13 @@ import moment from 'moment';
 function Lostpets() {
 
     const [data,setData] = useState([])
-
     const [date, setDate] = useState('') 
     const [finaldate, setFinalDate] = useState('')
 
     useEffect(() => {
         const getLostPet = async () => {
           try {
-            const res = await axios.get(`http://localhost:8000/admin-encode`);
+            const res = await axios.get(`http://localhost:8000/lostpet`);
             setDate(res.data[0].datefound);
             setData(res.data);
           } catch (err) {
@@ -27,7 +26,7 @@ function Lostpets() {
       }, []);
       
       useEffect(() => {
-        const formattedDate = moment(date).format('MM/DD/YYYY');
+        const formattedDate = moment(date).format('YYYY/MM/DD');
         setFinalDate(formattedDate)
 
       }, [date]);
@@ -85,16 +84,16 @@ function Lostpets() {
                 </h1>
                 <div className="flex flex-row">
                   <div className="w-1/2">
-                    <p className="text-gray-700 font-bold mb-2">Breed:</p>
+                    <p className="text-gray-700 font-bold mb-2">Type:</p>
                     <p className="text-gray-700 font-bold mb-2">Sex:</p>
                     <p className="text-gray-700 font-bold mb-2">Colors:</p>
-                    <p className="text-gray-700 font-bold mb-2">Date Found:</p>
+                    <p className="text-gray-700 font-bold mb-2">Date Lost:</p>
                   </div>
                   <div className="w-1/2">
-                    <p className="text-gray-700 mb-2">{pet.breed}</p>
+                    <p className="text-gray-700 mb-2">{pet.type}</p>
                     <p className="text-gray-700 mb-2">{pet.gender}</p>
                     <p className="text-gray-700 mb-2">{pet.color}</p>
-                    <p className="text-gray-700 mb-2">{finaldate}</p>
+                    <p className="text-gray-700 mb-2">{moment(pet.datefound).format('MM/DD/YYYY')}</p>
                   </div>
                 </div>
                 <div className="mt-4">
@@ -112,7 +111,7 @@ function Lostpets() {
         
       </div>
 
-      <FoundPets />
+      {/* <FoundPets /> */}
     </div>
   );
 }

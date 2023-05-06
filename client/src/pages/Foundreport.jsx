@@ -32,7 +32,7 @@ function FoundReport(){
                 <div className="gap-2">
                     
                         <div className="">
-                            <label htmlFor="" className="text-sm text-neutral-500  mt-6">FN</label>
+                            <label htmlFor="" className="text-sm text-neutral-500  mt-6">Full Name</label>
                             <input type="text" className="w-full text-sm shadow-l p-4" placeholder="LAST NAME, FIRST NAME, MIDDLE INITIAL" value={name} onChange={(e) => {setName(e.target.value)}}></input>
                         </div>
 
@@ -40,12 +40,12 @@ function FoundReport(){
                  <div className="grid grid-cols-2 gap-2 mt-6">
                          <div>
                             <label htmlFor="" className="text-sm text-neutral-500  mt-6">PHONE NUMBER</label>
-                            <input type="text" className="w-full text-sm shadow-l" 
+                            <input type="text" className="w-full text-sm shadow-l p-4" 
                             value={phonenumber} onChange={(e) => {setPhoneNumber(e.target.value)}}></input>
                         </div>
                         <div>
                         <label htmlFor="" className="text-sm text-neutral-500  mt-6">EMAIL</label>
-                            <input type="text" className="w-full text-sm shadow-l"
+                            <input type="text" className="w-full text-sm shadow-l p-4"
                             value={email} onChange={(e) => {setEmail(e.target.value)}}></input>    
                         </div>
                  </div>
@@ -58,12 +58,12 @@ function FoundReport(){
                     
                         <div>
                             <label htmlFor="" className="text-sm text-neutral-500  mt-6">TYPE OF PET</label>
-                            <input type="text" className="w-full text-sm shadow-l"  
+                            <input type="text" className="w-full text-sm shadow-l p-4"  
                                 value={typeofpet} onChange={(e) => {setTypeOfPet(e.target.value)}}></input>
                         </div>
                         <div>
                              <label htmlFor="" className="text-sm text-neutral-500  mt-6">PET GENDER</label>
-                             <select onChange={(e) => {setPetGender(e.target.value)}} className="w-full text-sm shadow-l" >
+                             <select onChange={(e) => {setPetGender(e.target.value)}} className="w-full text-sm shadow-l p-4" >
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                              </select>
@@ -74,7 +74,7 @@ function FoundReport(){
                     
                     <div className="">
                         <label htmlFor="" className="text-sm text-neutral-500  mt-6">COLOR/S</label>
-                        <input type="text" className="w-full text-sm shadow-l"  
+                        <input type="text" className="w-full text-sm shadow-l p-4"  
                         value={color} onChange={(e) => {setColor(e.target.value)}}></input>
                         
                        
@@ -82,12 +82,12 @@ function FoundReport(){
                     <div>
                         
                         <label htmlFor="" className="text-sm text-neutral-500  mt-6">BREED</label>
-                        <input type="text" className="w-full text-sm shadow-l"  
+                        <input type="text" className="w-full text-sm shadow-l p-4"  
                         value={breed} onChange={(e) => {setBreed(e.target.value)}}></input>
                     </div>
                     <div>
                          <label htmlFor="" className="text-sm text-neutral-500  mt-6">DATE OF LOST</label>
-                         <input type="text" className="w-full text-sm shadow-l"  
+                         <input type="text" className="w-full text-sm shadow-l p-4"  
                          value={dateoflost} onChange={(e) => {setDateOfLost(e.target.value)}}></input>
                     </div>
                 

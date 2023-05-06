@@ -35,7 +35,7 @@ import LostReport from './pages/LostReport';
 import LostPets from './pages/Lostpets';
 import LostPetsAll from './pages/Lostpetsall';
 import LostPetsMore from './pages/Lostpetsmore';
-
+import Modal from './pages/Modal';
 
 
 function App() {
@@ -58,6 +58,10 @@ const Layout = () => {
     {
       path: "/nav2",
       element: <Nav2 />,
+    },
+    {
+      path: "/modal/:id",
+      element: <Modal />,
     },
     {
       path: '/blogallpost',

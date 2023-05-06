@@ -15,6 +15,7 @@ function FosterPDF() {
         input6: '',
         input7: '',
         input8: '',
+        input9: '',
         file: null,
       };
     
@@ -27,6 +28,7 @@ function FosterPDF() {
         input6: Yup.string().required(),
         input7: Yup.string().required(),
         input8: Yup.string().required(),
+        input9: Yup.string().required(),
         file: Yup.mixed().required(),
         
       });
@@ -42,14 +44,42 @@ function FosterPDF() {
         reader.readAsDataURL(file);
       };
 
+      //Select and option
       const [selectoption, setSelectedOption] = useState('');
+
+      //radio form
+      const [selectradio, setSelectRadio] = useState('');
+      const [selectradio2, setSelectRadio2] = useState('');
+      const [selectradio3, setSelectRadio3] = useState('');
 
       const handleSelectChange = (e) => {
         setSelectedOption(e.target.value);
       };
 
+      const handleRadioChange = (e) => {
+        setSelectRadio(e.target.value);
+      };
+
+      const handleRadioChange2 = (e) => {
+        setSelectRadio2(e.target.value);
+      };
+      
+      const handleRadioChange3 = (e) => {
+        setSelectRadio3(e.target.value);
+      };
+
+
+
+
       const generatePDF = (values) => {
         const doc = new jsPDF('p', 'pt');
+        const selectedOptionText = document.querySelector(
+          `select option[value="${selectoption}"]`
+        ).textContent;
+        const selectedRadio = document.querySelector('input[name="radio"]:checked').value;
+        const selectedRadio2 = document.querySelector('input[name="radio2"]:checked').value;
+        const selectedRadio3 = document.querySelector('input[name="radio3"]:checked').value;
+
         doc.addFont('helvetica', 'normal');
         doc.text(225, 30,"FOSTER CONTRACTS")
         doc.text(20, 80,"Name of pet/s you are interested in fostering:")
@@ -77,7 +107,19 @@ function FosterPDF() {
         doc.text(20, 450, values.input8);
 
         doc.text(20, 480,"What type of home do you live in? *")
-        doc.text(20, 500, selectoption);
+        doc.text(20, 500, `${selectedOptionText}`);
+        
+        doc.text(20, 530,"If not a home owner, do you have permission to keep pets?")
+        doc.text(20, 550, `${selectedRadio}`);
+
+        doc.text(20, 580,"How long have you lived here?")
+        doc.text(20, 600, values.input9);
+
+        doc.text(20, 630,"Does any member of your household have any known allergies to animals?")
+        doc.text(20, 650, `${selectedRadio2}`);
+
+        doc.text(20, 680,"Does any member of your household have any known allergies to animals?")
+        doc.text(20, 700, `${selectedRadio3}`);
 
         doc.addImage(values.file, 'PNG', 330, 140, 300, 200);
         doc.save('demo.pdf');
@@ -170,23 +212,70 @@ function FosterPDF() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="input9">What type of home do you live in? *</label>
+            <label htmlFor="input99">What type of home do you live in? *</label>
             <select
               value={selectoption}
               onChange={handleSelectChange}
               className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
             >            
-            <option value="Iownmyhouse">I own my house</option>
-            <option value="Imrentingmyhouse">I'm renting my house</option>
-            <option value="Iownmyondo">I own my condo</option>
+            <option value="option1">I own my house</option>
+            <option value="option2">I'm renting my house</option>
+            <option value="option3">I own my condo</option>
             </select>
-
           </div>
 
+          <div className="mb-4">
+            <label htmlFor="">If not a home owner, do you have permission to keep pets? *
+            <br />
+            <input class="form-radio h-4 w-4 text-blue-600 m-4" type="radio" name='radio' value="Yes" checked={selectradio === 'Yes'} onChange={handleRadioChange}/> Yes
+            </label>
+            
+            <label htmlFor="">
+            <input class="form-radio h-4 w-4 text-blue-600 m-4" name="radio" type="radio" value="No" checked={selectradio === 'No'} onChange={handleRadioChange}/> No
+            </label>
+          </div>
 
+          <div className="mb-4">
+            <label htmlFor="input9">How long have you lived here? *</label>
+            <Field
+              type="text"
+              id="input9"
+              name="input9"
+              className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
+            />
+          </div>
 
+          <div className="mb-4">
+            <label htmlFor="input10">Household Members *</label>
+            <Field
+              type="text"
+              id="input10"
+              name="input10"
+              className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
+              placeholder="Sample format: Ana / Mother / 35, Tony / Father / 37, "
+            />
+            <label className="text-sm block font-normal">List all members (excluding pets) of the household including children in order of Name / Relationship / Age.</label>
+          </div>
 
+          <div className="mb-4">
+            <label htmlFor="">Does any member of your household have any known allergies to animals? *
+            <br />
+            <input class="form-radio h-4 w-4 text-blue-600 m-4" type="radio" name='radio2' value="Yes" checked={selectradio2 === 'Yes'} onChange={handleRadioChange2}/> Yes
+            </label>
+            <label htmlFor="">
+            <input class="form-radio h-4 w-4 text-blue-600 m-4"  type="radio" name="radio2" value="No" checked={selectradio2 === 'No'} onChange={handleRadioChange2}/> No
+            </label>
+          </div>
 
+          <div className="mb-4">
+            <label htmlFor="">Do all members of the family support your decision to foster a pet? *
+            <br />
+            <input class="form-radio h-4 w-4 text-blue-600 m-4" type="radio" name='radio3' value="Yes" checked={selectradio3 === 'Yes'} onChange={handleRadioChange3}/> Yes
+            </label>
+            <label htmlFor="">
+            <input class="form-radio h-4 w-4 text-blue-600 m-4"  type="radio" name="radio3" value="No" checked={selectradio3 === 'No'} onChange={handleRadioChange3}/> No
+            </label>
+          </div>
 
 
 

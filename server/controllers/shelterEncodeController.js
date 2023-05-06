@@ -12,34 +12,45 @@ const addEncodedPet = (req, res) =>{
     const gender = req.body.gender
     const color = req.body.color
     const age = req.body.age
-    const breed = req.body.breed
     const shelternumber = req.body.shelternumber
     const sheltername = req.body.sheltername
     const shelteremail = req.body.shelteremail
     const shelteraddress = req.body.shelteraddress
+    const type = req.body.type
     const datefound = req.body.datefound
+    const foundby = req.body.foundby
 
-    db.query("INSERT INTO shelterencode(`name`, `gender`, `color`,`age`, `breed`, `shelternumber`, `sheltername`,`shelteremail`, `shelteraddress`, `datefound`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [name, gender, color, age, breed, shelternumber, sheltername, shelteremail, shelteraddress, datefound],
+    db.query("INSERT INTO shelterencode(`name`, `gender`, `color`,`age`,`type`, `shelternumber`, `sheltername`,`shelteremail`, `shelteraddress`, `foundby`, `datefound`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [name, gender, color, age, type, shelternumber, sheltername, shelteremail, shelteraddress, foundby, datefound ],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)
     })
 }
 
-// const updateshelterencodes = (req, res) =>{
-//     const encodedPetId = req.params.id
+const updateshelterencodes = (req, res) =>{
+    const encodedPetId = req.params.id
 
-//     const title = req.body.title
-//     const description = req.body.description
+    const name = req.body.name
+    const gender = req.body.gender
+    const color = req.body.color
+    const age = req.body.age
+    const shelternumber = req.body.shelternumber
+    const sheltername = req.body.sheltername
+    const shelteremail = req.body.shelteremail
+    const shelteraddress = req.body.shelteraddress
+    const type = req.body.type
+    const datefound = req.body.datefound
+    const foundby = req.body.foundby
 
-//     db.query("UPDATE books SET `title`= ?, `description` = ?, `price` = ? WHERE id = ?",
-//     [title, description, price, bookId],
-//     (err, data) =>{
-//         if(err) return res.json(err)
-//         return res.json(data)
-//     })
-// }
+    db.query("UPDATE shelterencode SET `name` = ?, `gender` = ?, `color` = ?,`age` = ?, `type` = ?, `shelternumber`= ?, `sheltername` = ?,`shelteremail`= ?, `shelteraddress` = ?, `foundby` = ?, `datefound` = ? WHERE id = ?",
+    [name, gender, color, age, type, shelternumber, sheltername, shelteremail, shelteraddress, foundby, datefound, encodedPetId ],
+    (err, data) =>{
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+}
+
 
 const deleteEncodedPet = (req, res) =>{
     const encodedPetId = req.params.id
@@ -63,4 +74,4 @@ const getEncodedPet = (req, res) => {
     })
 }
 
-module.exports = { getEncodedPets, getEncodedPet, addEncodedPet, deleteEncodedPet}
+module.exports = { getEncodedPets, getEncodedPet, addEncodedPet, deleteEncodedPet, updateshelterencodes}
