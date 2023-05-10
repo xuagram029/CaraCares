@@ -15,7 +15,7 @@ function Lostpets() {
     useEffect(() => {
         const getLostPet = async () => {
           try {
-            const res = await axios.get(`http://localhost:8000/admin-encode`);
+            const res = await axios.get(`http://localhost:8000/lostpet`);
             setDate(res.data[0].datefound);
             setData(res.data);
           } catch (err) {
@@ -26,7 +26,7 @@ function Lostpets() {
       }, []);
       
       useEffect(() => {
-        const formattedDate = moment(date).format('MM/DD/YYYY');
+        const formattedDate = moment(date).format('YYYY/MM/DD');
         setFinalDate(formattedDate)
 
       }, [date]);
@@ -58,7 +58,7 @@ function Lostpets() {
           <div class="flex-grow border-t border-gray-400"></div>
         </div>
 
-        <div className="flex flex-row p-12">
+        <div className="flex flex-row flex-wrap  p-12">
         {data.map((pet)=> (
           <div className="w-full md:w-1/2 lg:w-1/4 p-2">
             <div className="bg-white rounded-lg shadow-lg">
@@ -68,23 +68,24 @@ function Lostpets() {
                 alt=""
               />
 
-              
               <div className="p-4">
                 <h1 className="text-gray-900 font-bold text-2xl mb-2">
-                  {pet.name}
+                  {pet.petname}
                 </h1>
                 <div className="flex flex-row">
                   <div className="w-1/2">
                     <p className="text-gray-700 font-bold mb-2">Type:</p>
                     <p className="text-gray-700 font-bold mb-2">Sex:</p>
                     <p className="text-gray-700 font-bold mb-2">Colors:</p>
-                    <p className="text-gray-700 font-bold mb-2">Date Found:</p>
+                    <p className="text-gray-700 font-bold mb-2">Date Lost:</p>
+                    <p className="text-gray-700 font-bold mb-2">Owner Name:</p>
                   </div>
                   <div className="w-1/2">
-                    <p className="text-gray-700 mb-2">{pet.type}</p>
+                    <p className="text-gray-700 mb-2">{pet.typeofpet}</p>
                     <p className="text-gray-700 mb-2">{pet.gender}</p>
                     <p className="text-gray-700 mb-2">{pet.color}</p>
-                    <p className="text-gray-700 mb-2">{moment(pet.datefound).format('MM/DD/YYYY')}</p>
+                    <p className="text-gray-700 mb-2">{moment(pet.lost).format('YYYY/MM/DD')}</p>
+                    <p className="text-gray-700 mb-2">{pet.ownername}</p>
                   </div>
                 </div>
                 <div className="mt-4">

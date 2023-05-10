@@ -22,12 +22,12 @@ const addBlog = (req, res) =>{
 
 const updateBlog = (req, res) =>{
     const blogId = req.params.id
-
     const title = req.body.title
     const description = req.body.description
+    const datecreated = req.body.datecreated
 
-    db.query("UPDATE books SET `title`= ?, `description` = ?, `price` = ? WHERE id = ?",
-    [title, description, price, bookId],
+    db.query("UPDATE blogs SET `title`= ?, `description` = ?, `datecreated` = ? WHERE id = ?",
+    [title, description, datecreated, blogId],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)

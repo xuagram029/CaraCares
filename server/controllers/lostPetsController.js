@@ -7,6 +7,15 @@ const getLostPets = (req, res) =>{
     })
 }
 
+const getLostPetsFront = (req, res) =>{
+    db.query("SELECT * FROM lostpet LIMIT 4", (err, data) =>{
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+}
+
+
+
 const addLostPet = (req, res) =>{
     const petname = req.body.petname
     const phone = req.body.phone
@@ -76,4 +85,4 @@ const getLostPet = (req, res) => {
     })
 }
 
-module.exports = { getLostPets, getLostPet, addLostPet, deleteLostPet, updateLostPets}
+module.exports = { getLostPets, getLostPet, getLostPetsFront, addLostPet, deleteLostPet, updateLostPets}

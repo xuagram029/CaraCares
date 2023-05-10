@@ -43,7 +43,7 @@ function Lostpetsmore() {
   }, [id]);
 
   useEffect(() => {
-    const formattedDate = moment(date).format("MM/DD/YYYY");
+    const formattedDate = moment(date).format("YYYY/MM/DD");
     setFinalDate(formattedDate);
   }, [date]);
 
@@ -139,7 +139,7 @@ function Lostpetsmore() {
                   <p>{pet.gender}</p>
                   <p>{pet.color}</p>
                   <p>{pet.age}</p>
-                  <p>{pet.lost}</p>
+                  <p>{finaldate}</p>
                   <p>{pet.description}</p>
                 </div>
               </div>
@@ -260,8 +260,22 @@ function Lostpetsmore() {
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block font-bold mb-2" htmlFor="found">
-                    Date Lost: {moment(data[0].lost).format('MM/DD/YYYY')}
+                  <label className="block font-bold mb-2" htmlFor="breed">
+                    Breed:
+                  </label>
+                  <input
+                    className="w-full border border-gray-400 p-2 rounded"
+                    type="text"
+                    value={breed}
+                    onChange={(e) => {
+                      setBreed(e.target.value);
+                    }}
+                    id="breed"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block font-bold mb-2" htmlFor="lost">
+                    Date Lost: {moment(data[0].lost).format('YYYY/MM/DD')}
                   </label>
                   <input
                     className="w-full border border-gray-400 p-2 rounded"
@@ -270,7 +284,7 @@ function Lostpetsmore() {
                     onChange={(e) => {
                       setLost(e.target.value);
                     }}
-                    placeholder="MM/DD/YYYY"
+                    placeholder="YYYY/MM/DD"
                     id="lost"
                   />
                 </div>

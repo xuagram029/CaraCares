@@ -148,6 +148,16 @@ const Layout = () => {
       element: <FoundPetsMore />,
     },
     {
+      path: '/foundpetsmore/:id',
+      element:<Layout />,
+      children: [
+        {
+          path: '/foundpetsmore/:id',
+          element: <FoundPetsMore />
+        }
+      ]
+    },
+    {
       path: "/reportpets",
       element: <Reportpets />,
     },

@@ -1,8 +1,5 @@
 import React from "react";
-import lostpet1 from "../assets/ui/CARA_PICTURES/lost1.png";
 import lostpet2 from "../assets/ui/CARA_PICTURES/lost2.png";
-import lostpet3 from "../assets/ui/CARA_PICTURES/lost3.png";
-import lostpet4 from "../assets/ui/CARA_PICTURES/lost4.png";
 import ReportPets from "../pages/Reportpets";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -28,7 +25,7 @@ function Foundpetsall() {
   }, []);
 
   useEffect(() => {
-    const formattedDate = moment(date).format("MM/DD/YYYY");
+    const formattedDate = moment(date).format("YYYY/MM/DD");
     setFinalDate(formattedDate);
   }, [date]);
 
@@ -48,130 +45,48 @@ function Foundpetsall() {
           <div class="flex-grow border-t border-gray-400"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2 pb-0 ">
-          <div className="border-2 border-solid grid-rows-2 p-3 shadow-xxl ">
-            <div className="h-1/2 lg:mb-4">
-              <img className="h-[100%] w-full" src={lostpet1} alt="" />
-            </div>
-            <div className="">
-              <h1 className="text-center font-bold text-lg lg:text-xl xl:text-2xl lg:mb-4">
-                Uknown #01
-              </h1>
-              <div className=" flex grid-cols-2 text-sm lg:text-md 2xl:mb-6 xl:mb-2 lg:mb-10 md:mb-10 mb-10">
-                <div className="border-2 border-solid w-1/2 leading-7 text-lg xl:text-sm font-bold">
-                  <p>Breed: </p>
-                  <p>Sex: </p>
-                  <p>Colors: </p>
-                  <p>Date Found: </p>
-                </div>
+        <div className="flex flex-row flex-wrap  p-12">
+          {data.map((pet) => (
+            <div className="w-full md:w-1/2 lg:w-1/4 p-2">
+              <div className="bg-white rounded-lg shadow-lg">
+                <img
+                  className="w-full h-48 object-cover object-center rounded-t-lg"
+                  src={lostpet2}
+                  alt=""
+                />
 
-                <div className="border-2 border-solid w-1/2 leading-7 text-lg xl:text-sm font-bold">
-                  <p>Uknown </p>
-                  <p>Male </p>
-                  <p>Brown/White</p>
-                  <p>07/04/23 </p>
+                <div className="p-4">
+                  <div className="flex flex-row">
+                    <div className="w-1/2">
+                      <p className="text-gray-700 font-bold mb-2">
+                        Pet Gender:
+                      </p>
+                      <p className="text-gray-700 font-bold mb-2">Colors:</p>
+                      <p className="text-gray-700 font-bold mb-2">
+                        Date Found:
+                      </p>
+                      <p className="text-gray-700 font-bold mb-2">Founder:</p>
+                    </div>
+                    <div className="w-1/2">
+                      <p className="text-gray-700 mb-2">{pet.gender}</p>
+                      <p className="text-gray-700 mb-2">{pet.color}</p>
+                      <p className="text-gray-700 mb-2">
+                        {moment(pet.found).format("YYYY/MM/DD")}
+                      </p>
+                      <p>{pet.foundername}</p>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <Link to={`/foundpetsmore/${pet.id}`}>
+                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        View Info
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
-              <div className="m-auto text-center">
-                <button className="bg-blue-900 text-white p-2 w-full ">
-                  View Info
-                </button>
-              </div>
             </div>
-          </div>
-
-          <div className="border-2 border-solid grid-rows-2 p-3 shadow-xxl ">
-            <div className="h-1/2 lg:mb-4">
-              <img className="h-[100%] w-full" src={lostpet2} alt="" />
-            </div>
-            <div className="">
-              <h1 className="text-center font-bold text-lg lg:text-xl xl:text-2xl lg:mb-4">
-                Uknown #01
-              </h1>
-              <div className=" flex grid-cols-2 text-sm lg:text-md 2xl:mb-6 xl:mb-2 lg:mb-10 md:mb-10 mb-10">
-                <div className="border-2 border-solid w-1/2 leading-7 text-lg xl:text-sm font-bold">
-                  <p>Breed: </p>
-                  <p>Sex: </p>
-                  <p>Colors: </p>
-                  <p>Date Found: </p>
-                </div>
-
-                <div className="border-2 border-solid w-1/2 leading-7 text-lg xl:text-sm font-bold">
-                  <p>Uknown </p>
-                  <p>Male </p>
-                  <p>Brown/White</p>
-                  <p>07/04/23 </p>
-                </div>
-              </div>
-              <div className="m-auto text-center">
-                <button className="bg-blue-900 text-white p-2 w-full ">
-                  View Info
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-2 border-solid grid-rows-2 p-3 shadow-xxl ">
-            <div className="h-1/2 lg:mb-4">
-              <img className="h-[100%] w-full" src={lostpet3} alt="" />
-            </div>
-            <div className="">
-              <h1 className="text-center font-bold text-lg lg:text-xl xl:text-2xl lg:mb-4">
-                Uknown #01
-              </h1>
-              <div className=" flex grid-cols-2 text-sm lg:text-md 2xl:mb-6 xl:mb-2 lg:mb-10 md:mb-10 mb-10">
-                <div className="border-2 border-solid w-1/2 leading-7 text-lg xl:text-sm font-bold">
-                  <p>Breed: </p>
-                  <p>Sex: </p>
-                  <p>Colors: </p>
-                  <p>Date Found: </p>
-                </div>
-
-                <div className="border-2 border-solid w-1/2 leading-7 text-lg xl:text-sm font-bold">
-                  <p>Uknown </p>
-                  <p>Male </p>
-                  <p>Brown/White</p>
-                  <p>07/04/23 </p>
-                </div>
-              </div>
-              <div className="m-auto text-center">
-                <button className="bg-blue-900 text-white p-2 w-full ">
-                  View Info
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-2 border-solid grid-rows-2 p-3 shadow-xxl ">
-            <div className="h-1/2 lg:mb-4">
-              <img className="h-[100%] w-full" src={lostpet4} alt="" />
-            </div>
-            <div className="">
-              <h1 className="text-center font-bold text-lg lg:text-xl xl:text-2xl lg:mb-4">
-                Uknown #01
-              </h1>
-              <div className=" flex grid-cols-2 text-sm lg:text-md 2xl:mb-6 xl:mb-2 lg:mb-10 md:mb-10 mb-10">
-                <div className="border-2 border-solid w-1/2 leading-7 text-lg xl:text-sm font-bold">
-                  <p>Breed: </p>
-                  <p>Sex: </p>
-                  <p>Colors: </p>
-                  <p>Date Found: </p>
-                </div>
-
-                <div className="border-2 border-solid w-1/2 leading-7 text-lg xl:text-sm font-bold">
-                  <p>Uknown </p>
-                  <p>Male </p>
-                  <p>Brown/White</p>
-                  <p>07/04/23 </p>
-                </div>
-              </div>
-              <div className="m-auto text-center">
-                <button className="bg-blue-900 text-white p-2 w-full ">
-                  View Info
-                </button>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       <ReportPets />

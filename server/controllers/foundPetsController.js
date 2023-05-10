@@ -1,6 +1,15 @@
 const db = require('../db')
 
+
 const getFoundPets = (req, res) =>{
+  db.query("SELECT * FROM foundpet", (err, data) =>{
+      if(err) return res.json(err)
+      return res.json(data)
+  })
+}
+
+
+const getFoundPetsFront = (req, res) =>{
     db.query("SELECT * FROM foundpet LIMIT 4", (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)
@@ -8,18 +17,17 @@ const getFoundPets = (req, res) =>{
 }
 
 const addFoundPet = (req, res) =>{
-    const name = req.body.name
+    const foundername = req.body.foundername
     const phone = req.body.phone
     const email = req.body.email
-    const breed = req.body.breed
     const gender = req.body.gender
     const color = req.body.color
     const found = req.body.found
     const description = req.body.description
     const typeofpet = req.body.typeofpet
 
-    db.query("INSERT INTO foundpet(`name`, `phone`, `email`,`breed`,`gender`,`color`, `found`,`description`,`typeofpet`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [name, phone, email, breed, gender, color, found, description, typeofpet],
+    db.query("INSERT INTO foundpet(`foundername`, `phone`, `email`, `gender`, `color`, `found`,`description`,`typeofpet`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)",
+    [foundername, phone, email, gender, color, found, description, typeofpet],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)
@@ -29,18 +37,17 @@ const addFoundPet = (req, res) =>{
 const updateFoundPets = (req, res) =>{
     const foundPetId = req.params.id
 
-    const name = req.body.name
+    const foundername = req.body.foundername
     const phone = req.body.phone
     const email = req.body.email
-    const breed = req.body.breed
     const gender = req.body.gender
     const color = req.body.color
     const found = req.body.found
     const description = req.body.description
     const typeofpet = req.body.typeofpet
 
-    db.query("UPDATE foundpet SET `name`= ?, `phone` = ?, `email` = ?, `breed` = ?, `gender` = ?, `color` = ?, `found` = ?, `typeofpet` = ?, `description` = ?,   WHERE id = ?",
-    [name, phone, email, breed, gender, color, found, description, foundPetId, typeofpet],
+    db.query("UPDATE foundpet SET `foundername`= ?, `phone` = ?, `email` = ?, `gender` = ?, `color` = ?, `found` = ?, `typeofpet` = ?, `description` = ?   WHERE id = ?",
+    [foundername, phone, email, gender, color, found, description, typeofpet, foundPetId],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)
@@ -106,4 +113,4 @@ const adoptedFoundPet = (req, res) => {
   
 
 
-module.exports = { getFoundPets, getFoundPet, addFoundPet, deleteFoundPet, updateFoundPets, adoptFoundPet, adoptedFoundPet, availFoundPet}
+module.exports = { getFoundPets, getFoundPet, addFoundPet, deleteFoundPet, updateFoundPets, adoptFoundPet, adoptedFoundPet, availFoundPet, getFoundPetsFront}
