@@ -25,6 +25,7 @@ import AdminVisitationReport from './pages/AdminVisitationReport';
 import AdminPanelEncode from './pages/AdminPanelEncode';
 import FosterPDF from './pages/FosterPDF';
 import Modal from './pages/Modal';
+import Login2 from './pages/Login2';
 
 function App() {
 
@@ -42,6 +43,10 @@ const Layout = () => {
     {
       path: "/",
       element: <Home />,
+    },
+    {
+      path: "/login",
+      element: <Login2 />,
     },
     {
       path: "/modal/:id",

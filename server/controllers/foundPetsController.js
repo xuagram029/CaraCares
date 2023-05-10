@@ -100,8 +100,5 @@ const adoptedFoundPet = (req, res) => {
       }
     });
 };
-  
-  
-
 
 module.exports = { getFoundPets, getFoundPet, addFoundPet, deleteFoundPet, updateFoundPets, adoptFoundPet, adoptedFoundPet, availFoundPet}

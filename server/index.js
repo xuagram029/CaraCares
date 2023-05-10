@@ -14,8 +14,8 @@ app.use(credentials);
 // Cross Origin Resource Sharing
 app.use(cors(corsOptions));
 
-const jwt = require('jsonwebtoken') //
-const db = require('./db')
+// const jwt = require('jsonwebtoken') //
+// const db = require('./db')
 
 require('dotenv').config()
 app.use(cors())
@@ -26,6 +26,7 @@ app.use(cookieParser()) //
 
 // routes
 // app.use('/register', require('./routes/register'))
+app.use('/admin',  require('./routes/admin'))
 app.use('/login',  require('./routes/auth'))
 app.use('/refresh',  require('./routes/refresh'))
 app.use('/logout',  require('./routes/logout'))
