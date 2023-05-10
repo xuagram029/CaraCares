@@ -27,6 +27,7 @@ const AdminPetBoarding = () => {
   const toggleModal = async (id) => {
     setModal(!modal);
     const res = await axios.get(`http://localhost:8000/user/${id}`)
+    console.log(res.data)
     const userSpec = res.data[0]
     setFullname(userSpec.fullname)
     setEmail(userSpec.email)
@@ -183,7 +184,7 @@ const AdminPetBoarding = () => {
                   Verified: {verified}
                 </label>
                 <select value={selectedOption} onChange={handleOptionChange} className="m-6 px-12 py-4  leading-tight text-gray-700  border border-gray-300 rounded-md focus:outline-none">
-                    <option value="select" hidden>- SELECT -</option>
+                    <option value={verified} hidden>- SELECT -</option>
                     <option value="verified" >verified</option>
                     <option value="not verified" >not verified</option>
                 </select>
