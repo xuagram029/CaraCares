@@ -17,11 +17,9 @@ const addEncodedPet = (req, res) =>{
     const shelteremail = req.body.shelteremail
     const shelteraddress = req.body.shelteraddress
     const type = req.body.type
-    const datefound = req.body.datefound
-    const foundby = req.body.foundby
 
-    db.query("INSERT INTO shelterencode(`name`, `gender`, `color`,`age`,`type`, `shelternumber`, `sheltername`,`shelteremail`, `shelteraddress`, `foundby`, `datefound`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [name, gender, color, age, type, shelternumber, sheltername, shelteremail, shelteraddress, foundby, datefound ],
+    db.query("INSERT INTO shelterencode(`name`, `gender`, `color`,`age`,`type`, `shelternumber`, `sheltername`,`shelteremail`, `shelteraddress`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [name, gender, color, age, type, shelternumber, sheltername, shelteremail, shelteraddress ],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)
@@ -40,11 +38,10 @@ const updateshelterencodes = (req, res) =>{
     const shelteremail = req.body.shelteremail
     const shelteraddress = req.body.shelteraddress
     const type = req.body.type
-    const datefound = req.body.datefound
-    const foundby = req.body.foundby
+    const adopted = req.body.adopted
 
-    db.query("UPDATE shelterencode SET `name` = ?, `gender` = ?, `color` = ?,`age` = ?, `type` = ?, `shelternumber`= ?, `sheltername` = ?,`shelteremail`= ?, `shelteraddress` = ?, `foundby` = ?, `datefound` = ? WHERE id = ?",
-    [name, gender, color, age, type, shelternumber, sheltername, shelteremail, shelteraddress, foundby, datefound, encodedPetId ],
+    db.query("UPDATE shelterencode SET `name` = ?, `gender` = ?, `color` = ?,`age` = ?, `type` = ?, `shelternumber`= ?, `sheltername` = ?,`shelteremail`= ?, `shelteraddress` = ?, `adopted` = ? WHERE id = ?",
+    [name, gender, color, age, type, shelternumber, sheltername, shelteremail, shelteraddress,adopted, encodedPetId ],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)
@@ -74,4 +71,38 @@ const getEncodedPet = (req, res) => {
     })
 }
 
-module.exports = { getEncodedPets, getEncodedPet, addEncodedPet, deleteEncodedPet, updateshelterencodes}
+const adoptFoundPet = (req, res) => {
+    const foundPetId = req.params.id;
+    db.query("UPDATE shelterencode SET adopted = 1 WHERE id = ?", [foundPetId], (err, data) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+      } else {
+        res.status(200).json(data);
+      }
+    });
+}
+
+const availFoundPet = (req, res) => {
+    db.query("SELECT * FROM shelterencode WHERE adopted = 0", (err, data) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+      } else {
+        res.status(200).json(data);
+      }
+    });
+}
+
+const adoptedFoundPet = (req, res) => {
+    db.query("SELECT * FROM shelterencode WHERE adopted = 1", (err, data) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+      } else {
+        res.status(200).json(data);
+      }
+    });
+};
+
+module.exports = { getEncodedPets, getEncodedPet, addEncodedPet, deleteEncodedPet, updateshelterencodes, adoptFoundPet, availFoundPet, adoptedFoundPet}

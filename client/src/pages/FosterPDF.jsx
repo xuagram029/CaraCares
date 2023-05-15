@@ -14,8 +14,7 @@ function FosterPDF() {
         input5: '',
         input6: '',
         input7: '',
-        input8: '',
-        input9: '',
+        input20: '',
         file: null,
       };
     
@@ -27,8 +26,7 @@ function FosterPDF() {
         input5: Yup.string().required(),
         input6: Yup.string().required(),
         input7: Yup.string().required(),
-        input8: Yup.string().required(),
-        input9: Yup.string().required(),
+        input20: Yup.string().required(),
         file: Yup.mixed().required(),
         
       });
@@ -47,15 +45,22 @@ function FosterPDF() {
       //Select and option
       const [selectoption, setSelectedOption] = useState('');
 
+
       //radio form
       const [selectradio, setSelectRadio] = useState('');
       const [selectradio2, setSelectRadio2] = useState('');
       const [selectradio3, setSelectRadio3] = useState('');
+      const [selectradio4, setSelectRadio4] = useState('');
 
+
+      //select
       const handleSelectChange = (e) => {
         setSelectedOption(e.target.value);
       };
 
+
+      
+      //radio
       const handleRadioChange = (e) => {
         setSelectRadio(e.target.value);
       };
@@ -67,6 +72,9 @@ function FosterPDF() {
       const handleRadioChange3 = (e) => {
         setSelectRadio3(e.target.value);
       };
+      const handleRadioChange4 = (e) => {
+        setSelectRadio4(e.target.value);
+      };
 
 
 
@@ -76,35 +84,37 @@ function FosterPDF() {
         const selectedOptionText = document.querySelector(
           `select option[value="${selectoption}"]`
         ).textContent;
+
         const selectedRadio = document.querySelector('input[name="radio"]:checked').value;
         const selectedRadio2 = document.querySelector('input[name="radio2"]:checked').value;
         const selectedRadio3 = document.querySelector('input[name="radio3"]:checked').value;
+        const selectedRadio4 = document.querySelector('input[name="radio4"]:checked').value;
 
         doc.addFont('helvetica', 'normal');
         doc.text(225, 30,"FOSTER CONTRACTS")
-        doc.text(20, 80,"Name of pet/s you are interested in fostering:")
+        doc.text(20, 80,"Full Name:")
         doc.text(20, 100, values.input);
 
-        doc.text(20, 130,"Full Name:")
+        doc.text(20, 130,"Address")
         doc.text(20, 150, values.input2);
 
-        doc.text(20, 180,"Age")
+        doc.text(20, 180,"Phone #")
         doc.text(20, 200, values.input3);
 
-        doc.text(20, 230,"Nationality")
+        doc.text(20, 230,"Email")
         doc.text(20, 250, values.input4);
 
-        doc.text(20, 280,"Occupation")
+        doc.text(20, 280,"Birth Date")
         doc.text(20, 300, values.input5);
 
-        doc.text(20, 330,"Email")
-        doc.text(20, 350, values.input6);
+        doc.text(20, 330,"Status")
+        doc.text(20, 350, `${selectedRadio4}`);
 
-        doc.text(20, 380,"Phone #")
-        doc.text(20, 400, values.input7);
-
-        doc.text(20, 430,"Address")
-        doc.text(20, 450, values.input8);
+        doc.text(20, 380,"Occupation")
+        doc.text(20, 400, values.input6);
+        
+        doc.text(20, 430,"Social Media")
+        doc.text(20, 450, values.input7);
 
         doc.text(20, 480,"What type of home do you live in? *")
         doc.text(20, 500, `${selectedOptionText}`);
@@ -113,7 +123,7 @@ function FosterPDF() {
         doc.text(20, 550, `${selectedRadio}`);
 
         doc.text(20, 580,"How long have you lived here?")
-        doc.text(20, 600, values.input9);
+        doc.text(20, 600, values.input20);
 
         doc.text(20, 630,"Does any member of your household have any known allergies to animals?")
         doc.text(20, 650, `${selectedRadio2}`);
@@ -140,27 +150,24 @@ function FosterPDF() {
         <Form>
             <div className='m-12 bg-blue-200 p-6 h-full w-[50%] mx-auto'>
             <div className="mb-4">
-            <label htmlFor="input">Name of pet/s you are interested in fostering: *</label>
+            <label htmlFor="input">Full Name *</label>
             <Field
               id="input"
               name="input"
               className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
+              placeholder="LN,FN,MI"
             />
-            <label className="text-sm block font-normal">If more than one, please separate by a comma.</label>
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="input2">Full Name *</label>
+            </div>
+            <div className="mb-4">
+            <label htmlFor="input2">Address: *</label>
             <Field
               id="input2"
               name="input2"
               className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
-              placeholder="LN,FN,MI"
             />
           </div>
-
           <div className="mb-4">
-            <label htmlFor="input3">Age *</label>
+            <label htmlFor="input3">Phone #: *</label>
             <Field
               id="input3"
               name="input3"
@@ -168,15 +175,16 @@ function FosterPDF() {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="input4">Nationality *</label>
+            <label htmlFor="input4">Email *</label>
             <Field
+              type="email"
               id="input4"
               name="input4"
               className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="input5">Occupation *</label>
+            <label htmlFor="input5">Birth Date *</label>
             <Field
               id="input5"
               name="input5"
@@ -184,43 +192,49 @@ function FosterPDF() {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="input6">Email *</label>
+            <label htmlFor="">Status*
+            <br />
+            <input class="form-radio h-4 w-4 text-blue-600 m-4" type="radio" name='radio4' value="Single" checked={selectradio4 === 'Single'} onChange={handleRadioChange4}/> Single
+            </label>
+            <label htmlFor="">
+            <input class="form-radio h-4 w-4 text-blue-600 m-4"  type="radio" name="radio4" value="Married" checked={selectradio4 === 'Married'} onChange={handleRadioChange4}/> Married
+            </label>
+            <label htmlFor="">
+            <input class="form-radio h-4 w-4 text-blue-600 m-4"  type="radio" name="radio4" value="Others" checked={selectradio4 === 'Others'} onChange={handleRadioChange4}/> Others
+            </label>
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="input6">Occupation *</label>
             <Field
-              type="email"
               id="input6"
               name="input6"
               className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
             />
           </div>
+
           <div className="mb-4">
-            <label htmlFor="input7">Phone # *</label>
+            <label htmlFor="input7">Social Media *</label>
             <Field
-              type="tel"
               id="input7"
               name="input7"
               className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
             />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="input8">Address*</label>
-            <Field
-              type="address"
-              id="input8"
-              name="input8"
-              className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
-            />
+            <p className='text-sm'>Please type N/A if no social media</p>
           </div>
 
+
           <div className="mb-4">
-            <label htmlFor="input99">What type of home do you live in? *</label>
+            <label htmlFor="input99">What type of building do you live in? *</label>
             <select
               value={selectoption}
               onChange={handleSelectChange}
               className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
             >            
-            <option value="option1">I own my house</option>
-            <option value="option2">I'm renting my house</option>
-            <option value="option3">I own my condo</option>
+            <option value="option1">House</option>
+            <option value="option2">Apartment</option>
+            <option value="option3">Condo</option>
+            <option value="option4">Others</option>
             </select>
           </div>
 
@@ -236,25 +250,13 @@ function FosterPDF() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="input9">How long have you lived here? *</label>
+            <label htmlFor="input20">How long have you lived here? *</label>
             <Field
               type="text"
-              id="input9"
-              name="input9"
+              id="input20"
+              name="input20"
               className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
             />
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="input10">Household Members *</label>
-            <Field
-              type="text"
-              id="input10"
-              name="input10"
-              className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
-              placeholder="Sample format: Ana / Mother / 35, Tony / Father / 37, "
-            />
-            <label className="text-sm block font-normal">List all members (excluding pets) of the household including children in order of Name / Relationship / Age.</label>
           </div>
 
           <div className="mb-4">

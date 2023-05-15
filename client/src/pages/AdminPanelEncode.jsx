@@ -15,16 +15,16 @@ const AdminPanelEncode = () => {
   const [gender, setGender] = useState('')
   const [color, setColor] = useState('')
   const [age, setAge] = useState('')
-  const [breed, setBreed] = useState([])
+  const [type, setType] = useState([])
   const [shelternumber, setShelterNumber] = useState('')
   const [sheltername, setShelterName] = useState('')
   const [shelteremail, setShelterEmail] = useState('')
   const [shelteraddress, setShelterAddress] = useState('')
-  const [datefound, setDateFound] = useState(null)
 
 
   const handleSubmit = async(e) =>{
-    await axios.post('http://localhost:8000/admin-encode', {name, gender, color, age, breed, shelternumber, sheltername, shelteremail, shelteraddress, datefound})
+    await axios.post('http://localhost:8000/admin-encode', {name, gender, color, age, type, shelternumber, sheltername, shelteremail, shelteraddress})
+    window.location.reload()
     navigate('/admin-panel-encode')
 }
 
@@ -83,21 +83,22 @@ const AdminPanelEncode = () => {
             value={age} onChange={(e) => {setAge (e.target.value)}}/>
           </div>
           <div class="mb-6">
-            <label class="block text-gray-700 font-bold mb-2" for="email">Breed:</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="breed" type="text"
-            value={breed} onChange={(e) => {setBreed (e.target.value)}}/>
+            <label class="block text-gray-700 font-bold mb-2" for="email">Type:</label>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="type" type="text"
+            value={type} onChange={(e) => {setType (e.target.value)}}/>
           </div>
-          <div class="mb-6">
-            <label class="block text-gray-700 font-bold mb-2" for="email">Shelter Number:</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="shelternum" type="text"
-            value={shelternumber} onChange={(e) => {setShelterNumber (e.target.value)}}/>
-          </div>
+
         </form>
       </div>
 
       <div class="bg-gray-100 rounded-lg shadow-lg p-6 sm:w-1/2 h-fit">
         <h2 class="text-2xl lg:text-3xl font-bold mb-4 text-center lg:text-left">Location Details</h2>
       <form>
+          <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2" for="email">Shelter Number:</label>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="shelternum" type="text"
+            value={shelternumber} onChange={(e) => {setShelterNumber (e.target.value)}}/>
+          </div>
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="name">Shelter Name:</label>
             <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text"
@@ -112,11 +113,6 @@ const AdminPanelEncode = () => {
             <label class="block text-gray-700 font-bold mb-2" for="email">Shelter Address:</label>
             <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="color" type="text"
             value={shelteraddress} onChange={(e) => {setShelterAddress (e.target.value)}}/>
-          </div>
-          <div class="mb-6">
-            <label class="block text-gray-700 font-bold mb-2" for="email">Date Found:</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="color" type="date"
-            value={datefound} onChange={(e) => {setDateFound (e.target.value)}}/>
           </div>
       </form>
       </div>
