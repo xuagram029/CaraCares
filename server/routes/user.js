@@ -1,13 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const { getUsers, handleNewUser, verifyUser, getUser } = require('../controllers/userController')
+const { getUsers, handleNewUser, getUser, updateUser, verifyUsers } = require('../controllers/userController')
+const { verifyAdmin, verifyUser } = require('../middleware/verifyToken')
 
 router.route('/')
     .get(getUsers)
     .post(handleNewUser)
 
 router.route('/:id')
-    .get(getUser)
-    .put(verifyUser)
+    .get(verifyAdmin ,getUser)
+    .put(verifyAdmin, verifyUsers)
+
+router.route('/update/:id')
+    .put(verifyUser, verifyAdmin, updateUser)
 
 module.exports = router

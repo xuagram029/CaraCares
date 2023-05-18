@@ -1,9 +1,7 @@
 import './App.css';
 import {createBrowserRouter,RouterProvider, Outlet} from "react-router-dom";
 import Home from './pages/Home';
-import Bloghome3 from './pages/bloghome3';
-import BlogAllpost from './pages/BlogsAllpost';
-import BlogSeemore from './pages/BlogSeemore';
+import Blogs from './pages/Blogs';
 import Admin from './pages/Admin';
 import AdminPetBoarding from './pages/AdminPetBoarding';
 import Navbar from './components/Navbar';
@@ -26,17 +24,8 @@ import AdminVisitation from './pages/AdminVisitation';
 import AdminVisitationReport from './pages/AdminVisitationReport';
 import AdminPanelEncode from './pages/AdminPanelEncode';
 import FosterPDF from './pages/FosterPDF';
-import FoundPets from './pages/FoundPets';
-import FoundPetsAll from './pages/Foundpetsall';
-import FoundPetsMore from './pages/Foundpetsmore';
-import Reportpets from './pages/Reportpets';
-import FoundReport from './pages/Foundreport';
-import LostReport from './pages/LostReport';
-import LostPets from './pages/Lostpets';
-import LostPetsAll from './pages/Lostpetsall';
-import LostPetsMore from './pages/Lostpetsmore';
 import Modal from './pages/Modal';
-
+import Login2 from './pages/Login2';
 
 function App() {
 
@@ -56,41 +45,26 @@ const Layout = () => {
       element: <Home />,
     },
     {
-      path: "/nav2",
-      element: <Nav2 />,
+      path: "/login",
+      element: <Login2 />,
     },
     {
       path: "/modal/:id",
       element: <Modal />,
     },
     {
-      path: '/blogallpost',
-      element:<Layout />,
-      children: [
-        {
-          path: '/blogallpost',
-          element: <BlogAllpost />
-        }
-      ]
+      path: "/nav2",
+      element: <Nav2 />,
     },
     {
-      path: '/blogseemore',
-      element:<Layout />,
-      children: [
-        {
-          path: '/blogseemore',
-          element: <BlogSeemore  />
-        }
-      ]
-    },
-    {
-      path: "/blogs3",
-      element: <Bloghome3 />,
+      path: "/blogs",
+      element: <Blogs />,
     },
     {
       path: "/admin",
       element: <Admin />,
     },
+
     {
       path: "/register",
       element: <Register />,
@@ -132,82 +106,6 @@ const Layout = () => {
         {
           path: '/admin-panel-encode',
           element: <AdminPanelEncode />
-        }
-      ]
-    },
-    {
-      path: "/foundpets",
-      element: <FoundPets />,
-    },
-    {
-      path: "/foundpetsall",
-      element: <FoundPetsAll />,
-    },
-    {
-      path: "/foundpetsmore",
-      element: <FoundPetsMore />,
-    },
-    {
-      path: '/foundpetsmore/:id',
-      element:<Layout />,
-      children: [
-        {
-          path: '/foundpetsmore/:id',
-          element: <FoundPetsMore />
-        }
-      ]
-    },
-    {
-      path: "/reportpets",
-      element: <Reportpets />,
-    },
-    {
-      path: '/Foundreport',
-      element:<Layout />,
-      children: [
-        {
-          path: '/Foundreport',
-          element: <FoundReport />
-        }
-      ]
-    },
-    {
-      path: '/lostreport',
-      element:<Layout />,
-      children: [
-        {
-          path: '/lostreport',
-          element: <LostReport />
-        }
-      ]
-    },
-    {
-      path: '/lostpets',
-      element:<Layout />,
-      children: [
-        {
-          path: '/lostpets',
-          element: <LostPets />
-        }
-      ]
-    },
-    {
-      path: '/Lostpetsall',
-      element:<Layout />,
-      children: [
-        {
-          path: '/Lostpetsall',
-          element: <LostPetsAll />
-        }
-      ]
-    },
-    {
-      path: '/lostpetsmore/:id',
-      element:<Layout />,
-      children: [
-        {
-          path: '/lostpetsmore/:id',
-          element: <LostPetsMore />
         }
       ]
     },
