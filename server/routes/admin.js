@@ -27,7 +27,7 @@ router.route('/logout')
 
 router.route('/adoption')
     .get(getAdoptionRequests)
-    .post(handleAdoptionRequest)
+    // .post(handleAdoptionRequest)
 
 router.route('/adoption/:id')
     .post(handleAdoptionRequest)
