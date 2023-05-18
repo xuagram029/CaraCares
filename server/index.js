@@ -15,7 +15,7 @@ app.use(credentials);
 app.use(cors(corsOptions));
 
 // const jwt = require('jsonwebtoken') //
-// const db = require('./db')
+const db = require('./db')
 
 require('dotenv').config()
 app.use(cors())
@@ -36,6 +36,8 @@ app.use('/typeofpet', require('./routes/pettype'))
 app.use('/admin-encode', require('./routes/shelterencode'))
 app.use('/user', require('./routes/user'))
 app.use('/volunteer', require('./routes/volunteer'))
+app.use('/adopt', require('./routes/adoption'))
+
 
 // app.use(verifyJWT)
 // app.use('/users', require('./routes/users'))

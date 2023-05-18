@@ -19,7 +19,10 @@ const verifyToken = (req, res, next) => {
 
 const verifyUser = (req, res, next) => {
     verifyToken(req, res, next, () =>{
-        if(req.user.id === parseInt(req.params.id) && req.user.role === "admin"){
+        console.log(req.user)
+        console.log(req.user.id)
+        console.log(req.params.id)
+        if(req.user.id === parseInt(req.params.id) || req.user.role === "admin"){
             next()
         }else{
             return res.status(403).json({message: "You are not authorized"})

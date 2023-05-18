@@ -57,7 +57,7 @@ const regAdmin = (req, res) => {
       if (resp.length > 0) {
         const userDb = resp[0];
   
-        bcrypt.compare(pass, userDb.pass, (err, result) => {
+        bcrypt.compare(pass, userDb.pass, (err, result) => { 
           if (result) {
             const token = jwt.sign(
               { id: userDb.id, role: userDb.role },
@@ -85,5 +85,38 @@ const regAdmin = (req, res) => {
     res.send("Logged out successfully");
   };
   
-  module.exports = { regAdmin, login, logout };
+  const getAdoptionRequests = (req, res) => {
+    // Route to view adoption requests (admin view)
+  // Execute a SELECT query to fetch all adoption requests from the database
+  const query = 'SELECT * FROM adoption';
+  db.query(query, (error, results) => {
+    if (error) {
+      console.error('Error retrieving adoption requests:', error);
+      res.status(500).json({ error: 'Failed to retrieve adoption requests.' });
+    } else {
+      res.status(200).json(results);
+    }
+  });
+  }
+
+  const handleAdoptionRequest = (req, res) => {
+// Route to handle adoption request response (admin action)
+  const requestId = req.params.id;
+  const { action } = req.body;
+
+  // Execute an UPDATE query to modify the status of the adoption request in the database
+  const query = 'UPDATE adoption SET status = ? WHERE id = ?';
+  db.query(query, [action, requestId], (error, results) => {
+    if (error) {
+      console.error('Error processing adoption request:', error);
+      res.status(500).json({ error: 'Failed to process adoption request.' });
+    } else if (results.affectedRows === 0) {
+      res.status(404).json({ error: 'Request not found.' });
+    } else {
+      res.status(200).json({ message: 'Request processed successfully.' });
+    }
+  });
+ }
+
+  module.exports = { regAdmin, login, logout, getAdoptionRequests, handleAdoptionRequest };
   

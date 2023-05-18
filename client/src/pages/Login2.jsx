@@ -41,11 +41,11 @@ const Login2 = () => {
         }
     }
 
-    // useEffect(() => {
-    //     if(user){
-    //         navigate("/")
-    //     }
-    // }, [user, navigate])
+    useEffect(() => {
+        if(user){
+            navigate("/")
+        }
+    }, [user, navigate])
 
   return (
     <div>

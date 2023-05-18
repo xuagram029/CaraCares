@@ -9,7 +9,7 @@ router.route('/')
     .post(verifyAdmin, addBlog)
     
 router.route('/:id')
-    .get(getSingleBlog)
+    .get(verifyAdmin, getSingleBlog)
     .delete(verifyAdmin, deleteBlog)
     .put(verifyAdmin, updateBlog)
     // .get()
