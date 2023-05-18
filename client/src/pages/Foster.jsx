@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+
+
 const Foster = () => {
   return (
 
@@ -247,7 +250,9 @@ const Foster = () => {
                 <input class="form-radio h-4 w-4 text-blue-600 m-4" type="radio" /> No
 
                 <div class="flex justify-center m-10">
+                    <Link to="/foster-pdf">
                     <button class=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-2 px-8 rounded-lg mx-auto">Submit</button>
+                    </Link> 
                 </div>
             </form>
         </section>
