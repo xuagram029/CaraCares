@@ -1,7 +1,7 @@
 import './App.css';
 import {createBrowserRouter,RouterProvider, Outlet} from "react-router-dom";
 import Home from './pages/Home';
-import Blogs from './pages/Blogs';
+// import Blogs from './pages/Blogs';
 import Admin from './pages/Admin';
 import AdminPetBoarding from './pages/AdminPetBoarding';
 import Navbar from './components/Navbar';
@@ -26,6 +26,7 @@ import AdminPanelEncode from './pages/AdminPanelEncode';
 import FosterPDF from './pages/FosterPDF';
 import Modal from './pages/Modal';
 import Login2 from './pages/Login2';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
 
@@ -45,6 +46,10 @@ const Layout = () => {
       element: <Home />,
     },
     {
+      path: "/admin-dashboard",
+      element: <AdminDashboard />,
+    },
+    {
       path: "/login",
       element: <Login2 />,
     },
@@ -56,10 +61,10 @@ const Layout = () => {
       path: "/nav2",
       element: <Nav2 />,
     },
-    {
-      path: "/blogs",
-      element: <Blogs />,
-    },
+    // {
+    //   path: "/blogs",
+    //   element: <Blogs />,
+    // },
     {
       path: "/admin",
       element: <Admin />,
