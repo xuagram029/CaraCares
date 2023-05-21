@@ -48,7 +48,7 @@ const Sidebar = () => {
                         className={`text-xl cursor-pointer min-w-fit`}/>
                         <h1 className={`origin-left ml-5 text-lg cursor-pointer ${!open ? "hidden duration-300" : "block duration-500"}`} onClick={() => {setOpenMenu(!openMenu)}}>Foster / Adoption</h1>
                         <AiOutlineArrowDown
-                        className={`text-3xl cursor-pointer absolute -right-1 ${!openMenu ? "rotate-180 duration-300" : "duration-500"} ${!open ? "hidden": "visible"}`} onClick={() => {setOpenMenu(!openMenu)}}/>
+                        className={`text-xl cursor-pointer absolute right-1 ${!openMenu ? "rotate-180 duration-300" : "duration-500"} ${!open ? "hidden": "visible"}`} onClick={() => {setOpenMenu(!openMenu)}}/>
                 </div>
                 { openMenu && <div className={`pt-4 w-full self-start ${!open && "hidden"}`}>
                     <div className='text-lg border-b border-red-300 cursor-pointer'>Adoption</div>
@@ -62,7 +62,7 @@ const Sidebar = () => {
                         className={`text-xl cursor-pointer min-w-fit`}/>
                         <h1 className={`origin-left ml-5 text-lg cursor-pointer ${!open ? "hidden duration-300" : "block duration-500"}`} onClick={() => {setOpenLf(!openLf)}}>Lost & Found</h1>
                         <AiOutlineArrowDown
-                        className={`text-3xl cursor-pointer absolute -right-1 ${!openLf ? "rotate-180 duration-300" : "duration-500"} ${!open ? "hidden": "visible"}`} onClick={() => {setOpenLf(!openLf)}}/>
+                        className={`text-xl cursor-pointer absolute right-1 ${!openLf ? "rotate-180 duration-300" : "duration-500"} ${!open ? "hidden": "visible"}`} onClick={() => {setOpenLf(!openLf)}}/>
                 </div>
                 { openLf && <div className={`pt-4 w-full self-start ${!open && "hidden"}`}>
                     <div className='text-lg border-b border-red-300 cursor-pointer'>Lost Pets</div>
