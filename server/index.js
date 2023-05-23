@@ -27,9 +27,9 @@ app.use(cookieParser()) //
 // routes
 // app.use('/register', require('./routes/register'))
 app.use('/admin',  require('./routes/admin'))
-app.use('/login',  require('./routes/auth'))
-app.use('/refresh',  require('./routes/refresh'))
-app.use('/logout',  require('./routes/logout'))
+// app.use('/login',  require('./routes/auth'))
+// app.use('/refresh',  require('./routes/refresh'))
+// app.use('/logout',  require('./routes/logout'))
 app.use('/blogs', require('./routes/blogs'))
 app.use('/foundpet', require('./routes/foundpet'))
 app.use('/typeofpet', require('./routes/pettype'))

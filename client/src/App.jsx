@@ -2,8 +2,8 @@ import './App.css';
 import {createBrowserRouter,RouterProvider, Outlet} from "react-router-dom";
 import Home from './pages/Home';
 // import Blogs from './pages/Blogs';
-import AdminPetBoarding from './pages/AdminPetBoarding';
 import Admin from './pages/Admin';
+import AdminPetBoarding from './pages/AdminPetBoarding';
 import Navbar from './components/Navbar';
 import About from './pages/About';
 import Footer from './components/Footer';
@@ -26,6 +26,7 @@ import AdminPanelEncode from './pages/AdminPanelEncode';
 import FosterPDF from './pages/FosterPDF';
 import Modal from './pages/Modal';
 import Login2 from './pages/Login2';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
 
@@ -45,7 +46,11 @@ const Layout = () => {
       element: <Home />,
     },
     {
-      path: "/login",
+      path: "/admin-dashboard",
+      element: <AdminDashboard />,
+    },
+    {
+      path: "/admin-login",
       element: <Login2 />,
     },
     {
@@ -70,15 +75,19 @@ const Layout = () => {
       element: <Register />,
     },
     {
-      path: '/admin-pet-boarding',
-      element:<Layout />,
-      children: [
-        {
-          path: '/admin-pet-boarding',
-          element: <AdminPetBoarding />
-        }
-      ]
+      path: "/admin-pet-boarding",
+      element: <AdminPetBoarding />,
     },
+    // {
+    //   path: '/admin-pet-boarding',
+    //   element:<Layout />,
+    //   children: [
+    //     {
+    //       path: '/admin-pet-boarding',
+    //       element: <AdminPetBoarding />
+    //     }
+    //   ]
+    // },
     {
       path: '/admin-visitation',
       element:<Layout />,
