@@ -1,9 +1,9 @@
 import './App.css';
 import {createBrowserRouter,RouterProvider, Outlet} from "react-router-dom";
 import Home from './pages/Home';
-import Blogs from './pages/Blogs';
-import Admin from './pages/Admin';
+// import Blogs from './pages/Blogs';
 import AdminPetBoarding from './pages/AdminPetBoarding';
+import Admin from './pages/Admin';
 import Navbar from './components/Navbar';
 import About from './pages/About';
 import Footer from './components/Footer';
@@ -56,10 +56,10 @@ const Layout = () => {
       path: "/nav2",
       element: <Nav2 />,
     },
-    {
-      path: "/blogs",
-      element: <Blogs />,
-    },
+    // {
+    //   path: "/blogs",
+    //   element: <Blogs />,
+    // },
     {
       path: "/admin",
       element: <Admin />,
