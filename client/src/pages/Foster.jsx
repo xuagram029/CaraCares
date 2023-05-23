@@ -1,7 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Foster = () => {
+
+    const navigate = useNavigate()
+
+    const handleRedirect = (e) => {
+        e.preventDefault()
+        navigate('/foster-pdf')
+      }
+
+
+
+
   return (
 
         <div className='flex flex-col sm:flex-col bg-slate-400 items-center sm:items-center lg:items-start '>
@@ -66,10 +77,11 @@ const Foster = () => {
             <div className="outline-dashed p-4 mb-10">
                 <p className="font-semibold text-5xl">Ready to Foster?</p>
                 <p className="text-lg mt-6">If you're ready to foster, click on the botton below to apply on our foster application form </p>
+
                 <div class="flex justify-center m-10">
-                    <Link to="/foster-pdf">
-                    <button class=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-2 px-8 rounded-lg mx-auto">Foster a Pet</button>
-                    </Link> 
+
+                    <button class=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-2 px-8 rounded-lg mx-auto" onClick={handleRedirect}>Foster a Pet</button>
+
                 </div>
 
             </div>

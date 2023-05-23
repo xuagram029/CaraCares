@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
+
 function FosterPDF() {
+
+  useEffect(() => {
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'auto' // Add smooth scrolling behavior
+      });
+    };
+    scrollToTop()
+  }, [])
+
   const initialValues = {
     input: "",
     input2: "",
@@ -117,11 +129,9 @@ function FosterPDF() {
   const handleRadioChange = (e) => {
     setSelectRadio(e.target.value);
   };
-
   const handleRadioChange2 = (e) => {
     setSelectRadio2(e.target.value);
   };
-
   const handleRadioChange3 = (e) => {
     setSelectRadio3(e.target.value);
   };
@@ -247,11 +257,7 @@ function FosterPDF() {
     doc.text(20, 110, "Are you applying to adopt a specific shelter animal?");
     doc.text(20, 130, `${selectedRadio2}`);
 
-    doc.text(
-      20,
-      160,
-      "Describe your ideal pet, including its sex, age, appearance, temperament, etc."
-    );
+    doc.text(20, 160, "Describe your ideal pet, including its sex, age, appearance, temperament, etc.");
     doc.text(20, 180, values.input11);
 
     doc.text(20, 210, "What type of home do you live in? *");
@@ -269,46 +275,22 @@ function FosterPDF() {
     doc.text(20, 410, "Are any members of your household allergic to animals?");
     doc.text(20, 430, `${selectedRadio8}`);
 
-    doc.text(
-      20,
-      460,
-      "Who will be responsible for feeding, grooming, and generally caring for your pet?"
-    );
+    doc.text(20, 460, "Who will be responsible for feeding, grooming, and generally caring for your pet?");
     doc.text(20, 480, values.input13);
 
-    doc.text(
-      20,
-      510,
-      "Who will be financially responsible for your pet’s needs (i.e. food, vet bills, etc.)?"
-    );
+    doc.text(20, 510, "Who will be financially responsible for your pet’s needs (i.e. food, vet bills, etc.)?");
     doc.text(20, 530, values.input14);
 
-    doc.text(
-      20,
-      560,
-      "Who will look after your pet if you go on vacation or in case of emergency?"
-    );
+    doc.text(20, 560, "Who will look after your pet if you go on vacation or in case of emergency?");
     doc.text(20, 580, values.input15);
 
-    doc.text(
-      20,
-      610,
-      "How many hours in an average workday will your pet be left alone?"
-    );
+    doc.text(20, 610, "How many hours in an average workday will your pet be left alone?");
     doc.text(20, 630, values.input16);
 
-    doc.text(
-      20,
-      660,
-      "What steps will you take to introduce your new pet to his/her new surroundings?"
-    );
+    doc.text(20, 660, "What steps will you take to introduce your new pet to his/her new surroundings?");
     doc.text(20, 680, values.input17);
 
-    doc.text(
-      20,
-      710,
-      "Does everyone in the family support your decision to adopt a pet?"
-    );
+    doc.text(20, 710, "Does everyone in the family support your decision to adopt a pet?");
     doc.text(20, 730, `${selectedRadio9}`);
 
     doc.text(20, 760, "Please explain");
@@ -324,11 +306,7 @@ function FosterPDF() {
     doc.text(20, 110, "Are you applying to adopt a specific shelter animal?");
     doc.text(20, 130, `${selectedRadio11}`);
 
-    doc.text(
-      20,
-      160,
-      "Will you be able to visit the shelter for the meet-and-greet?"
-    );
+    doc.text(20, 160, "Will you be able to visit the shelter for the meet-and-greet?");
     doc.text(20, 180, `${selectedRadio12}`);
 
     //new page
