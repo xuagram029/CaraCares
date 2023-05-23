@@ -51,21 +51,20 @@ function FosterPDF() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleAddImage = (e) => {
-
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
       const image = new Image();
       image.src = e.target.result;
       image.onload = () => {
-        const selectedWidth = 100; // Adjust the width for selection as needed
+        const selectedWidth = 90; // Adjust the width for selection as needed
         const selectedHeight = (selectedWidth / image.width) * image.height;
 
-        const pdfWidth = 200; // Adjust the width for PDF as needed
+        const pdfWidth = 90; // Adjust the width for PDF as needed
         const pdfHeight = (pdfWidth / image.width) * image.height;
 
-        const outputWidth = 10 * pdfWidth; // Adjust the desired width in the PDF
-        const outputHeight = 10 * pdfHeight; // Adjust the desired height in the PDF
+        const outputWidth = 3 * pdfWidth; // Adjust the desired width in the PDF
+        const outputHeight = 2 * pdfHeight; // Adjust the desired height in the PDF
 
         const imageObj = {
           dataURL: e.target.result,
@@ -87,8 +86,6 @@ function FosterPDF() {
     reader.readAsDataURL(file);
   };
 
-  
-
   const handleDeleteImage = (index) => {
     const updatedImages = images.filter((_, i) => i !== index);
     setImages(updatedImages);
@@ -109,6 +106,8 @@ function FosterPDF() {
   const [selectradio9, setSelectRadio9] = useState("");
   const [selectradio10, setSelectRadio10] = useState("");
   const [selectradio11, setSelectRadio11] = useState("");
+  const [selectradio12, setSelectRadio12] = useState("");
+
   //select
   const handleSelectChange = (e) => {
     setSelectedOption(e.target.value);
@@ -150,6 +149,9 @@ function FosterPDF() {
   const handleRadioChange11 = (e) => {
     setSelectRadio11(e.target.value);
   };
+  const handleRadioChange12 = (e) => {
+    setSelectRadio12(e.target.value);
+  };
 
   const generatePDF = (values) => {
     const doc = new jsPDF("p", "pt");
@@ -189,6 +191,9 @@ function FosterPDF() {
     ).value;
     const selectedRadio11 = document.querySelector(
       'input[name="radio11"]:checked'
+    ).value;
+    const selectedRadio12 = document.querySelector(
+      'input[name="radio12"]:checked'
     ).value;
 
     doc.addFont("helvetica", "small");
@@ -319,33 +324,32 @@ function FosterPDF() {
     doc.text(20, 110, "Are you applying to adopt a specific shelter animal?");
     doc.text(20, 130, `${selectedRadio11}`);
 
+    doc.text(
+      20,
+      160,
+      "Will you be able to visit the shelter for the meet-and-greet?"
+    );
+    doc.text(20, 180, `${selectedRadio12}`);
+
     //new page
     doc.addPage();
     doc.text(250, 30, "IMAGES");
 
-    let remainingSpace = doc.internal.pageSize.getHeight() - 60;
-    const spacing = 10; // Adjust the spacing value as needed
+    let yPos = 55; // Initial y-position
+    const spacing = 55; // Adjust the spacing value as needed
 
     images.forEach((imageObj, index) => {
-      const { dataURL, pdfWidth, pdfHeight, outputWidth, outputHeight } = imageObj;
+      const { dataURL, pdfWidth, pdfHeight, outputWidth, outputHeight } =
+        imageObj;
 
-      if (remainingSpace < pdfHeight + spacing) {
+      if (yPos + outputHeight > doc.internal.pageSize.getHeight() - 10) {
         doc.addPage();
-        remainingSpace = doc.internal.pageSize.getHeight() - 30;
+        yPos = 35; // Reset y-position for new page
       }
 
-      doc.addImage(
-        dataURL,
-        "JPEG",
-        25,
-        doc.internal.pageSize.getHeight() - remainingSpace,
-        pdfWidth,
-        pdfHeight,
-        outputWidth,
-        outputHeight
-      );
+      doc.addImage(dataURL, "JPEG", 140, yPos, outputWidth, outputHeight);
 
-      remainingSpace -= pdfHeight + spacing;
+      yPos += outputHeight + spacing;
     });
 
     doc.save("demo.pdf");
@@ -993,61 +997,81 @@ function FosterPDF() {
             </div>
 
             <div className="mb-4">
-              <p className="font-medium mb-2">Please attach photos of your home. This has replaced our on-site ocular inspections. (Limit: 8)</p>
+              <label htmlFor="">
+                Will you be able to visit the shelter for the meet-and-greet?*
+                <br />
+                <input
+                  class="form-radio h-4 w-4 text-blue-600 m-4"
+                  type="radio"
+                  name="radio12"
+                  value="Yes"
+                  checked={selectradio12 === "Yes"}
+                  onChange={handleRadioChange12}
+                />{" "}
+                Yes
+              </label>
+              <label htmlFor="">
+                <input
+                  class="form-radio h-4 w-4 text-blue-600 m-4"
+                  type="radio"
+                  name="radio12"
+                  value="No"
+                  checked={selectradio12 === "No"}
+                  onChange={handleRadioChange12}
+                />{" "}
+                No
+              </label>
+            </div>
+
+            <div className="mb-4">
+              <p className="font-medium mb-2">
+                Please attach photos of your home. This has replaced our on-site
+                ocular inspections. (Limit: 8)
+              </p>
               <ul className="mt-6 mb-6 px-6">
                 <li className="mt-[10px] list-disc">Front of the house</li>
                 <li className="mt-[10px] list-disc">Street photo</li>
                 <li className="mt-[10px] list-disc">Living room</li>
                 <li className="mt-[10px] list-disc">Dining area</li>
                 <li className="mt-[10px] list-disc">Kitchen</li>
-                <li className="mt-[10px] list-disc">Bedroom/s (if you pet will have access)</li>
-                <li className="mt-[10px] list-disc">Windows (if adopting a cat)</li>
-                <li className="mt-[10px] list-disc">Front & backyard (if adopting a dog)</li>
+                <li className="mt-[10px] list-disc">
+                  Bedroom/s (if you pet will have access)
+                </li>
+                <li className="mt-[10px] list-disc">
+                  Windows (if adopting a cat)
+                </li>
+                <li className="mt-[10px] list-disc">
+                  Front & backyard (if adopting a dog)
+                </li>
               </ul>
-              </div>
-
-
-
-
-      <h1 className="text-2xl font-bold mb-4">Add Images (Limit: 8)</h1>
-      <form>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleAddImage}
-        />
-          {errorMessage && (
-          <p className="text-red-500 mt-2">{errorMessage}</p>
-        )}
-        <div className="flex flex-wrap">
-          {images.map((imageObj, index) => (
-            <div key={index} className="m-2">
-              <img
-                src={imageObj.dataURL}
-                alt={`Image ${index + 1}`}
-                width={imageObj.selectedWidth}
-                height={imageObj.selectedHeight}
-              />
-              <button
-                type="button"
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-2"
-                onClick={() => handleDeleteImage(index)}
-              >
-                Delete
-              </button>
             </div>
-          ))}
-        </div>
-      </form>
 
-
-
-
-
-
-
-
-
+            <h1 className="text-2xl font-bold mb-4">Add Images (Limit: 8)</h1>
+            <form>
+              <input type="file" accept="image/*" onChange={handleAddImage} />
+              {errorMessage && (
+                <p className="text-red-500 mt-2">{errorMessage}</p>
+              )}
+              <div className="flex flex-wrap">
+                {images.map((imageObj, index) => (
+                  <div key={index} className="m-2">
+                    <img
+                      src={imageObj.dataURL}
+                      alt={`Image ${index + 1}`}
+                      width={imageObj.selectedWidth}
+                      height={imageObj.selectedHeight}
+                    />
+                    <button
+                      type="button"
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-2"
+                      onClick={() => handleDeleteImage(index)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </form>
           </div>
 
           <div className="flex justify-center p-12">
