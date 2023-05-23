@@ -50,7 +50,7 @@ const Layout = () => {
       element: <AdminDashboard />,
     },
     {
-      path: "/login",
+      path: "/admin-login",
       element: <Login2 />,
     },
     {
@@ -75,15 +75,19 @@ const Layout = () => {
       element: <Register />,
     },
     {
-      path: '/admin-pet-boarding',
-      element:<Layout />,
-      children: [
-        {
-          path: '/admin-pet-boarding',
-          element: <AdminPetBoarding />
-        }
-      ]
+      path: "/admin-pet-boarding",
+      element: <AdminPetBoarding />,
     },
+    // {
+    //   path: '/admin-pet-boarding',
+    //   element:<Layout />,
+    //   children: [
+    //     {
+    //       path: '/admin-pet-boarding',
+    //       element: <AdminPetBoarding />
+    //     }
+    //   ]
+    // },
     {
       path: '/admin-visitation',
       element:<Layout />,

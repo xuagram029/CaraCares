@@ -4,17 +4,17 @@ const  { regAdmin, login, logout, getAdoptionRequests, handleAdoptionRequest} = 
 const { verifyToken, verifyUser, verifyAdmin } = require('../middleware/verifyToken')
 
 
-router.get('/checkauth', verifyToken, (req, res, next) => {
-    res.send("u are logged in")
-})
+// router.get('/checkauth', verifyToken, (req, res, next) => {
+//     res.send("u are logged in")
+// })
 
-router.get('/user/:id', verifyUser, (req, res, next) => {
-    res.send("u can delete")
-})
+// router.get('/user/:id', verifyUser, (req, res, next) => {
+//     res.send("u can delete")
+// })
 
-router.get('/admin/:id', verifyAdmin, (req, res, next) => {
-    res.send("u can delete all")
-})
+// router.get('/admin/:id', verifyAdmin, (req, res, next) => {
+//     res.send("u can delete all")
+// })
 
 router.route('/')
     .post(regAdmin)
