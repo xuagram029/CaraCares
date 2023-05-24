@@ -3,18 +3,16 @@ import { jsPDF } from "jspdf";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-
 function FosterPDF() {
-
   useEffect(() => {
     const scrollToTop = () => {
       window.scrollTo({
         top: 0,
-        behavior: 'auto' // Add smooth scrolling behavior
+        behavior: "auto", // Add smooth scrolling behavior
       });
     };
-    scrollToTop()
-  }, [])
+    scrollToTop();
+  }, []);
 
   const initialValues = {
     input: "",
@@ -206,8 +204,6 @@ function FosterPDF() {
       'input[name="radio12"]:checked'
     ).value;
 
-
-
     doc.addFont("helvetica", "small");
     doc.setFontSize(16);
     doc.text(220, 30, "FOSTER CONTRACTS");
@@ -263,10 +259,18 @@ function FosterPDF() {
     doc.text(20, 60, "1. What are you looking to adopt?");
     doc.text(25, 80, `- ${selectedRadio6}`);
 
-    doc.text(20, 110, "2. Are you applying to adopt a specific shelter animal?");
+    doc.text(
+      20,
+      110,
+      "2. Are you applying to adopt a specific shelter animal?"
+    );
     doc.text(25, 130, `- ${selectedRadio2}`);
 
-    doc.text(20, 160, "3. Describe your ideal pet, including its sex, age, appearance, temperament, etc.");
+    doc.text(
+      20,
+      160,
+      "3. Describe your ideal pet, including its sex, age, appearance, temperament, etc."
+    );
     doc.text(25, 180, `- ${values.input11}`);
 
     doc.text(20, 210, "4. What type of home do you live in? *");
@@ -281,25 +285,53 @@ function FosterPDF() {
     doc.text(20, 360, "7. Who do you live with?");
     doc.text(25, 380, `- ${selectedRadio7}`);
 
-    doc.text(20, 410, "8. Are any members of your household allergic to animals?");
+    doc.text(
+      20,
+      410,
+      "8. Are any members of your household allergic to animals?"
+    );
     doc.text(25, 430, `- ${selectedRadio8}`);
 
-    doc.text(20, 460, "9. Who will be responsible for feeding, grooming, and generally caring for your pet?");
+    doc.text(
+      20,
+      460,
+      "9. Who will be responsible for feeding, grooming, and generally caring for your pet?"
+    );
     doc.text(25, 480, `- ${values.input13}`);
 
-    doc.text(20, 510, "10. Who will be financially responsible for your pet’s needs (i.e. food, vet bills, etc.)?");
+    doc.text(
+      20,
+      510,
+      "10. Who will be financially responsible for your pet’s needs (i.e. food, vet bills, etc.)?"
+    );
     doc.text(25, 530, `- ${values.input14}`);
 
-    doc.text(20, 560, "11. Who will look after your pet if you go on vacation or in case of emergency?");
+    doc.text(
+      20,
+      560,
+      "11. Who will look after your pet if you go on vacation or in case of emergency?"
+    );
     doc.text(25, 580, `- ${values.input15}`);
 
-    doc.text(20, 610, "12. How many hours in an average workday will your pet be left alone?");
+    doc.text(
+      20,
+      610,
+      "12. How many hours in an average workday will your pet be left alone?"
+    );
     doc.text(25, 630, `- ${values.input16}`);
 
-    doc.text(20, 660, "13. What steps will you take to introduce your new pet to his/her new surroundings?");
+    doc.text(
+      20,
+      660,
+      "13. What steps will you take to introduce your new pet to his/her new surroundings?"
+    );
     doc.text(25, 680, `- ${values.input17}`);
 
-    doc.text(20, 710, "14. Does everyone in the family support your decision to adopt a pet?");
+    doc.text(
+      20,
+      710,
+      "14. Does everyone in the family support your decision to adopt a pet?"
+    );
     doc.text(25, 730, `- ${selectedRadio9}`);
 
     //new page
@@ -315,10 +347,18 @@ function FosterPDF() {
     doc.text(20, 110, "16. What are you looking to adopt?");
     doc.text(25, 130, `- ${selectedRadio10}`);
 
-    doc.text(20, 160, "17. Are you applying to adopt a specific shelter animal?");
+    doc.text(
+      20,
+      160,
+      "17. Are you applying to adopt a specific shelter animal?"
+    );
     doc.text(25, 180, `- ${selectedRadio11}`);
 
-    doc.text(20, 210, "18. Will you be able to visit the shelter for the meet-and-greet?");
+    doc.text(
+      20,
+      210,
+      "18. Will you be able to visit the shelter for the meet-and-greet?"
+    );
     doc.text(25, 230, `- ${selectedRadio12}`);
 
     doc.line(20, 270, 575, 270);
