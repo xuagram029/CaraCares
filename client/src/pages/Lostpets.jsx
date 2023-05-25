@@ -28,7 +28,6 @@ function Lostpets() {
       useEffect(() => {
         const formattedDate = moment(date).format('YYYY/MM/DD');
         setFinalDate(formattedDate)
-
       }, [date]);
 
   return (

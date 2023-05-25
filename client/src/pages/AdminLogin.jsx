@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../context/AuthContext"
 import axios from "axios"
 import { useNavigate } from "react-router"
+import { Link } from "react-router-dom"
 
-const Login2 = () => {
+const AdminLogin = () => {
     const [credentials, setCredentials] = useState({
         username: undefined,
         pass: undefined
@@ -68,7 +69,7 @@ const Login2 = () => {
 
       <form action="" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
         <div>
-          <label for="email" class="sr-only">Email</label>
+          <label htmlFor="email" class="sr-only">Email</label>
   
           <div class="relative">
             <input
@@ -102,7 +103,7 @@ const Login2 = () => {
         <div class="flex items-center justify-between">
           <p class="text-sm text-gray-500">
             No account?
-            <a class="underline" href="">Sign up</a>
+            <Link class="underline" to="/admin-signup">Sign up</Link>
           </p>
   
           <button
@@ -128,4 +129,4 @@ const Login2 = () => {
   )
 }
 
-export default Login2
+export default AdminLogin

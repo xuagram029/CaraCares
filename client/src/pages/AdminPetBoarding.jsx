@@ -1,9 +1,10 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import axios from '../api/axios'
 import "../modal.css";
 import Sidebar from '../components/Sidebar';
+import { SidebarContext } from '../context/SbContext';
 
 
 const AdminPetBoarding = () => {
@@ -11,11 +12,13 @@ const AdminPetBoarding = () => {
   const [selectedOption, setSelectedOption] = useState('')
   const [users, setUsers] = useState([])
   const [id, setId] = useState('')
-  const [fullname, setFullname] = useState('')
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
   const [birthdate, setBirthdate] = useState('')
   const [verified, setVerified] = useState('')
+  const {open} = useContext(SidebarContext)
 
   useEffect(()=>{
     const getUsers = async() =>{
@@ -28,16 +31,19 @@ const AdminPetBoarding = () => {
   const toggleModal = async (id) => {
     setModal(!modal);
     const res = await axios.get(`http://localhost:8000/user/${id}`)
-    console.log(res.data)
+    // console.log(res)
+    console.log(res.data[0])
     const userSpec = res.data[0]
-    setFullname(userSpec.fullname)
+    setFirstname(userSpec.firstname)
+    setLastname(userSpec.lastname)
     setEmail(userSpec.email)
     setAddress(userSpec.address)
     setBirthdate(userSpec.birthdate)
     setVerified(userSpec.verified)
+    setSelectedOption(userSpec.verified)
     setId(userSpec.id)
   };
-
+  
   const toggleModalClose = () => {
     setModal(!modal);
   };
@@ -56,27 +62,31 @@ const AdminPetBoarding = () => {
   }
 
   const handleSubmit = async (id) =>{
-    console.log({fullname, email, address, birthdate, verified})
+    console.log({firstname, lastname, email, address, birthdate, verified})
     await axios.put(`http://localhost:8000/user/${id}`,{
-        fullname, email, address, birthdate, verified: selectedOption
+        firstname, lastname, email, address, birthdate, verified: selectedOption
     })
     console.log(verified)
     window.location.reload()
   }
 
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:8000/user/${id}`)
+    window.location.reload()
+  }
 
   return (
-    <div className="flex">
+    <div className="flex w-full">
       <Sidebar />
-      <div className='my-10 p-5 h-[80%] sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl'>
+      <div className='my-10 p-5 h-[100%] sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl'>
         <div className="space-x-6 font-bold font-pop text-base cursor-pointer flex justify-between items-center">
           <h1 className="text-4xl">USERS DASHBOARD</h1>
         </div>
         <form className=' mt-12 w-1/3 flex '>
-          <input name="SearchBar" class="block p-4 text-gray-700 bg-gray-100 rounded-l-lg border-gray-300 focus:outline-none focus:bg-white focus:border-gray-500 shadow-md shadow-slate-900" placeholder='Search...'></input>
-          <button type="submit" class="p-2 w-12 text-black bg-gray-100 rounded-r-lg  hover:text-white hover:bg-neutral-900 focus:outline-none shadow-md shadow-slate-900"> <FontAwesomeIcon icon={faMagnifyingGlass} /> </button>
+          <input name="SearchBar" className="block p-4 text-gray-700 bg-gray-100 rounded-l-lg border-gray-300 focus:outline-none focus:bg-white focus:border-gray-500 shadow-md shadow-slate-900" placeholder='Search...'></input>
+          <button type="submit" className="p-2 w-12 text-black bg-gray-100 rounded-r-lg  hover:text-white hover:bg-neutral-900 focus:outline-none shadow-md shadow-slate-900"> <FontAwesomeIcon icon={faMagnifyingGlass} /> </button>
         </form>
-        <div className="flex flex-col mt-12">
+        <div className={`overflow-x-auto flex flex-col mt-8 border border-black ${open ? "max-w-[100vw] transition-width duration-500" : "min-w-[90vw] transition-width duration-500 ease-linear"}`}>
           <div className='overflow-x-auto'>
             <div className='p-1.5 w-full inline-block align-middle'>
               <div className="overflow-hidden border rounded-lg">
@@ -88,20 +98,20 @@ const AdminPetBoarding = () => {
                       <th scope='col' className='px-6 py-3 text-sm font-bold text-left text-grey-500 uppercase'>Address</th>
                       <th scope='col' className='px-6 py-3 text-sm font-bold text-left text-grey-500 uppercase'>Birthday</th>
                       <th scope='col' className='px-6 py-3 text-sm font-bold text-left text-grey-500 uppercase'>VERIFIED</th>
-                      <th scope='col' className='px-6 py-3 text-sm font-bold text-left text-grey-500 uppercase'>EDIT / DELETE</th>
+                      <th scope='col' className='px-6 py-3 text-sm font-bold text-left text-grey-500 uppercase' >EDIT / DELETE</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     {users && users.map(user => (
                       <tr key={user.id}>
-                        <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{user.fullname}</td>
+                        <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{user.firstname} {user.lastname}</td>
                         <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{user.email}</td>
                         <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{user.address}</td>
                         <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{user.birthdate}</td>
                         <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{user.verified}</td>
                         <div className='flex gap-5'>
                           <button onClick={() => toggleModal(user.id)} className='bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 mt-2 rounded-lg shadow-gray-400 shadow-lg'>EDIT</button>
-                          <button className='bg-[#E06469] hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 mt-2 rounded-lg shadow-gray-400 shadow-lg'>DELETE</button>
+                          <button onClick={() => handleDelete(user.id)} className='bg-[#E06469] hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 mt-2 rounded-lg shadow-gray-400 shadow-lg'>DELETE</button>
                         </div>
                       </tr>
                     ))}
@@ -117,17 +127,31 @@ const AdminPetBoarding = () => {
               <h2 className="text-xl font-bold mb-4">Update Information</h2>
               <div className="grid grid-cols-2 gap-4">
                 <div className="mb-4">
-                  <label className="block font-bold mb-2" htmlFor="name">
-                    Full Name:
+                  <label className="block font-bold mb-2" htmlFor="firstname">
+                    First Name:
                   </label>
                   <input
                     className="w-full border border-gray-400 p-2 rounded"
                     type="text"
-                    value={fullname}
+                    value={firstname}
                     onChange={(e) => {
-                      setFullname(e.target.value);
+                      setFirstname(e.target.value);
                     }}
-                    id="name"
+                    id="firstname"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block font-bold mb-2" htmlFor="lastname">
+                    Last Name:
+                  </label>
+                  <input
+                    className="w-full border border-gray-400 p-2 rounded"
+                    type="text"
+                    value={lastname}
+                    onChange={(e) => {
+                      setLastname(e.target.value);
+                    }}
+                    id="lastname"
                   />
                 </div>
                 <div className="mb-4">
@@ -176,11 +200,24 @@ const AdminPetBoarding = () => {
                   <label className="block font-bold mb-2" htmlFor="color">
                     Verified: {verified}
                   </label>
-                  <select value={selectedOption} onChange={handleOptionChange} className="m-6 px-12 py-4  leading-tight text-gray-700  border border-gray-300 rounded-md focus:outline-none">
-                      <option value={verified} hidden>- SELECT -</option>
-                      <option value="verified" >verified</option>
-                      <option value="not verified" >not verified</option>
+                  <select
+                    value={selectedOption || verified}
+                    onChange={handleOptionChange}
+                    className="m-6 px-12 py-4 leading-tight text-gray-700 border border-gray-300 rounded-md focus:outline-none"
+                  >
+                    {verified === "verified" ? (
+                      <>
+                        <option value="verified">verified</option>
+                        <option value="not verified">not verified</option>
+                      </>
+                    ) : (
+                      <>
+                        <option value="not verified">not verified</option>
+                        <option value="verified">verified</option>
+                      </>
+                    )}
                   </select>
+
                 </div>
               </div>
               <button

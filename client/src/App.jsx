@@ -25,8 +25,11 @@ import AdminVisitationReport from './pages/AdminVisitationReport';
 import AdminPanelEncode from './pages/AdminPanelEncode';
 import FosterPDF from './pages/FosterPDF';
 import Modal from './pages/Modal';
-import Login2 from './pages/Login2';
+import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
+import UserSignup from './pages/UserSignup';
+import UserLogin from './pages/UserLogin';
+import AdminSignup from './pages/AdminSignup';
 
 function App() {
 
@@ -51,7 +54,11 @@ const Layout = () => {
     },
     {
       path: "/admin-login",
-      element: <Login2 />,
+      element: <AdminLogin />,
+    },
+    {
+      path: "/admin-signup",
+      element: <AdminSignup/>,
     },
     {
       path: "/modal/:id",
@@ -78,6 +85,14 @@ const Layout = () => {
       path: "/admin-pet-boarding",
       element: <AdminPetBoarding />,
     },
+    {
+      path: "/user-signup",
+      element: <UserSignup />,
+    },
+    {
+      path: "/user-login",
+      element: <UserLogin />,
+    },
     // {
     //   path: '/admin-pet-boarding',
     //   element:<Layout />,
@@ -99,11 +114,11 @@ const Layout = () => {
       ]
     },
     {
-      path: '/admin-visitation-report',
+      path: '/admin-visitation-report/:id',
       element:<Layout />,
       children: [
         {
-          path: '/admin-visitation-report',
+          path: '/admin-visitation-report/:id',
           element: <AdminVisitationReport />
         }
       ]

@@ -9,6 +9,7 @@ const AdminDashboard = () => {
 
     const navigate = useNavigate()
     const { user } = useContext(AuthContext);
+    const [name, setName] = useState(user?.resp[0]?.firstname)
 
     useEffect(() => {
       if(!user){
@@ -18,13 +19,17 @@ const AdminDashboard = () => {
       }
   }, [user, navigate])
 
-  console.log(user.resp[0].role)
+  console.log(user?.resp[0]?.role)
+  console.log(user?.resp[0]?.name)
+  
 
   return (
     <div className='flex'>
         <Sidebar/>
         <div className='p-8'>
             <h1>HOME</h1>
+            {/* <h1>{name}</h1>
+            <input type="text" value={name} onChange={(e) => {setName(e.target.value)}}/> */}
         </div>
     </div>
   )

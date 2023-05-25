@@ -1,11 +1,21 @@
 const express = require('express')
 const router = express.Router()
-const {getDog, getCat} = require('../controllers/petTypeController')
+const {getDogs, getCats, getPet, deletePet, addVisit, getVisits} = require('../controllers/petTypeController')
 
-router.route('/dog')
-    .get(getDog)
+router.route('/')
+    .delete(deletePet)
+    
+router.route('/dogs')
+    .get(getDogs)
 
-router.route('/cat')
-    .get(getCat)
+router.route('/cats')
+    .get(getCats)
+    
+router.route('/visits/:id')
+    .get(getVisits)
+
+router.route('/:id')
+    .get(getPet)
+    .post(addVisit)
 
 module.exports = router;
