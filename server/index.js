@@ -37,7 +37,8 @@ app.use('/admin-encode', require('./routes/shelterencode'))
 app.use('/user', require('./routes/user'))
 app.use('/volunteer', require('./routes/volunteer'))
 app.use('/adopt', require('./routes/adoption'))
-
+app.use('/foundpet', require('./routes/foundpet'))
+app.use('/lostpet', require('./routes/lostpet'))
 
 // app.use(verifyJWT)
 // app.use('/users', require('./routes/users'))

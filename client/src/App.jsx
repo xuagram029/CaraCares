@@ -30,6 +30,16 @@ import AdminDashboard from './pages/AdminDashboard';
 import UserSignup from './pages/UserSignup';
 import UserLogin from './pages/UserLogin';
 import AdminSignup from './pages/AdminSignup';
+import PetsForAdoption from './pages/PetsForAdoption';
+import FoundPets from './pages/FoundPets';
+import FoundPetsAll from './pages/Foundpetsall';
+import FoundPetsMore from './pages/Foundpetsmore';
+import Reportpets from './pages/Reportpets';
+import FoundReport from './pages/Foundreport';
+import LostReport from './pages/LostReport';
+import LostPets from './pages/Lostpets';
+import LostPetsAll from './pages/Lostpetsall';
+import LostPetsMore from './pages/Lostpetsmore';
 
 function App() {
 
@@ -134,6 +144,82 @@ const Layout = () => {
       ]
     },
     {
+      path: "/foundpets",
+      element: <FoundPets />,
+    },
+    {
+      path: "/foundpetsall",
+      element: <FoundPetsAll />,
+    },
+    {
+      path: "/foundpetsmore",
+      element: <FoundPetsMore />,
+    },
+    {
+      path: '/foundpetsmore/:id',
+      element:<Layout />,
+      children: [
+        {
+          path: '/foundpetsmore/:id',
+          element: <FoundPetsMore />
+        }
+      ]
+    },
+    {
+      path: "/reportpets",
+      element: <Reportpets />,
+    },
+    {
+      path: '/Foundreport',
+      element:<Layout />,
+      children: [
+        {
+          path: '/Foundreport',
+          element: <FoundReport />
+        }
+      ]
+    },
+    {
+      path: '/lostreport',
+      element:<Layout />,
+      children: [
+        {
+          path: '/lostreport',
+          element: <LostReport />
+        }
+      ]
+    },
+    {
+      path: '/lostpets',
+      element:<Layout />,
+      children: [
+        {
+          path: '/lostpets',
+          element: <LostPets />
+        }
+      ]
+    },
+    {
+      path: '/Lostpetsall',
+      element:<Layout />,
+      children: [
+        {
+          path: '/Lostpetsall',
+          element: <LostPetsAll />
+        }
+      ]
+    },
+    {
+      path: '/lostpetsmore/:id',
+      element:<Layout />,
+      children: [
+        {
+          path: '/lostpetsmore/:id',
+          element: <LostPetsMore />
+        }
+      ]
+    },
+    {
       path: '/about',
       element:<Layout />,
       children: [
@@ -150,6 +236,16 @@ const Layout = () => {
         {
           path: '/adopt-a-pet',
           element: <AdoptAPet/>
+        }
+      ]
+    },
+    {
+      path: "/pets-for-adoption",
+      element: <Layout />,
+      children: [
+        {
+          path: '/pets-for-adoption',
+          element: <PetsForAdoption/>
         }
       ]
     },
