@@ -3,25 +3,13 @@ import Sidebar from '../components/Sidebar'
 import { AuthContext } from "../context/AuthContext"
 import axios from "axios"
 import { useNavigate } from "react-router"
+import useRedirectAdmin from '../custom hooks/useRedirectAdmin'
 
 const AdminDashboard = () => {
     const [open, setOpen] = useState(true)
-
     const navigate = useNavigate()
     const { user } = useContext(AuthContext);
-    const [name, setName] = useState(user?.resp[0]?.firstname)
-
-    useEffect(() => {
-      if(!user){
-          navigate("/admin-login")
-      }else if(user?.resp[0]?.role !== 'admin'){
-        navigate('/')
-      }
-  }, [user, navigate])
-
-  console.log(user?.resp[0]?.role)
-  console.log(user?.resp[0]?.name)
-  
+    useRedirectAdmin(user)
 
   return (
     <div className='flex'>

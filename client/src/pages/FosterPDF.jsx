@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from 'react-router-dom'
 
 function FosterPDF() {
   useEffect(() => {
@@ -386,8 +387,10 @@ function FosterPDF() {
     doc.save("Foster Application Form.pdf");
   };
 
+  const navigate = useNavigate()
   const handleSubmit = (values) => {
     generatePDF(values);
+    navigate('/set-appointment')
   };
 
   return (
@@ -439,6 +442,7 @@ function FosterPDF() {
             <div className="mb-4 pb-4">
               <label htmlFor="input5">Birth Date *</label>
               <Field
+                type="date"
                 id="input5"
                 name="input5"
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
@@ -728,6 +732,7 @@ function FosterPDF() {
                 onChange={handleSelectChange}
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
               >
+                <option value="" hidden>SELECT</option>
                 <option value="option1">House</option>
                 <option value="option2">Apartment</option>
                 <option value="option3">Condo</option>

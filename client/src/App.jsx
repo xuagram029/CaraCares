@@ -30,6 +30,10 @@ import AdminDashboard from './pages/AdminDashboard';
 import UserSignup from './pages/UserSignup';
 import UserLogin from './pages/UserLogin';
 import AdminSignup from './pages/AdminSignup';
+import  AdminProfile  from './pages/AdminProfile';
+import Appointment from './pages/Appointment';
+import Calendar from './pages/Calendar';
+import UserAppointment from './pages/UserAppointment';
 
 function App() {
 
@@ -61,13 +65,29 @@ const Layout = () => {
       element: <AdminSignup/>,
     },
     {
-      path: "/modal/:id",
-      element: <Modal />,
+      path: "/admin-profile",
+      element: <AdminProfile/>,
     },
     {
-      path: "/nav2",
-      element: <Nav2 />,
+      path: "/scheduled-appointments",
+      element: <Calendar/>,
     },
+    {
+      path: "/appointment",
+      element: <Appointment/>,
+    },
+    {
+      path: "/set-appointment",
+      element: <UserAppointment/>,
+    },
+    // {
+    //   path: "/modal/:id",
+    //   element: <Modal />,
+    // },
+    // {
+    //   path: "/nav2",
+    //   element: <Nav2 />,
+    // },
     // {
     //   path: "/blogs",
     //   element: <Blogs />,

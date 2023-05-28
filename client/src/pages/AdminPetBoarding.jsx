@@ -5,12 +5,24 @@ import axios from '../api/axios'
 import "../modal.css";
 import Sidebar from '../components/Sidebar';
 import { SidebarContext } from '../context/SbContext';
-
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router';
+import  DataTable  from 'react-data-table-component'
+import { RiUserSearchLine } from 'react-icons/ri';
 
 const AdminPetBoarding = () => {
   const [modal, setModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState('')
+  const { user } = useContext(AuthContext)
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!user) {
+      navigate('/admin-login');
+    }
+  }, [user, navigate]);
+
   const [users, setUsers] = useState([])
+  const [filteredUser, setFilteredUser] = useState([])
   const [id, setId] = useState('')
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
@@ -18,21 +30,71 @@ const AdminPetBoarding = () => {
   const [address, setAddress] = useState('')
   const [birthdate, setBirthdate] = useState('')
   const [verified, setVerified] = useState('')
-  const {open} = useContext(SidebarContext)
+  const { open } = useContext(SidebarContext)
 
   useEffect(()=>{
     const getUsers = async() =>{
       const res = await axios.get('http://localhost:8000/user')
       setUsers(res.data)
+      setFilteredUser(res.data)
     }
     getUsers()
   },[])
 
+  const columns = [
+    {
+        name: 'First Name',
+        selector: row => row.firstname,
+        sortable: true
+    },
+    {
+        name: "Last Name",
+        selector: row => row.lastname,
+        sortable: true
+    },
+    {
+        name: "Email",
+        selector: row => row.email,
+        sortable: true
+    },
+    {
+        name: "Address",
+        selector: row => row.address,
+        sortable: true
+    },
+    {
+        name: "Birthday",
+        selector: row => row.birthdate,
+        sortable: true
+    },
+    {
+        name: "Verified",
+        selector: row => row.verified,
+        sortable: true
+    },
+    {
+      name: "Edit",
+      cell: row => (
+        <button onClick={() => toggleModal(row.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Edit
+        </button>
+      ),
+      button: true
+    },
+    {
+      name: "Delete",
+      cell: row => (
+        <button onClick={() => handleDelete(row.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          Delete
+        </button>
+      ),
+      button: true
+    }
+]
+
   const toggleModal = async (id) => {
     setModal(!modal);
     const res = await axios.get(`http://localhost:8000/user/${id}`)
-    // console.log(res)
-    console.log(res.data[0])
     const userSpec = res.data[0]
     setFirstname(userSpec.firstname)
     setLastname(userSpec.lastname)
@@ -56,17 +118,12 @@ const AdminPetBoarding = () => {
 
   const handleOptionChange = async (e) => {
     setSelectedOption(e.target.value);
-    // const res = await axios.get(`http://localhost:8000/typeofpet/${e.target.value}`)
-    console.log(e.target.value)
-    // console.log(res.data)
   }
 
   const handleSubmit = async (id) =>{
-    console.log({firstname, lastname, email, address, birthdate, verified})
     await axios.put(`http://localhost:8000/user/${id}`,{
         firstname, lastname, email, address, birthdate, verified: selectedOption
     })
-    console.log(verified)
     window.location.reload()
   }
 
@@ -75,18 +132,39 @@ const AdminPetBoarding = () => {
     window.location.reload()
   }
 
+  const handleFilter = (e) => {
+    const newData = filteredUser.filter(row =>
+      row.firstname.toLowerCase().includes(e.target.value.toLowerCase()) ||
+      row.lastname.toLowerCase().includes(e.target.value.toLowerCase())
+    );    
+    setUsers(newData)
+  }
+
   return (
-    <div className="flex w-full">
+    <div className="flex flex-col md:flex-row">
       <Sidebar />
-      <div className='my-10 p-5 h-[100%] sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl'>
-        <div className="space-x-6 font-bold font-pop text-base cursor-pointer flex justify-between items-center">
+      <div className="flex flex-col w-full md:w-3/4 lg:w-screen">
+        <div className="flex ml-8 mt-5 justify-between items-center space-x-6 font-bold font-pop text-base">
           <h1 className="text-4xl">USERS DASHBOARD</h1>
         </div>
-        <form className=' mt-12 w-1/3 flex '>
+          <div className={`mt-8 ml-8 max-w-full border border-black ${open ? "w-[75vw] transition-width duration-500" : "w-[85vw] transition-width duration-500 ease-linear"}`}>
+            <div className='p-[50px 10%] mt-2 ml-5 flex'>
+              <RiUserSearchLine className='text-2xl mt-1'/>
+              <input type="text" onChange={handleFilter} placeholder='search user' className='text-center border border-black rounded-md'/>
+            </div>
+            <DataTable
+              columns={columns}
+              data={users}
+              pagination
+            />
+          </div>
+        </div>
+        
+        {/* <form className=' mt-12 w-1/3 flex '>
           <input name="SearchBar" className="block p-4 text-gray-700 bg-gray-100 rounded-l-lg border-gray-300 focus:outline-none focus:bg-white focus:border-gray-500 shadow-md shadow-slate-900" placeholder='Search...'></input>
           <button type="submit" className="p-2 w-12 text-black bg-gray-100 rounded-r-lg  hover:text-white hover:bg-neutral-900 focus:outline-none shadow-md shadow-slate-900"> <FontAwesomeIcon icon={faMagnifyingGlass} /> </button>
         </form>
-        <div className={`overflow-x-auto flex flex-col mt-8 border border-black ${open ? "max-w-[100vw] transition-width duration-500" : "min-w-[90vw] transition-width duration-500 ease-linear"}`}>
+        <div className={`overflow-x-auto flex flex-col mt-8 border border-black ${open ? "w-[75vw] transition-width duration-500" : "w-[90vw] transition-width duration-500 ease-linear"}`}>
           <div className='overflow-x-auto'>
             <div className='p-1.5 w-full inline-block align-middle'>
               <div className="overflow-hidden border rounded-lg">
@@ -117,7 +195,11 @@ const AdminPetBoarding = () => {
                     ))}
                   </tbody>
                 </table>
-        {modal && (
+              </div>
+            </div>
+          </div>
+        </div> */}
+                {modal && (
           <div className="modal fixed inset-0 z-10 flex items-center justify-center">
             <div
               onClick={toggleModal}
@@ -188,7 +270,7 @@ const AdminPetBoarding = () => {
                   </label>
                   <input
                     className="w-full border border-gray-400 p-2 rounded"
-                    type="text"
+                    type="date"
                     value={birthdate}
                     onChange={(e) => {
                       setBirthdate(e.target.value);
@@ -235,11 +317,6 @@ const AdminPetBoarding = () => {
             </div>
           </div>
         )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }

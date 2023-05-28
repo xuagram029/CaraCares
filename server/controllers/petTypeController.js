@@ -66,21 +66,52 @@ const getVisits = (req, res) => {
     // Query to retrieve visits data
     const id = req.params.id
     const query = `
-      SELECT v.visitnumber, v.confirmation, v.visitdate, v.visitor
+    SELECT v.id, v.visitnumber, v.confirmation, v.visitdate, v.visitor
       FROM visitation AS v
       INNER JOIN shelterencode AS s ON v.petid = s.id 
       WHERE s.id = ?;
-    `;
-  
-    // Execute the query
-    db.query(query, [id], (err, results) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Error retrieving visits data' });
+      `;
+      
+      // Execute the query
+      db.query(query, [id], (err, results) => {
+          if (err) {
+              console.error(err);
+              return res.status(500).json({ error: 'Error retrieving visits data' });
       }
       return res.json(results);
     });
-  };
+};
 
+const editVisit = (req, res) => {
+    const id = req.params.id
+    // const { visitnumber, visitor, confirmation, visitdate } =  req.body
+    const visitnumber = req.body.visitnumber
+    const visitor = req.body.visitor 
+    const confirmation = req.body.confirmation
+    const visitdate = req.body.visitdate
+    console.log(visitnumber, visitor, confirmation, visitdate)
+    db.query("UPDATE visitation SET `visitnumber` = ?, `visitor` = ?, `confirmation` = ?, `visitdate` = ? where id = ?", [visitnumber, visitor, confirmation, visitdate, id], (err, result) => {
+        if(err) return res.json(err)
+        return res.json({message: "Success"})
+    })
+}
 
-module.exports = { getDogs, getCats, getPet, deletePet, addVisit, getVisits }
+const getVisit = (req, res) => {
+    // Query to retrieve visits data
+    const id = req.params.id
+    const query = `
+    SELECT v.id, v.visitnumber, v.confirmation, v.visitdate, v.visitor
+      FROM visitation AS v
+      WHERE v.id = ?;
+      `;
+      // Execute the query
+      db.query(query, [id], (err, results) => {
+          if (err) {
+              console.error(err);
+              return res.status(500).json({ error: 'Error retrieving visits data' });
+      }
+      return res.json(results);
+    });
+};
+
+module.exports = { getDogs, getCats, getPet, deletePet, addVisit, getVisits, getVisit, editVisit }

@@ -3,14 +3,15 @@ import { AuthContext } from "../context/AuthContext"
 import axios from "axios"
 import { useNavigate } from "react-router"
 import { Link } from "react-router-dom"
+import useRedirectAdmin from "../custom hooks/useRedirectAdmin"
 
 const AdminLogin = () => {
+    const {user, loading, error, dispatch } = useContext(AuthContext)
+    useRedirectAdmin(user)
     const [credentials, setCredentials] = useState({
         username: undefined,
         pass: undefined
     })
-
-    const {user, loading, error, dispatch } = useContext(AuthContext)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -29,24 +30,6 @@ const AdminLogin = () => {
             // alert(err.response.data)
         }
     }
-
-    // const handleLogout = async (e) => {
-    //     e.preventDefault()
-    //     dispatch({ type: "LOGOUT" })
-    //     try {
-    //         await axios.post("http://localhost:8000/admin/logout")
-    //         // console.log(res.data.message)
-    //         navigate('/')
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
-
-    useEffect(() => {
-        if(user){
-            navigate("/")
-        }
-    }, [user, navigate])
 
   return (
     <div>

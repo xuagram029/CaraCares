@@ -1,14 +1,19 @@
-import React from 'react'
+import {useContext} from 'react'
 import Max from '../assets/ui/CARA_PICTURES/dogs/MAX.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from "../context/AuthContext"
+import useRedirectAdmin from '../custom hooks/useRedirectAdmin'
+
 
 const AdminPanelEncode = () => {
   const [data,setData] = useState([])
-
+  const {user, loading, error, dispatch } = useContext(AuthContext)
+  useRedirectAdmin(user)
+  
   const navigate = useNavigate()
 
   const [name, setName] = useState('')

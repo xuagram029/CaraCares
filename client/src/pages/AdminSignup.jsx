@@ -1,9 +1,13 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import axios from "../api/axios"
 import { Link, useNavigate } from "react-router-dom"
+import { AuthContext } from "../context/AuthContext"
+import useRedirectAdmin from "../custom hooks/useRedirectAdmin"
 
 const UserSignup = () => {
     const navigate = useNavigate()
+    const { user } = useContext(AuthContext)
+    useRedirectAdmin(user)
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('')

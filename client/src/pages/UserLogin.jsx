@@ -3,14 +3,15 @@ import axios from '../api/axios'
 import { useNavigate } from 'react-router'
 import { AuthContext } from '../context/AuthContext'
 import { Link } from 'react-router-dom'
+import useRedirectUser from '../custom hooks/useRedirectUser'
 
 const UserLogin = () => {
   const [credentials, setCredentials] = useState({
     username: undefined,
     pass: undefined
 })
-
 const {user, loading, error, dispatch } = useContext(AuthContext)
+useRedirectUser(user)
 const navigate = useNavigate()
 
 const handleChange = (e) => {
@@ -28,12 +29,6 @@ const handleClick = async (e) => {
         dispatch({type: "LOGIN_FAILURE", payload: err.response.data})
     }
 }
-
-useEffect(() => {
-    if(user){
-        navigate("/")
-    }
-}, [user, navigate])
 
   return (
   <section class="relative flex flex-wrap lg:h-screen lg:items-center">

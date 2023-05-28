@@ -3,13 +3,14 @@ const bcrypt = require('bcrypt')
 const saltRounds = 10;
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
-// bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
-//     // Store hash in your password DB.
-// });
 
-// bcrypt.compare(pass, result[0].pass, (err, resp) =>{
+const getAdmin = (req, res) => {
+  const id = req.params.id
+  db.query("SELECT * FROM admins WHERE id = ?", [id], (err, result) => {
+    res.json(result)
+  })
+}
 
-// })
 const regAdmin = (req, res) => {
     const { firstname, lastname, username, email, address, birthdate, pass } = req.body;
   
@@ -42,6 +43,16 @@ const regAdmin = (req, res) => {
     });
   };
   
+  const updateAdmin = (req, res) => {
+    const id = req.params.id
+    const {firstname, lastname, email, address, birthdate} = req.body
+    db.query("UPDATE admins SET  `firstname` = ?, `lastname` = ?, `email` = ?, `address` = ?, `birthdate` = ? WHERE id = ?", [firstname, lastname, email, address, birthdate, id], 
+    (err, result) => {
+      if(err) return res.status(401).json(err)
+      return res.json({message: "updated successfully"})
+    })
+  }
+
   const login = (req, res) => {
     const { username, pass } = req.body;
   
@@ -118,5 +129,5 @@ const regAdmin = (req, res) => {
   });
  }
 
-  module.exports = { regAdmin, login, logout, getAdoptionRequests, handleAdoptionRequest };
+  module.exports = { getAdmin, regAdmin, updateAdmin, login, logout, getAdoptionRequests, handleAdoptionRequest };
   
