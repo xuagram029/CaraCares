@@ -1,20 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { jsPDF } from "jspdf";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from 'react-router-dom'
 
 function FosterPDF() {
-  useEffect(() => {
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "auto", // Add smooth scrolling behavior
-      });
-    };
-    scrollToTop();
-  }, []);
-
   const initialValues = {
     input: "",
     input2: "",
@@ -31,9 +21,7 @@ function FosterPDF() {
     input13: "",
     input14: "",
     input15: "",
-    input16: "",
-    input17: "",
-    input18: "",
+    file: null,
   };
 
   const validationSchema = Yup.object().shape({
@@ -52,54 +40,18 @@ function FosterPDF() {
     input13: Yup.string().required(),
     input14: Yup.string().required(),
     input15: Yup.string().required(),
-    input16: Yup.string().required(),
-    input17: Yup.string().required(),
-    input18: Yup.string().required(),
+    file: Yup.mixed().required(),
   });
 
-  //images
-  const [images, setImages] = useState([]);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const handleAddImage = (e) => {
-    const file = e.target.files[0];
+  const handleChange = (e, formik) => {
+    const file = e.currentTarget.files[0];
     const reader = new FileReader();
-    reader.onload = (e) => {
-      const image = new Image();
-      image.src = e.target.result;
-      image.onload = () => {
-        const selectedWidth = 90; // Adjust the width for selection as needed
-        const selectedHeight = (selectedWidth / image.width) * image.height;
 
-        const pdfWidth = 90; // Adjust the width for PDF as needed
-        const pdfHeight = (pdfWidth / image.width) * image.height;
-
-        const outputWidth = 3 * pdfWidth; // Adjust the desired width in the PDF
-        const outputHeight = 2 * pdfHeight; // Adjust the desired height in the PDF
-
-        const imageObj = {
-          dataURL: e.target.result,
-          selectedWidth,
-          selectedHeight,
-          pdfWidth,
-          pdfHeight,
-          outputWidth,
-          outputHeight,
-        };
-        if (images.length < 8) {
-          setImages([...images, imageObj]);
-          setErrorMessage("");
-        } else {
-          setErrorMessage("You have reached the maximum limit of 8 images.");
-        }
-      };
+    reader.onloadend = () => {
+      formik.setFieldValue("file", reader.result);
     };
-    reader.readAsDataURL(file);
-  };
 
-  const handleDeleteImage = (index) => {
-    const updatedImages = images.filter((_, i) => i !== index);
-    setImages(updatedImages);
+    reader.readAsDataURL(file);
   };
 
   //Select and option
@@ -114,10 +66,6 @@ function FosterPDF() {
   const [selectradio6, setSelectRadio6] = useState("");
   const [selectradio7, setSelectRadio7] = useState("");
   const [selectradio8, setSelectRadio8] = useState("");
-  const [selectradio9, setSelectRadio9] = useState("");
-  const [selectradio10, setSelectRadio10] = useState("");
-  const [selectradio11, setSelectRadio11] = useState("");
-  const [selectradio12, setSelectRadio12] = useState("");
 
   //select
   const handleSelectChange = (e) => {
@@ -128,9 +76,11 @@ function FosterPDF() {
   const handleRadioChange = (e) => {
     setSelectRadio(e.target.value);
   };
+
   const handleRadioChange2 = (e) => {
     setSelectRadio2(e.target.value);
   };
+
   const handleRadioChange3 = (e) => {
     setSelectRadio3(e.target.value);
   };
@@ -148,18 +98,6 @@ function FosterPDF() {
   };
   const handleRadioChange8 = (e) => {
     setSelectRadio8(e.target.value);
-  };
-  const handleRadioChange9 = (e) => {
-    setSelectRadio9(e.target.value);
-  };
-  const handleRadioChange10 = (e) => {
-    setSelectRadio10(e.target.value);
-  };
-  const handleRadioChange11 = (e) => {
-    setSelectRadio11(e.target.value);
-  };
-  const handleRadioChange12 = (e) => {
-    setSelectRadio12(e.target.value);
   };
 
   const generatePDF = (values) => {
@@ -192,24 +130,9 @@ function FosterPDF() {
     const selectedRadio8 = document.querySelector(
       'input[name="radio8"]:checked'
     ).value;
-    const selectedRadio9 = document.querySelector(
-      'input[name="radio9"]:checked'
-    ).value;
-    const selectedRadio10 = document.querySelector(
-      'input[name="radio10"]:checked'
-    ).value;
-    const selectedRadio11 = document.querySelector(
-      'input[name="radio11"]:checked'
-    ).value;
-    const selectedRadio12 = document.querySelector(
-      'input[name="radio12"]:checked'
-    ).value;
 
     doc.addFont("helvetica", "small");
-    doc.setFontSize(16);
-    doc.text(220, 30, "FOSTER CONTRACTS");
-
-    doc.setFontSize(10);
+    doc.text(225, 30, "FOSTER CONTRACTS");
     doc.text(20, 80, "Full Name:");
     doc.text(20, 100, values.input);
 
@@ -248,143 +171,46 @@ function FosterPDF() {
 
     doc.text(20, 680, "Alternate Contact's Email");
     doc.text(20, 700, values.input10);
-
+    
     //new page
     doc.addPage();
-
-    doc.addFont("helvetica", "small");
-    doc.setFontSize(16);
     doc.text(225, 30, "QUESTIONNAIRE");
 
-    doc.setFontSize(10);
-    doc.text(20, 60, "1. What are you looking to adopt?");
-    doc.text(25, 80, `- ${selectedRadio6}`);
+    doc.text(20, 60, "What are you looking to adopt?");
+    doc.text(20, 80, `${selectedRadio6}`);
+ 
+    doc.text(20, 110, "Are you applying to adopt a specific shelter animal?");
+    doc.text(20, 130, `${selectedRadio2}`);
 
-    doc.text(
-      20,
-      110,
-      "2. Are you applying to adopt a specific shelter animal?"
-    );
-    doc.text(25, 130, `- ${selectedRadio2}`);
+    doc.text(20, 160, "Describe your ideal pet, including its sex, age, appearance, temperament, etc.");
+    doc.text(20, 180, values.input11);
 
-    doc.text(
-      20,
-      160,
-      "3. Describe your ideal pet, including its sex, age, appearance, temperament, etc."
-    );
-    doc.text(25, 180, `- ${values.input11}`);
+    doc.text(20, 210, "What type of home do you live in? *");
+    doc.text(20, 230, `${selectedOptionText}`);
 
-    doc.text(20, 210, "4. What type of home do you live in? *");
-    doc.text(25, 230, `- ${selectedOptionText}`);
+    doc.text(20, 260, "Do you rent?");
+    doc.text(20, 280, `${selectedRadio3}`);
 
-    doc.text(20, 260, "5. Do you rent?");
-    doc.text(25, 280, `- ${selectedRadio3}`);
+    doc.text(20, 310, "What happens to your pet if or when you move?");
+    doc.text(20, 330, values.input12);
 
-    doc.text(20, 310, "6. What happens to your pet if or when you move?");
-    doc.text(25, 330, `- ${values.input12}`);
+    doc.text(20, 360, "Who do you live with?");
+    doc.text(20, 380, `${selectedRadio7}`);
 
-    doc.text(20, 360, "7. Who do you live with?");
-    doc.text(25, 380, `- ${selectedRadio7}`);
+    doc.text(20, 410, "Are any members of your household allergic to animals?");
+    doc.text(20, 430, `${selectedRadio8}`);
 
-    doc.text(
-      20,
-      410,
-      "8. Are any members of your household allergic to animals?"
-    );
-    doc.text(25, 430, `- ${selectedRadio8}`);
+    doc.text(20, 460, "Who will be responsible for feeding, grooming, and generally caring for your pet?");
+    doc.text(20, 480, values.input13);
 
-    doc.text(
-      20,
-      460,
-      "9. Who will be responsible for feeding, grooming, and generally caring for your pet?"
-    );
-    doc.text(25, 480, `- ${values.input13}`);
+    doc.text(20, 510, "Who will be financially responsible for your pet’s needs (i.e. food, vet bills, etc.)?");
+    doc.text(20, 530, values.input14);
 
-    doc.text(
-      20,
-      510,
-      "10. Who will be financially responsible for your pet’s needs (i.e. food, vet bills, etc.)?"
-    );
-    doc.text(25, 530, `- ${values.input14}`);
+    doc.text(20, 560, "Who will look after your pet if you go on vacation or in case of emergency?");
+    doc.text(20, 580, values.input15);
 
-    doc.text(
-      20,
-      560,
-      "11. Who will look after your pet if you go on vacation or in case of emergency?"
-    );
-    doc.text(25, 580, `- ${values.input15}`);
-
-    doc.text(
-      20,
-      610,
-      "12. How many hours in an average workday will your pet be left alone?"
-    );
-    doc.text(25, 630, `- ${values.input16}`);
-
-    doc.text(
-      20,
-      660,
-      "13. What steps will you take to introduce your new pet to his/her new surroundings?"
-    );
-    doc.text(25, 680, `- ${values.input17}`);
-
-    doc.text(
-      20,
-      710,
-      "14. Does everyone in the family support your decision to adopt a pet?"
-    );
-    doc.text(25, 730, `- ${selectedRadio9}`);
-
-    //new page
-    doc.addPage();
-
-    doc.setFontSize(16);
-    doc.text(225, 30, "QUESTIONNAIRE");
-
-    doc.setFontSize(10);
-    doc.text(20, 60, "15. Please explain");
-    doc.text(25, 80, `- ${values.input18}`);
-
-    doc.text(20, 110, "16. What are you looking to adopt?");
-    doc.text(25, 130, `- ${selectedRadio10}`);
-
-    doc.text(
-      20,
-      160,
-      "17. Are you applying to adopt a specific shelter animal?"
-    );
-    doc.text(25, 180, `- ${selectedRadio11}`);
-
-    doc.text(
-      20,
-      210,
-      "18. Will you be able to visit the shelter for the meet-and-greet?"
-    );
-    doc.text(25, 230, `- ${selectedRadio12}`);
-
-    doc.line(20, 270, 575, 270);
-
-    doc.setFontSize(16);
-    doc.text(250, 315, "IMAGES");
-
-    let yPos = 350; // Initial y-position
-    const spacing = 55; // Adjust the spacing value as needed
-
-    images.forEach((imageObj, index) => {
-      const { dataURL, pdfWidth, pdfHeight, outputWidth, outputHeight } =
-        imageObj;
-
-      if (yPos + outputHeight > doc.internal.pageSize.getHeight() - 10) {
-        doc.addPage();
-        yPos = 35; // Reset y-position for new page
-      }
-
-      doc.addImage(dataURL, "JPEG", 140, yPos, outputWidth, outputHeight);
-
-      yPos += outputHeight + spacing;
-    });
-
-    doc.save("Foster Application Form.pdf");
+    doc.addImage(values.file, "PNG", 300, 140, 300, 200);
+    doc.save("demo.pdf");
   };
 
   const navigate = useNavigate()
@@ -400,12 +226,11 @@ function FosterPDF() {
       onSubmit={handleSubmit}
     >
       {(formik) => (
-        <Form className="bg-slate-400">
-          <h1 className="sm:text-3xl md:text-4xl text-2xl font-bold xl:text-5xl text-slate-900 text-center pt-12">
-            FOSTER A PET APPLICATION FORM
-          </h1>
-          <div className="m-12 bg-primary  p-10 h-full w-[55%] mx-auto rounded-md">
-            <div className="mb-4 pb-4">
+        <Form>
+          <h1 className='sm:text-3xl md:text-4xl text-2xl font-bold xl:text-5xl text-blue-900 text-center m-12'>FOSTER A PET APPLICATION FORM</h1>  
+          <div className="m-12 bg-blue-200 p-6 h-full w-[55%] mx-auto">
+
+            <div className="mb-4">
               <label htmlFor="input">Full Name *</label>
               <Field
                 id="input"
@@ -414,7 +239,7 @@ function FosterPDF() {
                 placeholder="Last Name, First Name, Middle Initial"
               />
             </div>
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="input2">Address: *</label>
               <Field
                 id="input2"
@@ -422,7 +247,7 @@ function FosterPDF() {
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
               />
             </div>
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="input3">Phone #: *</label>
               <Field
                 id="input3"
@@ -430,7 +255,7 @@ function FosterPDF() {
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
               />
             </div>
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="input4">Email *</label>
               <Field
                 type="email"
@@ -439,7 +264,7 @@ function FosterPDF() {
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
               />
             </div>
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="input5">Birth Date *</label>
               <Field
                 type="date"
@@ -448,7 +273,7 @@ function FosterPDF() {
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
               />
             </div>
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="">
                 Status*
                 <br />
@@ -486,7 +311,7 @@ function FosterPDF() {
               </label>
             </div>
 
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="input6">Occupation *</label>
               <Field
                 id="input6"
@@ -495,7 +320,7 @@ function FosterPDF() {
               />
             </div>
 
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="input7">Social Media *</label>
               <Field
                 id="input7"
@@ -506,7 +331,7 @@ function FosterPDF() {
               <p className="text-sm">Please type N/A if no social media</p>
             </div>
 
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="">
                 What prompted you to adopt from PAWS? *
                 <br />
@@ -555,7 +380,7 @@ function FosterPDF() {
               </label>
             </div>
 
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="">
                 Have you adopted from PAWS before?*
                 <br />
@@ -583,7 +408,7 @@ function FosterPDF() {
               </label>
             </div>
 
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="input8">Alternate Contact *</label>
               <Field
                 id="input8"
@@ -591,13 +416,10 @@ function FosterPDF() {
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
                 placeholder="Last Name, First Name, Middle Initial"
               />
-              <p className="text-sm">
-                If the applicant is a minor, a parent or a guardian must be the
-                alternate contact and co-sign the application.
-              </p>
+              <p className="text-sm">If the applicant is a minor, a parent or a guardian must be the alternate contact and co-sign the application.</p>
             </div>
 
-            <div className="mb-4 flex mx-auto space-x-2 pb-4">
+            <div className="mb-4 flex mx-auto space-x-2">
               <div className="w-1/2">
                 <label htmlFor="input9" className="text-left">
                   Phone #: *
@@ -610,7 +432,7 @@ function FosterPDF() {
                 />
               </div>
 
-              <div className="w-1/2 pb-4">
+              <div className="w-1/2">
                 <label htmlFor="input10" className="text-left">
                   Email *
                 </label>
@@ -623,20 +445,16 @@ function FosterPDF() {
                 />
               </div>
             </div>
-
-            {/* NEW PDF PAGE */}
+            
             <div className="mt-12 mb-12 mx-6">
-              <h1 className="text-3xl">QUESTIONNAIRE</h1>
-              <br />
-              <p className="text-justify text-lg italic">
-                In an effort to help the process go smoothly, please be as
-                detailed as possible with your responses to the questions below.
-              </p>
+            <h1 className="text-3xl">QUESTIONNAIRE</h1>
+            <br />
+            <p className="text-justify text-lg italic">In an effort to help the process go smoothly, please be as detailed as possible with your responses to the questions below.</p>
             </div>
 
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="">
-                What are you looking to adopt? *
+                  What are you looking to adopt? *
                 <br />
                 <input
                   class="form-radio h-4 w-4 text-blue-600 m-4"
@@ -683,7 +501,7 @@ function FosterPDF() {
               </label>
             </div>
 
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="">
                 Are you applying to adopt a specific shelter animal?*
                 <br />
@@ -710,11 +528,8 @@ function FosterPDF() {
               </label>
             </div>
 
-            <div className="mb-4 pb-4">
-              <label htmlFor="input11">
-                Describe your ideal pet, including its sex, age, appearance,
-                temperament, etc.*
-              </label>
+            <div className="mb-4">
+              <label htmlFor="input11">Describe your ideal pet, including its sex, age, appearance, temperament, etc.*</label>
               <Field
                 type="text"
                 id="input11"
@@ -723,7 +538,7 @@ function FosterPDF() {
               />
             </div>
 
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="input99">
                 What type of building do you live in? *
               </label>
@@ -740,9 +555,9 @@ function FosterPDF() {
               </select>
             </div>
 
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="">
-                Do you rent?*
+                  Do you rent?*
                 <br />
                 <input
                   class="form-radio h-4 w-4 text-blue-600 m-4"
@@ -767,10 +582,8 @@ function FosterPDF() {
               </label>
             </div>
 
-            <div className="mb-4 pb-4">
-              <label htmlFor="input12">
-                What happens to your pet if or when you move? *
-              </label>
+            <div className="mb-4">
+              <label htmlFor="input12">What happens to your pet if or when you move? *</label>
               <Field
                 type="text"
                 id="input12"
@@ -779,9 +592,9 @@ function FosterPDF() {
               />
             </div>
 
-            <div className="mb-4 pb-4">
+            <div className="mb-4">
               <label htmlFor="">
-                Who do you live with? *
+                  Who do you live with? *
                 <br />
                 <input
                   class="form-radio h-4 w-4 text-blue-600 m-4"
@@ -877,11 +690,8 @@ function FosterPDF() {
               </label>
             </div>
 
-            <div className="mb-4 pb-4">
-              <label htmlFor="input13">
-                Who will be responsible for feeding, grooming, and generally
-                caring for your pet? *
-              </label>
+            <div className="mb-4">
+              <label htmlFor="input13">Who will be responsible for feeding, grooming, and generally caring for your pet? *</label>
               <Field
                 type="text"
                 id="input13"
@@ -889,11 +699,8 @@ function FosterPDF() {
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
               />
             </div>
-            <div className="mb-4 pb-4">
-              <label htmlFor="input14">
-                Who will be financially responsible for your pet’s needs (i.e.
-                food, vet bills, etc.)? *
-              </label>
+            <div className="mb-4">
+              <label htmlFor="input14">Who will be financially responsible for your pet’s needs (i.e. food, vet bills, etc.)? *</label>
               <Field
                 type="text"
                 id="input14"
@@ -901,11 +708,8 @@ function FosterPDF() {
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
               />
             </div>
-            <div className="mb-4 pb-4">
-              <label htmlFor="input15">
-                Who will look after your pet if you go on vacation or in case of
-                emergency? *
-              </label>
+            <div className="mb-4">
+              <label htmlFor="input15">Who will look after your pet if you go on vacation or in case of emergency? *</label>
               <Field
                 type="text"
                 id="input15"
@@ -913,207 +717,35 @@ function FosterPDF() {
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
               />
             </div>
-            <div className="mb-4 pb-4">
-              <label htmlFor="input16">
-                How many hours in an average workday will your pet be left
-                alone? *
+
+
+
+
+
+
+
+
+
+
+
+            <div className="mb-4">
+              <label htmlFor="file">
+                Upload Image of the pet you want to foster
               </label>
-              <Field
-                type="text"
-                id="input16"
-                name="input16"
+              <input
+                type="file"
+                id="file"
+                name="file"
+                onChange={(e) => handleChange(e, formik)}
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
               />
             </div>
-
-            <div className="mb-4 pb-4">
-              <label htmlFor="input17">
-                What steps will you take to introduce your new pet to his/her
-                new surroundings? *
-              </label>
-              <Field
-                type="text"
-                id="input17"
-                name="input17"
-                className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
-              />
-            </div>
-            <div className="mb-4 pb-4">
-              <label htmlFor="">
-                Does everyone in the family support your decision to adopt a
-                pet? *
-                <br />
-                <input
-                  class="form-radio h-4 w-4 text-blue-600 m-4"
-                  type="radio"
-                  name="radio9"
-                  value="Yes"
-                  checked={selectradio9 === "Yes"}
-                  onChange={handleRadioChange9}
-                />{" "}
-                Yes
-              </label>
-              <label htmlFor="">
-                <input
-                  class="form-radio h-4 w-4 text-blue-600 m-4"
-                  type="radio"
-                  name="radio9"
-                  value="No"
-                  checked={selectradio9 === "No"}
-                  onChange={handleRadioChange9}
-                />{" "}
-                No
-              </label>
-            </div>
-
-            <div className="mb-4 pb-4">
-              <label htmlFor="input18">Please explain *</label>
-              <Field
-                type="text"
-                id="input18"
-                name="input18"
-                className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
-              />
-            </div>
-
-            {/* NEW PDF PAGE */}
-
-            <div className="mb-4 pb-4">
-              <label htmlFor="">
-                Do you have other pets? *
-                <br />
-                <input
-                  class="form-radio h-4 w-4 text-blue-600 m-4"
-                  type="radio"
-                  name="radio10"
-                  value="Yes"
-                  checked={selectradio10 === "Yes"}
-                  onChange={handleRadioChange10}
-                />{" "}
-                Yes
-              </label>
-              <label htmlFor="">
-                <input
-                  class="form-radio h-4 w-4 text-blue-600 m-4"
-                  type="radio"
-                  name="radio10"
-                  value="No"
-                  checked={selectradio10 === "No"}
-                  onChange={handleRadioChange10}
-                />{" "}
-                No
-              </label>
-            </div>
-
-            <div className="mb-4 pb-4">
-              <label htmlFor="">
-                Have you had pets in the past? *
-                <br />
-                <input
-                  class="form-radio h-4 w-4 text-blue-600 m-4"
-                  type="radio"
-                  name="radio11"
-                  value="Yes"
-                  checked={selectradio11 === "Yes"}
-                  onChange={handleRadioChange11}
-                />{" "}
-                Yes
-              </label>
-              <label htmlFor="">
-                <input
-                  class="form-radio h-4 w-4 text-blue-600 m-4"
-                  type="radio"
-                  name="radio11"
-                  value="No"
-                  checked={selectradio11 === "No"}
-                  onChange={handleRadioChange11}
-                />{" "}
-                No
-              </label>
-            </div>
-
-            <div className="mb-4 pb-4">
-              <label htmlFor="">
-                Will you be able to visit the shelter for the meet-and-greet?*
-                <br />
-                <input
-                  class="form-radio h-4 w-4 text-blue-600 m-4"
-                  type="radio"
-                  name="radio12"
-                  value="Yes"
-                  checked={selectradio12 === "Yes"}
-                  onChange={handleRadioChange12}
-                />{" "}
-                Yes
-              </label>
-              <label htmlFor="">
-                <input
-                  class="form-radio h-4 w-4 text-blue-600 m-4"
-                  type="radio"
-                  name="radio12"
-                  value="No"
-                  checked={selectradio12 === "No"}
-                  onChange={handleRadioChange12}
-                />{" "}
-                No
-              </label>
-            </div>
-
-            <div className="mb-4 pb-4">
-              <p className="font-medium mb-2">
-                Please attach photos of your home. This has replaced our on-site
-                ocular inspections. (Limit: 8)
-              </p>
-              <ul className="mt-6 mb-6 px-6">
-                <li className="mt-[10px] list-disc">Front of the house</li>
-                <li className="mt-[10px] list-disc">Street photo</li>
-                <li className="mt-[10px] list-disc">Living room</li>
-                <li className="mt-[10px] list-disc">Dining area</li>
-                <li className="mt-[10px] list-disc">Kitchen</li>
-                <li className="mt-[10px] list-disc">
-                  Bedroom/s (if you pet will have access)
-                </li>
-                <li className="mt-[10px] list-disc">
-                  Windows (if adopting a cat)
-                </li>
-                <li className="mt-[10px] list-disc">
-                  Front & backyard (if adopting a dog)
-                </li>
-              </ul>
-            </div>
-
-            <h1 className="text-2xl font-bold mb-4">Add Images (Limit: 8)</h1>
-            <form>
-              <input type="file" accept="image/*" onChange={handleAddImage} />
-              {errorMessage && (
-                <p className="text-red-500 mt-2">{errorMessage}</p>
-              )}
-              <div className="flex flex-wrap">
-                {images.map((imageObj, index) => (
-                  <div key={index} className="m-2">
-                    <img
-                      src={imageObj.dataURL}
-                      alt={`Image ${index + 1}`}
-                      width={imageObj.selectedWidth}
-                      height={imageObj.selectedHeight}
-                    />
-                    <button
-                      type="button"
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-2"
-                      onClick={() => handleDeleteImage(index)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </form>
           </div>
 
-          <div className="flex justify-center pb-6">
+          <div className="flex justify-center p-12">
             <button
               type="submit"
-              className="bg-slate-700 hover:bg-neutral-900 hover: text-white font-bold py-2 px-8 rounded-lg mx-auto"
+              className="bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-2 px-8 rounded-lg mx-auto"
             >
               Generate PDF
             </button>

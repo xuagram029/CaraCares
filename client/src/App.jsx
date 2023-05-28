@@ -30,7 +30,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import UserSignup from './pages/UserSignup';
 import UserLogin from './pages/UserLogin';
 import AdminSignup from './pages/AdminSignup';
-import PetsForAdoption from './pages/PetsForAdoption';
+// import PetsForAdoption from './pages/PetsForAdoption';
 import FoundPets from './pages/FoundPets';
 import FoundPetsAll from './pages/Foundpetsall';
 import FoundPetsMore from './pages/Foundpetsmore';
@@ -244,16 +244,16 @@ const Layout = () => {
         }
       ]
     },
-    {
-      path: "/pets-for-adoption",
-      element: <Layout />,
-      children: [
-        {
-          path: '/pets-for-adoption',
-          element: <PetsForAdoption/>
-        }
-      ]
-    },
+    // {
+    //   path: "/pets-for-adoption",
+    //   element: <Layout />,
+    //   children: [
+    //     {
+    //       path: '/pets-for-adoption',
+    //       element: <PetsForAdoption/>
+    //     }
+    //   ]
+    // },
     {
       path: "/contact-us",
       element: <Layout />,
