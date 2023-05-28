@@ -12,7 +12,7 @@ const AdminDashboard = () => {
     useRedirectAdmin(user)
 
   return (
-    <div className='flex'>
+    <div className='flex h-screen'>
         <Sidebar/>
         <div className='p-8'>
             <h1>HOME</h1>

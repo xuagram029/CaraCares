@@ -30,10 +30,19 @@ import AdminDashboard from './pages/AdminDashboard';
 import UserSignup from './pages/UserSignup';
 import UserLogin from './pages/UserLogin';
 import AdminSignup from './pages/AdminSignup';
-import  AdminProfile  from './pages/AdminProfile';
-import Appointment from './pages/Appointment';
-import Calendar from './pages/Calendar';
-import UserAppointment from './pages/UserAppointment';
+import PetsForAdoption from './pages/PetsForAdoption';
+import FoundPets from './pages/FoundPets';
+import FoundPetsAll from './pages/Foundpetsall';
+import FoundPetsMore from './pages/Foundpetsmore';
+import Reportpets from './pages/Reportpets';
+import FoundReport from './pages/Foundreport';
+import LostReport from './pages/LostReport';
+import LostPets from './pages/Lostpets';
+import LostPetsAll from './pages/Lostpetsall';
+import LostPetsMore from './pages/Lostpetsmore';
+import AdminVisitationDogs from './pages/AdminVisitationDogs';
+import AdminVisitationCats from './pages/AdminVisitationCats';
+
 
 function App() {
 
@@ -65,29 +74,13 @@ const Layout = () => {
       element: <AdminSignup/>,
     },
     {
-      path: "/admin-profile",
-      element: <AdminProfile/>,
+      path: "/modal/:id",
+      element: <Modal />,
     },
     {
-      path: "/scheduled-appointments",
-      element: <Calendar/>,
+      path: "/nav2",
+      element: <Nav2 />,
     },
-    {
-      path: "/appointment",
-      element: <Appointment/>,
-    },
-    {
-      path: "/set-appointment",
-      element: <UserAppointment/>,
-    },
-    // {
-    //   path: "/modal/:id",
-    //   element: <Modal />,
-    // },
-    // {
-    //   path: "/nav2",
-    //   element: <Nav2 />,
-    // },
     // {
     //   path: "/blogs",
     //   element: <Blogs />,
@@ -134,14 +127,16 @@ const Layout = () => {
       ]
     },
     {
+      path: "/admin-visitation-dogs",
+      element: <AdminVisitationDogs />,
+    },
+    {
+      path: "/admin-visitation-cats",
+      element: <AdminVisitationCats />,
+    },
+    {
       path: '/admin-visitation-report/:id',
-      element:<Layout />,
-      children: [
-        {
-          path: '/admin-visitation-report/:id',
-          element: <AdminVisitationReport />
-        }
-      ]
+      element: <AdminVisitationReport />
     },
     {
       path: '/admin-panel-encode',
@@ -150,6 +145,82 @@ const Layout = () => {
         {
           path: '/admin-panel-encode',
           element: <AdminPanelEncode />
+        }
+      ]
+    },
+    {
+      path: "/foundpets",
+      element: <FoundPets />,
+    },
+    {
+      path: "/foundpetsall",
+      element: <FoundPetsAll />,
+    },
+    {
+      path: "/foundpetsmore",
+      element: <FoundPetsMore />,
+    },
+    {
+      path: '/foundpetsmore/:id',
+      element:<Layout />,
+      children: [
+        {
+          path: '/foundpetsmore/:id',
+          element: <FoundPetsMore />
+        }
+      ]
+    },
+    {
+      path: "/reportpets",
+      element: <Reportpets />,
+    },
+    {
+      path: '/Foundreport',
+      element:<Layout />,
+      children: [
+        {
+          path: '/Foundreport',
+          element: <FoundReport />
+        }
+      ]
+    },
+    {
+      path: '/lostreport',
+      element:<Layout />,
+      children: [
+        {
+          path: '/lostreport',
+          element: <LostReport />
+        }
+      ]
+    },
+    {
+      path: '/lostpets',
+      element:<Layout />,
+      children: [
+        {
+          path: '/lostpets',
+          element: <LostPets />
+        }
+      ]
+    },
+    {
+      path: '/Lostpetsall',
+      element:<Layout />,
+      children: [
+        {
+          path: '/Lostpetsall',
+          element: <LostPetsAll />
+        }
+      ]
+    },
+    {
+      path: '/lostpetsmore/:id',
+      element:<Layout />,
+      children: [
+        {
+          path: '/lostpetsmore/:id',
+          element: <LostPetsMore />
         }
       ]
     },
@@ -170,6 +241,16 @@ const Layout = () => {
         {
           path: '/adopt-a-pet',
           element: <AdoptAPet/>
+        }
+      ]
+    },
+    {
+      path: "/pets-for-adoption",
+      element: <Layout />,
+      children: [
+        {
+          path: '/pets-for-adoption',
+          element: <PetsForAdoption/>
         }
       ]
     },
