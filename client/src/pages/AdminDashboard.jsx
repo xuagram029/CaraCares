@@ -9,15 +9,26 @@ const AdminDashboard = () => {
     const [open, setOpen] = useState(true)
     const navigate = useNavigate()
     const { user } = useContext(AuthContext);
+<<<<<<< HEAD
     useRedirectAdmin(user)
+=======
+
+    useEffect(() => {
+      if(!user){
+          navigate("/admin-login")
+      }else if(user?.resp[0]?.role !== 'admin'){
+        navigate('/')
+      }
+  }, [user, navigate])
+
+  console.log(user.resp[0].role)
+>>>>>>> parent of 556bb1f (updated)
 
   return (
     <div className='flex h-screen'>
         <Sidebar/>
         <div className='p-8'>
             <h1>HOME</h1>
-            {/* <h1>{name}</h1>
-            <input type="text" value={name} onChange={(e) => {setName(e.target.value)}}/> */}
         </div>
     </div>
   )

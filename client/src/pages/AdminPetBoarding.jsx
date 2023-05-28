@@ -1,14 +1,18 @@
-import {useState, useEffect, useContext} from 'react'
+import {useState, useEffect} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import axios from '../api/axios'
 import "../modal.css";
 import Sidebar from '../components/Sidebar';
+<<<<<<< HEAD
 import { SidebarContext } from '../context/SbContext';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router';
 import  DataTable  from 'react-data-table-component'
 import { RiUserSearchLine } from 'react-icons/ri';
+=======
+
+>>>>>>> parent of 556bb1f (updated)
 
 const AdminPetBoarding = () => {
   const [modal, setModal] = useState(false);
@@ -24,13 +28,15 @@ const AdminPetBoarding = () => {
   const [users, setUsers] = useState([])
   const [filteredUser, setFilteredUser] = useState([])
   const [id, setId] = useState('')
-  const [firstname, setFirstname] = useState('')
-  const [lastname, setLastname] = useState('')
+  const [fullname, setFullname] = useState('')
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
   const [birthdate, setBirthdate] = useState('')
   const [verified, setVerified] = useState('')
+<<<<<<< HEAD
   const { open } = useContext(SidebarContext)
+=======
+>>>>>>> parent of 556bb1f (updated)
 
   useEffect(()=>{
     const getUsers = async() =>{
@@ -95,17 +101,19 @@ const AdminPetBoarding = () => {
   const toggleModal = async (id) => {
     setModal(!modal);
     const res = await axios.get(`http://localhost:8000/user/${id}`)
+<<<<<<< HEAD
+=======
+    console.log(res.data)
+>>>>>>> parent of 556bb1f (updated)
     const userSpec = res.data[0]
-    setFirstname(userSpec.firstname)
-    setLastname(userSpec.lastname)
+    setFullname(userSpec.fullname)
     setEmail(userSpec.email)
     setAddress(userSpec.address)
     setBirthdate(userSpec.birthdate)
     setVerified(userSpec.verified)
-    setSelectedOption(userSpec.verified)
     setId(userSpec.id)
   };
-  
+
   const toggleModalClose = () => {
     setModal(!modal);
   };
@@ -121,16 +129,16 @@ const AdminPetBoarding = () => {
   }
 
   const handleSubmit = async (id) =>{
+<<<<<<< HEAD
+=======
+    console.log({fullname, email, address, birthdate, verified})
+>>>>>>> parent of 556bb1f (updated)
     await axios.put(`http://localhost:8000/user/${id}`,{
-        firstname, lastname, email, address, birthdate, verified: selectedOption
+        fullname, email, address, birthdate, verified: selectedOption
     })
     window.location.reload()
   }
 
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:8000/user/${id}`)
-    window.location.reload()
-  }
 
   const handleFilter = (e) => {
     const newData = filteredUser.filter(row =>
@@ -141,6 +149,7 @@ const AdminPetBoarding = () => {
   }
 
   return (
+<<<<<<< HEAD
     <div className="flex flex-col md:flex-row">
       <Sidebar />
       <div className="flex flex-col w-full md:w-3/4 lg:w-screen">
@@ -165,6 +174,19 @@ const AdminPetBoarding = () => {
           <button type="submit" className="p-2 w-12 text-black bg-gray-100 rounded-r-lg  hover:text-white hover:bg-neutral-900 focus:outline-none shadow-md shadow-slate-900"> <FontAwesomeIcon icon={faMagnifyingGlass} /> </button>
         </form>
         <div className={`overflow-x-auto flex flex-col mt-8 border border-black ${open ? "w-[75vw] transition-width duration-500" : "w-[90vw] transition-width duration-500 ease-linear"}`}>
+=======
+    <div className="flex">
+      <Sidebar />
+      <div className='my-10 p-5 h-[80%] sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl'>
+        <div className="space-x-6 font-bold font-pop text-base cursor-pointer flex justify-between items-center">
+          <h1 className="text-4xl">USERS DASHBOARD</h1>
+        </div>
+        <form className=' mt-12 w-1/3 flex '>
+          <input name="SearchBar" class="block p-4 text-gray-700 bg-gray-100 rounded-l-lg border-gray-300 focus:outline-none focus:bg-white focus:border-gray-500 shadow-md shadow-slate-900" placeholder='Search...'></input>
+          <button type="submit" class="p-2 w-12 text-black bg-gray-100 rounded-r-lg  hover:text-white hover:bg-neutral-900 focus:outline-none shadow-md shadow-slate-900"> <FontAwesomeIcon icon={faMagnifyingGlass} /> </button>
+        </form>
+        <div className="flex flex-col mt-12">
+>>>>>>> parent of 556bb1f (updated)
           <div className='overflow-x-auto'>
             <div className='p-1.5 w-full inline-block align-middle'>
               <div className="overflow-hidden border rounded-lg">
@@ -176,20 +198,20 @@ const AdminPetBoarding = () => {
                       <th scope='col' className='px-6 py-3 text-sm font-bold text-left text-grey-500 uppercase'>Address</th>
                       <th scope='col' className='px-6 py-3 text-sm font-bold text-left text-grey-500 uppercase'>Birthday</th>
                       <th scope='col' className='px-6 py-3 text-sm font-bold text-left text-grey-500 uppercase'>VERIFIED</th>
-                      <th scope='col' className='px-6 py-3 text-sm font-bold text-left text-grey-500 uppercase' >EDIT / DELETE</th>
+                      <th scope='col' className='px-6 py-3 text-sm font-bold text-left text-grey-500 uppercase'>EDIT / DELETE</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     {users && users.map(user => (
                       <tr key={user.id}>
-                        <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{user.firstname} {user.lastname}</td>
+                        <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{user.fullname}</td>
                         <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{user.email}</td>
                         <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{user.address}</td>
                         <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{user.birthdate}</td>
                         <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{user.verified}</td>
                         <div className='flex gap-5'>
                           <button onClick={() => toggleModal(user.id)} className='bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 mt-2 rounded-lg shadow-gray-400 shadow-lg'>EDIT</button>
-                          <button onClick={() => handleDelete(user.id)} className='bg-[#E06469] hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 mt-2 rounded-lg shadow-gray-400 shadow-lg'>DELETE</button>
+                          <button className='bg-[#E06469] hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 mt-2 rounded-lg shadow-gray-400 shadow-lg'>DELETE</button>
                         </div>
                       </tr>
                     ))}
@@ -209,31 +231,17 @@ const AdminPetBoarding = () => {
               <h2 className="text-xl font-bold mb-4">Update Information</h2>
               <div className="grid grid-cols-2 gap-4">
                 <div className="mb-4">
-                  <label className="block font-bold mb-2" htmlFor="firstname">
-                    First Name:
+                  <label className="block font-bold mb-2" htmlFor="name">
+                    Full Name:
                   </label>
                   <input
                     className="w-full border border-gray-400 p-2 rounded"
                     type="text"
-                    value={firstname}
+                    value={fullname}
                     onChange={(e) => {
-                      setFirstname(e.target.value);
+                      setFullname(e.target.value);
                     }}
-                    id="firstname"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block font-bold mb-2" htmlFor="lastname">
-                    Last Name:
-                  </label>
-                  <input
-                    className="w-full border border-gray-400 p-2 rounded"
-                    type="text"
-                    value={lastname}
-                    onChange={(e) => {
-                      setLastname(e.target.value);
-                    }}
-                    id="lastname"
+                    id="name"
                   />
                 </div>
                 <div className="mb-4">
@@ -282,24 +290,11 @@ const AdminPetBoarding = () => {
                   <label className="block font-bold mb-2" htmlFor="color">
                     Verified: {verified}
                   </label>
-                  <select
-                    value={selectedOption || verified}
-                    onChange={handleOptionChange}
-                    className="m-6 px-12 py-4 leading-tight text-gray-700 border border-gray-300 rounded-md focus:outline-none"
-                  >
-                    {verified === "verified" ? (
-                      <>
-                        <option value="verified">verified</option>
-                        <option value="not verified">not verified</option>
-                      </>
-                    ) : (
-                      <>
-                        <option value="not verified">not verified</option>
-                        <option value="verified">verified</option>
-                      </>
-                    )}
+                  <select value={selectedOption} onChange={handleOptionChange} className="m-6 px-12 py-4  leading-tight text-gray-700  border border-gray-300 rounded-md focus:outline-none">
+                      <option value={verified} hidden>- SELECT -</option>
+                      <option value="verified" >verified</option>
+                      <option value="not verified" >not verified</option>
                   </select>
-
                 </div>
               </div>
               <button

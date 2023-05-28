@@ -25,8 +25,9 @@ import AdminVisitationReport from './pages/AdminVisitationReport';
 import AdminPanelEncode from './pages/AdminPanelEncode';
 import FosterPDF from './pages/FosterPDF';
 import Modal from './pages/Modal';
-import AdminLogin from './pages/AdminLogin';
+import Login2 from './pages/Login2';
 import AdminDashboard from './pages/AdminDashboard';
+<<<<<<< HEAD
 import UserSignup from './pages/UserSignup';
 import UserLogin from './pages/UserLogin';
 import AdminSignup from './pages/AdminSignup';
@@ -43,6 +44,8 @@ import LostPetsMore from './pages/Lostpetsmore';
 import AdminVisitationDogs from './pages/AdminVisitationDogs';
 import AdminVisitationCats from './pages/AdminVisitationCats';
 
+=======
+>>>>>>> parent of 556bb1f (updated)
 
 function App() {
 
@@ -67,11 +70,7 @@ const Layout = () => {
     },
     {
       path: "/admin-login",
-      element: <AdminLogin />,
-    },
-    {
-      path: "/admin-signup",
-      element: <AdminSignup/>,
+      element: <Login2 />,
     },
     {
       path: "/modal/:id",
@@ -98,14 +97,6 @@ const Layout = () => {
       path: "/admin-pet-boarding",
       element: <AdminPetBoarding />,
     },
-    {
-      path: "/user-signup",
-      element: <UserSignup />,
-    },
-    {
-      path: "/user-login",
-      element: <UserLogin />,
-    },
     // {
     //   path: '/admin-pet-boarding',
     //   element:<Layout />,
@@ -127,6 +118,7 @@ const Layout = () => {
       ]
     },
     {
+<<<<<<< HEAD
       path: "/admin-visitation-dogs",
       element: <AdminVisitationDogs />,
     },
@@ -137,6 +129,16 @@ const Layout = () => {
     {
       path: '/admin-visitation-report/:id',
       element: <AdminVisitationReport />
+=======
+      path: '/admin-visitation-report',
+      element:<Layout />,
+      children: [
+        {
+          path: '/admin-visitation-report',
+          element: <AdminVisitationReport />
+        }
+      ]
+>>>>>>> parent of 556bb1f (updated)
     },
     {
       path: '/admin-panel-encode',

@@ -1,47 +1,60 @@
-import {useState, useContext, useEffect} from 'react'
-import axios from '../api/axios'
-import { useNavigate } from 'react-router'
-import { AuthContext } from '../context/AuthContext'
-import { Link } from 'react-router-dom'
-import useRedirectUser from '../custom hooks/useRedirectUser'
+import { useContext, useEffect, useState } from "react"
+import { AuthContext } from "../context/AuthContext"
+import axios from "axios"
+import { useNavigate } from "react-router"
+<<<<<<< HEAD:client/src/pages/AdminLogin.jsx
+import { Link } from "react-router-dom"
+import useRedirectAdmin from "../custom hooks/useRedirectAdmin"
 
-const UserLogin = () => {
-  const [credentials, setCredentials] = useState({
-    username: undefined,
-    pass: undefined
-})
-const {user, loading, error, dispatch } = useContext(AuthContext)
-useRedirectUser(user)
-const navigate = useNavigate()
+const AdminLogin = () => {
+    const {user, loading, error, dispatch } = useContext(AuthContext)
+    useRedirectAdmin(user)
+=======
 
-const handleChange = (e) => {
-    setCredentials(prev => ({...prev, [e.target.id]: e.target.value}))
-}
+const Login2 = () => {
+>>>>>>> parent of 556bb1f (updated):client/src/pages/Login2.jsx
+    const [credentials, setCredentials] = useState({
+        username: undefined,
+        pass: undefined
+    })
+    const navigate = useNavigate()
 
-const handleClick = async (e) => {
-    e.preventDefault()
-    dispatch({type: "LOGIN_START"})
-    try {
-        const res = await axios.post("http://localhost:8000/user/login", credentials)
-        dispatch({type: "LOGIN_SUCCESS", payload: res.data})
-        navigate('/')
-    } catch (err) {
-        dispatch({type: "LOGIN_FAILURE", payload: err.response.data})
+    const handleChange = (e) => {
+        setCredentials(prev => ({...prev, [e.target.id]: e.target.value}))
     }
-}
+
+    const handleClick = async (e) => {
+        e.preventDefault()
+        dispatch({type: "LOGIN_START"})
+        try {
+            const res = await axios.post("http://localhost:8000/admin/login", credentials)
+            dispatch({type: "LOGIN_SUCCESS", payload: res.data})
+            navigate('/admin-dashboard')
+        } catch (err) {
+            dispatch({type: "LOGIN_FAILURE", payload: err.response.data})
+            // alert(err.response.data)
+        }
+    }
 
   return (
-  <section class="relative flex flex-wrap lg:h-screen lg:items-center">
+    <div>
+        {/* <input type="text" placeholder="username" id="username" onChange={handleChange}/>
+        <input type="text" placeholder="password" id="pass" onChange={handleChange}/>
+        <button disabled={loading} onClick={handleClick}>Login</button>
+        {error && <span>{error.message}</span>}
+        <button disabled={loading} onClick={handleLogout}>Logout</button>
+     */}
+       <section class="relative flex flex-wrap lg:h-screen lg:items-center">
     <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
       <div class="mx-auto max-w-lg text-center">
-        <h1 class="text-2xl font-bold sm:text-3xl">Welcome Back User!</h1>
+        <h1 class="text-2xl font-bold sm:text-3xl">Welcome Back Admin!</h1>
   
         <p class="mt-4 text-gray-500">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla
           eaque error neque ipsa culpa autem, at itaque nostrum!
         </p>
       </div>
-  
+
       <form action="" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
         <div>
           <label for="email" class="sr-only">Email</label>
@@ -54,6 +67,7 @@ const handleClick = async (e) => {
               id="username"
               onChange={handleChange}
             />
+  
           </div>
         </div>
   
@@ -68,13 +82,16 @@ const handleClick = async (e) => {
               id='pass'
               onChange={handleChange}
             />
+  
+            {error && <span className="text-red-500">{error}</span>}
           </div>
+
         </div>
   
         <div class="flex items-center justify-between">
           <p class="text-sm text-gray-500">
             No account?
-            <Link class="underline" to='/user-signup'>Sign up</Link>
+            <a class="underline" href="">Sign up</a>
           </p>
   
           <button
@@ -84,7 +101,6 @@ const handleClick = async (e) => {
           >
             Sign in
           </button>
-        {error && <span>{error.message}</span>}
         </div>
       </form>
     </div>
@@ -97,7 +113,8 @@ const handleClick = async (e) => {
       />
     </div>
   </section>
+    </div>
   )
 }
 
-export default UserLogin
+export default Login2

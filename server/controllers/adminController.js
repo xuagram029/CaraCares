@@ -12,13 +12,13 @@ const getAdmin = (req, res) => {
 }
 
 const regAdmin = (req, res) => {
-    const { firstname, lastname, username, email, address, birthdate, pass } = req.body;
+    const { firstname, lastname, username, pass } = req.body;
   
     bcrypt.hash(pass, saltRounds, (err, hash) => {
       if (err) {
         return res.json(err);
       }
-      
+  
       db.query("SELECT * FROM admins WHERE username = ?", username, (err, resp) => {
         if (err) {
           return res.status(400).json(err);
@@ -29,8 +29,8 @@ const regAdmin = (req, res) => {
         }
   
         db.query(
-          "INSERT INTO admins(`firstname`, `lastname`, `email`, `address`, `birthdate`, `username`, `pass`) VALUES(?, ?, ?, ?, ?, ?, ?)",
-          [firstname, lastname, email, address, birthdate, username, hash],
+          "INSERT INTO admins(`firstname`, `lastname`, `username`, `pass`) VALUES(?, ?, ?, ?)",
+          [firstname, lastname, username, hash],
           (err, resp) => {
             if (err) {
               return res.json(err);

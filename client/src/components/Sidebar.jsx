@@ -16,10 +16,9 @@ import { Link } from 'react-router-dom';
 import axios from '../api/axios';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router';
-import { SidebarContext } from '../context/SbContext';
 
 const Sidebar = () => {
-    const {open, setOpen} = useContext(SidebarContext)
+    const [open, setOpen] = useState(true)
     const [openMenu, setOpenMenu] = useState(false)
     const [openLf, setOpenLf] = useState(false)
     const [openPe, setOpenPe] = useState(false)
@@ -43,7 +42,11 @@ const Sidebar = () => {
 
   return (
     // overflow-y-scroll overflow-x-hidden
+<<<<<<< HEAD
     <div className={`flex flex-col justify-between bg-slate-400  p-6  relative  ${open ? "w-72": "w-20" } duration-500`}>
+=======
+    <div className={`flex flex-col justify-between bg-slate-400 h-screen p-6  relative  ${open ? "w-72": "w-20" } duration-500`}>
+>>>>>>> parent of 556bb1f (updated)
         <div>
             <BsArrowLeft
                 className={`bg-blue-900 rounded-full text-white text-3xl p-1 absolute -right-3 cursor-pointer ${ !open ? "rotate-180 duration-500" : "-rotate-0 duration-500" }`} onClick={() => setOpen(!open)}/>

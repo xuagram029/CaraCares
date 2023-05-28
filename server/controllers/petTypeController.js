@@ -1,5 +1,6 @@
 const db = require('../db')
 
+<<<<<<< HEAD
 const getShelterPets = (req, res) =>{
     db.query("SELECT * FROM shelterencode", (err, data) =>{
         if(err) return res.json(err)
@@ -8,6 +9,9 @@ const getShelterPets = (req, res) =>{
 }
 
 const getDogs = (req, res) => {
+=======
+const getDog = (req, res) => {
+>>>>>>> parent of 556bb1f (updated)
     db.query("SELECT * FROM shelterencode WHERE type = 'dog'",
     (err, data) => {
         if(err) return res.json(err)
@@ -15,7 +19,11 @@ const getDogs = (req, res) => {
     })
 }
 
+<<<<<<< HEAD
 const getCats = (req, res) => {
+=======
+const getCat = (req, res) => {
+>>>>>>> parent of 556bb1f (updated)
     db.query("SELECT * FROM shelterencode WHERE type = 'cat'",
     (err, data) => {
         if(err) return res.json(err)
@@ -23,6 +31,7 @@ const getCats = (req, res) => {
     })
 }
 
+<<<<<<< HEAD
 const getPet = (req, res) => {
     const petId = req.params.id
     db.query("SELECT * FROM shelterencode WHERE id = ?", petId, 
@@ -91,3 +100,6 @@ const getVisits = (req, res) => {
 
 
 module.exports = {getShelterPets, getDogs, getCats, getPet, deletePet, addVisit, getVisits }
+=======
+module.exports = { getDog, getCat }
+>>>>>>> parent of 556bb1f (updated)

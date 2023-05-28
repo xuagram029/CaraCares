@@ -6,7 +6,7 @@ import { IoMdClose } from "react-icons/io";
 import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
-  const { user, dispatch } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const username = user?.resp && user.resp[0]?.firstname;
 
   // flag if true or false
@@ -46,19 +46,6 @@ function Navbar() {
     setPet(!openPet);
   };
 
-  const handleLogout = async (e) => {
-    e.preventDefault()
-    dispatch({ type: "LOGOUT" })
-    try {
-        const res = await axios.post("http://localhost:8000/user/logout")
-        console.log(res.data.message)
-        navigate('/')
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-
   // console.log(user.resp[0].username)
   return (
     <nav className="px-5 bg-white shadow-xl md:flex md:items-center md:justify-between">
@@ -77,15 +64,6 @@ function Navbar() {
         </span>
       </div>
       <ul className="md:flex md:items-center r  z-1  md:z-auto md:static absolute bg-white w-2/5 left-0 md:w-auto md:py-0  md:pl-0  md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500 mt-[0px] pl-[0px] py-[0px] ">
-        {
-          user && 
-          <div className="mx-4 hover:md:mx-4 hover:md:pl-3 hover:mx-0 hover:pl-7 my-4 md:my-0  hover:shadow-s duration-500  hover:bg-blue-900 text-xl p-3 uppercase bg-rose-white text-blue-900 hover:text-white hover:border-blue-900">
-            <li>
-              <button onClick={handleLogout}>LOGOUT</button>
-            </li>
-          </div>
-        }
-
         <div className="mx-4 hover:md:mx-4 hover:md:pl-3 hover:mx-0 hover:pl-7 my-4 md:my-0  hover:shadow-s duration-500  hover:bg-blue-900 text-xl p-3 uppercase bg-rose-white text-blue-900 hover:text-white hover:border-blue-900">
           <li>
             <Link to="/" className="">

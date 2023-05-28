@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useContext } from 'react'
 import Max from '../assets/ui/CARA_PICTURES/dogs/MAX.jpg'
 import { useParams } from 'react-router-dom'
@@ -117,42 +118,42 @@ const AdminVisitationReport = () => {
   
 
   // console.log(id)
+=======
+import React from 'react'
+import Max from '../assets/ui/CARA_PICTURES/dogs/MAX.jpg'
+
+
+const AdminVisitationReport = () => {
+>>>>>>> parent of 556bb1f (updated)
   return (
     <div className='m-10 p-5 h-max sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto'>
 
       <div className="space-x-6 font-bold font-pop text-base cursor-pointer flex justify-between items-center">
         <h1 className="text-4xl">PET VISITATION</h1>
         <div className="space-x-6 ">
-        <button className=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg mx-auto shadow-gray-400 shadow-lg">Edit</button>
-        <button className=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg mx-auto shadow-gray-400 shadow-lg">Delete</button>
+        <button class=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg mx-auto shadow-gray-400 shadow-lg">Edit</button>
+        <button class=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg mx-auto shadow-gray-400 shadow-lg">Delete</button>
         </div>
       </div> 
       
-      {
-        pet && pet.map(p => (
-        <div className=' p-6 flex items-center mt-12' key={p.id}>
-          <div className="w-[55%]">
-              <img src={Max} alt="Dogs" className='rounded-lg' />
-          </div>
-          <div className=' w-1/2 leading-10 mx-auto pl-12'>
-              <h1 className='font-bold text-3xl text-center pb-12'>Pet Name: {p.name}</h1>
-              <p className='font-semibold pb-2 text-left'>Breed: {p.breed}</p>
-              <p className='font-semibold pb-2 text-left'>Gender: {p.gender}</p>
-              <p className='font-semibold pb-2 text-left'>Color: {p.color}</p>
-          </div>
+        <div className=' p-6 flex items-center  mt-12'>
+            <div className="w-[55%]">
+                <img src={Max} alt="Dogs" className='rounded-lg' />
+            </div>
+            <div className=' w-1/2 leading-10 mx-auto pl-12'>
+                <h1 className='font-bold text-3xl text-center pb-12'>Pet Name</h1>
+                <p className='font-semibold pb-2 text-left'>Breed: Unknown</p>
+                <p className='font-semibold pb-2 text-left'>Gender: Male</p>
+                <p className='font-semibold pb-2 text-left'>Color: Brown</p>
+            </div>
         </div>
-        ))
-      }
 
 
       <div className="flex flex-col mt-12">
         <div className='overflow-x-auto'>
-          <div className='flex flex-col p-1.5 w-full  align-middle'>
-            <div className='flex self-end mb-4'>
-              <IoMdAddCircle className='text-3xl cursor-pointer'/>
-              <button onClick={toggleAvModal}>Add Visit</button>
-            </div>
+          <div className='p-1.5 w-full inline-block align-middle'>
             <div className="overflow-hidden border rounded-lg">
+
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className='bg-grey-500'>
                   <tr>
@@ -163,6 +164,7 @@ const AdminVisitationReport = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
+<<<<<<< HEAD
                   {visits && visits.map(v => (
                     <tr>
                         <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{v.visitnumber}</td>
@@ -173,10 +175,37 @@ const AdminVisitationReport = () => {
                     </tr>
                   ))}
 
+=======
+                <tr>
+                    <th></th>
+                    <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>Marky</td>
+                    <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>asdasdas</td>
+                    <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>6/4/2012</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>Marky</td>
+                    <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>asdasdas</td>
+                    <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>6/4/2012</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>Marky</td>
+                    <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>asdasdas</td>
+                    <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>6/4/2012</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>Marky</td>
+                    <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>asdasdas</td>
+                    <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>6/4/2012</td>
+                </tr>
+>>>>>>> parent of 556bb1f (updated)
                 </tbody>
               </table>
               
 
+<<<<<<< HEAD
               {/* ADD VISITATION REPORT */}
               {modalAv && (
                 <div className="fixed z-10 overflow-y-auto top-0 w-full left-0">
@@ -239,6 +268,8 @@ const AdminVisitationReport = () => {
                   </div>
                 </div>
               )}
+=======
+>>>>>>> parent of 556bb1f (updated)
 
             </div>
           </div>
