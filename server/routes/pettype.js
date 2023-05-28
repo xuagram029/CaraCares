@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const {getDogs, getCats, getPet, deletePet, addVisit, getVisits} = require('../controllers/petTypeController')
+const {getShelterPets, getDogs, getCats, getPet, deletePet, addVisit, getVisits} = require('../controllers/petTypeController')
 
 router.route('/')
+    .get(getShelterPets)
     .delete(deletePet)
     
 router.route('/dogs')

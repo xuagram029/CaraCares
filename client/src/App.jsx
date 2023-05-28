@@ -40,6 +40,9 @@ import LostReport from './pages/LostReport';
 import LostPets from './pages/Lostpets';
 import LostPetsAll from './pages/Lostpetsall';
 import LostPetsMore from './pages/Lostpetsmore';
+import AdminVisitationDogs from './pages/AdminVisitationDogs';
+import AdminVisitationCats from './pages/AdminVisitationCats';
+
 
 function App() {
 
@@ -124,14 +127,16 @@ const Layout = () => {
       ]
     },
     {
+      path: "/admin-visitation-dogs",
+      element: <AdminVisitationDogs />,
+    },
+    {
+      path: "/admin-visitation-cats",
+      element: <AdminVisitationCats />,
+    },
+    {
       path: '/admin-visitation-report/:id',
-      element:<Layout />,
-      children: [
-        {
-          path: '/admin-visitation-report/:id',
-          element: <AdminVisitationReport />
-        }
-      ]
+      element: <AdminVisitationReport />
     },
     {
       path: '/admin-panel-encode',

@@ -43,7 +43,7 @@ const Sidebar = () => {
 
   return (
     // overflow-y-scroll overflow-x-hidden
-    <div className={`flex flex-col justify-between bg-slate-400 h-[1000px] p-6  relative  ${open ? "w-72": "w-20" } duration-500`}>
+    <div className={`flex flex-col justify-between bg-slate-400  p-6  relative  ${open ? "w-72": "w-20" } duration-500`}>
         <div>
             <BsArrowLeft
                 className={`bg-blue-900 rounded-full text-white text-3xl p-1 absolute -right-3 cursor-pointer ${ !open ? "rotate-180 duration-500" : "-rotate-0 duration-500" }`} onClick={() => setOpen(!open)}/>
@@ -109,6 +109,14 @@ const Sidebar = () => {
                 { openPe && <div className={`pt-4 w-full self-start ${!open && "hidden"}`}>
                     <div className='text-sm border-b border-red-300 cursor-pointer'>Lost Reports</div>
                     <div className='text-sm mt-2  border-b border-red-300 cursor-pointer'>Found Reports</div>
+
+                    <div className='text-sm mt-2  border-b border-red-300 cursor-pointer hover:bg-slate-500'>
+                    <Link to='/admin-visitation-dogs'>Dog Visitation</Link>
+                    </div>
+
+                    <div className='text-sm mt-2  border-b border-red-300 cursor-pointer hover:bg-slate-500'>
+                    <Link to='/admin-visitation-cats'>Cat Visitation</Link>
+                    </div>
                 </div> }
             </div>
 

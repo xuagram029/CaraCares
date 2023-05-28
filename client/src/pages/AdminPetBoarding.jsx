@@ -78,7 +78,7 @@ const AdminPetBoarding = () => {
   return (
     <div className="flex w-full">
       <Sidebar />
-      <div className='my-10 p-5 h-[100%] sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl'>
+      <div className='my-10 p-5 h-screen sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl'>
         <div className="space-x-6 font-bold font-pop text-base cursor-pointer flex justify-between items-center">
           <h1 className="text-4xl">USERS DASHBOARD</h1>
         </div>
