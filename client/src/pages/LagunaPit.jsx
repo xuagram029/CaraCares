@@ -1,12 +1,24 @@
 import lagunaPit from '../assets/ui/CARA_PICTURES/logos/LPB1-1.jpg'
 import { Link } from 'react-router-dom'
+import Paw from '../assets/ui/CARA_PICTURES/paw.jpg'
+import CD from '../assets/ui/CARA_PICTURES/cat and dog.jpg'
 
 
 const LagunaPit = () => {
   return (
-    <div className='bg-slate-400 m-6 p-5 '>
-        <img src={lagunaPit} alt="" className='max-w-full lg:mx-auto h-auto mt-10 lg:max-w-[70%] lg:max-h-[600px] lg:mt-0 lg:flex-none '/>
-        <p className='mx-20 mt-8 indent-10'>In 2012, the biggest raid of the country’s most infamous dogfighting operations took place in Laguna. We found over 260 pit bulls and mixed-breed dogs in horrible conditions. They were malnourished, heavily scarred, and living in steel drums. But beneath the physical scars ran deeper ailments, most notably vast deficiencies in their immune systems.</p>
+
+    <div className='bg-zinc-400 p-12'>
+
+      <div classname="bg-rose-300">
+      <img src={lagunaPit} alt="" className='max-w-full lg:mx-auto h-auto  lg:max-w-[70%] lg:max-h-[600px] lg:flex-none rounded-lg'/>
+      </div>
+
+      <img src={Paw} alt="" className='w-56 absolute right-1 bottom-[60%] opacity-[0.08] hover:opacity-80 '/>
+      <img src={CD} alt="" className="w-56 absolute left-1 bottom-[60%] opacity-[0.08] hover:opacity-80" />
+
+
+    <div className='bg-primary m-6 p-5 w-9/12 mx-auto rounded-xl relative'>
+        <p className='mx-20 mt-8 indent-10'>In 2012, the biggest raid1 of the country’s most infamous dogfighting operations took place in Laguna. We found over 260 pit bulls and mixed-breed dogs in horrible conditions. They were malnourished, heavily scarred, and living in steel drums. But beneath the physical scars ran deeper ailments, most notably vast deficiencies in their immune systems.</p>
         <p className='mx-20 my-8 indent-10'>With the success of shutting down of such a horrible enterprise, there came to light another challenge: these dogs needed care and a home, and they needed them fast.  CARA eventually took the lead in the care and rehabilitation of these poor dogs.</p>
 
         <h1 className='mx-20 my-8 text-xl font-semibold text-center sm:text-center lg:text-left'>Can we visit the Laguna Pit Bulls?</h1>
@@ -24,6 +36,8 @@ const LagunaPit = () => {
         
         <h1 className='mx-20 my-8 text-xl font-semibold text-center sm:text-center lg:text-left'>How can I donate to the 250 for a Pittie Campaign?</h1>
         <p className='mx-20 my-3 text-center sm:text-center lg:text-left'>Thank you so much! You can register as a monthly giver on <Link to='https://lpb.helixpay.ph/' className='underline'>https://lpb.helixpay.ph/</Link> or deposit to BPI #3121-1984-86. Kindly send the proof of deposit (screenshot or scanned) to secretary@caraphil.org.</p>
+        
+    </div>
     </div>
   )
 }
