@@ -200,73 +200,41 @@ function AdoptionPDF() {
 
     doc.setFontSize(10);
 
-    doc.text(
-      20,
-      160,
-      "3. Name of Pet you want to Adopt"
-    );
-    doc.text(25, 180, `- ${values.input11}`);
+    doc.text(20, 80, "1. Name of Pet you want to Adopt");
+    doc.text(25, 100, `- ${values.input11}`);
 
-    doc.text(20, 210, "4. What type of home do you live in? *");
-    doc.text(25, 230, `- ${selectedOptionText}`);
+    doc.text(20, 130, "2. What type of home do you live in? *");
+    doc.text(25, 150, `- ${selectedOptionText}`);
 
-    doc.text(20, 260, "5. Do you rent?");
-    doc.text(25, 280, `- ${selectedRadio3}`);
+    doc.text(20, 180, "3. Do you rent?");
+    doc.text(25, 200, `- ${selectedRadio3}`);
 
-    doc.text(20, 310, "6. What happens to your pet if or when you move?");
-    doc.text(25, 330, `- ${values.input12}`);
+    doc.text(20, 230, "4. What happens to your pet if or when you move?");
+    doc.text(25, 250, `- ${values.input12}`);
 
-    doc.text(20, 360, "7. Who do you live with?");
-    doc.text(25, 380, `- ${selectedRadio7}`);
+    doc.text(20, 280, "5. Who do you live with?");
+    doc.text(25, 300, `- ${selectedRadio7}`);
 
-    doc.text(
-      20,
-      410,
-      "8. Are any members of your household allergic to animals?"
-    );
-    doc.text(25, 430, `- ${selectedRadio8}`);
+    doc.text(20, 330, "6. Are any members of your household allergic to animals?");
+    doc.text(25, 350, `- ${selectedRadio8}`);
 
-    doc.text(
-      20,
-      460,
-      "9. Who will be responsible for feeding, grooming, and generally caring for your pet?"
-    );
-    doc.text(25, 480, `- ${values.input13}`);
+    doc.text(20, 380, "7. Who will be responsible for feeding, grooming, and generally caring for your pet?");
+    doc.text(25, 400, `- ${values.input13}`);
 
-    doc.text(
-      20,
-      510,
-      "10. Who will be financially responsible for your pet’s needs (i.e. food, vet bills, etc.)?"
-    );
-    doc.text(25, 530, `- ${values.input14}`);
+    doc.text(20, 430," 8. Who will be financially responsible for your pet’s needs (i.e. food, vet bills, etc.)?");
+    doc.text(25, 450, `- ${values.input14}`);
 
-    doc.text(
-      20,
-      560,
-      "11. Who will look after your pet if you go on vacation or in case of emergency?"
-    );
-    doc.text(25, 580, `- ${values.input15}`);
+    doc.text(20, 480, "9. Who will look after your pet if you go on vacation or in case of emergency?");
+    doc.text(25, 500, `- ${values.input15}`);
 
-    doc.text(
-      20,
-      610,
-      "12. How many hours in an average workday will your pet be left alone?"
-    );
-    doc.text(25, 630, `- ${values.input16}`);
+    doc.text(20, 530, "10. How many hours in an average workday will your pet be left alone?");
+    doc.text(25, 550, `- ${values.input16}`);
 
-    doc.text(
-      20,
-      660,
-      "13. What steps will you take to introduce your new pet to his/her new surroundings?"
-    );
-    doc.text(25, 680, `- ${values.input17}`);
+    doc.text(20, 580, "11. What steps will you take to introduce your new pet to his/her new surroundings?");
+    doc.text(25, 600, `- ${values.input17}`);
 
-    doc.text(
-      20,
-      710,
-      "14. Does everyone in the family support your decision to adopt a pet?"
-    );
-    doc.text(25, 730, `- ${selectedRadio9}`);
+    doc.text(20, 630,"12. Does everyone in the family support your decision to adopt a pet?");
+    doc.text(25, 650, `- ${selectedRadio9}`);
 
     //new page
     doc.addPage();
@@ -275,26 +243,17 @@ function AdoptionPDF() {
     doc.text(225, 30, "QUESTIONNAIRE");
 
     doc.setFontSize(10);
-    doc.text(20, 60, "15. Please explain");
+    doc.text(20, 60, "13. Please explain");
     doc.text(25, 80, `- ${values.input18}`);
 
-    doc.text(20, 110, "16. Do you have other pets?");
+    doc.text(20, 110, "14. Do you have other pets?");
     doc.text(25, 130, `- ${selectedRadio10}`);
 
-    doc.text(
-      20,
-      160,
-      "17. Have you had pets in the past?"
-    );
+    doc.text(20, 160, "15. Have you had pets in the past?");
     doc.text(25, 180, `- ${selectedRadio11}`);
 
-    doc.text(
-      20,
-      210,
-      "18. Will you be able to visit the shelter for the meet-and-greet?"
-    );
+    doc.text(20, 210, "16. Will you be able to visit the shelter for the meet-and-greet?");
     doc.text(25, 230, `- ${selectedRadio12}`);
-
 
     doc.save("Adoption Application Form.pdf");
   };
@@ -352,6 +311,7 @@ function AdoptionPDF() {
             <div className="mb-4 pb-4">
               <label htmlFor="input5">Birth Date *</label>
               <Field
+                type="date"
                 id="input5"
                 name="input5"
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
