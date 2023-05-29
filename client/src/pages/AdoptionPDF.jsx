@@ -90,7 +90,6 @@ function AdoptionPDF() {
   const handleRadioChange5 = (e) => {
     setSelectRadio5(e.target.value);
   };
-
   const handleRadioChange7 = (e) => {
     setSelectRadio7(e.target.value);
   };
