@@ -129,12 +129,12 @@ function Lostpetsmore() {
               key={pet.id}
               className="w-1/2 h-[100%] my-auto md:ml-4 ml-4 md:p-5"
             >
-              <button
-                onClick={toggleModal}
-                className="btn-modal bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg shadow-gray-400 shadow-lg tracking-[3px]"
-              >
-                Edit
-              </button>
+                <button onClick={toggleModal} 
+                className="btn-modal bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg shadow-gray-400 tracking-[3px] 
+                relative left-52 bottom-24"
+                >
+                  Edit
+                </button>
               <h1 className="font-bold text-sm lg:text-xl xl:text-2xl lg:mb-4">
                 Animal ID {id}
               </h1>

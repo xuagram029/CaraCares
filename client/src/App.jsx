@@ -20,10 +20,10 @@ import JoinTeam from './pages/JoinTeam';
 import ErrorPage from './pages/ErrorPage';
 import Nav2 from './pages/Nav2';
 import Nav3 from './pages/Nav3';
-import AdminVisitation from './pages/AdminVisitation';
 import AdminVisitationReport from './pages/AdminVisitationReport';
 import AdminPanelEncode from './pages/AdminPanelEncode';
 import FosterPDF from './pages/FosterPDF';
+import AdoptionPDF from './pages/AdoptionPDF';
 import Modal from './pages/Modal';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
@@ -42,7 +42,6 @@ import LostPetsAll from './pages/Lostpetsall';
 import LostPetsMore from './pages/Lostpetsmore';
 import AdminVisitationDogs from './pages/AdminVisitationDogs';
 import AdminVisitationCats from './pages/AdminVisitationCats';
-
 
 function App() {
 
@@ -117,16 +116,6 @@ const Layout = () => {
     //   ]
     // },
     {
-      path: '/admin-visitation',
-      element:<Layout />,
-      children: [
-        {
-          path: '/admin-visitation',
-          element: <AdminVisitation />
-        }
-      ]
-    },
-    {
       path: "/admin-visitation-dogs",
       element: <AdminVisitationDogs />,
     },
@@ -149,12 +138,24 @@ const Layout = () => {
       ]
     },
     {
-      path: "/foundpets",
-      element: <FoundPets />,
+      path: '/foundpets',
+      element:<Layout />,
+      children: [
+        {
+          path: '/foundpets',
+          element: <FoundPets />
+        }
+      ]
     },
     {
-      path: "/foundpetsall",
-      element: <FoundPetsAll />,
+      path: '/foundpetsall',
+      element:<Layout />,
+      children: [
+        {
+          path: '/foundpetsall',
+          element: <FoundPetsAll />
+        }
+      ]
     },
     {
       path: "/foundpetsmore",
@@ -284,13 +285,23 @@ const Layout = () => {
         }
       ]
     },
-        {
+    {
       path: "/foster-pdf",
       element: <Layout />,
       children: [
         {
           path: '/foster-pdf',
           element: <FosterPDF />
+        }
+      ]
+    },
+    {
+      path: "/adoption-pdf",
+      element: <Layout />,
+      children: [
+        {
+          path: '/adoption-pdf',
+          element: <AdoptionPDF />
         }
       ]
     },

@@ -106,21 +106,27 @@ function Lostpetsmore() {
       <div className="grid-rows-2 mt-[50px] px-16 md:px-[50px] lg:px-[150px] xl:px-[200px] ">
 
         <div className="flex ">
+          
           <div className="w-1/2  h-[100%] my-auto ">
             <div className="h-full">
               <img className="   h-[100%]" src={lostpet1} alt="" />
+              
             </div>
           </div>
           {data.map((pet) => (
             <div key={pet.id} className="w-1/2 h-[100%] my-auto md:ml-4 ml-4 md:p-5">
-                <button onClick={toggleModal} className="btn-modal bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg shadow-gray-400 shadow-lg tracking-[3px]">
+                <button onClick={toggleModal} 
+                className="btn-modal bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg shadow-gray-400 tracking-[3px] 
+                relative left-52 bottom-24"
+                >
                   Edit
                 </button>
               <h1 className="font-bold text-sm lg:text-xl xl:text-3xl lg:mb-4 text-center">
                 Animal ID #{id}
               </h1>
               
-              <div className=" flex grid-cols-2 text-sm lg:text-md 2xl:mb-6 xl:mb-2 lg:mb-10 md:mb-10 mb-10">
+              <div className=" flex grid-cols-2 text-sm lg:text-md 2xl:mb-6 xl:mb-2 lg:mb-10 md:mb-10 mb-10 pt-12">
+                
                 <div className="w-1/2 leading-4 md:leading-[50px] text-sm xl:text-xl md:font-bold">
                   <p>Pet Name: </p>
                   <p>Type: </p>

@@ -1,13 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const {addFoundPet, deleteFoundPet, getFoundPet, getFoundPets, updateFoundPets, adoptFoundPet, adoptedFoundPet, availFoundPet} = require('../controllers/foundPetsController')
+const {addFoundPet, deleteFoundPet, getFoundPet, getFoundPets, updateFoundPets, adoptFoundPet, adoptedFoundPet, availFoundPet, getFoundPetsFront} = require('../controllers/foundPetsController')
 const { verifyAdmin } = require('../middleware/verifyToken')
 
 router.route('/')
     .get(getFoundPets)
     .post(addFoundPet)
-    
-    
+
+router.route('/front')
+    .get(getFoundPetsFront)
+
 router.route('/adopted')
     .get(adoptedFoundPet)
 
