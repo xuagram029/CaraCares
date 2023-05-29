@@ -108,7 +108,7 @@ const AdminVisitationReport = () => {
     try {
       const res = await axios.put(`http://localhost:8000/typeofpet/${idEv}`, { visitnumber:numberEv, visitor:nameEv, confirmation:confirmationEv, visitdate:dateEv });
       setModalEv(!modalEv);
-      console.log(res)
+      window.location.reload()
     } catch (error) {
       console.log(error)
     }

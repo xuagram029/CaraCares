@@ -72,16 +72,22 @@ const getEncodedPet = (req, res) => {
 }
 
 const adoptFoundPet = (req, res) => {
-    const foundPetId = req.params.id;
-    db.query("UPDATE shelterencode SET adopted = 1 WHERE id = ?", [foundPetId], (err, data) => {
+  const foundPetId = req.params.id;
+  const adoptedDate = new Date();
+
+  db.query(
+    "UPDATE shelterencode SET adopted = 1, adopted_date = ? WHERE id = ?",
+    [adoptedDate, foundPetId],
+    (err, data) => {
       if (err) {
         console.error(err);
         res.status(500).send('Internal Server Error');
       } else {
         res.status(200).json(data);
       }
-    });
-}
+    }
+  );
+};
 
 const availFoundPet = (req, res) => {
     db.query("SELECT * FROM shelterencode WHERE adopted = 0", (err, data) => {
@@ -105,4 +111,16 @@ const adoptedFoundPet = (req, res) => {
     });
 };
 
-module.exports = { getEncodedPets, getEncodedPet, addEncodedPet, deleteEncodedPet, updateshelterencodes, adoptFoundPet, availFoundPet, adoptedFoundPet}
+const totalAdoption = (req, res) => {
+  db.query("SELECT COUNT (*) AS total FROM shelterencode WHERE adopted = 1", (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    } else {
+      console.log(result)
+      res.status(200).json(result);
+    }
+  });
+}
+
+module.exports = { getEncodedPets, getEncodedPet, addEncodedPet, deleteEncodedPet, updateshelterencodes, adoptFoundPet, availFoundPet, adoptedFoundPet, totalAdoption}

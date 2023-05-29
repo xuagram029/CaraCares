@@ -1,15 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import axios from 'axios';
+import Sidebar from '../components/Sidebar';
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router';
 
 const Calendar = () => {
   const [events, setEvents] = useState([]);
+  const { user } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchEvents();
   }, []);
+
+  useEffect(() => {
+    if(!user){
+      navigate('/admin-login')
+    }else if(user?.resp[0]?.role === 'user'){
+      navigate('/')
+   }
+  }, [user])
+  
 
   const fetchEvents = async () => {
     try {
@@ -31,7 +45,7 @@ const Calendar = () => {
     // eventInfo.timeText
     // console.log(eventInfo.timeText.toLocaleString([], { timeStyle: 'short' }))
     return (
-      <div className='grid grid-cols-2 bg-slate-300 rounded-lg p-2'>
+      <div className='text-white w-full text-center bg-rose-500 rounded-lg p-2'>
         <b>Time: {formattedStart}</b>
         <p className='-ml-1'><b>Agenda:</b> {eventInfo.event.title}</p>
         <p><b>name:</b> {eventInfo.event.id}</p>
@@ -40,16 +54,19 @@ const Calendar = () => {
   };
 
   return (
-    <div className='w-full h-[90vh]'>
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin]}
-        // initialView="timeGridWeek"
-        initialView="dayGridMonth"
-        events={events}
-        eventContent={eventContent}
-        height="100%"
-        aspectRatio={1.5}
-      />
+    <div className='flex flex-col sm:flex-row'>
+      <Sidebar />
+      <div className='ml-5 flex-grow'>
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin]}
+          // initialView="timeGridWeek"
+          initialView="dayGridMonth"
+          events={events}
+          eventContent={eventContent}
+          height="100%"
+          aspectRatio={1.5}
+        />
+      </div>
     </div>
   );
 };

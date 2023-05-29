@@ -49,7 +49,7 @@ const Appointment = () => {
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin]}
         // initialView="dayGridMonth",
-        initialView="timeGridPlugin"
+        // initialView="timeGridPlugin"
         events={appointments}
         eventContent={appointmentContent}
         height="100%"

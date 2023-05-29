@@ -34,6 +34,11 @@ import  AdminProfile  from './pages/AdminProfile';
 import Appointment from './pages/Appointment';
 import Calendar from './pages/Calendar';
 import UserAppointment from './pages/UserAppointment';
+import UserAppointments from './pages/UserAppointments';
+import AppointmentPending from './pages/AdoptionHistory';
+import AdoptionHistory from './pages/AdoptionHistory';
+import PetsForAdoption from './pages/PetsForAdoption';
+import AvailablePets from './pages/AvailablePets';
 
 function App() {
 
@@ -79,6 +84,32 @@ const Layout = () => {
     {
       path: "/set-appointment",
       element: <UserAppointment/>,
+    },
+    {
+      path: "/user-appointments",
+      element: <UserAppointments/>,
+    },
+    {
+      path: "/adoption-history",
+      element: <AdoptionHistory/>,
+    },
+    {
+      path: '/admin-panel-encode',
+      element: <AdminPanelEncode />
+    },
+    {
+      path: '/available-pets',
+      element: <AvailablePets />
+    },
+    {
+      path: "/pets-for-adoption",
+      element: <Layout />,
+      children: [
+        {
+          path: '/pets-for-adoption',
+          element: <PetsForAdoption/>
+        }
+      ]
     },
     // {
     //   path: "/modal/:id",
@@ -143,16 +174,16 @@ const Layout = () => {
         }
       ]
     },
-    {
-      path: '/admin-panel-encode',
-      element:<Layout />,
-      children: [
-        {
-          path: '/admin-panel-encode',
-          element: <AdminPanelEncode />
-        }
-      ]
-    },
+    // {
+    //   path: '/admin-panel-encode',
+    //   element:<Layout />,
+    //   children: [
+    //     {
+    //       path: '/admin-panel-encode',
+    //       element: <AdminPanelEncode />
+    //     }
+    //   ]
+    // },
     {
       path: '/about',
       element:<Layout />,

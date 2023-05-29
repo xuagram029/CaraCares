@@ -44,7 +44,7 @@ const AdoptAPet = () => {
                 <p className='text-center'>We will make at least one follow up visit to ensure that everybody is happy. CARA reserves the right to refuse adoption to any individual who we feel is not suitable.</p>
             </div>
                 <div className="flex justify-center gap-10 my-4 ">
-                    <button className='border rounded-l border-black p-2'>View our gallery of Pets for Adoption</button>
+                    <button className='border rounded-l border-black p-2'><Link to='/pets-for-adoption'>View our gallery of Pets for Adoption</Link></button>
                     <button className='border rounded-l border-black p-2'>Download the Pet Adoption Form</button>
                 </div>
         </section>

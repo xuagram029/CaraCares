@@ -29,7 +29,6 @@ const handleClick = async (e) => {
         dispatch({type: "LOGIN_FAILURE", payload: err.response.data})
     }
 }
-
   return (
   <section class="relative flex flex-wrap lg:h-screen lg:items-center">
     <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
@@ -44,7 +43,7 @@ const handleClick = async (e) => {
   
       <form action="" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
         <div>
-          <label for="email" class="sr-only">Email</label>
+          <label for="username" class="sr-only">Username</label>
   
           <div class="relative">
             <input
@@ -69,6 +68,8 @@ const handleClick = async (e) => {
               onChange={handleChange}
             />
           </div>
+          {error && <span className="text-red-500">{error}</span>}
+
         </div>
   
         <div class="flex items-center justify-between">
@@ -84,7 +85,7 @@ const handleClick = async (e) => {
           >
             Sign in
           </button>
-        {error && <span>{error.message}</span>}
+
         </div>
       </form>
     </div>

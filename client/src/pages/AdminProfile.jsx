@@ -119,7 +119,7 @@ const AdminProfile = () => {
             </div>
             </div>
             <button
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 mr-2"
+            className="w-full bg-rose-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 mr-2"
             onClick={() => {handleSubmit(userId)}}
             >
             Submit

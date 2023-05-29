@@ -147,7 +147,7 @@ const AdminPetBoarding = () => {
         <div className="flex ml-8 mt-5 justify-between items-center space-x-6 font-bold font-pop text-base">
           <h1 className="text-4xl">USERS DASHBOARD</h1>
         </div>
-          <div className={`mt-8 ml-8 max-w-full border border-black ${open ? "w-[75vw] transition-width duration-500" : "w-[85vw] transition-width duration-500 ease-linear"}`}>
+          <div className={` mt-8 ml-8 max-w-full border border-black ${open ? "w-[75vw] transition-width duration-500" : "w-[85vw] transition-width duration-500 ease-linear"}`}>
             <div className='p-[50px 10%] mt-2 ml-5 flex'>
               <RiUserSearchLine className='text-2xl mt-1'/>
               <input type="text" onChange={handleFilter} placeholder='search user' className='text-center border border-black rounded-md'/>

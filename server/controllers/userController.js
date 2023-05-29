@@ -111,7 +111,7 @@ const login = (req, res) => {
           }
         });
       } else {
-        return res.status(401).send("No user exists");
+        return res.status(401).send("No user exist");
       }
     });
   };
