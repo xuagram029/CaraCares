@@ -42,6 +42,8 @@ import LostPetsAll from './pages/Lostpetsall';
 import LostPetsMore from './pages/Lostpetsmore';
 import AdminVisitationDogs from './pages/AdminVisitationDogs';
 import AdminVisitationCats from './pages/AdminVisitationCats';
+import ShelterLogin from './pages/ShelterLogin';
+import ShelterSignup from './pages/ShelterSignup';
 
 function App() {
 
@@ -104,6 +106,22 @@ const Layout = () => {
     {
       path: "/user-login",
       element: <UserLogin />,
+    },
+    {
+      path: "/admin-signup",
+      element: <AdminSignup />,
+    },
+    {
+      path: "/admin-login",
+      element: <AdminLogin />,
+    },
+    {
+      path: "/shelter-signup",
+      element: <ShelterSignup />,
+    },
+    {
+      path: "/shelter-login",
+      element: <ShelterLogin />,
     },
     // {
     //   path: '/admin-pet-boarding',

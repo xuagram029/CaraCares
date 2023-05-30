@@ -1,9 +1,13 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import axios from "../api/axios"
 import { Link, useNavigate } from "react-router-dom"
+import { AuthContext } from "../context/AuthContext"
+// import useRedirectAdmin from "../custom hooks/useRedirectAdmin"
 
-const UserSignup = () => {
+const AdminSignup = () => {
     const navigate = useNavigate()
+    const { user } = useContext(AuthContext)
+    // useRedirectAdmin(user)
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('')
@@ -29,7 +33,7 @@ const UserSignup = () => {
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-indigo-600 lg:max-w-xl">
                 <h1 className="text-3xl font-semibold text-center text-indigo-500 underline uppercase decoration-wavy">
-                    Sign UP
+                    Admin Sign UP
                 </h1>
                 <form className="mt-6">
                     <div className="mb-2">
@@ -153,4 +157,4 @@ const UserSignup = () => {
     );
 }
 
-export default UserSignup
+export default AdminSignup

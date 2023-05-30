@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Max from '../assets/ui/CARA_PICTURES/dogs/MAX.jpg'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
@@ -6,91 +6,75 @@ import "../modal.css";
 import { IoMdAddCircle } from 'react-icons/io';
 import moment from 'moment';
 import Sidebar from '../components/Sidebar';
+import { AuthContext } from '../context/AuthContext';
+
+
 
 const AdminVisitationReport = () => {
+  const {user} = useContext(AuthContext)
+  // useRedirectAdmin(user)
   const {id} = useParams()
   const [pet, setPet] = useState(null)
   const [modalAv, setModalAv] = useState(false);
   const [modalEv, setModalEv] = useState(false);
   const [modalPet, setModalPet] = useState(false);
-  // const [visitation, setVisitation] = useState({
-  //   number: '',
-  //   name: '',
-  //   confirmation: '',
-  //   date: ''
-  // })
 
   const [number, setNumber] = useState('')
   const [visitor, setVisitor] = useState('')
   const [confirmation, setConfirmation] = useState('')
   const [date, setDate] = useState('')
+
+  const [numberEv, setNumberEv] = useState('')
+  const [nameEv, setNameEv] = useState('')
+  const [confirmationEv, setConfirmationEv] = useState('')
+  const [dateEv, setDateEv] = useState('')
+  const [idEv, setIdEv] = useState('')
   const [visits, setVisits] = useState([])
+
+    //PET INFORMATION
+    const [name, setName] = useState('')
+    const [gender, setGender] = useState('')
+    const [color, setColor] = useState('')
+    const [type, setType] = useState('')
+    const [age, setAge] = useState('')
+    const [shelternumber, setShelterNumber] = useState('')
+    const [sheltername, setShelterName] = useState('')
+    const [shelteremail, setShelterEmail] = useState('')
+    const [shelteraddress, setShelterAddress] = useState('')
+
+    const EditPet = (e) => {
+      console.log({ name, gender, color, type, age, shelternumber, sheltername, shelteremail, shelteraddress }
+        );
+      axios.put(`http://localhost:8000/admin-encode/${id}`, { name, gender, color, type, age, shelternumber, sheltername, shelteremail, shelteraddress });
+      window.location.reload()
+      setModalPet(!modalPet);
   
-  //PET INFORMATION
-  const [name, setName] = useState('')
-  const [gender, setGender] = useState('')
-  const [color, setColor] = useState('')
-  const [type, setType] = useState('')
-  const [age, setAge] = useState('')
-  const [shelternumber, setShelterNumber] = useState('')
-  const [sheltername, setShelterName] = useState('')
-  const [shelteremail, setShelterEmail] = useState('')
-  const [shelteraddress, setShelterAddress] = useState('')
+    };
 
-
-
+    useEffect(() => {
+      const getData = async () => {
+        const res = await axios.get(`http://localhost:8000/admin-encode/${id}`);
+  
+        const editpet = res.data[0];
+        setName(editpet.name);
+        setGender(editpet.gender);
+        setColor(editpet.color);
+        setType(editpet.type);
+        setAge(editpet.age);
+        setShelterNumber(editpet.shelternumber);
+        setShelterName(editpet.sheltername);
+        setShelterEmail(editpet.shelteremail);
+        setShelterAddress(editpet.shelteraddress);
+        console.log(res.data)
+      };
+      getData();
+    }, [id]);
+  
   const handleChange = (e) => {
     setVisitation(prev => ({...prev, [e.target.visitor]: e.target.value}))
   }
 
-  // console.log(visitation)value={} 
-
-  //EDIT PET INFO
-  const togglePetModalClose = () => {
-    setModalPet(!modalPet);
-  };
-
-  const togglePetModal = () => {
-    setModalPet(true);
-  };
-
-  if(modalPet) {
-    document.body.classList.add('active-modal')
-  } else {
-    document.body.classList.remove('active-modal')
-  }
-
-
-  const EditPet = (e) => {
-    console.log({ name, gender, color, type, age, shelternumber, sheltername, shelteremail, shelteraddress }
-      );
-    axios.put(`http://localhost:8000/admin-encode/${id}`, { name, gender, color, type, age, shelternumber, sheltername, shelteremail, shelteraddress });
-    window.location.reload()
-    setModalPet(!modalPet);
-
-  };
-
-  useEffect(() => {
-    const getData = async () => {
-      const res = await axios.get(`http://localhost:8000/admin-encode/${id}`);
-
-      const editpet = res.data[0];
-      setName(editpet.name);
-      setGender(editpet.gender);
-      setColor(editpet.color);
-      setType(editpet.type);
-      setAge(editpet.age);
-      setShelterNumber(editpet.shelternumber);
-      setShelterName(editpet.sheltername);
-      setShelterEmail(editpet.shelteremail);
-      setShelterAddress(editpet.shelteraddress);
-      console.log(res.data)
-    };
-    getData();
-  }, [id]);
-
-
-  //ADD VISITATION REPORT//
+  //ADD VISITATION REPORT
   const toggleAvModalClose = () => {
     setModalAv(!modalAv);
   };
@@ -105,12 +89,13 @@ const AdminVisitationReport = () => {
     document.body.classList.remove('active-modal')
   }
 
-  //EDIT VISITATION REPORT//
+
+  //EDIT VISITATION REPORT
   const toggleEvModalClose = () => {
     setModalEv(!modalEv);
   };
 
-  const toggleEvModalOpen = () => {
+  const toggleEvModalOpen = async (vId) => {
     setModalEv(true);
   };
 
@@ -120,18 +105,24 @@ const AdminVisitationReport = () => {
     document.body.classList.remove('active-modal')
   }
 
-  const toggleEvModal = async (id) => {
+  const toggleEvModal = async (vId) => {
     setModalEv(!modalEv);
-    const res = await axios.get(`http://localhost:8000/typeofpet/${id}`)
-    // console.log(res)
-    console.log(res.data[0])
-    const visitEdit = res.data[0]
-    setNumber(visitEdit.number)
-    setConfirmation(visitEdit.confirmation)
-    setDate(visitEdit.date)
-    setId(visitEdit.id)
+    try {
+      const res = await axios.get(`http://localhost:8000/typeofpet/visits/${vId}`)
+      const visitEdit = res.data[0]
+      console.log(res.data)
+      setVisitor(visitEdit.visitor)
+      setNumberEv(visitEdit.visitnumber)
+      setConfirmationEv(visitEdit.confirmation)
+      setDateEv(visitEdit.visitdate)
+      setIdEv(visitEdit.id)
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
+    }
   };
-
+  
+  
   useEffect(() => {
     const getPet = async () => {
       const res = await axios.get(`http://localhost:8000/typeofpet/${id}`)
@@ -139,11 +130,6 @@ const AdminVisitationReport = () => {
       setPet(res.data)
       setVisits(resV.data)
       // setVisitNumber(res.data[0].visitnumber)
-      // setVisitorName(res.data[0].visitor)
-      // setVisitorConfirmation(res.data[0].confirmation)
-      // setVisitDate(res.data[0].visitdate)
-      console.log(res.data[0])
-      console.log(resV.data[0].visitdate)
     }
     getPet()
   }, [])
@@ -152,7 +138,7 @@ const AdminVisitationReport = () => {
     try {
       await axios.post(`http://localhost:8000/typeofpet/${id}`, { visitnumber:number, visitor, confirmation, visitdate:date });
       window.location.reload()
-      console.log(number, visitor, confirmation, date)
+      // console.log(number, name, confirmation, date)
       // Handle the response data or perform any necessary actions
     } catch (error) {
       console.error('Error:', error);
@@ -160,17 +146,32 @@ const AdminVisitationReport = () => {
     }
   };
 
-
-  const EditVisit = (e) => {
-    console.log({ visitnumber:number, visitor, confirmation, visitdate:date }
-      );
-    axios.put(`http://localhost:8000/typeofpet/${id}`, { visitnumber:number, visitor, confirmation, visitdate:date });
-    window.location.reload()
-    setModalEv(!modalEv);
-
+  const EditVisit = async () => {
+    // console.log({ visitnumber:numberEv, visitor:nameEv, confirmation:confirmationEv, visitdate:dateEv }
+    //   );
+    try {
+      const res = await axios.put(`http://localhost:8000/typeofpet/${idEv}`, { visitnumber:numberEv, visitor, confirmation:confirmationEv, visitdate:dateEv });
+      setModalEv(!modalEv);
+      window.location.reload()
+    } catch (error) {
+      console.log(error)
+    }
+    // window.location.reload()
   };
   
+  const togglePetModalClose = () => {
+    setModalPet(!modalPet);
+  };
 
+  const togglePetModal = () => {
+    setModalPet(true);
+  };
+
+  if(modalPet) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
 
   // console.log(id)
   return (
@@ -297,7 +298,7 @@ const AdminVisitationReport = () => {
                         <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{v.visitor}</td>
                         <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{v.confirmation}</td>
                         <td className='px-6 py-4 text-sm font-medium text-grey-800 whitespace-nowrap'>{moment(v.visitdate).format('YYYY/MM/DD')}</td>
-                        <button onClick={() => toggleEvModalOpen(visits.id)} className='bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 mt-2 rounded-lg shadow-gray-400 shadow-lg'>EDIT</button>
+                        <button onClick={() => toggleEvModal(visits.id)} className='bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 mt-2 rounded-lg shadow-gray-400 shadow-lg'>EDIT</button>
                     </tr>
                   ))}
 
@@ -345,16 +346,16 @@ const AdminVisitationReport = () => {
                     </div>
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
                     <div className="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                      <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <label>Visit Number</label>
-                        <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={number} name='number' onChange={(e) => {setNumber(e.target.value)}}/>
-                        <label>Visitor Name</label>
-                        <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={visitor} name='name' onChange={(e) => {setVisitor(e.target.value)}}/>
-                        <label>Visitation Confirmation</label>
-                        <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={confirmation} name='confirmation' onChange={(e) => {setConfirmation(e.target.value)}}/>
-                        <label>Visitation Date</label>
-                        <input type="date" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={date} name='date' onChange={(e) => {setDate(e.target.value)}}/>
-                      </div>
+                    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                      <label>Visit Number</label>
+                      <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={numberEv} name='numberEv' onChange={(e) => {setNumberEv(e.target.value)}}/>
+                      <label>Visitor Name</label>
+                      <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={visitor} name='visitor' onChange={(e) => {setVisitor(e.target.value)}}/>
+                      <label>Visitation Confirmation</label>
+                      <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={confirmationEv} name='confirmationEv' onChange={(e) => {setConfirmationEv(e.target.value)}}/>
+                      <label>Visitation Date: {moment(dateEv).format('MM/DD/YYYY')}</label>
+                      <input type="date" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={dateEv} name='dateEv' onChange={(e) => {setDateEv(e.target.value)}}/>
+                    </div>
                       <div className="bg-gray-200 px-4 py-3 text-right">
                         <button type="button" className="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onClick={toggleEvModalClose}>
                           <i className="fas fa-times" /> Cancel

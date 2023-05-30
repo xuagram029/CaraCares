@@ -90,7 +90,7 @@ const AdoptAPet = () => {
         
 
         <div className="flex justify-center gap-10 my-8 p-6 ">
-            <button className='border rounded-l border-black p-2'>Download the Pet Adoption Form</button>
+        <Link to="/adoption-pdf"><button className='border rounded-l border-black p-2'>Fill up our Pet Adoption Form</button></Link>
         </div>
     </div>
   )
