@@ -22,7 +22,7 @@ router.route('/adopt/:id')
 
 router.route('/:id')
     .get(getFoundPet)
-    .delete(verifyAdmin, deleteFoundPet)
-    .put(verifyAdmin, updateFoundPets)
+    .delete(deleteFoundPet)
+    .put(updateFoundPets)
 
 module.exports = router

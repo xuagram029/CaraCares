@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
 // import useRedirectAdmin from "../custom hooks/useRedirectAdmin"
 
-const AdminSignup = () => {
+const ShelterSignup = () => {
     const navigate = useNavigate()
     const { user } = useContext(AuthContext)
     // useRedirectAdmin(user)
@@ -30,13 +30,45 @@ const AdminSignup = () => {
     }
 
     return (
-        <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-            <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-indigo-600 lg:max-w-xl">
-                <h1 className="text-3xl font-semibold text-center text-indigo-500 underline uppercase decoration-wavy">
-                    Admin Sign UP
+        <div className="relative flex flex-row justify-center min-h-screen overflow-hidden mx-auto w-3/5 shadow-xl">
+            
+            
+            <div
+      className="bg-green-600 bg-cover bg-center w-9/12 mx-auto m-4 rounded-l-2xl relative flex flex-col items-center justify-center"
+      style={{
+        backgroundImage: `url('https://images.unsplash.com/photo-1612260836955-1140700c5bf0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80')`,
+      }}
+    >
+      <div
+        className="absolute top-0 left-0 w-full h-full bg-black opacity-40 rounded-l-2xl"
+        style={{ backdropFilter: 'blur(8px)' }}
+      ></div>
+
+      <div className="relative ">
+        <p className="text-white text-center text-3xl font-semibold">Welcome!</p>
+        <p className="text-white text-center text-sm p-6 leading-6">
+            We're delighted that you're interested in joining our team as an administrator.
+        </p>
+
+        <div className="border-2 w-12 border-white m-2 mx-auto"></div>
+
+        <div className="flex justify-center items-center m-10">
+          <p className="text-white mx-auto">Already have an account?</p>
+          <button className="inline-block bg-green-600 px-8 py-2 text-sm font-medium rounded-xl mx-auto border-4 border-white hover:bg-white hover:text-green-600 text-white">
+            <Link to="/admin-login">Sign in</Link>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+            <div className="w-9/5 p-6 mt-4 mb-4 bg-white rounded-r-2xl shadow-xl shadow-rose-600/40  border border-green-500 ">
+                <h1 className="text-3xl font-semibold text-center text-green-600 uppercase ">
+                   Admin Sign UP
                 </h1>
                 <form className="mt-6">
-                    <div className="mb-2">
+                    <div className="flex flex-row mt-6 mb-6 space-x-6 ">
+                        <div >
                         <label
                             htmlFor="email"
                             className="block text-sm font-semibold text-gray-800"
@@ -47,10 +79,10 @@ const AdminSignup = () => {
                             onChange={(e) => {setFirstname(e.target.value)}}
                             name="firstname"
                             type="text"
-                            className="block w-full px-4 py-2 mt-2  bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full px-4 py-2 mt-2 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
-                    </div>
-                    <div className="mb-2">
+                        </div>
+                        <div className="">
                         <label
                             htmlFor="email"
                             className="block text-sm font-semibold text-gray-800"
@@ -61,10 +93,12 @@ const AdminSignup = () => {
                             onChange={(e) => {setLastname(e.target.value)}}
                             name="lastname"
                             type="text"
-                            className="block w-full px-4 py-2 mt-2  bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full px-4 py-2 mt-2 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
+                        </div>
                     </div>
-                    <div className="mb-2">
+
+                    <div className="mb-4">
                         <label
                             htmlFor="email"
                             className="block text-sm font-semibold text-gray-800"
@@ -78,7 +112,7 @@ const AdminSignup = () => {
                             className="block w-full px-4 py-2 mt-2  bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                     </div>
-                    <div className="mb-2">
+                    <div className="mb-4">
                         <label
                             htmlFor="address"
                             className="block text-sm font-semibold text-gray-800"
@@ -92,7 +126,7 @@ const AdminSignup = () => {
                             className="block w-full px-4 py-2 mt-2  bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                     </div>
-                    <div className="mb-2">
+                    <div className="mb-4">
                         <label
                             htmlFor="birthday"
                             className="block text-sm font-semibold text-gray-800"
@@ -106,7 +140,7 @@ const AdminSignup = () => {
                             className="block w-full px-4 py-2 mt-2  bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                     </div>
-                    <div className="mb-2">
+                    <div className="mb-4">
                         <label
                             htmlFor="address"
                             className="block text-sm font-semibold text-gray-800"
@@ -120,7 +154,7 @@ const AdminSignup = () => {
                             className="block w-full px-4 py-2 mt-2  bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                     </div>
-                    <div className="mb-2">
+                    <div className="mb-4">
                         <label
                             htmlFor="password"
                             className="block text-sm font-semibold text-gray-800"
@@ -135,26 +169,15 @@ const AdminSignup = () => {
                         />
                     </div>
                     {err && <div className="text-red-600">{err}</div>}
-                    <div className="mt-6">
-                        <button onClick={handleSubmit} className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
+                    <div className="flex justify-center m-6">
+                        <button onClick={handleSubmit} className=" bg-green-600 px-8 py-2 text-sm font-medium rounded-xl mx-auto border-4 border-white hover:bg-green-300 hover:text-black text-white">
                             Submit
                         </button>
                     </div>
                 </form>
-
-                <p className="mt-8 text-xs font-light text-center text-gray-700">
-                    {" "}
-                    Already have an account?{" "}
-                    <Link 
-                        to='/admin-login'
-                        className="font-medium text-indigo-600 hover:underline"
-                    >
-                        Sign in
-                    </Link>
-                </p>
             </div>
         </div>
     );
 }
 
-export default AdminSignup
+export default ShelterSignup

@@ -176,17 +176,6 @@ const ShelterSignup = () => {
                         </button>
                     </div>
                 </form>
-
-                <p className="mt-8 text-xs font-light text-center text-gray-700">
-                    {" "}
-                    Already have an account?{" "}
-                    <Link 
-                        to='/shelter-login'
-                        className="font-medium text-indigo-600 hover:underline"
-                    >
-                        Sign in
-                    </Link>
-                </p>
             </div>
         </div>
     );

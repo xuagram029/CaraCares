@@ -102,16 +102,8 @@ function Lostpetsmore() {
       typeofpet,
       
     });
-    // window.location.reload();
+    window.location.reload();
     setModal(!modal);
-    console.log(foundername,
-      phone,
-      email,
-      gender,
-      color,
-      found,
-      description,
-      typeofpet,)
   };
 
   console.log(id)
