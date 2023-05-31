@@ -5,6 +5,7 @@ import { faImage } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import Sidebar from '../components/Sidebar'
 
 const AdminPanelEncode = () => {
   const [data,setData] = useState([])
@@ -43,7 +44,9 @@ const AdminPanelEncode = () => {
 
 
   return (
-    <div className='m-10 p-5 h-max sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto'>
+    <div className='flex w-full'>
+      <Sidebar />
+      <div className='m-10 p-5 h-max sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto'>
       <div className="space-x-6 font-bold font-pop text-base cursor-pointer flex justify-between items-center">
         <h1 className="text-4xl">ADD PET INFO</h1>
       </div> 
@@ -120,6 +123,7 @@ const AdminPanelEncode = () => {
         <button class=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-[13px] px-8 mt-4 rounded-lg mx-auto" onClick={handleSubmit}>Submit</button>
       </div>
 
+    </div>
     </div>
   )
 }

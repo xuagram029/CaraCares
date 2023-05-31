@@ -147,13 +147,7 @@ const Layout = () => {
     },
     {
       path: '/admin-panel-encode',
-      element:<Layout />,
-      children: [
-        {
-          path: '/admin-panel-encode',
-          element: <AdminPanelEncode />
-        }
-      ]
+      element: <AdminPanelEncode />
     },
     {
       path: '/foundpets',
