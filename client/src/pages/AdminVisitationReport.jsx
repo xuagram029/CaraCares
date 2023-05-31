@@ -41,11 +41,12 @@ const AdminVisitationReport = () => {
     const [sheltername, setShelterName] = useState('')
     const [shelteremail, setShelterEmail] = useState('')
     const [shelteraddress, setShelterAddress] = useState('')
+    const [adoptor, setAdoptor] = useState('')
 
     const EditPet = (e) => {
-      console.log({ name, gender, color, type, age, shelternumber, sheltername, shelteremail, shelteraddress }
+      console.log({ name, gender, color, type, age, shelternumber, sheltername, shelteremail, shelteraddress, adoptor }
         );
-      axios.put(`http://localhost:8000/admin-encode/${id}`, { name, gender, color, type, age, shelternumber, sheltername, shelteremail, shelteraddress });
+      axios.put(`http://localhost:8000/admin-encode/${id}`, { name, gender, color, type, age, shelternumber, sheltername, shelteremail, shelteraddress, adoptor });
       window.location.reload()
       setModalPet(!modalPet);
   
@@ -65,6 +66,7 @@ const AdminVisitationReport = () => {
         setShelterName(editpet.sheltername);
         setShelterEmail(editpet.shelteremail);
         setShelterAddress(editpet.shelteraddress);
+        setAdoptor(editpet.adoptor);
         console.log(res.data)
       };
       getData();
@@ -205,10 +207,11 @@ const AdminVisitationReport = () => {
               <p className='font-semibold pb-2 text-left'>Color: {p.color}</p>
               <p className='font-semibold pb-2 text-left'>Type: {p.type}</p>
               <p className='font-semibold pb-2 text-left'>Age: {p.age}</p>
-              <p className='font-semibold pb-2 text-left'>Shelter Number: {p.shelternumber}</p>
+              <p className='font-semibold pb-2 text-left'>Shelter Number: {p.shelternumber}</p> 
               <p className='font-semibold pb-2 text-left'>Shelter Name: {p.sheltername}</p>
               <p className='font-semibold pb-2 text-left'>Shelter Email: {p.shelteremail}</p>
               <p className='font-semibold pb-2 text-left'>Shelter Address: {p.shelteraddress}</p>
+              <p className='font-semibold pb-2 text-left'>Adoptor: {p.adoptor}</p>
           </div>
         </div>
         ))
@@ -258,6 +261,10 @@ const AdminVisitationReport = () => {
                         <div className='mb-4'>
                         <label>Shelter Address</label>
                         <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={shelteraddress} name='shelteraddress' onChange={(e) => {setShelterAddress(e.target.value)}}/>
+                        </div>
+                        <div className='mb-4'>
+                        <label>Adoptor</label>
+                        <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={adoptor} name='adoptor' onChange={(e) => {setAdoptor(e.target.value)}}/>
                         </div>
                       
                       </div>

@@ -17,9 +17,10 @@ const addEncodedPet = (req, res) =>{
     const shelteremail = req.body.shelteremail
     const shelteraddress = req.body.shelteraddress
     const type = req.body.type
+    const adoptor = req.body.adoptor
 
-    db.query("INSERT INTO shelterencode(`name`, `gender`, `color`,`age`,`type`, `shelternumber`, `sheltername`,`shelteremail`, `shelteraddress`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [name, gender, color, age, type, shelternumber, sheltername, shelteremail, shelteraddress ],
+    db.query("INSERT INTO shelterencode(`name`, `gender`, `color`,`age`,`type`, `shelternumber`, `sheltername`,`shelteremail`, `shelteraddress`, `adoptor`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [name, gender, color, age, type, shelternumber, sheltername, shelteremail, shelteraddress, adoptor ],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)
@@ -39,9 +40,10 @@ const updateshelterencodes = (req, res) =>{
     const shelteraddress = req.body.shelteraddress
     const type = req.body.type
     const adopted = req.body.adopted
+    const adoptor = req.body.adoptor
 
-    db.query("UPDATE shelterencode SET `name` = ?, `gender` = ?, `color` = ?, `type` = ?, `age` = ?,  `shelternumber`= ?, `sheltername` = ?,`shelteremail`= ?, `shelteraddress` = ?, `adopted` = ? WHERE id = ?",
-    [name, gender, color, type, age, shelternumber, sheltername, shelteremail, shelteraddress,adopted, encodedPetId ],
+    db.query("UPDATE shelterencode SET `name` = ?, `gender` = ?, `color` = ?, `type` = ?, `age` = ?,  `shelternumber`= ?, `sheltername` = ?,`shelteremail`= ?, `shelteraddress` = ?, `adoptor` = ?, `adopted` = ? WHERE id = ?",
+    [name, gender, color, type, age, shelternumber, sheltername, shelteremail, shelteraddress, adoptor, adopted, encodedPetId ],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)

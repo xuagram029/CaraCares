@@ -16,7 +16,17 @@ function FoundReport(){
 
     const handleSubmit = async(e) =>{
         await axios.post('http://localhost:8000/foundpet', {foundername, phone, email, gender, color, found, description, typeofpet})
-        navigate('/foundpets')
+
+        if (confirm('Please press OK to confirm the accuracy of the entered information') == true){
+            alert("Thank you for your submission. Please allow approximately 5-10 working days for confirmation.")
+            navigate('/foundpets')
+        }
+        else{
+            alert("Please verify the entered information before proceeding with the confirmation.")
+        }
+
+
+        
       }
     return(
         <div>
