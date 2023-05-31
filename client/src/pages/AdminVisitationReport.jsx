@@ -84,6 +84,7 @@ const AdminVisitationReport = () => {
       const res = await axios.get(`http://localhost:8000/typeofpet/${id}`)
       const resV = await axios.get(`http://localhost:8000/typeofpet/visits/${id}`)
       setPet(res.data)
+      // console.log(res.data)
       setVisits(resV.data)
       // setVisitNumber(res.data[0].visitnumber)
     }
@@ -139,6 +140,7 @@ const AdminVisitationReport = () => {
               <p className='font-semibold pb-2 text-left'>Breed: {p.breed}</p>
               <p className='font-semibold pb-2 text-left'>Gender: {p.gender}</p>
               <p className='font-semibold pb-2 text-left'>Color: {p.color}</p>
+              <p className='font-semibold pb-2 text-left'>Adoptor: {p.adoptor }</p>
           </div>
         </div>
         ))
@@ -239,7 +241,6 @@ const AdminVisitationReport = () => {
                   </div>
                 </div>
               )}
-
             </div>
           </div>
         </div>

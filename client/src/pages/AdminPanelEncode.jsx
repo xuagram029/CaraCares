@@ -32,13 +32,35 @@ const AdminPanelEncode = () => {
   const [sheltername, setShelterName] = useState('')
   const [shelteremail, setShelterEmail] = useState('')
   const [shelteraddress, setShelterAddress] = useState('')
+  const [photo, setPhoto] = useState('')
 
 
-  const handleSubmit = async(e) =>{
-    await axios.post('http://localhost:8000/admin-encode', {name, gender, color, age, type, shelternumber, sheltername, shelteremail, shelteraddress})
-    window.location.reload()
-    navigate('/admin-panel-encode')
-}
+  const handleSubmit = async (e) =>{
+    try {
+      const formData = new FormData()
+      formData.append('name', name)
+      formData.append('gender', gender)
+      formData.append('color', color)
+      formData.append('age', age)
+      formData.append('type', type)
+      formData.append('shelternumber', shelternumber)
+      formData.append('sheltername', sheltername)
+      formData.append('shelteremail', shelteremail)
+      formData.append('shelteraddress', shelteraddress)
+      formData.append('image', photo)
+      await axios.post('http://localhost:8000/admin-encode', formData)
+      window.location.reload()
+    } catch (error) {
+      console.log(error);
+    }
+    // window.location.reload()
+    // navigate('/admin-panel-encode')
+  }
+  // const res = await axios.get('http://localhost:8000/admin-encode')
+
+  const handleFile = (e) => {
+    setPhoto(e.target.files[0])
+  }
 
   useEffect(() =>{
     const getData = async () =>{
@@ -125,9 +147,8 @@ const AdminPanelEncode = () => {
               value={shelteraddress} onChange={(e) => {setShelterAddress (e.target.value)}}/>
             </div>
             <div className="mb-6">
-              <label className="block text-gray-700 font-bold mb-2" for="email">Shelter Address:</label>
-              <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="color" type="text"
-              value={shelteraddress} onChange={(e) => {setShelterAddress (e.target.value)}}/>
+              <label className="block text-gray-700 font-bold mb-2" for="email">Photo of pet</label>
+              <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="color" type="file" onChange={handleFile}/>
             <div className="flex justify-center">
               <button className=" bg-rose-500 hover:bg-neutral-900 hover: text-white font-bold py-[13px] px-8 mt-4 w-full rounded-lg mx-auto" onClick={handleSubmit}>Submit</button>
             </div>

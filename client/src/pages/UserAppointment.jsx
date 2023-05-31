@@ -6,12 +6,13 @@ const UserAppointment = () => {
   const [name, setName] = useState("")
   const [date, setDate] = useState("")
   const [type, setType] = useState("")
+  const [number, setNumber] = useState("")
   const navigate = useNavigate()
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:8000/appointment', {fullName: name, date, type})
+      const res = await axios.post('http://localhost:8000/appointment', {fullName: name, date, type, number})
       console.log(res.data.message)
       navigate('/')
     } catch (error) {
@@ -61,6 +62,21 @@ const UserAppointment = () => {
               onChange={(e) => {setDate(e.target.value)}}
               type="datetime-local"
               class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+            />
+  
+          </div>
+        </div>
+
+        <div>
+          <label for="password" class="sr-only">Phone Number</label>
+  
+          <div class="relative">
+            <input
+              value={number}
+              onChange={(e) => {setNumber(e.target.value)}}
+              type="text"
+              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              placeholder='Number (eg.639*********)'
             />
   
           </div>

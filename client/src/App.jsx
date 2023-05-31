@@ -39,6 +39,18 @@ import AppointmentPending from './pages/AdoptionHistory';
 import AdoptionHistory from './pages/AdoptionHistory';
 import PetsForAdoption from './pages/PetsForAdoption';
 import AvailablePets from './pages/AvailablePets';
+import UserProfile from './pages/UserProfile';
+import AdminVisitationDogs from './pages/AdminVisitationDogs';
+import AdminVisitationCats from './pages/AdminVisitationCats';
+import LostReport from './pages/LostReport';
+import Lostpetsall from './pages/Lostpetsall'
+import Lostpetsmore from './pages/Lostpetsmore'
+import Foundpets from './pages/FoundPets'
+import Foundpetsall from './pages/Foundpetsall'
+import Foundpetsmore from './pages/Foundpetsmore'
+import Foundreport from './pages/Foundreport'
+import PendingFounds from './pages/PendingFounds';
+import PendingLost from './pages/PendingLost';
 
 function App() {
 
@@ -74,6 +86,24 @@ const Layout = () => {
       element: <AdminProfile/>,
     },
     {
+      path: "/admin-visitation-dogs",
+      element: <AdminVisitationDogs />,
+    },
+    {
+      path: "/admin-visitation-cats",
+      element: <AdminVisitationCats />,
+    },
+    {
+      path: "/user-profile",
+      element: <Layout />,
+      children: [
+        {
+          path: "/user-profile",
+          element: <UserProfile/>,
+        }
+      ]
+    },
+    {
       path: "/scheduled-appointments",
       element: <Calendar/>,
     },
@@ -96,6 +126,14 @@ const Layout = () => {
     {
       path: '/admin-panel-encode',
       element: <AdminPanelEncode />
+    },
+    {
+      path: '/pending-founds',
+      element: <PendingFounds />
+    },
+    {
+      path: '/pending-losts',
+      element: <PendingLost />
     },
     {
       path: '/available-pets',
@@ -161,6 +199,76 @@ const Layout = () => {
         {
           path: '/admin-visitation',
           element: <AdminVisitation />
+        }
+      ]
+    },
+    {
+      path: '/lostreport',
+      element:<Layout />,
+      children: [
+        {
+          path: '/lostreport',
+          element: <LostReport />
+        }
+      ]
+    },
+    {
+      path: '/lostpetsall',
+      element:<Layout />,
+      children: [
+        {
+          path: '/lostpetsall',
+          element: <Lostpetsall />
+        }
+      ]
+    },
+    {
+      path: '/lostpetsmore/:id',
+      element:<Layout />,
+      children: [
+        {
+          path: '/lostpetsmore/:id',
+          element: <Lostpetsmore />
+        }
+      ]
+    },
+    {
+      path: '/foundpets',
+      element:<Layout />,
+      children: [
+        {
+          path: '/foundpets',
+          element: <Foundpets />
+        }
+      ]
+    },
+    {
+      path: '/foundpetsall',
+      element:<Layout />,
+      children: [
+        {
+          path: '/foundpetsall',
+          element: <Foundpetsall />
+        }
+      ]
+    },
+    {
+      path: '/foundpetsmore/:id',
+      element:<Layout />,
+      children: [
+        {
+          path: '/foundpetsmore/:id',
+          element: <Foundpetsmore />
+        }
+      ]
+    },
+    {
+      path: '/foundreport',
+      element:<Layout />,
+      children: [
+        {
+          path: '/foundreport/',
+          element: <Foundreport />
         }
       ]
     },
@@ -295,8 +403,6 @@ const Layout = () => {
       ]
     },
 
-
-    
     {
       path: '*',
       element: <ErrorPage/>

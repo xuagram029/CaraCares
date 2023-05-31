@@ -15,6 +15,7 @@ const AdminDashboard = () => {
     const navigate = useNavigate()
     const { user } = useContext(AuthContext);
     const [name, setName] = useState(user?.resp[0]?.firstname)
+    const [total, setTotal] = useState(0)
 
     useEffect(() => {
       if(!user){
@@ -22,7 +23,17 @@ const AdminDashboard = () => {
       }else if(user?.resp[0]?.role !== 'admin'){
         navigate('/')
       }
-  }, [user, navigate])
+    }, [user, navigate])
+
+    useEffect(() => {
+      const getCount = async() => {
+        const res = await axios.get('http://localhost:8000/admin-encode/total')
+        console.log(res.data)
+        setTotal(res.data)
+      }
+      getCount()
+    }, [])
+
 
   console.log(user?.resp[0]?.role)
   console.log(user?.resp[0]?.name)
@@ -32,7 +43,6 @@ const AdminDashboard = () => {
     <div className='flex h-screen'>
         <Sidebar/>
         <div className='p-8 flex flex-row flex-wrap justify-evenly items-center mx-auto space-x-12'>
-
           <div className="space-y-16">
             <div className="w-[400px] h-64 bg-[#E5707E] shadow-xl border-8 border-grey rounded-3xl hover:text-white cursor-pointer">
               <Link to='/scheduled-appointments'>
@@ -44,7 +54,7 @@ const AdminDashboard = () => {
             <div className="w-[400px] h-64 bg-[#E5707E] shadow-xl border-8 border-grey rounded-3xl hover:text-white">
               <Link >
                 <p className='text-3xl font-medium text-center text-white relative top-[30px] '>Adopted Animals</p> 
-                <p className='text-6xl font-semibold text-center text-white relative right-16 top-[88px]'>12</p> 
+                <p className='text-6xl font-semibold text-center text-white relative right-16 top-[88px]'>{total}</p> 
                 <AiOutlineHome className='text-8xl hover:animate-pulse delay-400 opacity-50 relative left-52 bottom-1'/>
               </Link>
             </div>

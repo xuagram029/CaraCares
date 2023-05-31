@@ -1,4 +1,17 @@
 const db = require('../db')
+const multer = require('multer')
+const path = require('path')
+
+const storage = multer.diskStorage({
+  destination:(req, file, cb) => {
+    cb(null, 'uploads')
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname))
+  }
+})
+
+const upload = multer({storage: storage})
 
 const getEncodedPets = (req, res) =>{
     db.query("SELECT * FROM shelterencode LIMIT 4", (err, data) =>{
@@ -8,6 +21,10 @@ const getEncodedPets = (req, res) =>{
 }
 
 const addEncodedPet = (req, res) =>{
+  upload.single('image')(req, res, (err) => {
+    if (err) {
+      return res.status(401).json({ error: 'Error uploading file' });
+    }
     const name = req.body.name
     const gender = req.body.gender
     const color = req.body.color
@@ -17,13 +34,16 @@ const addEncodedPet = (req, res) =>{
     const shelteremail = req.body.shelteremail
     const shelteraddress = req.body.shelteraddress
     const type = req.body.type
+    const photo = req.file ? req.file.filename : null; // Get the file name if it exists
 
-    db.query("INSERT INTO shelterencode(`name`, `gender`, `color`,`age`,`type`, `shelternumber`, `sheltername`,`shelteremail`, `shelteraddress`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [name, gender, color, age, type, shelternumber, sheltername, shelteremail, shelteraddress ],
+
+    db.query("INSERT INTO shelterencode(`name`, `gender`, `color`,`age`,`type`, `shelternumber`, `sheltername`,`shelteremail`, `shelteraddress`, `photo`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [name, gender, color, age, type, shelternumber, sheltername, shelteremail, shelteraddress, photo],
     (err, data) =>{
         if(err) return res.json(err)
         return res.json(data)
     })
+  });
 }
 
 const updateshelterencodes = (req, res) =>{
@@ -117,8 +137,8 @@ const totalAdoption = (req, res) => {
       console.error(err);
       res.status(500).send('Internal Server Error');
     } else {
-      console.log(result)
-      res.status(200).json(result);
+      const total = result[0].total
+      res.status(200).json(total);
     }
   });
 }

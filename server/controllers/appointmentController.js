@@ -28,10 +28,10 @@ const getPendingAppointments = (req, res) => {
 }
 
 const makeAppointment = (req, res) => {
-    const { fullName, date, type } = req.body
+    const { fullName, date, type, number } = req.body
     console.log(fullName, date, type);
-    db.query("INSERT INTO appointment(`fullName`, `date_s`, `type`) VALUES (?, ?, ?)", [fullName, date, type], (err,data) => {
-        if(err) return res.json(err)
+    db.query("INSERT INTO appointment(`fullName`, `date_s`, `type`, `number`) VALUES (?, ?, ?, ?)", [fullName, date, type, number], (err,data) => {
+        if(err) return res.status(401).json(err)
         return res.json({message: "Appointment sent"})
     })
 }
@@ -80,7 +80,8 @@ const acceptAppointment = (req, res) => {
           const number = (result[0].number);
           const from = "Cara Cares"
           // const to = "639917326715"
-          const to =  number 
+          // const to =  number 
+          const to =  "639429154447" 
           // const to = "639453061364"
           const text = 'Your appointment has been accepted.'
   

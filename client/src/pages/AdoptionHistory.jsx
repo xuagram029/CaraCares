@@ -46,11 +46,6 @@ const AdoptionHistory = () => {
       sortable: true
     },
     {
-      name: 'Breed',
-      selector: row => row.breed,
-      sortable: true
-    },
-    {
       name: 'Date Adopted',
       selector: row => new Date(row.adopted_date).toLocaleString(),
       sortable: true

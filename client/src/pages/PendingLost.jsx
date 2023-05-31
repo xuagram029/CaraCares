@@ -5,15 +5,18 @@ import { RiUserSearchLine } from 'react-icons/ri';
 import Sidebar from '../components/Sidebar';
 import { SidebarContext } from '../context/SbContext';
 
-const AvailablePets = () => {
+const PendingLost = () => {
     const { open } = useContext(SidebarContext)
     const [availablePets, setAvailablePets] = useState([]) 
     const [filteredAvailablePets, setFilteredAvailablePets] = useState([]) 
-  
+    const [ imgModal, setImgModal] = useState(false)
+    const [selectedPhoto, setSelectedPhoto] = useState('');
+
+
     useEffect(() => {
-      const getAvailable = async() => {
+      const getPending = async() => {
         try {
-          const res = await axios.get('http://localhost:8000/admin-encode/available')
+          const res = await axios.get('http://localhost:8000/lostpet/pending')
           setAvailablePets(res.data)
           setFilteredAvailablePets(res.data)
           console.log(res.data)
@@ -21,13 +24,21 @@ const AvailablePets = () => {
           console.log(error);
         }
       }
-      getAvailable()
+      getPending()
     }, [])
-  
+    // console.log(availablePets[0]);
     const updateStatus = async(id) => {
         try {
-          const res = await axios.put(`http://localhost:8000/admin-encode/adopt/${id}`)
-          console.log(res.data.message)
+          await axios.put(`http://localhost:8000/lostpet/pending/${id}`)
+          window.location.reload()
+        } catch (error) {
+          console.log(error);
+        }
+    }
+
+    const deleteReport = async(id) => {
+        try {
+          await axios.delete(`http://localhost:8000/lostpet/pending/${id}`)
           window.location.reload()
         } catch (error) {
           console.log(error);
@@ -36,13 +47,13 @@ const AvailablePets = () => {
 
     const columns = [
       {
-        name: 'Pet Name',
-        selector: row => row.name,
+        name: 'Name',
+        selector: row => row.ownername,
         sortable: true
       },
       {
         name: 'type',
-        selector: row => row.type,
+        selector: row => row.typeofpet,
         sortable: true
       },
       {
@@ -51,20 +62,40 @@ const AvailablePets = () => {
         sortable: true
       },
       {
-        name: 'Age',
-        selector: row => row.age,
+        name: 'Color',
+        selector: row => row.color,
         sortable: true
       },
       {
-        name: 'Breed',
-        selector: row => row.breed,
+        name: 'Lost Date',
+        selector: row => row.lost,
         sortable: true
       },
       {
-        name: "Adopted",
+        name: 'Photo',
+        cell: (row) => (
+          <button onClick={() => {
+              setSelectedPhoto(row.photo);
+              setImgModal(true);
+            }}>
+            View Photo
+          </button>
+        ),
+      },
+      {
+        name: "Verified",
         cell: row => (
           <button onClick={() => updateStatus(row.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             ✓
+          </button>
+        ),
+        button: true
+      },
+      {
+        name: "Delete",
+        cell: row => (
+          <button onClick={() => deleteReport(row.id)} className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            X
           </button>
         ),
         button: true
@@ -73,18 +104,19 @@ const AvailablePets = () => {
   
     const handleFilter = (e) => {
       const newData = filteredAvailablePets.filter(row =>
-        row.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        row.type.toLowerCase().includes(e.target.value.toLowerCase())
+        row.foundername.toLowerCase().includes(e.target.value.toLowerCase()) ||
+        row.typeofpet.toLowerCase().includes(e.target.value.toLowerCase())
       );    
       setAvailablePets(newData)
     }
+    
 
   return (
     <div className="flex flex-col md:flex-row">
         <Sidebar /> 
-        <div className="flex flex-col w-full md:w-3/4 lg:w-screen">
+        <div className={`flex flex-col w-full md:w-3/4 lg:w-screen ${imgModal && "opacity-50"}`}>
             <div className="flex ml-8 mt-5 justify-between items-center space-x-6 font-bold font-pop text-base">
-            <h1 className="text-4xl">PETS FOR ADOPTION</h1>
+            <h1 className="text-4xl">PENDING LOST REPORTS</h1>
             </div>
             <div className={` mt-8 ml-8 max-w-full border border-black ${open ? "w-[75vw] transition-width duration-500" : "w-[85vw] transition-width duration-500 ease-linear"}`}>
             <div className='p-[50px 10%] mt-2 ml-5 flex'>
@@ -98,8 +130,16 @@ const AvailablePets = () => {
             />
             </div>
         </div>  
+        {imgModal &&   
+          <div>
+            <img 
+            className='w-96 h-96 top-48 left-[550px] absolute'
+            src={`http://localhost:8000/uploads/${selectedPhoto}`} alt="Full Photo" />   
+            <button onClick={() => {setImgModal(!imgModal)}}>close</button>
+          </div>
+        }
     </div>
   )
 }
 
-export default AvailablePets
+export default PendingLost

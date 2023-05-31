@@ -14,7 +14,7 @@ function Foundpetsall() {
   useEffect(() => {
     const getLostPet = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/foundpet`);
+        const res = await axios.get(`http://localhost:8000/foundpet/accepted`);
         setDate(res.data[0].datefound);
         setData(res.data);
       } catch (err) {
@@ -28,15 +28,17 @@ function Foundpetsall() {
     const formattedDate = moment(date).format("YYYY/MM/DD");
     setFinalDate(formattedDate);
   }, [date]);
-
   return (
     <div className="mb-[30px]">
+            <div>
+        <h1 className="sm:text-3xl md:text-4xl text-2xl font-bold xl:text-6xl text-blue-900 text-center mt-8 md:mt-12 pb-4">
+          Found Pets
+        </h1>
+        <p className="text-sm md:text-l lg:text-xl font-bold xl:text-2xl  text-center">
+          Reuniting Found Pets with Their Families{" "}
+        </p>
+      </div>
       <div className="px-16 md:px-[50px] lg:px-[150px] xl:px-[200px] xl:mt-[80px] mt-[40px]">
-        <select className="text-sm p-[1px] text-neutral-700 md:text-lg border-2 border-solid shadow-xl">
-          <option value="Category" hidden>
-            Category
-          </option>
-        </select>
 
         <div class="relative flex py-2 items-center">
           <span class="text-lg md:text-2xl flex-shrink mx-4 text-gray-400">
@@ -51,7 +53,7 @@ function Foundpetsall() {
               <div className="bg-white rounded-lg shadow-lg">
                 <img
                   className="w-full h-48 object-cover object-center rounded-t-lg"
-                  src={lostpet2}
+                  src={`http://localhost:8000/uploads/${pet.photo}`}
                   alt=""
                 />
 

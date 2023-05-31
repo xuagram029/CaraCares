@@ -74,7 +74,7 @@ const Sidebar = () => {
                 <div className={`pt-6 flex items-center ${!open ? "border-none" : "border-b border-[#060047]"}`}>
                         <MdPets
                             className={`text-lg cursor-pointer min-w-fit`} />
-                        <h1 className={`origin-left ml-5 text-base cursor-pointer ${!open ? "scale-0 duration-300" : "duration-500"}`}>Users</h1>
+                        <h1 className={`origin-left ml-5 text-base cursor-pointer ${!open ? "scale-0 duration-300" : "duration-500"}`}>Available Pets</h1>
                 </div>
             </Link>
 
@@ -101,8 +101,8 @@ const Sidebar = () => {
                         className={`text-lg cursor-pointer absolute right-1 ${!openLf ? "rotate-180 duration-300" : "duration-500"} ${!open ? "hidden": "visible"}`} onClick={() => {setOpenLf(!openLf)}}/>
                 </div>
                 { openLf && <div className={`pt-4 w-full self-start ${!open && "hidden"}`}>
-                    <div className='text-sm border-b border-[#060047] cursor-pointer'>Lost Pets</div>
-                    <div className='text-sm mt-2  border-b border-[#060047] cursor-pointer'>Found Pets</div>
+                    <div className='text-sm border-b border-[#060047] cursor-pointer'><Link to='/pending-losts'>Lost Pets</Link></div>
+                    <div className='text-sm mt-2  border-b border-[#060047] cursor-pointer'><Link to='/pending-founds'>Found Pets</Link></div>
                 </div> }
             </div>
 
@@ -115,8 +115,9 @@ const Sidebar = () => {
                         className={`text-lg cursor-pointer absolute right-1 ${!openPe ? "rotate-180 duration-300" : "duration-500"} ${!open ? "hidden": "visible"}`} onClick={() => {setOpenPe(!openPe)}}/>
                 </div>
                 { openPe && <div className={`pt-4 w-full self-start ${!open && "hidden"}`}>
-                    <div className='text-sm border-b border-[#060047] cursor-pointer'>Lost Reports</div>
-                    <div className='text-sm mt-2  border-b border-[#060047] cursor-pointer'>Found Reports</div>
+                    <div className='text-sm border-b border-[#060047] cursor-pointer'><Link to='/admin-visitation-dogs'>Dog Visitation Report</Link></div>
+                    <div className='text-sm mt-2  border-b border-[#060047] cursor-pointer'><Link to='/admin-visitation-cats'>Cat Visitation Report</Link></div>
+                    <div className='text-sm mt-2  border-b border-[#060047] cursor-pointer'><Link to='/admin-panel-encode'>Add Pet</Link></div>
                 </div> }
             </div>
             <Link to='/admin-profile'>

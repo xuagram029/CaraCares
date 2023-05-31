@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {getDogs, getCats, getPet, deletePet, addVisit, getVisits, editVisit, getVisit} = require('../controllers/petTypeController')
+const {getDogs, getCats, getPet, deletePet, addVisit, getVisits, editVisit, getVisit, getAdoptedCats, getAdoptedDogs} = require('../controllers/petTypeController')
 
 router.route('/')
     .delete(deletePet)
@@ -10,6 +10,12 @@ router.route('/dogs')
 
 router.route('/cats')
     .get(getCats)
+    
+router.route('/adopted-cats')
+    .get(getAdoptedCats)
+
+router.route('/adopted-dogs')
+    .get(getAdoptedDogs)
     
 router.route('/visits/:id')
     .get(getVisits)

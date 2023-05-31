@@ -74,7 +74,7 @@ const PetsForAdoption = () => {
         >
           <img
             className="w-full h-50 object-cover mb-4 rounded-lg"
-            src={Max}
+            src={`http://localhost:8000/uploads/${pet.photo}`}
             alt={pet.name}
           />
           <div>

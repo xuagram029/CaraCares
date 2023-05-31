@@ -1,7 +1,15 @@
 const db = require('../db')
 
 const getDogs = (req, res) => {
-    db.query("SELECT * FROM shelterencode WHERE type = 'dog' LIMIT 4",
+    db.query("SELECT * FROM shelterencode WHERE type = 'dog' ",
+    (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+}
+
+const getAdoptedDogs = (req, res) => {
+    db.query("SELECT * FROM shelterencode WHERE type = 'dog' AND adopted = 1",
     (err, data) => {
         if(err) return res.json(err)
         return res.json(data)
@@ -9,7 +17,15 @@ const getDogs = (req, res) => {
 }
 
 const getCats = (req, res) => {
-    db.query("SELECT * FROM shelterencode WHERE type = 'cat' LIMIT 4",
+    db.query("SELECT * FROM shelterencode WHERE type = 'cat' ",
+    (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+}
+
+const getAdoptedCats = (req, res) => {
+    db.query("SELECT * FROM shelterencode WHERE type = 'cat' AND adopted = 1",
     (err, data) => {
         if(err) return res.json(err)
         return res.json(data)
@@ -114,4 +130,4 @@ const getVisit = (req, res) => {
     });
 };
 
-module.exports = { getDogs, getCats, getPet, deletePet, addVisit, getVisits, getVisit, editVisit }
+module.exports = { getDogs, getCats, getPet, deletePet, addVisit, getVisits, getVisit, editVisit, getAdoptedCats, getAdoptedDogs }
