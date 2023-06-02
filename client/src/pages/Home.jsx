@@ -3,6 +3,8 @@ import Nav3 from '../pages/Nav3';
 import HeroHome from './HeroHome'
 import HelpPage from './HelpPage'
 import Whyadopt from './whyadopt'
+import Bloghome3 from './bloghome3'
+import ActDate from './ActivitiesDate'
 function Home() {
   return (
     <div className='home'>
@@ -10,6 +12,8 @@ function Home() {
         <HeroHome/>
         <HelpPage/>
         <Whyadopt/>
+        <Bloghome3/>
+        {/* <ActDate/> */}
     </div>
   )
 }

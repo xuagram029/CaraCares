@@ -4,6 +4,8 @@ import img4 from "../assets/images/image4.png";
 import img5 from "../assets/images/greater-than-symbol.png";
 import img6 from "../assets/images/down.png";
 import usericon from "../assets/images/user.png";
+import logouticon from "../assets/images/logout.png";
+import settingicon from "../assets/images/gear.png";
 import { IoMdMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { AuthContext } from "../context/AuthContext";
@@ -81,10 +83,7 @@ function Navbar() {
 
        
       </div>
-      {user ? <div className="flex gap-2 md:hidden cursor-pointer">
-          <img className="" src={usericon} alt="" />
-          <span className="m-auto text-lg font-bold text-black">{username}</span>
-          </div> : ""}      
+ 
       <ul className="md:flex md:items-center mx-auto gap-6 text-sm z-1  md:z-auto md:static absolute bg-white w-full left-0 md:w-auto md:py-0  md:pl-0  md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500 ">
         <div className="md:border-none md:mx-4 mx-0 border-2 border-solid border-neutral-200   md:my-4 my-0  duration-500   p-3 uppercase font-bold  text-black  ">
           <li>
@@ -171,18 +170,33 @@ function Navbar() {
             <Link  to="/tnvr" className="flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" /> TNVR</Link>
         </div>}
     </div>
-    {user ? <div className="gap-2 relative peer cursor-pointer px-[12px] flex ">
-              
+    {/* {user ? <div className="gap-2 md:hidden cursor-pointer px-[12px] py-2 ">
+              <div className="flex peer ">
           <img src={usericon} alt="" />
-          <span onClick={() => setOpenAccount(!openAccount)} className="m-auto text-md text-black font-bold ">{username}</span>
-
+          <span onClick={() => setOpenAccount(!openAccount)} className=" text-md text-black font-bold ">{username}</span>
+          
          {openAccount && <div className="peer-hover:flex hover:flex
          w-[200px] md:w-[250px] md:absolute top-16 
          flex-col bg-white drop-shadow-lg  mr-2 ">
           <Link to="/about" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300" href="#"><img className="md:hidden" src={img5} alt="" />About CARA</Link>
           </div>
+          
           }
-          </div> : ""}      
+          </div>
+          </div> : ""}       */}
+         {user ?   <div className="">
+        <button class="peer md:py-10 w-full flex gap-1 font-bold  items-center p-3 uppercase text-black md:border-none border-2 text-left " onClick={() => setOpenAb(!openAb)}><img src={usericon} alt="" />
+          <span onClick={() => setOpenAccount(!openAccount)} className=" text-md text-black font-bold ">{username}</span></button>
+        
+       
+     <div className="hidden peer-hover:flex hover:flex
+         w-full md:w-[250px] md:absolute 
+         flex-col bg-white drop-shadow-lg  mr-2 ">
+          
+          <Link to="/about" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300" href="#"><img className="" src={settingicon} alt="" /><span className="ml-3 my-auto">Profile Setting</span></Link>
+            <Link to="/about" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300" href="#"><img className="" src={logouticon} alt="" /><span className="ml-3 my-auto">Logout</span></Link>
+        </div>
+    </div>  : ""}   
       </ul>
           <div>
             <button className="bg-rose-600 text-white w-[100px] border-2 border-rose-600 p-2 mr-3">Login</button>
