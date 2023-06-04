@@ -52,6 +52,7 @@ import Foundreport from './pages/Foundreport'
 import PendingFounds from './pages/PendingFounds';
 import PendingLost from './pages/PendingLost';
 import Lostpets from './pages/Lostpets';
+import AnimalWelfareLaws from './pages/AnimalWelfareLaws';
 
 function App() {
 
@@ -410,6 +411,16 @@ const Layout = () => {
         {
           path: '/humane-education',
           element: <HumaneEduc />
+        }
+      ]
+    },
+    {
+      path: "/animal-welfare-laws",
+      element: <Layout />,
+      children: [
+        {
+          path: '/animal-welfare-laws',
+          element: <AnimalWelfareLaws />
         }
       ]
     },
