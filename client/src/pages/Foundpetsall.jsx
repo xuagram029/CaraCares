@@ -14,7 +14,7 @@ function Foundpetsall() {
   useEffect(() => {
     const getLostPet = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/foundpet`);
+        const res = await axios.get(`http://localhost:8000/foundpet/accepted`);
         setDate(res.data[0].datefound);
         setData(res.data);
       } catch (err) {
@@ -28,7 +28,7 @@ function Foundpetsall() {
     const formattedDate = moment(date).format("YYYY/MM/DD");
     setFinalDate(formattedDate);
   }, [date]);
-
+  
   return (
     <div className="mb-[30px]">
             <div>
@@ -54,7 +54,7 @@ function Foundpetsall() {
               <div className="bg-white rounded-lg shadow-lg">
                 <img
                   className="w-full h-48 object-cover object-center rounded-t-lg"
-                  src={lostpet2}
+                  src={`http://localhost:8000/uploads/${pet.photo}`}
                   alt=""
                 />
 

@@ -22,31 +22,33 @@ function LostReport() {
   const [address, setAddress] = useState("");
   const [age, setAge] = useState("");
   const [ownername, setOwnerName] = useState("");
+  const [ photo, setPhoto ] = useState('')
 
+  const handleFile = (e) => {
+    setPhoto(e.target.files[0])
+  }
+  // http://localhost:8000/lostpet
   const handleSubmit = async (e) => {
-    await axios.post("http://localhost:8000/lostpet", {
-      petname,
-      phone,
-      email,
-      typeofpet,
-      gender,
-      color,
-      breed,
-      lost,
-      description,
-      address,
-      age,
-      ownername,
-    });
-    if (confirm('Please press OK to confirm the accuracy of the entered information') == true){
-      alert("Thank you for your submission. Please allow approximately 5-10 working days for confirmation.")
-      navigate("/lostpetsall");
-  }
-  else{
-      alert("Please verify the entered information before proceeding with the confirmation.")
-  }
+    
+    const formData = new FormData()
+    formData.append('petname', petname)
+    formData.append('phone', phone)
+    formData.append('email', email)
+    formData.append('typeofpet', typeofpet)
+    formData.append('gender', gender)
+    formData.append('color', color)
+    formData.append('breed', breed)
+    formData.append('lost', lost)
+    formData.append('description', description)
+    formData.append('address', address)
+    formData.append('age', age)
+    formData.append('ownername', ownername)
+    formData.append('image', photo)
 
+    await axios.post("http://localhost:8000/lostpet", formData);
+    navigate("/lostpetsall");
   };
+
   return (
     <div>
       <div className="px-2 md:px-12 lg:px-20 xl:px-32 2xl:px-[500px] ">
@@ -225,6 +227,17 @@ function LostReport() {
                 onChange={(e) => {
                   setAge(e.target.value);
                 }}
+              ></input>
+            </div>
+
+            <div className="">
+              <label htmlFor="" className="text-sm text-neutral-500  mt-6">
+                Photo of pet
+              </label>
+              <input
+                type="file"
+                className="w-full text-sm shadow-l p-4"
+                onChange={handleFile}
               ></input>
             </div>
           </div>

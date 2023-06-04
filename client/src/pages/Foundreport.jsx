@@ -13,21 +13,34 @@ function FoundReport(){
     const [found, setFound] = useState("");
     const [description, setDescription] = useState("");
     const [typeofpet, setTypeOfPet] = useState("");
+    const [photo, setPhoto] = useState('')
 
-    const handleSubmit = async(e) =>{
-        await axios.post('http://localhost:8000/foundpet', {foundername, phone, email, gender, color, found, description, typeofpet})
+    const handleFile = (e) => {
+        setPhoto(e.target.files[0])
+    }
 
-        if (confirm('Please press OK to confirm the accuracy of the entered information') == true){
-            alert("Thank you for your submission. Please allow approximately 5-10 working days for confirmation.")
-            navigate('/foundpets')
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const formData = new FormData();
+            formData.append('foundername', foundername);
+            formData.append('phone', phone);
+            formData.append('email', email);
+            formData.append('gender', gender);
+            formData.append('color', color);
+            formData.append('found', found);
+            formData.append('description', description);
+            formData.append('typeofpet', typeofpet);
+            formData.append('image', photo);
+    
+            await axios.post('http://localhost:8000/foundpet', formData);
+            navigate('/foundpets');
+        } catch (error) {
+            console.log(error);
         }
-        else{
-            alert("Please verify the entered information before proceeding with the confirmation.")
-        }
+    };
+    
 
-
-        
-      }
     return(
         <div>
         <div className="px-2 md:px-12 lg:px-20 xl:px-32 2xl:px-[500px] ">
@@ -92,10 +105,10 @@ function FoundReport(){
                     
                  </div>
                     
-                    {/* <label htmlFor="" className="text-sm text-neutral-500">PHOTO OF PET</label>   
                     <div className="border-2 border-solid w-full  p-1">
-                    <input type="file" />
-                    </div> */}
+                        <label htmlFor="" className="text-sm text-neutral-500">PHOTO OF PET</label>   
+                        <input type="file" onChange={handleFile}/>
+                    </div>
                     
                     <div >
                         <label  htmlFor="" className="text-sm text-neutral-500 block">Additional Description/Message</label>  

@@ -15,7 +15,7 @@ function Lostpets() {
     useEffect(() => {
         const getLostPet = async () => {
           try {
-            const res = await axios.get(`http://localhost:8000/lostpet`);
+            const res = await axios.get(`http://localhost:8000/lostpet/accepted`);
             setDate(res.data[0].datefound);
             setData(res.data);
           } catch (err) {
@@ -35,7 +35,7 @@ function Lostpets() {
     <div>
       <div>
         <h1 className="sm:text-3xl md:text-4xl text-2xl font-bold xl:text-6xl text-blue-900 text-center mt-8 md:mt-12 ">
-          Lost Pets
+          Lost And Found
         </h1>
         <p className="text-sm md:text-l lg:text-xl font-bold xl:text-2xl  text-center">
           Reuniting Lost Pets with Their Families{" "}
@@ -43,7 +43,6 @@ function Lostpets() {
       </div>
       <div className="px-16 md:px-[50px] lg:px-[150px] xl:px-[200px] xl:mt-[80px] mt-[40px]">
         <div className="flex justify-between">
-
         </div>
         <div class="relative flex py-2 items-center">
           <span class="text-lg md:text-2xl flex-shrink mx-4 text-gray-400">
@@ -58,7 +57,7 @@ function Lostpets() {
             <div className="bg-white rounded-lg shadow-lg">
               <img
                 className="w-full h-48 object-cover object-center rounded-t-lg"
-                src={lostpet1}
+                src={`http://localhost:8000/uploads/${pet.photo}`}
                 alt=""
               />
 

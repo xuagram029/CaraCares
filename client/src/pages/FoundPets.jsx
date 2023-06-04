@@ -1,7 +1,5 @@
 import React from "react";
-import lostpet2 from '../assets/ui/CARA_PICTURES/lost2.png'
 import { Link } from "react-router-dom";
-import Lostpets from "./Lostpets";
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import moment from 'moment';
@@ -17,6 +15,7 @@ function Foundpets(){
       const getFoundPet = async () => {
         try {
           const res = await axios.get(`http://localhost:8000/foundpet/front`);
+          console.log(res.data)
           setDate(res.data[0].datefound);
           setData(res.data);
         } catch (err) {
@@ -30,10 +29,7 @@ function Foundpets(){
     useEffect(() => {
       const formattedDate = moment(date).format('YYYY/MM/DD');
       setFinalDate(formattedDate)
-
     }, [date]);
-
-
 
 
     return(
@@ -70,7 +66,7 @@ function Foundpets(){
             <div className="bg-white rounded-lg shadow-lg">
               <img
                 className="w-full h-48 object-cover object-center rounded-t-lg"
-                src={lostpet2}
+                src={`http://localhost:8000/uploads/${pet.photo}`}
                 alt=""
               />
 

@@ -23,7 +23,7 @@ const handleOptionChange = async (e) => {
   
   useEffect(() =>{
     const getDog = async() => {
-      const res = await axios.get(`http://localhost:8000/typeofpet/dogs`)
+      const res = await axios.get(`http://localhost:8000/typeofpet/adopted-dogs`)
       setPetType(res.data)
       console.log(res.data)
     }
@@ -43,12 +43,12 @@ const handleOptionChange = async (e) => {
   return (
     <div className="flex w-full">
     <Sidebar />
-    <div className='m-10 p-5 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto'>
+      <div className=' w-screen'>
+      <div className='m-10 p-5 max-w-screen-2xl mx-auto'>
       <h1 className='text-center text-3xl font-semibold'>DOGS VISITATION</h1>
-      <div className='flex flex-row flex-wrap p-12'>
-        
+        <div className='flex flex-row flex-wrap py-5'>
         {petType && petType.map(pet => (
-          <div className='border border-black p-6 w-[25%] h-[50%]' key={pet.id}>
+          <div className='border border-black p-6 w-[25%] h-[50%]  ' key={pet.id}>
           <img src={Max} alt="Dogs" className=' mx-auto' />
             <div className=''>
               <h1 className='font-bold text-center p-4 text-xl'>{pet.name}</h1>
@@ -65,6 +65,7 @@ const handleOptionChange = async (e) => {
         ))}
       </div>
     </div>
+      </div>
     </div>
   )
 }

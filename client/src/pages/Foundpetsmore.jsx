@@ -112,15 +112,16 @@ function Lostpetsmore() {
       <div className="grid-rows-2 mt-[50px] px-16 md:px-[50px] lg:px-[150px] xl:px-[200px] ">
         <div className="flex ">
           <div className="w-1/2  h-[100%] my-auto ">
-            <div className="h-full">
-              <img className="   h-[100%]" src={lostpet2} alt="" />
-            </div>
+
           </div>
           {data.map((pet) => (
             <div
               key={pet.id}
               className="w-1/2 h-[100%] my-auto md:ml-4 ml-4 md:p-5"
             >
+                          <div className="h-full">
+              <img className="h-[100%]" src={`http://localhost:8000/uploads/${pet.photo}`} alt="" />
+            </div>
                 <button onClick={toggleModal} 
                 className="btn-modal bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg shadow-gray-400 tracking-[3px] 
                 relative left-52 bottom-24"

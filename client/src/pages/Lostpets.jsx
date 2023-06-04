@@ -1,6 +1,4 @@
 import React from "react";
-import lostpet3 from "../assets/ui/CARA_PICTURES/lost3.png";
-import FoundPets from "../pages/FoundPets";
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from "react-router-dom";
@@ -65,7 +63,7 @@ function Lostpets() {
             <div className="bg-white rounded-lg shadow-lg">
               <img
                 className="w-full h-48 object-cover object-center rounded-t-lg"
-                src={lostpet3}
+                src={`http://localhost:8000/uploads/${pet.photo}`}
                 alt=""
               />
 
