@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar'
 import { AuthContext } from '../context/AuthContext'
 import axios from '../api/axios'
 import { SidebarContext } from '../context/SbContext'
+import { useNavigate } from 'react-router'
 
 const AdminProfile = () => {
     const { user } = useContext(AuthContext)
@@ -12,8 +13,18 @@ const AdminProfile = () => {
     const [lastname, setLastname] = useState('')
     const [address, setAddress] = useState('')
     const [birthdate, setBirthdate] = useState('')
-
+    const navigate = useNavigate()
     const userId = user?.resp[0]?.id
+
+    useEffect(() => {
+        if(!user){
+          navigate('/admin-login')
+        }else if(user?.resp[0]?.role === 'user'){
+          navigate('/')
+       }
+      }, [user])
+      
+
     useEffect(() => {
         const getInfo = async () => {
             const res = await axios.get(`http://localhost:8000/admin/${userId}`)

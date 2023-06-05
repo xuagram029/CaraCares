@@ -84,7 +84,7 @@ const PetsForAdoption = () => {
             </p>
             <p className="text-gray-800">{pet.gender}</p>
           </div>
-          <button className="bg-rose-600 text-white hover:bg-white hover:text-rose-600 hover:border-rose-600 hover:border-2 py-2 px-4 rounded w-1/2 mx-auto m-4">
+          <button className="bg-rose-600 border-2 text-white hover:bg-white hover:text-rose-600 hover:border-rose-600 hover:border-2 py-2 px-4 rounded w-1/2 mx-auto m-4">
             Adopt Me
           </button>
         </div>

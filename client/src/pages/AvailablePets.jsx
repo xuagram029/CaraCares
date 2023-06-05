@@ -4,6 +4,9 @@ import  DataTable  from 'react-data-table-component'
 import { RiUserSearchLine } from 'react-icons/ri';
 import Sidebar from '../components/Sidebar';
 import { SidebarContext } from '../context/SbContext';
+import { AuthContext } from "../context/AuthContext"
+import { useNavigate } from 'react-router-dom'
+
 
 const AvailablePets = () => {
     const { open } = useContext(SidebarContext)
@@ -11,6 +14,17 @@ const AvailablePets = () => {
     const [filteredAvailablePets, setFilteredAvailablePets] = useState([]) 
     const [ imgModal, setImgModal] = useState(false)
     const [selectedPhoto, setSelectedPhoto] = useState('');
+
+    const {user, loading, error, dispatch } = useContext(AuthContext)
+  useEffect(() => {
+    if(!user){
+      navigate('/admin-login')
+    }else if(user?.resp[0]?.role === 'user'){
+      navigate('/')
+   }
+  }, [user])
+
+  const navigate = useNavigate()
   
     useEffect(() => {
       const getAvailable = async() => {

@@ -1,133 +1,151 @@
-const db = require('../db')
+const db = require('../db');
 
 const getDogs = (req, res) => {
-    db.query("SELECT * FROM shelterencode WHERE type = 'dog' ",
-    (err, data) => {
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-}
+  db.query("SELECT * FROM shelterencode WHERE type = 'dog'", (err, data) => {
+    if (err) {
+      console.error('Error retrieving dogs:', err);
+      return res.status(500).json({ error: 'Failed to retrieve dogs.' });
+    }
+    res.json(data);
+  });
+};
 
 const getAdoptedDogs = (req, res) => {
-    db.query("SELECT * FROM shelterencode WHERE type = 'dog' AND adopted = 1",
-    (err, data) => {
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-}
+  db.query("SELECT * FROM shelterencode WHERE type = 'dog' AND adopted = 1", (err, data) => {
+    if (err) {
+      console.error('Error retrieving adopted dogs:', err);
+      return res.status(500).json({ error: 'Failed to retrieve adopted dogs.' });
+    }
+    res.json(data);
+  });
+};
 
 const getCats = (req, res) => {
-    db.query("SELECT * FROM shelterencode WHERE type = 'cat' ",
-    (err, data) => {
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-}
+  db.query("SELECT * FROM shelterencode WHERE type = 'cat'", (err, data) => {
+    if (err) {
+      console.error('Error retrieving cats:', err);
+      return res.status(500).json({ error: 'Failed to retrieve cats.' });
+    }
+    res.json(data);
+  });
+};
 
 const getAdoptedCats = (req, res) => {
-    db.query("SELECT * FROM shelterencode WHERE type = 'cat' AND adopted = 1",
-    (err, data) => {
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-}
+  db.query("SELECT * FROM shelterencode WHERE type = 'cat' AND adopted = 1", (err, data) => {
+    if (err) {
+      console.error('Error retrieving adopted cats:', err);
+      return res.status(500).json({ error: 'Failed to retrieve adopted cats.' });
+    }
+    res.json(data);
+  });
+};
 
 const getPet = (req, res) => {
-    const petId = req.params.id
-    db.query("SELECT * FROM shelterencode WHERE id = ?", petId, 
-    (err, data) => {
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-}
+  const petId = req.params.id;
+  db.query("SELECT * FROM shelterencode WHERE id = ?", petId, (err, data) => {
+    if (err) {
+      console.error('Error retrieving pet:', err);
+      return res.status(500).json({ error: 'Failed to retrieve pet.' });
+    }
+    res.json(data);
+  });
+};
 
 const deletePet = (req, res) => {
-    const id = req.body.id
-    db.query("DELETE FROM shelterencode WHERE id = ?", id ,
-    (err, data) => {
-        if(err) return res.json(err)
-        return res.json({message: "Successfully deleted"})
-    })
-}
+  const id = req.body.id;
+  db.query("DELETE FROM shelterencode WHERE id = ?", id, (err, data) => {
+    if (err) {
+      console.error('Error deleting pet:', err);
+      return res.status(500).json({ error: 'Failed to delete pet.' });
+    }
+    res.json({ message: 'Successfully deleted' });
+  });
+};
 
 const addVisit = (req, res) => {
-    const petid = req.params.id
-    const visitnumber = req.body.visitnumber
-    const visitor = req.body.visitor
-    const confirmation = req.body.confirmation
-    const visitdate = req.body.visitdate
+  const petid = req.params.id;
+  const visitnumber = req.body.visitnumber;
+  const visitor = req.body.visitor;
+  const confirmation = req.body.confirmation;
+  const visitdate = req.body.visitdate;
 
-
-    db.query(
-        "INSERT INTO visitation(`visitnumber`, `visitor`, `confirmation`, `visitdate`, `petid`) VALUES (?, ?, ?, ?, ?)",
-        [visitnumber, visitor, confirmation, visitdate, petid],
-        (err, data) => {
-            if (err) return res.json(err)
-            return res.json({ message: "Visitation Confirmed" })
-        }
-    )
-}
-
-// const addVisit = (req, res) => {
-//     const id = req.params.id
-//     const { number, name, confirmation, date } = req.body
-//     db.query("UPDATE shelterencode set `visitnumber` = ?, `visitor` = ?, `confirmation` = ?, `visitdate` = ? WHERE id = ? ", [number, name, confirmation, date, id],
-//      (err, data) => {
-//         if (err) return res.json(err)
-//         return res.json({message: "Visitation Confirmed"})
-//      })
-// }
+  db.query(
+    'INSERT INTO visitation(`visitnumber`, `visitor`, `confirmation`, `visitdate`, `petid`) VALUES (?, ?, ?, ?, ?)',
+    [visitnumber, visitor, confirmation, visitdate, petid],
+    (err, data) => {
+      if (err) {
+        console.error('Error adding visit:', err);
+        return res.status(500).json({ error: 'Failed to add visit.' });
+      }
+      res.json({ message: 'Visitation Confirmed' });
+    }
+  );
+};
 
 const getVisits = (req, res) => {
-    // Query to retrieve visits data
-    const id = req.params.id
-    const query = `
+  const id = req.params.id;
+  const query = `
     SELECT v.id, v.visitnumber, v.confirmation, v.visitdate, v.visitor
-      FROM visitation AS v
-      INNER JOIN shelterencode AS s ON v.petid = s.id 
-      WHERE s.id = ?;
-      `;
-      
-      // Execute the query
-      db.query(query, [id], (err, results) => {
-          if (err) {
-              console.error(err);
-              return res.status(500).json({ error: 'Error retrieving visits data' });
-      }
-      return res.json(results);
-    });
+    FROM visitation AS v
+    INNER JOIN shelterencode AS s ON v.petid = s.id 
+    WHERE s.id = ?;
+  `;
+
+  db.query(query, [id], (err, results) => {
+    if (err) {
+      console.error('Error retrieving visits data:', err);
+      return res.status(500).json({ error: 'Failed to retrieve visits data.' });
+    }
+    res.json(results);
+  });
 };
 
 const editVisit = (req, res) => {
-    const id = req.params.id
-    // const { visitnumber, visitor, confirmation, visitdate } =  req.body
-    const visitnumber = req.body.visitnumber
-    const visitor = req.body.visitor 
-    const confirmation = req.body.confirmation
-    const visitdate = req.body.visitdate
-    console.log(visitnumber, visitor, confirmation, visitdate)
-    db.query("UPDATE visitation SET `visitnumber` = ?, `visitor` = ?, `confirmation` = ?, `visitdate` = ? where id = ?", [visitnumber, visitor, confirmation, visitdate, id], (err, result) => {
-        if(err) return res.json(err)
-        return res.json({message: "Success"})
-    })
-}
+  const id = req.params.id;
+  const visitnumber = req.body.visitnumber;
+  const visitor = req.body.visitor;
+  const confirmation = req.body.confirmation;
+  const visitdate = req.body.visitdate;
 
-const getVisit = (req, res) => {
-    // Query to retrieve visits data
-    const id = req.params.id
-    const query = `
-    SELECT v.id, v.visitnumber, v.confirmation, v.visitdate, v.visitor
-      FROM visitation AS v
-      WHERE v.id = ?;
-      `;
-      // Execute the query
-      db.query(query, [id], (err, results) => {
-          if (err) {
-              console.error(err);
-              return res.status(500).json({ error: 'Error retrieving visits data' });
+  db.query(
+    'UPDATE visitation SET `visitnumber` = ?, `visitor` = ?, `confirmation` = ?, `visitdate` = ? WHERE id = ?',
+    [visitnumber, visitor, confirmation, visitdate, id],
+    (err, result) => {
+      if (err) {
+        console.error('Error editing visit:', err);
+        return res.status(500).json({ error: 'Failed to edit visit.' });
       }
-      return res.json(results);
-    });
+      res.json({ message: 'Success' });
+    }
+  );
 };
 
-module.exports = { getDogs, getCats, getPet, deletePet, addVisit, getVisits, getVisit, editVisit, getAdoptedCats, getAdoptedDogs }
+const getVisit = (req, res) => {
+  const id = req.params.id;
+  const query = `
+    SELECT v.id, v.visitnumber, v.confirmation, v.visitdate, v.visitor
+    FROM visitation AS v
+    WHERE v.id = ?;
+  `;
+
+  db.query(query, [id], (err, results) => {
+    if (err) {
+      console.error('Error retrieving visit data:', err);
+      return res.status(500).json({ error: 'Failed to retrieve visit data.' });
+    }
+    res.json(results);
+  });
+};
+
+module.exports = {
+  getDogs,
+  getAdoptedDogs,
+  getCats,
+  getAdoptedCats,
+  getPet,
+  deletePet,
+  addVisit,
+  getVisits,
+  getVisit,
+  editVisit,
+};

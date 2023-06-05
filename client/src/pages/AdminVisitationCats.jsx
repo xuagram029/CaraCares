@@ -3,10 +3,24 @@ import Pet1 from '../assets/ui/CARA_PICTURES/lost1.png'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from "../context/AuthContext"
+import {useContext} from 'react'
 
 function AdminVisitationCats() {
   const [selectedOption, setSelectedOption] = useState('')
   const [petType, setPetType] = useState(null)
+
+  const {user, loading, error, dispatch } = useContext(AuthContext)
+  useEffect(() => {
+    if(!user){
+      navigate('/admin-login')
+    }else if(user?.resp[0]?.role === 'user'){
+      navigate('/')
+   }
+  }, [user])
+  
+  const navigate = useNavigate()
 
 const handleOptionChange = async (e) => {
     setSelectedOption(e.target.value);

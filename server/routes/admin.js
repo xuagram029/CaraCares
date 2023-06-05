@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const  { regAdmin, login, logout, getAdoptionRequests, handleAdoptionRequest} = require('../controllers/adminController')
+const  { regAdmin, login, logout, getAdoptionRequests, handleAdoptionRequest, getAdmin, updateAdmin} = require('../controllers/adminController')
 const { verifyToken, verifyUser, verifyAdmin } = require('../middleware/verifyToken')
 
 
@@ -31,5 +31,9 @@ router.route('/adoption')
 
 router.route('/adoption/:id')
     .post(handleAdoptionRequest)
+
+router.route('/:id')
+    .get(getAdmin)
+    .put(updateAdmin)
 
 module.exports = router

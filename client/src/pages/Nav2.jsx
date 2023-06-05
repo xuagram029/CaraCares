@@ -1,76 +1,90 @@
-import React from 'react'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import img4 from "../assets/images/image4.png";
+import img5 from "../assets/images/greater-than-symbol.png";
+import img6 from "../assets/images/down.png";
+import usericon from "../assets/images/user.png";
+import logouticon from "../assets/images/logout.png";
+import settingicon from "../assets/images/gear.png";
+import { IoMdMenu } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
+import { AuthContext } from "../context/AuthContext";
 
-function Navbar() {
-    const [open, setOpen] = useState(false)
-    const handleClick = () => {
-        setOpen(!open)
+function Nav2() {
+  const { user } = useContext(AuthContext);
+  const username = user?.resp && user.resp[0]?.firstname;
+
+  const [openSv, setOpenSv] = useState(false)
+  const [openAb, setOpenAb] = useState(false)
+  const [openAccount, setOpenAccount] = useState(false)
+  // flag if true or false
+  const [menuOpen, setMenuOpen] = useState(false);
+  // taga set ng boolean to true or false depende sa value
+  function toggleMenu() {
+    setMenuOpen(!menuOpen);
+    let list = document.querySelector("ul");
+    if (!menuOpen) {
+      list.classList.add("opacity-100"),
+        list.classList.add("top-[168px]"),
+        list.classList.add("shadow-l");
+    } else {
+      list.classList.remove("opacity-100"),
+        list.classList.remove("top-[168px]"),
+        list.classList.remove("shadow-l");
     }
+  }
 
-    const [openServices, setServices] = useState(false)
-    const handleClickServices = () => {
-        setServices(!openServices)
-    }
+  const [open, setOpen] = useState(false);
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
-    const [openContact, setContact] = useState(false)
-    const handleClickContact = () => {
-        setContact(!openContact)
-    }
+  const [openServices, setServices] = useState(false);
+  const handleClickServices = () => {
+    setServices(!openServices);
+  };
 
-    const [openPet, setPet] = useState(false)
-    const handleClickPet = () => {
-        setPet(!openPet)
-    }
+  const [openContact, setContact] = useState(false);
+  const handleClickContact = () => {
+    setContact(!openContact);
+  };
 
+  const [openPet, setPet] = useState(false);
+  const handleClickPet = () => {
+    setPet(!openPet);
+  };
+  const [openAcc, setAcc] = useState(false);
+  const handleClickAcc = () => {
+    setAcc(!openAcc);
+  };
+
+  // console.log(user.resp[0].username)
   return (
-    <div className='h-24 bg-primary flex justify-between items-center border-black p-9 relative'>
-        <div className="logo-container">
-            <h1>CARACARES</h1>
+    <div>
+        <div className=" items-center cursor-pointer pt-5">
+            <img src={img4} className="w-[60px] m-auto" alt="" />
+            <p className="pl-2 text-lg  text-center font-[Lato] font-bold cursor-pointer "> CARA Welfare Philippines</p>
         </div>
-        <div className="ml-[10px] uppercase relative">
-          <Link to="/" className='ml-2 uppercase'>Home</Link>
 
+        <div className="border border-blue-400 py-5 px-4 flex justify-between items-center">
+            <div className="border border-red-500 w-[50%] justify-self-center text-center">
+                <ul className="flex py-5 px-4 justify-around">
+                    <li>HOME</li>
+                    <li>PETS</li>
+                    <li>CONTACT</li>
+                    <li>SERVICES</li>
+                    <li>ABOUT</li>
+                </ul>
+            </div>
 
-            <Link className='ml-2 uppercase' onClick={handleClickPet}>Pets</Link>
-            {openPet && (
-                <div className='dropdown-content h-40 w-40 flex flex-col absolute right-42 top-7 items-center transition-opacity'>
-                    <Link to='/adopt-a-pet' className='dropdown-item border border-black p-3 w-40 text-center hover:bg-gray-500 hover:text-white'>Adopt a Pet</Link>
-                    <Link to='/sponsor-a-pet' className='dropdown-item border border-black p-3 w-40 text-center hover:bg-gray-500 hover:text-white'>Sponsor a Pet</Link>
-                    <Link to='/foster-a-pet' className='dropdown-item border border-black p-3 w-40 text-center hover:bg-gray-500 hover:text-white'>Foster a Pet</Link>
-                </div>
-                )}
-
-            <Link className='ml-2 uppercase ' onClick={handleClickContact}>Contact</Link>
-            {openContact && (
-                <div className='dropdown-content h-40 w-40 flex flex-col absolute right-24 top-7 items-center'>
-                    <Link to='/contact-us' className='dropdown-item border border-black p-3 w-40 text-center hover:bg-gray-500 hover:text-white' >Contact Us</Link>
-                    <Link to='/join-team' className='dropdown-item border border-black p-3 w-40 text-center hover:bg-gray-500 hover:text-white' >Join Our Team</Link>
-                </div>
-                )}
-
-
-            <Link className='ml-2 uppercase' onClick={handleClickServices}>Services</Link>
-            {openServices && (
-                <div className='dropdown-content h-40 w-40 flex flex-col absolute right-4 top-7 items-center'>
-                    <Link to='/donate' className='dropdown-item border border-black p-3 w-40 text-center hover:bg-gray-500 hover:text-white' >Donate</Link>
-                    <Link to='' className='dropdown-item border border-black p-3 w-40 text-center hover:bg-gray-500 hover:text-white' >zxczxc</Link>
-                </div>
-                )}
-
-
-                <Link className='dropdown-btn ml-2 uppercase' onClick={handleClick}>About</Link>
-                {open && (
-                <div className='dropdown-content h-40 w-40 flex flex-col absolute right-0 top-7 items-center'>
-                    <Link to='/about' className='dropdown-item border border-black p-3 w-40 text-center hover:bg-gray-500 hover:text-white' >About CARA</Link>
-                    <Link to='/humane-education' className='dropdown-item border border-black p-3 w-40 text-center hover:bg-gray-500 hover:text-white'>Humane Education</Link>
-                    <Link to='/laguna-pitbulls' className='dropdown-item border border-black p-3 w-40 text-center hover:bg-gray-500 hover:text-white' >Laguna Pitbulls</Link>
-                    <Link to='/tnvr' className='dropdown-item border border-black p-3 w-40 text-center hover:bg-gray-500 hover:text-white' >TNVR</Link>
-                </div>
-                )}
+            <div className="border border-blue-400 flex justify-around py-5 px-4 w-64">
+                <button>LOGIN</button>
+                <button>SIGN UP</button>
+            </div>
         </div>
+
     </div>
-  )
+  );
 }
 
-export default Navbar
+export default Nav2;

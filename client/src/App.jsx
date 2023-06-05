@@ -53,6 +53,7 @@ import PendingFounds from './pages/PendingFounds';
 import PendingLost from './pages/PendingLost';
 import Lostpets from './pages/Lostpets';
 import AnimalWelfareLaws from './pages/AnimalWelfareLaws';
+import AdoptionPDF from './pages/AdoptionPDF';
 
 function App() {
 
@@ -70,6 +71,10 @@ const Layout = () => {
     {
       path: "/",
       element: <Home />,
+    },
+    {
+      path: "/nav2",
+      element: <Nav2 />,
     },
     {
       path: "/admin-dashboard",
@@ -321,6 +326,16 @@ const Layout = () => {
         {
           path: '/adopt-a-pet',
           element: <AdoptAPet/>
+        }
+      ]
+    },
+    {
+      path: "/adoption-pdf",
+      element: <Layout />,
+      children: [
+        {
+          path: '/adoption-pdf',
+          element: <AdoptionPDF/>
         }
       ]
     },

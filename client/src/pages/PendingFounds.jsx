@@ -4,6 +4,9 @@ import  DataTable  from 'react-data-table-component'
 import { RiUserSearchLine } from 'react-icons/ri';
 import Sidebar from '../components/Sidebar';
 import { SidebarContext } from '../context/SbContext';
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from "../context/AuthContext"
+
 
 const PendingFounds = () => {
     const { open } = useContext(SidebarContext)
@@ -12,6 +15,16 @@ const PendingFounds = () => {
     const [ imgModal, setImgModal] = useState(false)
     const [selectedPhoto, setSelectedPhoto] = useState('');
 
+    const {user, loading, error, dispatch } = useContext(AuthContext)
+    useEffect(() => {
+      if(!user){
+        navigate('/admin-login')
+      }else if(user?.resp[0]?.role === 'user'){
+        navigate('/')
+     }
+    }, [user])
+    
+    const navigate = useNavigate()
 
     useEffect(() => {
       const getPending = async() => {
@@ -132,7 +145,7 @@ const PendingFounds = () => {
             </div>
         </div>  
         {imgModal &&   
-          <div>
+          <div className='z-50'>
             <img 
             className='w-96 h-96 top-48 left-[550px] absolute'
             src={`http://localhost:8000/uploads/${selectedPhoto}`} alt="Full Photo" />   
