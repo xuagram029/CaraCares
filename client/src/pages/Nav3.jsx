@@ -150,9 +150,9 @@ function Navbar() {
               
             {openSv && <div class={`hidden peer-hover:flex hover:flex
                 w-full md:w-[250px] md:absolute
-                flex-col bg-white drop-shadow-lg`}>
-                <Link  to="/donate" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Donate</Link>
-                <Link to="/humane-education" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Humane Education</Link>
+                flex-col bg-white drop-shadow-lg z-50`}>
+                <Link  to="/donate" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200 z-40" href="#"><img className="md:hidden" src={img5} alt="" />Donate</Link>
+                <Link to="/humane-education" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200 z-40" href="#"><img className="md:hidden" src={img5} alt="" />Humane Education</Link>
             </div>}
           </div>
         </div>
@@ -163,12 +163,12 @@ function Navbar() {
        
         {openAb && <div className="hidden peer-hover:flex hover:flex
          w-full md:w-[250px] md:absolute 
-         flex-col bg-white drop-shadow-lg  mr-2">
-            <Link to="/animal-welfare-laws" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300" href="#"><img className="md:hidden" src={img5} alt="" />Animal Welfare Laws</Link>
-            <Link to="/about" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300" href="#"><img className="md:hidden" src={img5} alt="" />About CARA</Link>
-            <Link to="/humane-education" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300" href="#"><img className="md:hidden" src={img5} alt="" />Humane Education</Link>
-            <Link  to="/laguna-pitbulls" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300" href="#"><img className="md:hidden" src={img5} alt="" />Laguna Pitbulls</Link>
-            <Link  to="/tnvr" className="flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" /> TNVR</Link>
+         flex-col bg-white drop-shadow-lg  mr-2 z-50">
+            <Link to="/animal-welfare-laws" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300 z-40" href="#"><img className="md:hidden" src={img5} alt="" />Animal Welfare Laws</Link>
+            <Link to="/about" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300 z-40" href="#"><img className="md:hidden" src={img5} alt="" />About CARA</Link>
+            <Link to="/humane-education" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300 z-40" href="#"><img className="md:hidden" src={img5} alt="" />Humane Education</Link>
+            <Link  to="/laguna-pitbulls" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300 z-40" href="#"><img className="md:hidden" src={img5} alt="" />Laguna Pitbulls</Link>
+            <Link  to="/tnvr" className="flex px-5 py-3 hover:bg-gray-200 z-50" href="#"><img className="md:hidden" src={img5} alt="" /> TNVR</Link>
         </div>}
     </div>
     {/* {user ? <div className="gap-2 md:hidden cursor-pointer px-[12px] py-2 ">
@@ -192,10 +192,10 @@ function Navbar() {
        
      <div className="hidden peer-hover:flex hover:flex
          w-full md:w-[250px] md:absolute 
-         flex-col bg-white drop-shadow-lg  mr-2 ">
+         flex-col bg-white drop-shadow-lg  mr-2 z-50">
           
-          <Link to="/about" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300" href="#"><img className="" src={settingicon} alt="" /><span className="ml-3 my-auto">Profile Setting</span></Link>
-            <Link to="/about" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300" href="#"><img className="" src={logouticon} alt="" /><span className="ml-3 my-auto">Logout</span></Link>
+          <Link to="/about" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300 z-40" href="#"><img className="" src={settingicon} alt="" /><span className="ml-3 my-auto">Profile Setting</span></Link>
+            <Link to="/about" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300 z-40" href="#"><img className="" src={logouticon} alt="" /><span className="ml-3 my-auto">Logout</span></Link>
         </div>
     </div>  : ""}   
       </ul>

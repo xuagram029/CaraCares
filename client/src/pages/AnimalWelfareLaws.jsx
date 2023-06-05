@@ -6,8 +6,8 @@ import React from "react";
 
 function AnimalWelfareLaws() {
   return (
-    <div className="bg-zinc-400 p-12">
-      <img
+    <div className="bg-zinc-400 p-12 ">
+      {/* <img
         src={Paw}
         alt=""
         className="w-56 absolute right-1 bottom-[60%] opacity-[0.08] hover:opacity-80 "
@@ -16,9 +16,9 @@ function AnimalWelfareLaws() {
         src={CD}
         alt=""
         className="w-56 absolute left-1 bottom-[60%] opacity-[0.08] hover:opacity-80"
-      />
+      /> */}
 
-      <div className="bg-primary m-6 p-6 pb-12 w-9/12 mx-auto rounded-xl relative">
+      <div className="bg-primary m-6 p-6 pb-12 w-9/12 mx-auto rounded-xl relative z-0">
         <h1 className="mx-20 mt-8 text-4xl font-bold">Animal Welfare Laws</h1>
         <p className="mx-20 mt-8 ">
           Read more about the laws that protect animals in the Philippines.
@@ -1081,7 +1081,7 @@ function AnimalWelfareLaws() {
         </p>
 
         <p className="mx-20">(Sgd.) OSCAR G. YABES</p>
-        <p className="mx-20">Secretary of the Senate</p>
+        <p className="mx-20 pb-6">Secretary of the Senate</p>
 
         <p className="mx-20">(Sgd.) ROBERTO P. NAZARENO</p>
         <p className="mx-20">Secretary General</p>
