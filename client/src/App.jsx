@@ -51,6 +51,9 @@ import Foundpetsmore from './pages/Foundpetsmore'
 import Foundreport from './pages/Foundreport'
 import PendingFounds from './pages/PendingFounds';
 import PendingLost from './pages/PendingLost';
+import AdoptionPdf from './pages/AdoptionPdf';
+import ShelterLogin from './pages/ShelterLogin';
+import ShelterSignup from './pages/AdminSignup';
 
 function App() {
 
@@ -182,6 +185,14 @@ const Layout = () => {
       path: "/user-login",
       element: <UserLogin />,
     },
+    {
+      path: "/shelter-login",
+      element: <ShelterLogin />,
+    },
+    {
+      path: "/shelter-signup",
+      element: <ShelterSignup />,
+    },
     // {
     //   path: '/admin-pet-boarding',
     //   element:<Layout />,
@@ -279,6 +290,16 @@ const Layout = () => {
         {
           path: '/admin-visitation-report/:id',
           element: <AdminVisitationReport />
+        }
+      ]
+    },
+    {
+      path: '/adoption-pdf',
+      element:<Layout />,
+      children: [
+        {
+          path: '/adoption-pdf',
+          element: <AdoptionPdf />
         }
       ]
     },

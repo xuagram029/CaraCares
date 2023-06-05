@@ -7,7 +7,6 @@ import useRedirectAdmin from "../custom hooks/useRedirectAdmin"
 const UserSignup = () => {
     const navigate = useNavigate()
     const { user } = useContext(AuthContext)
-    useRedirectAdmin(user)
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('')

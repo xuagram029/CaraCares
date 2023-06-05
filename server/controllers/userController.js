@@ -16,7 +16,15 @@ const handleNewUser = (req, res) => {
     const address = req.body.address
     const birthdate = req.body.birthdate
     const username = req.body.username
-    const password = bcrypt.hashSync(req.body.password, 10);
+    let password;
+    try {
+      password = bcrypt.hashSync(req.body.password, 10);
+    } catch (error) {
+      // Handle the error appropriately
+      console.error('Error hashing password:', error);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
+    
 
     if(!firstname || !lastname || !email || !address || !birthdate|| !username || !password){
         return res.status(400).json({ message: 'Please fillup the input fields' });
@@ -123,6 +131,6 @@ const login = (req, res) => {
     });
   
     res.send("Logged out successfully");
-  };
+};
 
 module.exports = { getUsers, handleNewUser, verifyUsers, getUser, updateUser, deleteUser, login, logout }

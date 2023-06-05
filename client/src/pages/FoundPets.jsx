@@ -68,7 +68,7 @@ function Foundpets(){
             <div className="bg-white rounded-lg shadow-lg">
               <img
                 className="w-full h-48 object-cover object-center rounded-t-lg"
-                src={lostpet2}
+                src={`http://localhost:8000/uploads/${pet.photo}`}
                 alt=""
               />
 
