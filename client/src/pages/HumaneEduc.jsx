@@ -1,6 +1,6 @@
 const HumaneEduc = () => {
     return (
-      <div className='bg-neutral-100 shadow-l m-10 p-5 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto'>
+      <div className='bg-neutral-100 shadow-l  p-5 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto'>
           <div className='m-auto p-10 max-w-5xl border-l-4 shadow-m bg-slate-100'>
               <p className='leading-8 indent-10 text-justify'>“To educate our people, and especially our children, to humane attitudes and actions toward living things is to preserve and strengthen our national heritage and the moral values we champion in the world”.</p>
               <br />
