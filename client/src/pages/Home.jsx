@@ -5,6 +5,7 @@ import HelpPage from './HelpPage'
 import Whyadopt from './whyadopt'
 import Bloghome3 from './bloghome3'
 import ActDate from './ActivitiesDate'
+import Footer from '../components/Footer'
 function Home() {
   return (
     <div className='home'>
@@ -13,6 +14,7 @@ function Home() {
         <HelpPage/>
         <Whyadopt/>
         <Bloghome3/>
+        <Footer/>
         {/* <ActDate/> */}
     </div>
   )

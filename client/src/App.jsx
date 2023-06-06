@@ -29,6 +29,7 @@ import Login2 from './pages/Login2';
 import Volunteer from './components/volunteer';
 import Whyadopt from './pages/whyadopt';
 import Profilesett from './pages/profilesett'
+import AdminBlogs from './pages/Adminblogs'
 function App() {
 
 const Layout = () => {
@@ -54,6 +55,10 @@ const ProfLayout = () => {
     {
       path: "/",
       element: <Home />,
+    },
+    {
+      path: "/adminblogs",
+      element: <AdminBlogs />,
     },
     {
       path:"/profilesett",

@@ -184,9 +184,9 @@ function Navbar() {
         </div>
     </div>  : ""}   
       </ul>
-          <div>
-            <button className="bg-rose-600 text-white w-[100px] border-2 border-rose-600 p-2 mr-3">Login</button>
-            <button className="bg-white text-rose-600 w-[100px] border-2 border-rose-600 p-2">Register</button>
+          <div className="flex">
+            <button className="bg-rose-600 rounded-full text-white w-[100px] border-2 border-rose-600 p-2 mr-3">Login</button>
+            <button className="bg-white rounded-full text-rose-600 w-[100px] border-2 border-rose-600 p-2">Register</button>
           </div>     
         
     </nav>

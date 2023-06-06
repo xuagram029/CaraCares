@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function Bloghome3(){
 return(
- <div className="bg-white mt-[120px] pb-[50px]  px-12 xl:px-[200px]  2xl:px-[300px]  ">
+ <div className="bg-white mt-[120px] pb-[50px]  px-12 xl:px-[200px] mb-16  2xl:px-[300px]  ">
       
     <div className=" flex justify-between text-right mt-2  ">
         <p className="text-md md:text-l lg:text-lg  font-bold" ><span className="text-rose-600">Blogs</span> for you</p>
@@ -41,11 +41,12 @@ return(
             <span className="flex items-center grow justify-center">Paws For A Moment:Art for a good cause</span>
             <button className="bg-white text-rose-600 border-2 w-1/5  h-1/3 border-rose-600 p-2 m-auto rounded-full">Read</button>
            </div>
+           <button className="sm:-bottom-[220px] md:left-[10px] sm:left-[230px] md:bottom-0 2xl:-bottom-[100px] 2xl:p-4  flex items-center mt-7 justify-center bg-rose-600 text-white w-[200px] border-2 border-rose-600 p-2 m-auto rounded-full">More Blogs</button>
         </div>
        
     </div>
           
-    <button className="absolute md:relative sm:-bottom-[220px] md:left-[10px] sm:left-[230px] md:bottom-0 2xl:-bottom-[100px] 2xl:p-4  flex items-center mt-7 justify-center bg-rose-600 text-white w-[200px] border-2 border-rose-600 p-2 m-auto rounded-full">More Blogs</button>
+    
 
 
 
