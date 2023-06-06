@@ -3,57 +3,62 @@ import { Link } from 'react-router-dom'
 
 const Contact = () => {
   return (
-    <div className='bg-slate-400 m-10 px-3 max-h-fit'>
-        <div className=''>
-            <p className='font-bold  text-center p-10 text-4xl sm:text-4xl md:text-5xl'>We would love to hear from you.</p>
-            <p className='font-bold text-center my-5 text-2xl sm:text-2xl md:text-3xl'>Drop us a line or send us an email.</p>
-            <div>
-                <p className='text-center max-w-[50%] m-auto'>We welcome correspondence from fellow animal lovers and animal welfare supporters. We value your comments and suggestions. We will endeavor to answer all your inquiries within 2-3 working days.</p>
-            </div>
+    <section class="bg-neutral-100 shadow-l ">
+    <div class="container px-6 py-12 mx-auto">
+        <div>
+            <p class="font-bold text-blue-500 ">Contact us</p>
 
-            <div className='flex flex-col items-center mt-7'>
-                <p className='text-center max-w-[50%] m-auto mt-4'>Got questions?</p>
-                <Link className='text-center max-w-[50%] m-auto '>Check out our FAQs first.</Link>
-            </div>
+            <h1 class="mt-2 text-2xl font-semibold text-rose-600 md:text-3xl">Get in touch</h1>
 
+            <p class="mt-3 text-rose-600 ">Our friendly team would love to hear from you.</p>
+        </div>
 
-            <div className='bg-slate-800 p-4 flex flex-col sm:flex-col md:flex-row lg:flex-row mt-10 md:space-x-5 justify-around align-baseline space-y-5'>
-                <div className=' bg-slate-200 mx-3 max-w-md p-2 justify-items-center sm:mx-auto md:mx-0'>
-                    <p className='font-bold text-2xl text-center my-5'>Please Contact the Appropriate Department</p>
-                    <ul className='text-center'>
-                        <li className='underline
-                        '>CARA Volunteer Registration – admin@caraphil.org</li>
-                        <li className='underline
-                        '>Interviews, Events / Media – events@caraphil.org</li>
-                        <li className='underline
-                        '>Donations – donate@caraphil.org</li>
-                        <li className='underline
-                        '>LPB Site Visits – volunteeratlpb@gmail.com</li>
-                        <li className='underline
-                        '>LPB Adoptions – adopt.a.lpb@gmail.com,</li>
-                    </ul>
+        <div class="grid grid-cols-1 gap-12 mt-10 lg:grid-cols-3">
+            <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-1">
+                <div>
+                    <span class="inline-block p-3 text-rose-600 rounded-full bg-blue-100/80 ">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+                    </span>
+
+                    <h2 class="mt-4 text-base font-bold text-rose-600">Email</h2>
+                    <p class="mt-2 text-sm text-rose-600 ">Our friendly team is here to help.</p>
+                    <p class="mt-2 text-sm text-blue-500 ">hello@merakiui.com</p>
                 </div>
 
                 <div>
-                    <div className=' bg-slate-200 mx-3 max-w-md p-2 sm:mx-auto md:mx-0'>
-                        <p className='font-bold text-2xl text-center my-5'>Adoptions</p>
-                        <p className='text-center'>Please note that we do not have a shelter, so we cannot take animals in. The animals we have up for adoption were all rescued by our members years ago.</p>
-                    </div>
+                    <span class="inline-block p-3 text-rose-600 rounded-full bg-blue-100/80 ">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                    </span>
+                    
+                    <h2 class="mt-4 text-base font-bold text-rose-600">Office</h2>
+                    <p class="mt-2 text-sm text-rose-600 ">Come say hello at our office HQ.</p>
+                    <p class="mt-2 text-sm text-blue-500 ">100 Smith Street Collingwood VIC 3066 AU</p>
                 </div>
-                
+
+                <div>
+                    <span class="inline-block p-3 text-rose-600 rounded-full bg-blue-100/80 ">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                        </svg>
+                    </span>
+                    
+                    <h2 class="mt-4 text-base font-bold text-rose-600">Phone</h2>
+                    <p class="mt-2 text-sm text-rose-600 ">Mon-Fri from 8am to 5pm.</p>
+                    <p class="mt-2 text-sm text-blue-500 ">+1 (555) 000-0000</p>
+                </div>
             </div>
 
-                <div className='p-5 bg-slate-300 text-center'>
-                    <p>For TNVR concerns, Pet Boarding/Grooming Reservation, Clinic Adoptions: Kindly send an email to <b>admin@caraphil.org</b> and <b>clinic@caraphil.org.</b></p>
-                </div>
-
-                <div className='p-10 bg-red-200'>
-                    <p className='font-semibold text-2xl text-center'>Where to Report Cruelty Cases</p>
-                    <p className='text-center'>There is an Animal Welfare Act of 1998 in the Philippines that protects animals from cruelty and abuse. If you witness any cases, immediately proceed to the nearest police precinct to report the incident and bring a policeman with you to the scene – they have to help you by law! Don’t forget to take photographic evidence.</p>
-                </div>
-            
+            <div class="overflow-hidden rounded-lg lg:col-span-2 h-96 lg:h-auto w-full">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.267292199526!2d121.04660127596235!3d14.58383927748506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c83915619f6f%3A0x4534c811fbda5c18!2sCARA%20Welfare%20Philippines!5e0!3m2!1sen!2sph!4v1686018020224!5m2!1sen!2sph" width="1000" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </div>
     </div>
+</section>
   )
 }
 

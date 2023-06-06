@@ -8,7 +8,9 @@ import { MdPets } from "react-icons/md";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { BiFileFind } from "react-icons/bi";
 import { BsPencilSquare } from "react-icons/bs";
+import { MdOutlinePostAdd } from "react-icons/md";
 import { BiUserCircle } from "react-icons/bi";
+import { BiHomeHeart } from "react-icons/bi";
 
 import { AiOutlineSetting } from "react-icons/ai";
 
@@ -24,8 +26,10 @@ const Sidebar = () => {
     const [openLf, setOpenLf] = useState(false)
     const [openPe, setOpenPe] = useState(false)
     const { user, dispatch } = useContext(AuthContext);
+    const role = user?.resp[0].role
     const firstname = user?.resp && user.resp[0]?.firstname;
     const lastname = user?.resp && user.resp[0]?.lastname;
+    const name = user?.resp && user.resp[0]?.name;
     const navigate = useNavigate()
 
     const handleLogout = async (e) => {
@@ -51,34 +55,56 @@ const Sidebar = () => {
             <div className={`pt-2 flex items-center z-10 ${!open ? "border-none" : "border-b border-[#060047]"}`}>
             <BiUserCircle
                     className={`text-2xl cursor-pointer min-w-fit`} />
-                    <h1 className={`origin-left ml-5 text-xs cursor-pointer ${!open ? "scale-0 duration-300" : "duration-500"}`}>{`${firstname} ${lastname}`}</h1>
+                    {role === 'admin' ? 
+                      <h1 className={`origin-left ml-5 text-xs cursor-pointer ${!open ? "scale-0 duration-300" : "duration-500"}`}>{`${firstname} ${lastname}`}</h1>:
+                      <h1 className={`origin-left ml-5 text-xs cursor-pointer ${!open ? "scale-0 duration-300" : "duration-500"}`}>{`${name}`}</h1>
+                    }
             </div>
 
-            <Link to='/admin-dashboard'>
+            {
+                role === 'admin' &&
+                <Link to='/admin-dashboard'>
                 <div className={`pt-10 flex items-center ${!open ? "border-none" : "border-b border-[#060047]"}`}>
                     <RxDashboard
                         className={`text-lg cursor-pointer min-w-fit`} />
                         <h1 className={`origin-left ml-5 text-xs cursor-pointer ${!open ? "scale-0 duration-300" : "duration-500"}`}>Dashboard</h1>
                 </div>
             </Link>
+            }
 
-            <Link to='/admin-pet-boarding'>
+
+            {
+                role === 'admin' &&
+                <Link to='/admin-pet-boarding'>
                 <div className={`pt-6 flex items-center ${!open ? "border-none" : "border-b border-[#060047]"}`}>
                         <HiOutlineUsers
                             className={`text-lg cursor-pointer min-w-fit`} />
                         <h1 className={`origin-left ml-5 text-xs cursor-pointer ${!open ? "scale-0 duration-300" : "duration-500"}`}>Users</h1>
                 </div>
             </Link>
+            }
 
-            <Link to='/available-pets'>
+            {
+                role === 'admin' && 
+                <Link to='/available-pets'>
                 <div className={`pt-6 flex items-center ${!open ? "border-none" : "border-b border-[#060047]"}`}>
                         <MdPets
                             className={`text-lg cursor-pointer min-w-fit`} />
                         <h1 className={`origin-left ml-5 text-xs cursor-pointer ${!open ? "scale-0 duration-300" : "duration-500"}`}>Pets for adoption</h1>
                 </div>
+                </Link>
+            }
+
+
+            <Link to='/registered-shelter'>
+                <div className={`pt-6 flex items-center ${!open ? "border-none" : "border-b border-[#060047]"}`}>
+                        <BiHomeHeart
+                            className={`text-lg cursor-pointer min-w-fit`} />
+                        <h1 className={`origin-left ml-5 text-xs cursor-pointer ${!open ? "scale-0 duration-300" : "duration-500"}`}>Shelter Dashboard</h1>
+                </div>
             </Link>
 
-            <div className='pt-6 flex flex-col items-center'>
+            {/* <div className='pt-6 flex flex-col items-center'>
                 <div className={`flex self-start border-b border-[#060047] w-full ${!open ? "border-none" : "border-b border-[#060047]"}`}>
                     <MdPets
                         className={`text-lg cursor-pointer min-w-fit`}/>
@@ -90,7 +116,7 @@ const Sidebar = () => {
                     <div className='text-xs border-b border-[#060047] cursor-pointer'>Adoption</div>
                     <div className='text-xs mt-2  border-b border-[#060047] cursor-pointer'>Foster</div>
                 </div> }
-            </div>
+            </div> */}
 
             <div className='pt-6 flex flex-col items-center'>
                 <div className={`flex self-start border-b border-[#060047] w-full ${!open ? "border-none" : "border-b border-[#060047]"}`}>
@@ -122,13 +148,33 @@ const Sidebar = () => {
                     <div className='text-xs mt-2  border-b border-[#060047] cursor-pointer'><Link to='/accepted-founds'>Found Reports</Link></div>
                 </div> }
             </div>
-            <Link to='/admin-profile'>
+            <Link to='/admin-blogs'>
+                <div className={`pt-6 flex items-center ${!open ? "border-none" : "border-b border-[#060047]"}`}>
+                    <MdOutlinePostAdd
+                        className={`text-lg cursor-pointer min-w-fit`}/>
+                        <h1 className={`origin-left ml-5 text-xs cursor-pointer ${!open ? "scale-0 duration-300" : "duration-500"}`}>Blogs</h1>
+                </div>
+            </Link>
+            {
+                role === 'admin' &&
+                <Link to='/admin-profile'>
                 <div className={`pt-6 flex items-center ${!open ? "border-none" : "border-b border-[#060047]"}`}>
                     <AiOutlineSetting
                         className={`text-lg cursor-pointer min-w-fit`}/>
                         <h1 className={`origin-left ml-5 text-xs cursor-pointer ${!open ? "scale-0 duration-300" : "duration-500"}`}>Settings</h1>
                 </div>
             </Link>
+            }
+            {
+                role === 'shelter' &&
+                <Link to='/shelter-profile'>
+                <div className={`pt-6 flex items-center ${!open ? "border-none" : "border-b border-[#060047]"}`}>
+                    <AiOutlineSetting
+                        className={`text-lg cursor-pointer min-w-fit`}/>
+                        <h1 className={`origin-left ml-5 text-xs cursor-pointer ${!open ? "scale-0 duration-300" : "duration-500"}`}>Shelter Profile</h1>
+                </div>
+            </Link>
+            }
         </div>
             <div className='flex items-center mt-3'>
                 <BiLogOut

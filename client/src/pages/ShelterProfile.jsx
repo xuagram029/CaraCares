@@ -5,39 +5,38 @@ import axios from '../api/axios'
 import { SidebarContext } from '../context/SbContext'
 import { useNavigate } from 'react-router'
 
-const UserProfile = () => {
-    const navigate = useNavigate()
+const ShelterProfile = () => {
     const { user } = useContext(AuthContext)
-    useEffect(() => {
-      if(!user){
-          navigate("/user-login")
-      }
-    }, [user, navigate])
-
-
     const { open } = useContext(SidebarContext)
     const [email, setEmail] = useState('')
-    const [firstname, setFirstname] = useState('')
-    const [lastname, setLastname] = useState('')
+    const [name, setName] = useState('')
     const [address, setAddress] = useState('')
-    const [birthdate, setBirthdate] = useState('')
-
+    const [number, setNumber] = useState('')
+    const navigate = useNavigate()
     const userId = user?.resp[0]?.id
+
+    useEffect(() => {
+        if(!user){
+          navigate('/admin-login')
+        }else if(user?.resp[0]?.role === 'user'){
+          navigate('/')
+       }
+      }, [user])
+      
+
     useEffect(() => {
         const getInfo = async () => {
-            const res = await axios.get(`http://localhost:8000/user/${userId}`)
-            console.log(res.data)
+            const res = await axios.get(`http://localhost:8000/shelter/${userId}`)
             setEmail(res.data[0].email)
-            setFirstname(res.data[0].firstname)
-            setLastname(res.data[0].lastname)
+            setName(res.data[0].name)
             setAddress(res.data[0].address)
-            setBirthdate(res.data[0].birthdate)
+            setNumber(res.data[0].number)
         }
         getInfo()
     }, [user])
 
     const handleSubmit = (id) => {
-        axios.put(`http://localhost:8000/user/${id}`, {firstname, lastname, email, address, birthdate})
+        axios.put(`http://localhost:8000/shelter/${id}`, {name, email, address, number})
         .then(res => {
             window.location.reload()
             console.log(res)
@@ -47,35 +46,22 @@ const UserProfile = () => {
 
   return (
     <div className='flex relative w-full'>
-        <div className={`bg-white rounded-lg shadow-lg border border-black p-10 h-[500px] mt-10 mx-auto ${open ? "w-[75%] duration-500" : "w-[90%] duration-500"}`}>
+        <Sidebar />
+        <div className={`bg-white rounded-lg shadow-lg border border-black p-10 h-[500px] mt-10 mx-10 ${open ? "w-[75%] duration-500" : "w-[90%] duration-500"}`}>
             <h2 className="text-xl font-bold mb-4">Update Information</h2>
             <div className="grid grid-cols-2 gap-4">
             <div className="mb-4">
                 <label className="block font-bold mb-2" htmlFor="firstname">
-                First Name:
+                Shelter Name:
                 </label>
                 <input
                 className="w-full border border-gray-400 p-2 rounded"
                 type="text"
-                value={firstname}
+                value={name}
                 onChange={(e) => {
-                    setFirstname(e.target.value);
+                    setName(e.target.value);
                 }}
-                id="firstname"
-                />
-            </div>
-            <div className="mb-4">
-                <label className="block font-bold mb-2" htmlFor="lastname">
-                Last Name:
-                </label>
-                <input
-                className="w-full border border-gray-400 p-2 rounded"
-                type="text"
-                value={lastname}
-                onChange={(e) => {
-                    setLastname(e.target.value);
-                }}
-                id="lastname"
+                id="name"
                 />
             </div>
             <div className="mb-4">
@@ -108,16 +94,16 @@ const UserProfile = () => {
             </div>
             <div className="mb-4">
                 <label className="block font-bold mb-2" htmlFor="birthdate">
-                Birthday:
+                Shelter Number:
                 </label>
                 <input
                 className="w-full border border-gray-400 p-2 rounded"
-                type="date"
-                value={birthdate}
+                type="number"
+                value={number}
                 onChange={(e) => {
-                    setBirthdate(e.target.value);
+                    setNumber(e.target.value);
                 }}
-                id="birthdate"
+                id="number"
                 />
             </div>
             <div className="mb-4">
@@ -138,4 +124,5 @@ const UserProfile = () => {
   )
 }
 
-export default UserProfile
+export default ShelterProfile
+

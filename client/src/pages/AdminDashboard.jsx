@@ -16,11 +16,18 @@ const AdminDashboard = () => {
     const { user } = useContext(AuthContext);
     const [name, setName] = useState(user?.resp[0]?.firstname)
     const [total, setTotal] = useState(0)
+    // if(user?.resp[0]?.role === 'shelter'){
+    //   console.log('i am shelter');
+    // }
+    console.log(user?.resp[0]?.role);
+
 
     useEffect(() => {
       if(!user){
           navigate("/admin-login")
-      }else if(user?.resp[0]?.role !== 'admin'){
+      }else if(user?.resp[0]?.role === 'shelter' || user?.resp[0]?.role === 'admin'){
+        navigate('/admin-dashboard')
+      }else if(user?.resp[0]?.role === 'user'){
         navigate('/')
       }
     }, [user, navigate])

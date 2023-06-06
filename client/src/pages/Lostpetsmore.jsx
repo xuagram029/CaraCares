@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import lostpet1 from "../assets/ui/CARA_PICTURES/lost1.png";
 import ReportPets from "../pages/Reportpets";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import moment from "moment";
+import {AuthContext} from '../context/AuthContext'
 
 function Lostpetsmore() {
+  const { user } = useContext(AuthContext)
+  const role = user?.resp[0]?.role
   const [modal, setModal] = useState(false);
 
   const [data, setData] = useState([]);
@@ -117,9 +120,12 @@ function Lostpetsmore() {
               </div>
 
               <div className="">
-              <button onClick={toggleModal} className="btn-modal mt-0 mb-6 bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg shadow-gray-400 shadow-lg tracking-[3px]">
-                Edit
-              </button>
+                {
+                  role === 'admin' &&
+                  <button onClick={toggleModal} className="btn-modal mt-0 mb-6 bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg shadow-gray-400 shadow-lg tracking-[3px]">
+                  Edit
+                </button>
+                }
                 <div className="flex text-sm lg:text-md 2xl:mb-6 xl:mb-2 lg:mb-10 md:mb-10 mb-10 space-x-6">
                 <div className="w-1/2 leading-4 md:leading-[50px] text-sm xl:text-xl md:font-bold">
                   <p>Pet Name: </p>

@@ -19,7 +19,7 @@ const {user, loading, error, dispatch } = useContext(AuthContext)
 const navigate = useNavigate()
 useEffect(() => {
   if (user) {
-    navigate('/');
+    navigate('/admin-dashboard');
   }
 }, [user, navigate]);
 
@@ -35,7 +35,7 @@ const handleClick = async (e) => {
     try {
         const res = await axios.post("http://localhost:8000/shelter/login", credentials)
         dispatch({type: "LOGIN_SUCCESS", payload: res.data})
-        navigate('/')
+        navigate('/admin-dashboard')
     } catch (err) {
         dispatch({type: "LOGIN_FAILURE", payload: err.response.data})
     }

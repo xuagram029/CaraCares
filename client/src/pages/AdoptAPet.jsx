@@ -13,14 +13,7 @@ const AdoptAPet = () => {
                 <Link to="/pets-for-adoption"><button className='border rounded-l border-black p-2'>View our gallery of Pets for Adoption</button></Link>
                 <Link to="/adoption-pdf"><button className='border rounded-l border-black p-2'>Fill up our Pet Adoption Form</button></Link>
                 </div>
-                    <ul className='m-auto'>
-                        <Link className='list-disc underline block text-center mb-1'>Why Adopt a Pet Instead of Buying?</Link>
-                        <Link className='list-disc underline block text-center mb-1'>5 Reasons to Adopt a Pet Rather Than Buy</Link>
-                        <Link className='list-disc underline block text-center mb-1'>5 Things to Consider Before Adopting a Pet</Link>
-                        <Link className='list-disc underline block text-center mb-1'>Health Benefits of Having Pets</Link>
-                        <Link className='list-disc underline block text-center mb-1'>Why You Should Totally Adopt a Cat</Link>
-                        <Link className='list-disc underline block text-center mb-1'>5 Reasons for Adopting an Older Cat</Link>
-                    </ul>
+
             </div>
         </section>
 

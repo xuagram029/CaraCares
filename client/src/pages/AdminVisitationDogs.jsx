@@ -51,9 +51,9 @@ const handleOptionChange = async (e) => {
           <img src={`http://localhost:8000/uploads/${pet.photo}`} alt="Dogs" className='h-72 mx-auto' />
             <div className=''>
               <h1 className='font-bold text-center p-4 text-xl'>{pet.name}</h1>
-              <p className='font-semibold pb-2'>Breed: {pet.breed}</p>
+              <p className='font-semibold pb-2'>From: {pet.sheltername}</p>
               <p className='font-semibold pb-2'>Gender: {pet.gender}</p>
-              <p className='font-semibold pb-2'>Color: {pet.color}</p>
+              <p className='font-semibold pb-2'>Adoptor: {pet.adoptor}</p>
             </div>
           <div className="flex justify-center">
             <Link to ={`/admin-visitation-report/${pet.id}`}>

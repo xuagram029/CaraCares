@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const  { getShelter, login, logout, regShelter, updateShelter, getAllShelter} = require('../controllers/shelterController')
+const  { getShelter, login, logout, regShelter, updateShelter, getAllShelter, deleteShelter} = require('../controllers/shelterController')
 // const { verifyToken, verifyUser, verifyAdmin } = require('../middleware/verifyToken')
 
 router.route('/')
@@ -16,5 +16,6 @@ router.route('/logout')
 router.route('/:id')
     .get(getShelter)
     .put(updateShelter)
+    .delete(deleteShelter)
 
 module.exports = router

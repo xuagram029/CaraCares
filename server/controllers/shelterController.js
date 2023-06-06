@@ -29,7 +29,7 @@ const getAllShelter = (req, res) => {
 };
 
 const regShelter = (req, res) => {
-  const { name, email, address, username, pass } = req.body;
+  const { name, email, address, username, pass, number } = req.body;
 
   bcrypt.hash(pass, saltRounds, (err, hash) => {
     if (err) {
@@ -48,8 +48,8 @@ const regShelter = (req, res) => {
       }
 
       db.query(
-        "INSERT INTO shelter(`name`, `email`, `address`, `username`, `pass`) VALUES(?, ?, ?, ?, ?)",
-        [name, email, address, username, hash],
+        "INSERT INTO shelter(`name`, `email`, `address`, `username`, `pass`, `number`) VALUES(?, ?, ?, ?, ?, ?)",
+        [name, email, address, username, hash, number],
         (err, resp) => {
           if (err) {
             console.error('Error registering shelter:', err);
@@ -73,6 +73,17 @@ const updateShelter = (req, res) => {
         return res.status(401).json({ error: 'Unauthorized' });
       }
       return res.json({ message: "Updated successfully" });
+    });
+};
+const deleteShelter = (req, res) => {
+  const id = req.params.id;
+  db.query("DELETE FROM shelter WHERE id = ?", [id],
+    (err, result) => {
+      if (err) {
+        console.error('Error updating shelter:', err);
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+      return res.json({ message: "Deleted successfully" });
     });
 };
 
@@ -125,40 +136,12 @@ const logout = (req, res) => {
   res.send("Logged out successfully");
 };
 
-// const getAdoptionRequests = (req, res) => {
-//   const query = 'SELECT * FROM adoption';
-//   db.query(query, (error, results) => {
-//     if (error) {
-//       console.error('Error retrieving adoption requests:', error);
-//       res.status(500).json({ error: 'Failed to retrieve adoption requests.' });
-//     } else {
-//       res.status(200).json(results);
-//     }
-//   });
-// };
-
-// const handleAdoptionRequest = (req, res) => {
-//   const requestId = req.params.id;
-//   const { action } = req.body;
-
-//   const query = 'UPDATE adoption SET status = ? WHERE id = ?';
-//   db.query(query, [action, requestId], (error, results) => {
-//     if (error) {
-//       console.error('Error processing adoption request:', error);
-//       res.status(500).json({ error: 'Failed to process adoption request.' });
-//     } else if (results.affectedRows === 0) {
-//       res.status(404).json({ error: 'Request not found.' });
-//     } else {
-//       res.status(200).json({ message: 'Request processed successfully.' });
-//     }
-//   });
-// };
-
 module.exports = {
   getShelter,
   regShelter,
   updateShelter,
   getAllShelter,
+  deleteShelter,
   login,
   logout
 };

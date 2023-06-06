@@ -7,6 +7,7 @@ import { IoMdAddCircle } from 'react-icons/io';
 import moment from 'moment';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
+import Sidebar from '../components/Sidebar';
 // import useRedirectAdmin from '../custom hooks/useRedirectAdmin';
 
 const AdminVisitationReport = () => {
@@ -139,7 +140,10 @@ const AdminVisitationReport = () => {
   // const petId = pet && pet.length > 0 && pet[0].id
   // console.log(pet)
   return (
-    <div className='m-10 p-5 h-max sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto'>
+    <div className='flex'>
+
+    <Sidebar/>
+    <div className='flex flex-col w-full h-screen p-6'>
 
       <div className="space-x-6 font-bold font-pop text-base cursor-pointer flex justify-between items-center">
         <div className=''>
@@ -166,6 +170,7 @@ const AdminVisitationReport = () => {
               <p className='font-semibold pb-2 text-left'>Gender: {p.gender}</p>
               <p className='font-semibold pb-2 text-left'>Color: {p.color}</p>
               <p className='font-semibold pb-2 text-left'>Adoptor: {p.adoptor}</p>
+              <p className='font-semibold pb-2 text-left'>From: {p.sheltername}</p>
           </div>
         </div>
         ))
@@ -296,6 +301,7 @@ const AdminVisitationReport = () => {
           </div>
         </div>
       </div>
+</div>
 </div>
   )
 }

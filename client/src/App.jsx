@@ -58,6 +58,11 @@ import SignupShelter from './pages/SignupShelter';
 import ShelterLogin from './pages/ShelterLogin';
 import AcceptedLost from './pages/AcceptedLost';
 import AcceptedFound from './pages/AcceptedFound';
+import ShetlerList from './pages/ShetlerList';
+import BlogAllpost from './pages/BlogsAllpost';
+import BlogSeemore from './pages/BlogSeemore';
+import Adminblogs from './pages/Adminblogs';
+import ShelterProfile from './pages/ShelterProfile';
 
 function App() {
 
@@ -113,6 +118,14 @@ const Layout = () => {
       element: <ShelterLogin/>,
     },
     {
+      path: "/shelter-profile",
+      element: <ShelterProfile/>,
+    },
+    {
+      path: "/registered-shelter",
+      element: <ShetlerList/>,
+    },
+    {
       path: "/user-profile",
       element: <Layout />,
       children: [
@@ -145,6 +158,10 @@ const Layout = () => {
     {
       path: '/admin-panel-encode',
       element: <AdminPanelEncode />
+    },
+    {
+      path: '/admin-blogs',
+      element: <Adminblogs />
     },
     {
       path: '/pending-founds',
@@ -230,6 +247,30 @@ const Layout = () => {
       ]
     },
     {
+      path: '/blogs',
+      element:<Layout />,
+      children: [
+        {
+          path: '/blogs',
+          element: <BlogAllpost />
+        }
+      ]
+    },
+    {
+      path: '/blog-seemore',
+      element:<Layout />,
+      children: [
+        {
+          path: '/blog-seemore/:id',
+          element: <BlogSeemore />
+        }
+      ]
+    },
+    {
+      path: "/admin-visitation-report/:id",
+      element: <AdminVisitationReport />,
+    },
+    {
       path: '/lostpets',
       element:<Layout />,
       children: [
@@ -309,16 +350,7 @@ const Layout = () => {
         }
       ]
     },
-    {
-      path: '/admin-visitation-report/:id',
-      element:<Layout />,
-      children: [
-        {
-          path: '/admin-visitation-report/:id',
-          element: <AdminVisitationReport />
-        }
-      ]
-    },
+
     // {
     //   path: '/admin-panel-encode',
     //   element:<Layout />,

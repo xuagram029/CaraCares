@@ -12,11 +12,12 @@ const SignupShelter = () => {
     const [address, setAddress] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [number, setNumber] = useState('')
     const [err, setErr] = useState(null)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:8000/shelter ', {name, email, address, username, pass: password})
+        axios.post('http://localhost:8000/shelter ', {name, email, address, username, pass: password, number})
         .then(res => {
             console.log(res.data.message)
             navigate('/shelter-login')
@@ -95,6 +96,24 @@ const SignupShelter = () => {
                             className="block w-full px-4 py-2 mt-2  bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                     </div>
+
+                    
+                    <div className="mb-4">
+                        <label
+                            htmlFor="email"
+                            className="block text-sm font-semibold text-gray-800"
+                        >
+                            Shelter Number
+                        </label>
+                        <input
+                            onChange={(e) => {setNumber(e.target.value)}}
+                            name="email"
+                            type="email"
+                            className="block w-full px-4 py-2 mt-2  bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                        />
+                    </div>
+
+
                     <div className="mb-4">
                         <label
                             htmlFor="address"
