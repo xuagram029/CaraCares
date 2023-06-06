@@ -13,7 +13,7 @@ const Donate = () => {
             <p>CARA appreciates all your help!</p>
         </div>
         <div className='flex flex-col sm:flex-col sm:justify-center sm:items-center md:flex-row xl:flex-row bg-neutral-100 p-10 gap-6 items-center'>
-            <div className='bg-neutral-100 sm:w-[350px] md:w-1/2 text-md font-bold bg-rose-600 text-white p-8 rounded-full'>
+            <div className='bg-neutral-100 sm:w-[350px] md:w-1/2 text-md font-bold  text-rose-600 shadow-m p-8 rounded-full'>
                 <p className='leading-8'>Thank you for your on-going support and donations big and small that help the animals we help, big and small.  Every donation is important and appreciated by the staff and supporters, but most of all it makes a massive difference to the animals we rescue!</p>
             </div>
             <div className='bg-neutral-100'>
@@ -23,17 +23,17 @@ const Donate = () => {
 
         <p className='font-semibold text-center sm:text-lg pt-5'>Please choose from any of the following Donation Channels:</p>
         <div className=' flex bg-neutral-100 px-48 my-5 mx-24 justify-between flex-col sm:flex-col lg:flex-row'>
-            <div className='flex flex-col justify-center items-center shadow-m p-5 rounded-[12px] bg-rose-600'>
+            <div className='flex flex-col justify-center items-center shadow-m p-5 rounded-[12px] '>
                 <Link to='https://www.paypal.com/paypalme/carawelfareph/' target='_blank'><img src={paypal} alt="" className='max-w-[200px] max-h-[300px] mt-10 inline-block mb-5'/></Link>
-                <Link to='https://www.paypal.com/paypalme/carawelfareph/'><p className='text-md font-bold text-white'>paypal.com/paypalme/carawelfareph</p></Link>
+                <Link to='https://www.paypal.com/paypalme/carawelfareph/'><p className='text-md font-bold text-rose-600'>paypal.com/paypalme/carawelfareph</p></Link>
             </div>
-            <div className='flex flex-col justify-center items-center shadow-m p-5 rounded-[12px] bg-rose-600'>
+            <div className='flex flex-col justify-center items-center shadow-m p-5 rounded-[12px] '>
                 <Link to='https://www.simplygiving.com/nonprofit/CARA' target='_blank'><img src={simplygiving} alt="" className='max-w-[200px] max-h-[300px] mt-10 inline-block mb-5'/></Link>
-                <Link to='https://www.simplygiving.com/nonprofit/CARA'><p className='text-md font-bold text-white'>simplygiving.com/nonprofit/CARA</p></Link>
+                <Link to='https://www.simplygiving.com/nonprofit/CARA'><p className='text-md font-bold text-rose-600'>simplygiving.com/nonprofit/CARA</p></Link>
             </div>
-            <div className='flex flex-col justify-center items-center shadow-m p-5 rounded-[12px] bg-rose-600'>
+            <div className='flex flex-col justify-center items-center shadow-m p-5 rounded-[12px] '>
                 <img src={gcash} alt="" className='max-w-[200px] max-h-[300px] mt-10 inline-block mb-5'/>
-                <p className='text-md font-bold text-white'>Send to 09274251052 Nancy C</p>
+                <p className='text-md font-bold text-rose-600'>Send to 09274251052 Nancy C</p>
             </div>
         </div>
 

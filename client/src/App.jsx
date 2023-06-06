@@ -30,6 +30,7 @@ import Volunteer from './components/volunteer';
 import Whyadopt from './pages/whyadopt';
 import Profilesett from './pages/profilesett'
 import AdminBlogs from './pages/Adminblogs'
+import Contacts from './pages/Contact'
 function App() {
 
 const Layout = () => {
@@ -59,6 +60,16 @@ const ProfLayout = () => {
     {
       path: "/adminblogs",
       element: <AdminBlogs />,
+    },
+    {
+      path: '/contacts',
+      element:<Layout />,
+      children: [
+        {
+          path: '/contacts',
+          element: <Contacts />
+        }
+      ]
     },
     {
       path:"/profilesett",

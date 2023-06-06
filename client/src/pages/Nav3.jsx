@@ -122,7 +122,7 @@ function Navbar() {
             {openCnct && <div className={`hidden peer-hover:flex hover:flex
                 w-full md:w-[250px] md:absolute
                 flex-col bg-white drop-shadow-lg`}>
-                <Link  to="/donate" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Contact us</Link>
+                <Link  to="/contacts" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Contact us</Link>
                 <Link to="/humane-education" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Join Our Team</Link>
                 <Link  to="/donate" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Report Found Pets</Link>
                 <Link to="/humane-education" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Report Lost Pets</Link>
