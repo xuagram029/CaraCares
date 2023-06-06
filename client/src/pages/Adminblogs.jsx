@@ -21,7 +21,7 @@ function Adminblogs(){
           <input className="mt-5" type="file" />
           <br />
           <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-rose-600 rounded-lg">
-              Add product
+              Add Blog
           </button>
       </form>
   </div>
