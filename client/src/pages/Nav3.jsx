@@ -16,6 +16,8 @@ function Navbar() {
 
   const [openSv, setOpenSv] = useState(false)
   const [openAb, setOpenAb] = useState(false)
+  const [openPt, setOpenPt] = useState(false)
+  const [openCnct, setOpenCnct] = useState(false)
   const [openAccount, setOpenAccount] = useState(false)
   // flag if true or false
   const [menuOpen, setMenuOpen] = useState(false);
@@ -58,6 +60,8 @@ function Navbar() {
     setAcc(!openAcc);
   };
 
+  
+
   // console.log(user.resp[0].username)
   return (
     <div>
@@ -93,66 +97,48 @@ function Navbar() {
           </li>
         </div>
 
-        <div className="md:mx-4 mx-0 border-1 border-solid border-neutral-200  md:my-4 my-0  duration-500  font-bold  p-3 uppercase  text-black  ">
-          <li className="">
-            <Link onClick={handleClickPet}>Pets</Link>
-            {openPet && (
-              <div className="z-5 dropdown-content h-40 w-40 border border-white bg-white text-black flex flex-col absolute right-32 top-20 items-center">
-                <Link
-                  to="/adopt-a-pet"
-                  className="dropdown-item border border-neutral-300 p-3 w-40 text-center  "
-                >
-                  Adopt a Pet
-                </Link>
-                <Link
-                  to="/sponsor-a-pet"
-                  className="dropdown-item border border-neutral-300 p-3 w-40 text-center  "
-                >
-                  Sponsor a Pet
-                </Link>
-                <Link
-                  to="/foster-a-pet"
-                  className="dropdown-item border border-neutral-300 p-3 w-40 text-center  "
-                >
-                  Foster a Pet
-                </Link>
-              </div>
-            )}
-          </li>
+        <div className="flex flex-col">
+          <div className="">
+            <button class="peer md:py-10 w-full   p-3 uppercase text-black  items-center flex gap-1 font-bold text-left" onClick={() => setOpenPt(!openPt)}>Pets <img className="" src={img6} alt="" /></button>
+              
+            {openPt && <div className={`hidden peer-hover:flex hover:flex
+                w-full md:w-[250px] md:absolute
+                flex-col bg-white drop-shadow-lg`}>
+                <Link  to="/donate" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Adopt a Pet</Link>
+                <Link to="/humane-education" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Foster a Pet</Link>
+                <Link  to="/donate" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Sponsor a Pet</Link>
+                <Link to="/humane-education" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Pets for Adoption</Link>
+                <Link  to="/donate" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Found Pet</Link>
+                <Link to="/humane-education" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Lost Pet</Link>
+                
+            </div>}
+          </div>
         </div>
 
-        <div className="md:mx-4 mx-0 sm:border-2 md:border-none border-solid border-neutral-200   md:my-4 my-0   duration-500  font-bold    p-3 uppercase  text-black  ">
-          <li className="">
-            <Link className="  uppercase " onClick={handleClickContact}>
-            Contact
-            </Link>
-            {openContact && (
-              <div className="z-5 dropdown-content h-40 w-40 border border-white bg-white text-black flex flex-col absolute lg:top-20 lg:right-0 items-center">
-                <Link
-                  to="/contact-us"
-                  className="dropdown-item border border-neutral-300 p-3 w-40 text-center  "
-                >
-                  Contact Us
-                </Link>
-                <Link
-                  to="/join-team"
-                  className="dropdown-item border border-neutral-300 p-3 w-40 text-center  "
-                >
-                  Join Our Team
-                </Link>
-              </div>
-            )}
-          </li>
+        <div className="flex flex-col">
+          <div className="">
+            <button class="peer md:py-10 w-full   p-3 uppercase text-black  items-center flex gap-1 font-bold text-left" onClick={() => setOpenCnct(!openCnct)}>Contact <img className="" src={img6} alt="" /></button>
+              
+            {openCnct && <div className={`hidden peer-hover:flex hover:flex
+                w-full md:w-[250px] md:absolute
+                flex-col bg-white drop-shadow-lg`}>
+                <Link  to="/donate" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Contact us</Link>
+                <Link to="/humane-education" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Join Our Team</Link>
+                <Link  to="/donate" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Report Found Pets</Link>
+                <Link to="/humane-education" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Report Lost Pets</Link>
+            </div>}
+          </div>
         </div>
+
         <div className="flex flex-col">
           <div className="">
             <button class="peer md:py-10 w-full   p-3 uppercase text-black  items-center flex gap-1 font-bold text-left" onClick={() => setOpenSv(!openSv)}>Services <img className="" src={img6} alt="" /></button>
               
-            {openSv && <div class={`hidden peer-hover:flex hover:flex
+            {openSv && <div className={`hidden peer-hover:flex hover:flex
                 w-full md:w-[250px] md:absolute
                 flex-col bg-white drop-shadow-lg`}>
                 <Link  to="/donate" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Donate</Link>
-                <Link to="/humane-education" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Humane Education</Link>
+                <Link to="/humane-education" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200" href="#"><img className="md:hidden" src={img5} alt="" />Blogs</Link>
             </div>}
           </div>
         </div>
@@ -193,7 +179,7 @@ function Navbar() {
          w-full md:w-[250px] md:absolute 
          flex-col bg-white drop-shadow-lg  mr-2 ">
           
-          <Link to="/about" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300" href="#"><img className="" src={settingicon} alt="" /><span className="ml-3 my-auto">Profile Setting</span></Link>
+          <Link to="/profilesett" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300" href="#"><img className="" src={settingicon} alt="" /><span className="ml-3 my-auto">Profile Setting</span></Link>
             <Link to="/about" className="flex px-5 py-3 hover:bg-gray-200 border border-neutral-300" href="#"><img className="" src={logouticon} alt="" /><span className="ml-3 my-auto">Logout</span></Link>
         </div>
     </div>  : ""}   

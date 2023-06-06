@@ -28,10 +28,19 @@ import Modal from './pages/Modal';
 import Login2 from './pages/Login2';
 import Volunteer from './components/volunteer';
 import Whyadopt from './pages/whyadopt';
-
+import Profilesett from './pages/profilesett'
 function App() {
 
 const Layout = () => {
+  return(
+    <>
+      <Nav3 />
+      <Outlet />
+      <Footer />
+    </>
+  )
+}
+const ProfLayout = () => {
   return(
     <>
       <Nav3 />
@@ -45,6 +54,16 @@ const Layout = () => {
     {
       path: "/",
       element: <Home />,
+    },
+    {
+      path:"/profilesett",
+    element:<Layout />,
+      children: [
+        {
+          path: '/profilesett',
+          element: <Profilesett />
+        }
+      ]
     },
     {
       path: "/login",
