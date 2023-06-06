@@ -22,10 +22,16 @@ function LostReport() {
   const [address, setAddress] = useState("");
   const [age, setAge] = useState("");
   const [ownername, setOwnerName] = useState("");
-  const [ photo, setPhoto ] = useState('')
+  const [ photo1, setPhoto1 ] = useState('')
+  const [ photo2, setPhoto2 ] = useState('')
 
-  const handleFile = (e) => {
-    setPhoto(e.target.files[0])
+  const handleFile = (e, fileInput) => {
+    const file = e.target.files[0]
+    if (fileInput === 'photo1') {
+      setPhoto1(file);
+    } else if (fileInput === 'photo2') {
+      setPhoto2(file);
+    }
   }
   // http://localhost:8000/lostpet
   const handleSubmit = async (e) => {
@@ -43,7 +49,8 @@ function LostReport() {
     formData.append('address', address)
     formData.append('age', age)
     formData.append('ownername', ownername)
-    formData.append('image', photo)
+    formData.append('image1', photo1)
+    formData.append('image2', photo2)
 
     await axios.post("http://localhost:8000/lostpet", formData);
     navigate("/lostpetsall");
@@ -237,7 +244,17 @@ function LostReport() {
               <input
                 type="file"
                 className="w-full text-sm shadow-l p-4"
-                onChange={handleFile}
+                onChange={(e) => {handleFile(e, 'photo1')} }
+              ></input>
+            </div>
+            <div className="">
+              <label htmlFor="" className="text-sm text-neutral-500  mt-6">
+                Valid ID
+              </label>
+              <input
+                type="file"
+                className="w-full text-sm shadow-l p-4"
+                onChange={(e) => {handleFile(e, 'photo2')} }
               ></input>
             </div>
           </div>

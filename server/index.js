@@ -40,6 +40,7 @@ app.use('/user', require('./routes/user'))
 app.use('/volunteer', require('./routes/volunteer'))
 app.use('/adopt', require('./routes/adoption'))
 app.use('/appointment', require('./routes/appointment'))
+app.use('/shelter', require('./routes/shelter'))
 
 // app.use(verifyJWT)
 // app.use('/users', require('./routes/users'))

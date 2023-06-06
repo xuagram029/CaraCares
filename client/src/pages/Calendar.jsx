@@ -28,6 +28,7 @@ const Calendar = () => {
   const fetchEvents = async () => {
     try {
       const response = await axios.get('http://localhost:8000/appointment');
+      console.log(response.data);
       const transformedEvents = response.data.map(event => ({
         id: event.fullname,
         title: event.type,

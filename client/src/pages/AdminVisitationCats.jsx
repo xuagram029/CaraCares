@@ -64,10 +64,9 @@ const handleOptionChange = async (e) => {
         
         {petType && petType.map(pet => (
           <div className='border border-black p-6 w-[25%] h-[50%]' key={pet.id}>
-          <img src={Pet1} alt="Dogs" className=' mx-auto' />
+          <img src={`http://localhost:8000/uploads/${pet.photo}`} alt="Dogs" className=' mx-auto' />
             <div className=''>
               <h1 className='font-bold text-center p-4 text-xl'>{pet.name}</h1>
-              <p className='font-semibold pb-2'>Breed: {pet.breed}</p>
               <p className='font-semibold pb-2'>Gender: {pet.gender}</p>
               <p className='font-semibold pb-2'>Color: {pet.color}</p>
             </div>

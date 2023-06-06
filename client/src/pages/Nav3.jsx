@@ -13,6 +13,7 @@ import { AuthContext } from "../context/AuthContext";
 function Navbar() {
   const { user } = useContext(AuthContext);
   const username = user?.resp && user.resp[0]?.firstname;
+  const name = user?.resp && user.resp[0]?.name;
 
   const [openSv, setOpenSv] = useState(false)
   const [openAb, setOpenAb] = useState(false)
@@ -187,7 +188,7 @@ function Navbar() {
           </div> : ""}       */}
          {user ?   <div className="">
         <button class="peer md:py-10 w-full flex gap-1 font-bold  items-center p-3 uppercase text-black md:border-none border-2 text-left " onClick={() => setOpenAb(!openAb)}><img src={usericon} alt="" />
-          <span onClick={() => setOpenAccount(!openAccount)} className=" text-md text-black font-bold ">{username}</span></button>
+          <span onClick={() => setOpenAccount(!openAccount)} className=" text-md text-black font-bold ">{username || name}</span></button>
         
        
      <div className="hidden peer-hover:flex hover:flex
@@ -199,11 +200,13 @@ function Navbar() {
         </div>
     </div>  : ""}   
       </ul>
-          <div>
-            <Link to="/user-login"> <button className="bg-rose-600 text-white w-[100px] border-2 border-rose-600 p-2 mr-3">Login</button></Link>
-            <Link to="/user-signup"><button className="bg-white text-rose-600 w-[100px] border-2 border-rose-600 p-2">Register</button></Link>
-          </div>     
-        
+      {
+        !user &&
+        <div>
+          <Link to="/user-login"> <button className="bg-rose-600 text-white w-[100px] border-2 border-rose-600 p-2 mr-3">Login</button></Link>
+          <Link to="/user-signup"><button className="bg-white text-rose-600 w-[100px] border-2 border-rose-600 p-2">Register</button></Link>
+      </div>     
+      }
     </nav>
     </div>
   );

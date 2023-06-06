@@ -26,13 +26,8 @@ const handleOptionChange = async (e) => {
     setSelectedOption(e.target.value);
     const res = await axios.get(`http://localhost:8000/typeofpet/${e.target.value}`)
     setPetType(res.data)
-    // console.log(e.target.value)
     console.log(res.data)
   }
-  
-  // console.log(petType)
-  // const [dog, setDog] = useState('')
-  // const [cat, setCat] = useState('')
   
   useEffect(() =>{
     const getDog = async() => {
@@ -43,15 +38,6 @@ const handleOptionChange = async (e) => {
     getDog()
   }, [])
 
-  // useEffect(() =>{
-  //   const getCat = async() => {
-  //     const res = await axios.get(`http://localhost:8000/typeofpet/getcat`)
-  //     console.log(res.data)
-  //   }
-  //   getCat()
-  // }, [cat])
-
-
 
   return (
     <div className="flex w-full">
@@ -61,8 +47,8 @@ const handleOptionChange = async (e) => {
       <h1 className='text-center text-3xl font-semibold'>DOGS VISITATION</h1>
         <div className='flex flex-row flex-wrap py-5'>
         {petType && petType.map(pet => (
-          <div className='border border-black p-6 w-[25%] h-[50%]  ' key={pet.id}>
-          <img src={Max} alt="Dogs" className=' mx-auto' />
+          <div className='border border-black ml-4 p-6 w-[25%] h-[50%]  ' key={pet.id}>
+          <img src={`http://localhost:8000/uploads/${pet.photo}`} alt="Dogs" className='h-72 mx-auto' />
             <div className=''>
               <h1 className='font-bold text-center p-4 text-xl'>{pet.name}</h1>
               <p className='font-semibold pb-2'>Breed: {pet.breed}</p>

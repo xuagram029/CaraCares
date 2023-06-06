@@ -65,41 +65,19 @@ const addEncodedPet = (req, res) => {
   });
 };
 
-const updateshelterencodes = (req, res) => {
+const updateOwner = (req, res) => {
   const encodedPetId = req.params.id;
-
-  const name = req.body.name;
-  const gender = req.body.gender;
-  const color = req.body.color;
-  const age = req.body.age;
-  const shelternumber = req.body.shelternumber;
-  const sheltername = req.body.sheltername;
-  const shelteremail = req.body.shelteremail;
-  const shelteraddress = req.body.shelteraddress;
-  const type = req.body.type;
-  const adopted = req.body.adopted;
+  const { petAdoptor } = req.body
 
   db.query(
-    'UPDATE shelterencode SET `name` = ?, `gender` = ?, `color` = ?, `age` = ?, `type` = ?, `shelternumber` = ?, `sheltername` = ?, `shelteremail` = ?, `shelteraddress` = ?, `adopted` = ? WHERE id = ?',
-    [
-      name,
-      gender,
-      color,
-      age,
-      type,
-      shelternumber,
-      sheltername,
-      shelteremail,
-      shelteraddress,
-      adopted,
-      encodedPetId,
-    ],
+    'UPDATE shelterencode SET `adoptor` = ? WHERE id = ?',
+    [petAdoptor, encodedPetId,],
     (err, data) => {
       if (err) {
         console.error('Error updating encoded pet:', err);
         return res.status(500).json({ error: 'Failed to update encoded pet.' });
       }
-      res.json(data);
+      res.json({message: "Update Success"});
     }
   );
 };
@@ -185,7 +163,7 @@ module.exports = {
   getEncodedPet,
   addEncodedPet,
   deleteEncodedPet,
-  updateshelterencodes,
+  updateOwner,
   adoptFoundPet,
   availFoundPet,
   adoptedFoundPet,

@@ -2,9 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {getDogs, getCats, getPet, deletePet, addVisit, getVisits, editVisit, getVisit, getAdoptedCats, getAdoptedDogs} = require('../controllers/petTypeController')
 
-router.route('/')
-    .delete(deletePet)
-    
+
 router.route('/dogs')
     .get(getDogs)
 
@@ -27,5 +25,7 @@ router.route('/:id')
     .get(getPet)
     .post(addVisit)
     .put(editVisit)
+    .delete(deletePet)
+
 
 module.exports = router;

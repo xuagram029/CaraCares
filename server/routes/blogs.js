@@ -6,12 +6,12 @@ const { verifyAdmin } = require('../middleware/verifyToken')
 
 router.route('/')
     .get(getBlogs)
-    .post(verifyAdmin, addBlog)
+    .post( addBlog)
     
 router.route('/:id')
-    .get(verifyAdmin, getSingleBlog)
-    .delete(verifyAdmin, deleteBlog)
-    .put(verifyAdmin, updateBlog)
+    .get(getSingleBlog)
+    .delete(deleteBlog)
+    .put(updateBlog)
     // .get()
 
 module.exports = router

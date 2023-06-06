@@ -13,32 +13,41 @@ function FoundReport(){
     const [found, setFound] = useState("");
     const [description, setDescription] = useState("");
     const [typeofpet, setTypeOfPet] = useState("");
-    const [photo, setPhoto] = useState('')
+    const [photo1, setPhoto1] = useState('')
+    const [photo2, setPhoto2] = useState('')
 
-    const handleFile = (e) => {
-        setPhoto(e.target.files[0])
-    }
+    const handleFile = (e, fileInput) => {
+        const file = e.target.files[0];
+        
+        if (fileInput === 'photo1') {
+          setPhoto1(file);
+        } else if (fileInput === 'photo2') {
+          setPhoto2(file);
+        }
+      };
 
-    const handleSubmit = async (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const formData = new FormData();
-            formData.append('foundername', foundername);
-            formData.append('phone', phone);
-            formData.append('email', email);
-            formData.append('gender', gender);
-            formData.append('color', color);
-            formData.append('found', found);
-            formData.append('description', description);
-            formData.append('typeofpet', typeofpet);
-            formData.append('image', photo);
-    
-            await axios.post('http://localhost:8000/foundpet', formData);
-            navigate('/foundpets');
+          const formData = new FormData();
+          formData.append('foundername', foundername);
+          formData.append('phone', phone);
+          formData.append('email', email);
+          formData.append('gender', gender);
+          formData.append('color', color);
+          formData.append('found', found);
+          formData.append('description', description);
+          formData.append('typeofpet', typeofpet);
+          formData.append('image1', photo1); // Assuming photo1 and photo2 are the file objects representing the two pictures
+          formData.append('image2', photo2);
+      
+          await axios.post('http://localhost:8000/foundpet', formData);
+          navigate('/foundpets');
         } catch (error) {
-            console.log(error);
+          console.log(error);
         }
-    };
+      };
+      
     
 
     return(
@@ -99,7 +108,7 @@ function FoundReport(){
                         </div>
                         <div>
                          <label htmlFor="" className="text-sm text-neutral-500  mt-6">DATE FOUND</label>
-                         <input type="text" className="w-full text-sm shadow-l p-4"  
+                         <input type="date" className="w-full text-sm shadow-l p-4"  
                          value={found} onChange={(e) => {setFound(e.target.value)}} placeholder="YYYY/MM/DD"></input>
                         </div>
                     
@@ -107,7 +116,12 @@ function FoundReport(){
                     
                     <div className="border-2 border-solid w-full  p-1">
                         <label htmlFor="" className="text-sm text-neutral-500">PHOTO OF PET</label>   
-                        <input type="file" onChange={handleFile}/>
+                        <input type="file" onChange={(e) => handleFile(e, 'photo1')} />
+                    </div>
+
+                    <div className="border-2 border-solid w-full  p-1">
+                        <label htmlFor="" className="text-sm text-neutral-500">VALID ID</label>   
+                        <input type="file" onChange={(e) => handleFile(e, 'photo2')} />
                     </div>
                     
                     <div >

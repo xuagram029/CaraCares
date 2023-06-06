@@ -6,15 +6,20 @@ import "../modal.css";
 import { IoMdAddCircle } from 'react-icons/io';
 import moment from 'moment';
 import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom'
 // import useRedirectAdmin from '../custom hooks/useRedirectAdmin';
 
 const AdminVisitationReport = () => {
   const {user} = useContext(AuthContext)
   // useRedirectAdmin(user)
   const {id} = useParams()
-  const [pet, setPet] = useState(null)
+  const [pet, setPet] = useState([])
+  const [petId, setPetId] = useState(null)
+  const [petAdoptor, setPetAdoptor] = useState("")
+  const navigate = useNavigate()
   const [modalAv, setModalAv] = useState(false);
   const [modalEv, setModalEv] = useState(false);
+  const [modalPet, setModalPet] = useState(false);
 
   const [number, setNumber] = useState('')
   const [name, setName] = useState('')
@@ -53,8 +58,10 @@ const AdminVisitationReport = () => {
     setModalEv(!modalEv);
   };
 
-  const toggleEvModalOpen = async (vId) => {
-    setModalEv(true);
+  const togglePetModal = async () => {
+    setModalPet(true);
+    console.log(petAdoptor);
+    console.log(pet);
   };
 
   if(modalEv) {
@@ -73,7 +80,6 @@ const AdminVisitationReport = () => {
       setConfirmationEv(visitEdit.confirmation)
       setDateEv(visitEdit.visitdate)
       setIdEv(visitEdit.id)
-      console.log(res.data)
     } catch (error) {
       console.log(err)
     }
@@ -83,29 +89,34 @@ const AdminVisitationReport = () => {
     const getPet = async () => {
       const res = await axios.get(`http://localhost:8000/typeofpet/${id}`)
       const resV = await axios.get(`http://localhost:8000/typeofpet/visits/${id}`)
+      setPetId(res.data[0].id)
+      setPetAdoptor(res.data[0].adoptor)
       setPet(res.data)
-      // console.log(res.data)
       setVisits(resV.data)
-      // setVisitNumber(res.data[0].visitnumber)
     }
     getPet()
   }, [])
+
+  const editOwner = async(id) => {
+    try {
+      const res = await axios.put(`http://localhost:8000/admin-encode/${id}`, { petAdoptor })
+      alert(res.data.message);
+      window.location.reload()
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const addVisit = async (id) => {
     try {
       await axios.post(`http://localhost:8000/typeofpet/${id}`, { visitnumber:number, visitor:name, confirmation, visitdate:date });
       window.location.reload()
-      // console.log(number, name, confirmation, date)
-      // Handle the response data or perform any necessary actions
     } catch (error) {
       console.error('Error:', error);
-      // Handle the error case
     }
   };
 
   const EditVisit = async () => {
-    // console.log({ visitnumber:numberEv, visitor:nameEv, confirmation:confirmationEv, visitdate:dateEv }
-    //   );
     try {
       const res = await axios.put(`http://localhost:8000/typeofpet/${idEv}`, { visitnumber:numberEv, visitor:nameEv, confirmation:confirmationEv, visitdate:dateEv });
       setModalEv(!modalEv);
@@ -115,32 +126,46 @@ const AdminVisitationReport = () => {
     }
     // window.location.reload()
   };
-  
 
-  // console.log(id)
+  const handleDelete = async (id) => {
+    try {
+      const res = await axios.delete(`http://localhost:8000/typeofpet/${id}`)
+      console.log(res.data.message);
+      navigate('/admin-dashboard')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  // const petId = pet && pet.length > 0 && pet[0].id
+  // console.log(pet)
   return (
     <div className='m-10 p-5 h-max sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto'>
 
       <div className="space-x-6 font-bold font-pop text-base cursor-pointer flex justify-between items-center">
-        <h1 className="text-4xl">PET VISITATION</h1>
-        <div className="space-x-6 ">
-        <button className=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg mx-auto shadow-gray-400 shadow-lg">Edit</button>
-        <button className=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg mx-auto shadow-gray-400 shadow-lg">Delete</button>
+        <div className=''>
+          <h1 className="text-4xl">PET VISITATION</h1>
         </div>
+        <div className='space-x-6'>
+          <button className=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg mx-auto shadow-gray-400 shadow-lg" onClick={() => togglePetModal(petId)}>Edit</button>
+          <button className=" bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg mx-auto shadow-gray-400 shadow-lg" onClick={() => handleDelete(petId)}>Delete</button>
+        </div>
+        
       </div> 
       
       {
         pet && pet.map(p => (
-        <div className=' p-6 flex items-center mt-12' key={p.id}>
-          <div className="w-[55%]">
-              <img src={Max} alt="Dogs" className='rounded-lg' />
+        <div className=' border border-black bg-[#f2f2f2] px-28 py-6 flex justify-center items-center mt-6' key={p.id}>
+          <div className="mx-auto">
+              <img 
+              src={`http://localhost:8000/uploads/${p.photo}`} 
+              alt="Dogs" 
+              className='h-[400px] rounded-xl' />
           </div>
-          <div className=' w-1/2 leading-10 mx-auto pl-12'>
+          <div className='leading-10 mx-auto'>
               <h1 className='font-bold text-3xl text-center pb-12'>Pet Name: {p.name}</h1>
-              <p className='font-semibold pb-2 text-left'>Breed: {p.breed}</p>
               <p className='font-semibold pb-2 text-left'>Gender: {p.gender}</p>
               <p className='font-semibold pb-2 text-left'>Color: {p.color}</p>
-              <p className='font-semibold pb-2 text-left'>Adoptor: {p.adoptor }</p>
+              <p className='font-semibold pb-2 text-left'>Adoptor: {p.adoptor}</p>
           </div>
         </div>
         ))
@@ -177,7 +202,31 @@ const AdminVisitationReport = () => {
 
                 </tbody>
               </table>
-              
+
+              {modalPet && (
+                <div className="fixed z-10 overflow-y-auto top-0 w-full left-0">
+                  <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    <div className="fixed inset-0 transition-opacity">
+                      <div className="absolute inset-0 bg-gray-900 opacity-75" />
+                    </div>
+                    <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+                    <div className="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                      <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <label>Adoptor Name</label>
+                        <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={petAdoptor} name='number' onChange={(e) => setPetAdoptor(e.target.value)}/>
+                      </div>
+                      <div className="bg-gray-200 px-4 py-3 text-right">
+                        <button type="button" className="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onClick={() => setModalPet(false)}>
+                          <i className="fas fa-times" /> Cancel
+                        </button>
+                        <button type="button" onClick={() => {editOwner(id)}} className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2">
+                          <i className="fas fa-plus" /> Update
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* ADD VISITATION REPORT */}
               {modalAv && (
@@ -210,6 +259,8 @@ const AdminVisitationReport = () => {
                   </div>
                 </div>
               )}
+
+
               {/* EDIT VISITATION REPORT */}
               {modalEv && (
                 <div className="fixed z-10 overflow-y-auto top-0 w-full left-0">
@@ -245,10 +296,6 @@ const AdminVisitationReport = () => {
           </div>
         </div>
       </div>
-
-
-
-
 </div>
   )
 }

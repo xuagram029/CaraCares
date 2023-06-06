@@ -47,9 +47,17 @@ const AdoptionHistory = () => {
     },
     {
       name: 'Date Adopted',
-      selector: row => new Date(row.adopted_date).toLocaleString(),
+      selector: row => {
+        const date = new Date(row.adopted_date);
+        const formattedDate = date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        });
+        return formattedDate;
+      },
       sortable: true
-    },
+    }
   ]
 
   const handleFilter = (e) => {
@@ -70,7 +78,7 @@ const AdoptionHistory = () => {
           <div className={` mt-8 ml-8 max-w-full border border-black ${open ? "w-[75vw] transition-width duration-500" : "w-[85vw] transition-width duration-500 ease-linear"}`}>
             <div className='p-[50px 10%] mt-2 ml-5 flex'>
               <RiUserSearchLine className='text-2xl mt-1'/>
-              <input onChange={handleFilter} type="text" placeholder='search user' className='text-center border border-black rounded-md'/>
+              <input onChange={handleFilter} type="text" placeholder='Search pet' className='text-center border border-black rounded-md'/>
             </div>
             <DataTable
               columns={columns}

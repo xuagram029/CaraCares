@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import  DataTable  from 'react-data-table-component'
 import { RiUserSearchLine } from 'react-icons/ri';
+import { AiOutlineClose } from 'react-icons/ai';
 import Sidebar from '../components/Sidebar';
 import { SidebarContext } from '../context/SbContext';
 import { useNavigate } from 'react-router-dom'
@@ -14,6 +15,8 @@ const PendingFounds = () => {
     const [filteredAvailablePets, setFilteredAvailablePets] = useState([]) 
     const [ imgModal, setImgModal] = useState(false)
     const [selectedPhoto, setSelectedPhoto] = useState('');
+    const [ imgModal2, setImgModal2] = useState(false)
+    const [selectedPhoto2, setSelectedPhoto2] = useState('');
 
     const {user, loading, error, dispatch } = useContext(AuthContext)
     useEffect(() => {
@@ -39,7 +42,23 @@ const PendingFounds = () => {
       }
       getPending()
     }, [])
-    // console.log(availablePets[0]);
+
+    useEffect(() =>{
+      if(imgModal){
+        document.body.style.overflow = 'hidden'
+      }else{ 
+        document.body.style.overflow = 'visible'
+      }
+    }, [imgModal])
+
+    useEffect(() =>{
+      if(imgModal2){
+        document.body.style.overflow = 'hidden'
+      }else{ 
+        document.body.style.overflow = 'visible'
+      }
+    }, [imgModal2])
+
     const updateStatus = async(id) => {
         try {
           await axios.put(`http://localhost:8000/foundpet/pending/${id}`)
@@ -87,16 +106,31 @@ const PendingFounds = () => {
       {
         name: 'Photo',
         cell: (row) => (
-          <button onClick={() => {
-              setSelectedPhoto(row.photo);
-              setImgModal(true);
+          <button 
+          className="bg-[#00DFA2] hover:bg-[#36AE7C] text-white font-bold py-2 px-4 rounded"
+          onClick={() => {
+              setSelectedPhoto(row.photo)
+              setImgModal(true)
             }}>
             View Photo
           </button>
         ),
       },
       {
-        name: "Verified",
+        name: 'ID',
+        cell: (row) => (
+          <button 
+          className="bg-[#00DFA2] hover:bg-[#36AE7C] text-white font-bold py-2 px-4 rounded"
+          onClick={() => {
+              setSelectedPhoto2(row.photo2)
+              setImgModal2(true)
+            }}>
+            View Photo
+          </button>
+        ),
+      },
+      {
+        name: "Admit",
         cell: row => (
           <button onClick={() => updateStatus(row.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             ✓
@@ -107,7 +141,7 @@ const PendingFounds = () => {
       {
         name: "Delete",
         cell: row => (
-          <button onClick={() => deleteReport(row.id)} className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button onClick={() => deleteReport(row.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             X
           </button>
         ),
@@ -145,11 +179,23 @@ const PendingFounds = () => {
             </div>
         </div>  
         {imgModal &&   
-          <div className='z-50'>
-            <img 
-            className='w-96 h-96 top-48 left-[550px] absolute'
+        <div className='inset-0 w-full h-screen bg-[rgba(49,49,49,0.8)] z-50 fixed flex justify-center items-center'>
+          <img 
+            className='w-[30rem] h-[30rem] absolute'
             src={`http://localhost:8000/uploads/${selectedPhoto}`} alt="Full Photo" />   
-            <button onClick={() => {setImgModal(!imgModal)}}>close</button>
+            <button className='bg-rose-400 text-2xl text-white rounded-sm absolute top-0 right-0 mt-8 mr-8' onClick={() => {setImgModal(!imgModal)}}>
+              <AiOutlineClose />
+            </button>
+          </div>
+        }
+        {imgModal2 &&   
+        <div className='inset-0 w-full h-screen bg-[rgba(49,49,49,0.8)] z-50 fixed flex justify-center items-center'>
+          <img 
+            className='w-[30rem] h-[30rem] absolute'
+            src={`http://localhost:8000/uploads/${selectedPhoto2}`} alt="Full Photo" />   
+            <button className='bg-rose-400 text-2xl text-white rounded-sm absolute top-0 right-0 mt-8 mr-8' onClick={() => {setImgModal2(!imgModal2)}}>
+              <AiOutlineClose />
+            </button>
           </div>
         }
     </div>

@@ -103,27 +103,24 @@ function Lostpetsmore() {
 
   return (
     <div>
-      <div className="grid-rows-2 mt-[50px] px-16 md:px-[50px] lg:px-[150px] xl:px-[200px] ">
+      <div className="px-16 md:px-[50px] lg:px-[150px] xl:px-[200px] ">
 
-        <div className="flex ">
-          <div className="w-1/2  h-[100%] my-auto ">
-
-          </div>
           {data.map((pet) => (
-            <div key={pet.id} className="w-1/2 h-[100%] my-auto md:ml-4 ml-4 md:p-5">
-              <div className="h-full">
-                <img className="h-[100%]" 
+            <div key={pet.id} className="flex flex-row justify-center items-center h-1/2 space-x-20">
+              <div className="">
+              <h1 className="font-bold text-sm text-blue-900 lg:text-xl xl:text-3xl lg:mb-4 text-center pb-4">
+                Animal ID #{id}
+              </h1>
+              <img className="h-[400px] pb-4" 
                 src={`http://localhost:8000/uploads/${pet.photo}`}
                 alt="" />
               </div>
-                <button onClick={toggleModal} className="btn-modal bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg shadow-gray-400 shadow-lg tracking-[3px]">
-                  Edit
-                </button>
-              <h1 className="font-bold text-sm lg:text-xl xl:text-3xl lg:mb-4 text-center">
-                Animal ID #{id}
-              </h1>
-              
-              <div className=" flex grid-cols-2 text-sm lg:text-md 2xl:mb-6 xl:mb-2 lg:mb-10 md:mb-10 mb-10">
+
+              <div className="">
+              <button onClick={toggleModal} className="btn-modal mt-0 mb-6 bg-slate-500 hover:bg-neutral-900 hover: text-white font-bold py-1 px-4 rounded-lg shadow-gray-400 shadow-lg tracking-[3px]">
+                Edit
+              </button>
+                <div className="flex text-sm lg:text-md 2xl:mb-6 xl:mb-2 lg:mb-10 md:mb-10 mb-10 space-x-6">
                 <div className="w-1/2 leading-4 md:leading-[50px] text-sm xl:text-xl md:font-bold">
                   <p>Pet Name: </p>
                   <p>Type: </p>
@@ -146,9 +143,10 @@ function Lostpetsmore() {
                   <p>{pet.description}</p>
                 </div>
               </div>
+
+              </div>
             </div>
           ))}
-        </div>
       </div>
 
       <h1 className="sm:text-2xl md:text-4xl text-2xl font-bold xl:text-6xl text-blue-900  px-16 md:px-[50px] lg:px-[150px] xl:px-[200px] mt-20">

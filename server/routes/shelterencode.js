@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const{getEncodedPet, getEncodedPets, addEncodedPet, deleteEncodedPet, updateshelterencodes, adoptFoundPet, availFoundPet, adoptedFoundPet, totalAdoption} = require('../controllers/shelterEncodeController')
+const{getEncodedPet, getEncodedPets, addEncodedPet, deleteEncodedPet, updateshelterencodes, adoptFoundPet, availFoundPet, adoptedFoundPet, totalAdoption, updateOwner} = require('../controllers/shelterEncodeController')
 
 router.route('/')
     .get(getEncodedPets)
@@ -22,7 +22,7 @@ router.route('/adopt/:id')
 router.route('/:id')
     .get(getEncodedPet)
     .delete(deleteEncodedPet)
-    .put(updateshelterencodes)
+    .put(updateOwner)
 
 
 module.exports = router

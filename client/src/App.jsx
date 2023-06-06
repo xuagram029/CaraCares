@@ -54,6 +54,10 @@ import PendingLost from './pages/PendingLost';
 import Lostpets from './pages/Lostpets';
 import AnimalWelfareLaws from './pages/AnimalWelfareLaws';
 import AdoptionPDF from './pages/AdoptionPDF';
+import SignupShelter from './pages/SignupShelter';
+import ShelterLogin from './pages/ShelterLogin';
+import AcceptedLost from './pages/AcceptedLost';
+import AcceptedFound from './pages/AcceptedFound';
 
 function App() {
 
@@ -101,6 +105,14 @@ const Layout = () => {
       element: <AdminVisitationCats />,
     },
     {
+      path: "/shelter-signup",
+      element: <SignupShelter/>,
+    },
+    {
+      path: "/shelter-login",
+      element: <ShelterLogin/>,
+    },
+    {
       path: "/user-profile",
       element: <Layout />,
       children: [
@@ -141,6 +153,14 @@ const Layout = () => {
     {
       path: '/pending-losts',
       element: <PendingLost />
+    },
+    {
+      path: '/accepted-losts',
+      element: <AcceptedLost />
+    },
+    {
+      path: '/accepted-founds',
+      element: <AcceptedFound />
     },
     {
       path: '/available-pets',

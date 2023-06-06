@@ -52,7 +52,7 @@ const acceptReport = (req, res) => {
 };
 
 const addFoundPet = (req, res) => {
-  upload.single('image')(req, res, (err) => {
+  upload.fields([{ name: 'image1' }, { name: 'image2' }])(req, res, (err) => {
     if (err) {
       return res.json({ error: 'Error uploading file' });
     }
@@ -66,11 +66,12 @@ const addFoundPet = (req, res) => {
     const description = req.body.description;
     const typeofpet = req.body.typeofpet;
 
-    const photo = req.file ? req.file.filename : null; // Get the file name if it exists
+    const photo1 = req.files['image1'][0].filename;
+    const photo2 = req.files['image2'][0].filename;
 
     db.query(
-      "INSERT INTO foundpet(`foundername`, `phone`, `email`, `gender`, `color`, `found`, `description`, `typeofpet`, `photo`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [foundername, phone, email, gender, color, found, description, typeofpet, photo],
+      "INSERT INTO foundpet(`foundername`, `phone`, `email`, `gender`, `color`, `found`, `description`, `typeofpet`, `photo`, `photo2`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [foundername, phone, email, gender, color, found, description, typeofpet, photo1, photo2],
       (err, data) => {
         if (err) return res.json(err);
         return res.json(data);
@@ -78,6 +79,8 @@ const addFoundPet = (req, res) => {
     );
   });
 };
+
+
 
 const updateFoundPets = (req, res) =>{
     const foundPetId = req.params.id

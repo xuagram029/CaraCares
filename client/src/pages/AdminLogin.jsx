@@ -18,8 +18,10 @@ const {user, loading, error, dispatch } = useContext(AuthContext)
 // useRedirectUser(user)
 const navigate = useNavigate()
 useEffect(() => {
-  if (user) {
-    navigate('/');
+  if (user?.resp[0]?.role === 'admin') {
+    navigate('/admin-dashboard');
+  }else if(user?.resp[0]?.role === 'user'){
+    navigate('/')
   }
 }, [user, navigate]);
 

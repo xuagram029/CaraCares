@@ -5,7 +5,6 @@ import { RiUserSearchLine } from 'react-icons/ri';
 import axios from '../api/axios';
 
 const UserAppointments = () => {
-    const [count, setCount] = useState(1)
 
     // useEffect(() => {
     //     const interval = setInterval(() => {

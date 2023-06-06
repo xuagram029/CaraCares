@@ -52,15 +52,26 @@ const getPet = (req, res) => {
 };
 
 const deletePet = (req, res) => {
-  const id = req.body.id;
-  db.query("DELETE FROM shelterencode WHERE id = ?", id, (err, data) => {
+  const id = req.params.id;
+
+  // Delete related records from the 'visitation' table first
+  db.query("DELETE FROM visitation WHERE petid = ?", id, (err, data) => {
     if (err) {
-      console.error('Error deleting pet:', err);
+      console.error('Error deleting related visitation records:', err);
       return res.status(500).json({ error: 'Failed to delete pet.' });
     }
-    res.json({ message: 'Successfully deleted' });
+
+    // Once the related records are deleted, delete the pet from the 'shelterencode' table
+    db.query("DELETE FROM shelterencode WHERE id = ?", id, (err, data) => {
+      if (err) {
+        console.error('Error deleting pet:', err);
+        return res.status(500).json({ error: 'Failed to delete pet.' });
+      }
+      res.json({ message: 'Successfully deleted' });
+    });
   });
 };
+
 
 const addVisit = (req, res) => {
   const petid = req.params.id;

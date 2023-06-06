@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import  DataTable  from 'react-data-table-component'
 import { RiUserSearchLine } from 'react-icons/ri';
+import { AiOutlineClose } from 'react-icons/ai';
 import Sidebar from '../components/Sidebar';
 import { SidebarContext } from '../context/SbContext';
 import { useNavigate } from 'react-router-dom'
@@ -14,6 +15,8 @@ const PendingLost = () => {
     const [filteredAvailablePets, setFilteredAvailablePets] = useState([]) 
     const [ imgModal, setImgModal] = useState(false)
     const [selectedPhoto, setSelectedPhoto] = useState('');
+    const [ imgModal1, setImgModal1] = useState(false)
+    const [selectedPhoto1, setSelectedPhoto1] = useState('');
 
     const {user, loading, error, dispatch } = useContext(AuthContext)
     useEffect(() => {
@@ -39,6 +42,22 @@ const PendingLost = () => {
       }
       getPending()
     }, [])
+
+    useEffect(() => {
+      if(imgModal){
+        document.body.style.overflow = 'hidden'
+      }else{
+        document.body.style.overflow = 'visible'
+      }
+    },[imgModal])
+
+    useEffect(() => {
+      if(imgModal1){
+        document.body.style.overflow = 'hidden'
+      }else{
+        document.body.style.overflow = 'visible'
+      }
+    },[imgModal1])
     // console.log(availablePets[0]);
     const updateStatus = async(id) => {
         try {
@@ -87,9 +106,24 @@ const PendingLost = () => {
       {
         name: 'Photo',
         cell: (row) => (
-          <button onClick={() => {
+          <button 
+          className="bg-[#00DFA2] hover:bg-[#36AE7C] text-white font-bold py-2 px-4 rounded"
+          onClick={() => {
               setSelectedPhoto(row.photo);
               setImgModal(true);
+            }}>
+            View Photo
+          </button>
+        ),
+      },
+      {
+        name: 'ID',
+        cell: (row) => (
+          <button 
+          className="bg-[#00DFA2] hover:bg-[#36AE7C] text-white font-bold py-2 px-4 rounded"
+          onClick={() => {
+              setSelectedPhoto1(row.photo2);
+              setImgModal1(true);
             }}>
             View Photo
           </button>
@@ -125,7 +159,7 @@ const PendingLost = () => {
     
 
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row relative">
         <Sidebar /> 
         <div className={`flex flex-col w-full md:w-3/4 lg:w-screen ${imgModal && "opacity-50"}`}>
             <div className="flex ml-8 mt-5 justify-between items-center space-x-6 font-bold font-pop text-base">
@@ -144,11 +178,23 @@ const PendingLost = () => {
             </div>
         </div>  
         {imgModal &&   
-          <div>
-            <img 
-            className='w-96 h-96 top-48 left-[550px] absolute'
+        <div className='inset-0 w-full h-screen bg-[rgba(49,49,49,0.8)] z-50 fixed flex justify-center items-center'>
+          <img 
+            className='w-[30rem] h-[30rem] absolute'
             src={`http://localhost:8000/uploads/${selectedPhoto}`} alt="Full Photo" />   
-            <button onClick={() => {setImgModal(!imgModal)}}>close</button>
+            <button className='bg-rose-400 text-2xl text-white rounded-sm absolute top-0 right-0 mt-8 mr-8' onClick={() => {setImgModal(!imgModal)}}>
+              <AiOutlineClose />
+            </button>
+          </div>
+        }
+        {imgModal1 &&   
+        <div className='inset-0 w-full h-screen bg-[rgba(49,49,49,0.8)] z-50 fixed flex justify-center items-center'>
+          <img 
+            className='w-[30rem] h-[30rem] absolute'
+            src={`http://localhost:8000/uploads/${selectedPhoto1}`} alt="Full Photo" />   
+            <button className='bg-rose-400 text-2xl text-white rounded-sm absolute top-0 right-0 mt-8 mr-8' onClick={() => {setImgModal1(!imgModal1)}}>
+              <AiOutlineClose />
+            </button>
           </div>
         }
     </div>

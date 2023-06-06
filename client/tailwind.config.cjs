@@ -24,7 +24,8 @@ module.exports = {
     extend: {
       colors:{
         button: '#222',
-        primary: '#f6f6f2'
+        primary: '#f6f6f2',
+        modal: 'rgba(0, 0, 0, 0.5)'
       },
       fontFamily:{
         body: ['Roboto'],
@@ -34,6 +35,9 @@ module.exports = {
         '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
       }
     },
+    // backgroundColor:{
+    //   modal: 'rgba(49, 49, 49, 0.8)',
+    // },
     boxShadow:{
       xxl:'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;',
       xl:'rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;',
