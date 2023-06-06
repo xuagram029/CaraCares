@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Contact = () => {
   return (
-    <section class="bg-white ">
+    <section class="bg-neutral-100 shadow-l ">
     <div class="container px-6 py-12 mx-auto">
         <div>
             <p class="font-bold text-blue-500 ">Contact us</p>
@@ -53,8 +53,8 @@ const Contact = () => {
                 </div>
             </div>
 
-            <div class="overflow-hidden rounded-lg lg:col-span-2 h-96 lg:h-auto">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.267292199526!2d121.04660127596235!3d14.58383927748506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c83915619f6f%3A0x4534c811fbda5c18!2sCARA%20Welfare%20Philippines!5e0!3m2!1sen!2sph!4v1686018020224!5m2!1sen!2sph" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="overflow-hidden rounded-lg lg:col-span-2 h-96 lg:h-auto w-full">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.267292199526!2d121.04660127596235!3d14.58383927748506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c83915619f6f%3A0x4534c811fbda5c18!2sCARA%20Welfare%20Philippines!5e0!3m2!1sen!2sph!4v1686018020224!5m2!1sen!2sph" width="1000" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </div>
