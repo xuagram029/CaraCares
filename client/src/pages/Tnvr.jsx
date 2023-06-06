@@ -2,7 +2,7 @@ import tCat from '../assets/ui/CARA_PICTURES/logos/TNR.jpg'
 import vilCats from '../assets/ui/CARA_PICTURES/logos/TNR-colony.jpg'
 const Tnvr = () => {
   return (
-    <div className='bg-slate-400 m-10 p-5 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto'>
+    <div className='bg-neutral-100 shadow-l m-10 p-10 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto'>
         <img src={tCat} alt="cat trap" className='m-auto'/>
         <p className='mx-20 my-6 indent-10 sm:indent-10 lg:indent-0'>More than thirty years of documented proof shows that trap-and-kill methods have no lasting effect on reducing feral cat populations. Trap and kill is simply ineffective, expensive and cruel. If all the cats are not caught, then the ones left behind over breed until the former population level is reached.</p>
         <p className='mx-20 my-6 indent-10 sm:indent-10 lg:indent-0'>Even if all the cats are removed, new un-neutered cats move in to take advantage of whatever food source is available. Once there, they breed prolifically, quickly populating a new colony with descendants that are more cautious and more disease-resistant. This “vacuum effect” is very well-documented. Therefore the trap/kill effort becomes increasingly unproductive in the effort to reduce numbers.</p>

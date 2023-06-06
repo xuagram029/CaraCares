@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const LagunaPit = () => {
   return (
-    <div className='bg-slate-400 m-6 p-5 '>
+    <div className='bg-neutral-100 shadow-l m-6 p-5 '>
         <img src={lagunaPit} alt="" className='max-w-full lg:mx-auto h-auto mt-10 lg:max-w-[70%] lg:max-h-[600px] lg:mt-0 lg:flex-none '/>
         <p className='mx-20 mt-8 indent-10'>In 2012, the biggest raid of the country’s most infamous dogfighting operations took place in Laguna. We found over 260 pit bulls and mixed-breed dogs in horrible conditions. They were malnourished, heavily scarred, and living in steel drums. But beneath the physical scars ran deeper ailments, most notably vast deficiencies in their immune systems.</p>
         <p className='mx-20 my-8 indent-10'>With the success of shutting down of such a horrible enterprise, there came to light another challenge: these dogs needed care and a home, and they needed them fast.  CARA eventually took the lead in the care and rehabilitation of these poor dogs.</p>

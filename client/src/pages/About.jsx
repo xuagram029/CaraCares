@@ -5,6 +5,7 @@ import clinic from '../assets/ui/CARA_PICTURES/facilities/CARA-Clinic-outer-faca
 import goalsimg from "../assets/images/target.png";
 import vissionimg from "../assets/images/vision.png";
 import missionimg from "../assets/images/goal.png";
+import aboutimg from "../assets/images/aboutpage.png";
 const About = () => {
   return (
     <div className='bg-neutral-100 shadow-l pt-10 w-full'>
@@ -22,7 +23,7 @@ const About = () => {
                 
             </div>
             <h1 className='text-3xl font-bold text-rose-600 text-center p-24'>CARA'S CORE FOUNDATION</h1>
-            <div class="flex items-center justify-center px-64 text-center text-black mt-12">
+            <div class="flex items-center justify-center px-64 text-center text-black mt-12 mb-24">
                 <div className='items-center justify-center'>
                     <img className="fill-cyan-500 hover:fill-cyan-700 p-7 m-auto shadow-s rounded-full" src={goalsimg} alt="" />
                     <h1 className='mt-7 text-3xl font-bold mb-1 text-rose-600'>Goals</h1>
@@ -62,9 +63,14 @@ CARA veterinary clinic aims to make the Philippines a compassionate country for 
                     <p className='m-auto text-center text-neutral-400  w-full text-[18px]'>
 CARA veterinary clinic aims to make the Philippines a compassionate country for cats and dogs with good homes. Through veterinary consultations, responsible ownership promotion, and collaboration, we strive to create a society that values and protects the well-being of our furry companions, providing them safe and nurturing environments.</p>
                 </div>
-         
+            
+           
         </div>
-          
+        
+                <div className=' m-auto mb-16'>
+                    <img className="w-1/2 m-auto" src={aboutimg} alt="" />
+                </div>
+       
             
         </section>
         {/* goals */}
