@@ -1,9 +1,24 @@
 const db = require('../db');
 const { Vonage } = require('@vonage/server-sdk');
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const vonage = new Vonage({
-  apiKey: "d9f094ac",
-  apiSecret: "wf92sNcadp1YyRmZ"
+  apiKey: "1753cd33",
+  apiSecret: "0KD7Kcq8q4HcDtCT"
+  // apiKey: "d9f094ac",
+  // apiSecret: "wf92sNcadp1YyRmZ"
 });
 
 const getAppointments = (req, res) => {
@@ -29,9 +44,16 @@ const getPendingAppointments = (req, res) => {
 };
 
 const makeAppointment = (req, res) => {
+  upload.single('image')(req, res, (err) => {
+    if (err) {
+      console.error('Error uploading file:', err);
+      return res.status(401).json({ error: 'Error uploading file.' });
+    }
+
   const { fullName, date, type, number } = req.body;
-  console.log(fullName, date, type);
-  db.query("INSERT INTO appointment(`fullName`, `date_s`, `type`, `number`) VALUES (?, ?, ?, ?)", [fullName, date, type, number], (err, data) => {
+  const photo = req.file ? req.file.filename : null;
+
+  db.query("INSERT INTO appointment(`fullName`, `date_s`, `type`, `number`, `photo`) VALUES (?, ?, ?, ?, ?)", [fullName, date, type, number, photo], (err, data) => {
     if (err) {
       console.error('Error making appointment:', err);
       res.status(500).json({ error: 'Failed to make appointment.' });
@@ -39,6 +61,7 @@ const makeAppointment = (req, res) => {
       res.json({ message: "Appointment sent" });
     }
   });
+})
 };
 
 const rejectAppointment = (req, res) => {
@@ -55,7 +78,8 @@ const rejectAppointment = (req, res) => {
           res.status(500).json({ error: 'Failed to delete appointment.' });
         } else {
           const from = "Cara Cares";
-          const to = number;
+          // const to = "639429154447";
+          const to = "639668425716";
           const text = 'Your appointment is rejected.';
   
           vonage.sms.send({ to, from, text })
@@ -91,7 +115,8 @@ const acceptAppointment = (req, res) => {
         } else if (result.length > 0) {
           const number = result[0].number;
           const from = "Cara Cares";
-          const to = number;
+          // const to = "639429154447";
+          const to = "639668425716";
           const text = 'Your appointment has been accepted.';
   
           vonage.sms.send({ to, from, text })

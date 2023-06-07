@@ -38,7 +38,7 @@ function Adminblogs(){
           <form>
               <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                   <div className="sm:col-span-2">
-                      <label for="name" className="block mb-2 text-sm font-medium text-rose-600 dark:text-rose-600">Blog Tittle</label>
+                      <label for="name" className="block mb-2 text-sm font-medium text-rose-600 dark:text-rose-600">Blog Title</label>
                       <input onChange={(e) => setTitle(e.target.value)} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Type blog tittle" required=""/>
                   </div>
       

@@ -7,17 +7,28 @@ const UserAppointment = () => {
   const [date, setDate] = useState("")
   const [type, setType] = useState("")
   const [number, setNumber] = useState("")
+  const [photo, setPhoto] = useState('')
   const navigate = useNavigate()
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:8000/appointment', {fullName: name, date, type, number})
+      const formData = new FormData()
+      formData.append('fullName', name)
+      formData.append('date', date)
+      formData.append('type', type)
+      formData.append('number', number)
+      formData.append('image', photo)
+      const res = await axios.post('http://localhost:8000/appointment', formData)
       console.log(res.data.message)
       navigate('/')
     } catch (error) {
       console.log(error);
     }
+  }
+
+  const handleFile = (e) => {
+    setPhoto(e.target.files[0])
   }
 
   return (
@@ -39,7 +50,7 @@ const UserAppointment = () => {
         <p class="text-center text-lg font-medium">Set your appointment now </p>
   
         <div>
-          <label for="name" class="sr-only">Full Name: </label>
+          <label for="name">Full Name: </label>
   
           <div class="relative">
             <input
@@ -52,15 +63,29 @@ const UserAppointment = () => {
   
           </div>
         </div>
+
+        <div>
+          <label for="name">Valid ID: </label>
+  
+          <div class="relative">
+            <input
+              onChange={handleFile}
+              type="file"
+              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              placeholder="Valid ID"
+            />
+  
+          </div>
+        </div>
   
         <div>
-          <label for="password" class="sr-only">Appointment Date</label>
+          <label for="password">Appointment Date</label>
   
           <div class="relative">
             <input
               value={date}
               onChange={(e) => {setDate(e.target.value)}}
-              type="datetime-local"
+              type="date"
               class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
             />
   
@@ -68,7 +93,7 @@ const UserAppointment = () => {
         </div>
 
         <div>
-          <label for="password" class="sr-only">Phone Number</label>
+          <label for="password">Phone Number</label>
   
           <div class="relative">
             <input
@@ -83,7 +108,7 @@ const UserAppointment = () => {
         </div>
 
         <div>
-          <label for="password" class="sr-only">Password</label>
+          <label for="password">Password</label>
   
           <div class="relative">
             <select name="" id="" className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm' value={type} onChange={(e) => {setType(e.target.value)}}>

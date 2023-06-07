@@ -118,7 +118,7 @@ function Navbar() {
                 w-full md:w-[250px] md:absolute
                 flex-col bg-white drop-shadow-lg z-50`}>
                 <Link  to="/adopt-a-pet" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200 z-40" href="#"><img className="md:hidden" src={img5} alt="" />Adopt a Pet</Link>
-                <Link to="/foster-a-pet" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200 z-40" href="#"><img className="md:hidden" src={img5} alt="" />Foster a Pet</Link>
+                {/* <Link to="/foster-a-pet" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200 z-40" href="#"><img className="md:hidden" src={img5} alt="" />Foster a Pet</Link> */}
                 <Link  to="/sponsor-a-pet" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200 z-40" href="#"><img className="md:hidden" src={img5} alt="" />Sponsor a Pet</Link>
                 <Link to="/pets-for-adoption" className="border border-neutral-300 flex px-5 py-3 hover:bg-gray-200 z-40" href="#"><img className="md:hidden" src={img5} alt="" />Pets for Adoption</Link>
                 <Link  to="/foundpets" className=" border border-neutral-300 flex px-5 py-3 hover:bg-gray-200 z-40" href="#"><img className="md:hidden" src={img5} alt="" />Found Pet</Link>

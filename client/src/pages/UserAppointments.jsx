@@ -2,58 +2,38 @@ import {useEffect, useState} from 'react'
 import  DataTable  from 'react-data-table-component'
 import Sidebar from '../components/Sidebar'
 import { RiUserSearchLine } from 'react-icons/ri';
+import { AiOutlineClose } from 'react-icons/ai';
 import axios from '../api/axios';
 
 const UserAppointments = () => {
-
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //       setCount(prevCount => {
-    //         if (prevCount >= 50) {
-    //           clearInterval(interval); // Stop the interval when count reaches 20
-    //           return prevCount; // Return the current count without incrementing
-    //         } else {
-    //           return prevCount + 1; // Increment the count by 1
-    //         }
-    //       });
-    //     }, 200); // Interval in milliseconds (e.g., increment every second)
-    
-    //     return () => {
-    //       clearInterval(interval); // Clear the interval when the component unmounts
-    //     };
-    //   }, []);
-    // const currentDate = new Date(); // Get the current date and time
-
-    // const year = currentDate.getFullYear();
-    // const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-    // const day = String(currentDate.getDate()).padStart(2, '0');
-    // const hours = String(currentDate.getHours()).padStart(2, '0');
-    // const minutes = String(currentDate.getMinutes()).padStart(2, '0');
-    // const seconds = String(currentDate.getSeconds()).padStart(2, '0');
-    
-    // const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    // console.log(formattedDate);
     
     const [ appointments, setAppointments] = useState([])
     const [ filteredAppointments, setFilteredAppointments] = useState([])
+    const [ imgModal, setImgModal] = useState(false)
+    const [selectedPhoto, setSelectedPhoto] = useState('');
+
     useEffect(()=>{
         const getAppointments = async() =>{
           const res = await axios.get('http://localhost:8000/appointment/pendings')
-        //   setUsers(res.data)
             setAppointments(res.data)
             setFilteredAppointments(res.data)
         }
         getAppointments()
       },[])
 
+    useEffect(() => {
+      if(imgModal){
+        document.body.style.overflow = 'hidden'
+      }else{
+        document.body.style.overflow = 'visible'
+      }
+    },[imgModal])
     const acceptAppointment = async (id) => {
-        // e.preventDefault()
         window.location.reload()
         const res = await axios.put(`http://localhost:8000/appointment/${id}`)
         console.log(res.data.message)
     }
     const rejectAppointment = async (id) => {
-        // e.preventDefault()
         window.location.reload()
         const res = await axios.delete(`http://localhost:8000/appointment/${id}`)
         console.log(res.data.message)
@@ -79,6 +59,19 @@ const UserAppointments = () => {
             name: "Agenda",
             selector: row => row.type,
             sortable: true
+        },
+        {
+          name: 'ID',
+          cell: (row) => (
+            <button 
+            className="bg-[#00DFA2] hover:bg-[#36AE7C] text-white font-bold py-2 px-4 rounded"
+            onClick={() => {
+                setSelectedPhoto(row.photo);
+                setImgModal(true);
+              }}>
+              View Photo
+            </button>
+          ),
         },
         {
           name: "Edit",
@@ -128,6 +121,16 @@ const UserAppointments = () => {
             </div>
         </div>
         </div>
+        {imgModal &&   
+        <div className='inset-0 w-full h-screen bg-[rgba(49,49,49,0.8)] z-50 fixed flex justify-center items-center'>
+          <img 
+            className='w-[30rem] h-[30rem] absolute'
+            src={`http://localhost:8000/uploads/${selectedPhoto}`} alt="Full Photo" />   
+            <button className='bg-rose-400 text-2xl text-white rounded-sm absolute top-0 right-0 mt-8 mr-8' onClick={() => {setImgModal(!imgModal)}}>
+              <AiOutlineClose />
+            </button>
+          </div>
+        }
     </div>
   )
 }

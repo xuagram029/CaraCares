@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router";
 
 function AdoptionPDF() {
+  const navigate = useNavigate()
   useEffect(() => {
     const scrollToTop = () => {
       window.scrollTo({
@@ -259,8 +261,8 @@ function AdoptionPDF() {
 
   const handleSubmit = (values) => {
     generatePDF(values);
+    navigate('/set-appointment')
   };
-
   return (
     <Formik
       initialValues={initialValues}
@@ -524,6 +526,7 @@ function AdoptionPDF() {
                 onChange={handleSelectChange}
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
               >
+                <option hidden>SELECT</option>
                 <option value="option1">House</option>
                 <option value="option2">Apartment</option>
                 <option value="option3">Condo</option>

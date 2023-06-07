@@ -148,7 +148,7 @@ function Lostpetsmore() {
                   <p>{pet.color}</p>
                   <p>{finaldate}</p>
                   <p className="w-[300px]">{pet.foundername}</p>
-                  <p>{pet.description}</p>
+                  <p className="w-[350px]">{pet.description}</p>
                 </div>
               </div>
               </div>

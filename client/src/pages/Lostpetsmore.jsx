@@ -146,7 +146,7 @@ function Lostpetsmore() {
                   <p>{pet.color}</p>
                   <p>{pet.age}</p>
                   <p>{finaldate}</p>
-                  <p>{pet.description}</p>
+                  <p className="w-[350px]">{pet.description}</p>
                 </div>
               </div>
 

@@ -6,6 +6,7 @@ import Whyadopt from './whyadopt'
 import Bloghome3 from './bloghome3'
 import { AuthContext } from "../context/AuthContext"
 import { useContext } from 'react'
+import Footer from '../components/Footer';
 // import ActDate from './ActivitiesDate'
 
 function Home() {
@@ -21,7 +22,8 @@ function Home() {
         <HeroHome/>
         <HelpPage/>
         <Whyadopt/>
-        <Bloghome3/>
+        {/* <Bloghome3/> */}
+        <Footer/>
         {/* <ActDate/> */}
     </div>
   )

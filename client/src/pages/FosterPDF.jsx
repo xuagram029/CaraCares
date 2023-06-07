@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router";
 
 function FosterPDF() {
+  const navigate = useNavigate()
   useEffect(() => {
     const scrollToTop = () => {
       window.scrollTo({
@@ -388,6 +390,7 @@ function FosterPDF() {
 
   const handleSubmit = (values) => {
     generatePDF(values);
+    navigate('/set-appointment')
   };
 
   return (

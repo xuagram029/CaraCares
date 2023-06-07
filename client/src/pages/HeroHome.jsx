@@ -3,6 +3,7 @@ import Homeimg from "../assets/images/home.png";
 import Adoptedimg from "../assets/images/animal-care.png";
 import Fosteredimg from "../assets/images/house.png";
 import Sponsoredimg from "../assets/images/donation.png";
+import { Link } from 'react-router-dom';
 function HeroHome() {
   return (
     <div className='flex px-5 shadow-l bg-neutral-100 '>
@@ -11,8 +12,8 @@ function HeroHome() {
       <h1 className='lg:text-7xl text-2xl font-bold font-[Courier] '>Your new <span className="text-rose-600">friend</span> awaits you</h1>
       <p className='mt-5 lg:text-xl '>Unlock a Lifetime of Love: Choose Adoption and Bring Home Your Perfect Pet Companion Today</p>
       <div className='mt-5'>
-        <button className='shadow-xxl bg-rose-600 text-white text-xs p-1 lg:w-[130px] w-[100px] rounded-[12px] border-2 border-solid border-rose-600 lg:text-lg'>Adopt A Pet</button>
-        <button className='shadow-xxl  sm:ml-5 bg-white text-rose-600 text-xs p-1 lg:w-[130px] w-[100px] rounded-[12px] border-2 border-solid border-rose-600 lg:text-lg'>Sponsor A Pet</button>
+        <Link to="/adopt-a-pet"><button className='shadow-xxl bg-rose-600 text-white text-xs p-1 lg:w-[130px] w-[100px] rounded-[12px] border-2 border-solid border-rose-600 lg:text-lg'>Adopt A Pet</button></Link>
+        <Link to="/sponsor-a-pet"><button className='shadow-xxl  sm:ml-5 bg-white text-rose-600 text-xs p-1 lg:w-[130px] w-[100px] rounded-[12px] border-2 border-solid border-rose-600 lg:text-lg'>Sponsor A Pet</button></Link>
       </div>
       {/* <div className='flex mt-5 md:mt-16 shadow-s py-5'>
         <div className='w-1/3 text-center text-rose-600 font-bold'>

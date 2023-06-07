@@ -48,8 +48,8 @@ function BlogAllpost() {
                 {blog.title}
                 </h1>
                 <p className="text-sm 2xl:text-lg xl:text-md mt-2 text-neutral-700 overflow-clip">
-                    {blog.description.split(' ').slice(0, 25).join(' ')}
-                    {blog.description.split(' ').length > 25 ? '...' : ''}
+                    {blog.description.split(' ').slice(0, 15).join(' ')}
+                    {blog.description.split(' ').length > 15 ? '...' : ''}
                 </p>
 
                 <div className="flex justify-right mt-6">

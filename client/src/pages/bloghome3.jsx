@@ -45,7 +45,7 @@ return(
        
     </div>
           
-    <button className="absolute md:relative sm:-bottom-[220px] md:left-[10px] sm:left-[230px] md:bottom-0 2xl:-bottom-[100px] 2xl:p-4  flex items-center mt-7 justify-center bg-rose-600 text-white w-[200px] border-2 border-rose-600 p-2 m-auto rounded-full">More Blogs</button>
+    <Link to="/blogs"><button className="absolute md:relative sm:-bottom-[220px] md:left-[10px] sm:left-[230px] md:bottom-0 2xl:-bottom-[100px] 2xl:p-4  flex items-center mt-7 justify-center bg-rose-600 text-white w-[200px] border-2 border-rose-600 p-2 m-auto rounded-full">More Blogs</button></Link>
 
 
 

@@ -16,9 +16,10 @@ const handleNewUser = (req, res) => {
     const address = req.body.address
     const birthdate = req.body.birthdate
     const username = req.body.username
-    let password;
+    console.log(firstname, lastname, email, address, birthdate, username);
+    // let password;
     try {
-      password = bcrypt.hashSync(req.body.password, 10);
+      password = bcrypt.hashSync(req.body.pass, 10);
     } catch (error) {
       // Handle the error appropriately
       console.error('Error hashing password:', error);
@@ -30,7 +31,7 @@ const handleNewUser = (req, res) => {
         return res.status(400).json({ message: 'Please fillup the input fields' });
     }
     db.query("SELECT * FROM newusers WHERE username = ? ", [username], (err, result) => {
-        if(err) return res.sendStatus(500)
+        // if(err) return res.sendStatus(500)
 
         if(result.length > 0){
             return res.status(409).json({ message: 'Username already taken' });
