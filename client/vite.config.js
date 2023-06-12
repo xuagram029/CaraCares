@@ -13,4 +13,9 @@ export default defineConfig({
       external: ['styled-components'],
     },
   },
+  resolve: {
+    alias: {
+      'styled-components': 'styled-components',
+    },
+  },
 });
