@@ -51,6 +51,10 @@ const makeAppointment = (req, res) => {
     }
 
   const { fullName, date, type, number } = req.body;
+  if(!fullName || !date || !type || !number){
+    return res.status(401).json({message: "Please Fill in all the fields"})
+  }
+  
   const photo = req.file ? req.file.filename : null;
 
   db.query("INSERT INTO appointment(`fullName`, `date_s`, `type`, `number`, `photo`) VALUES (?, ?, ?, ?, ?)", [fullName, date, type, number, photo], (err, data) => {

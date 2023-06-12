@@ -13,7 +13,6 @@ function Adminblogs(){
     const handleFile = (e) => {
         setPhoto(e.target.files[0])
     }
-
     const handleSubmit = async(e) => {
         e.preventDefault()
         try {

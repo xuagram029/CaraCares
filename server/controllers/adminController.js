@@ -15,9 +15,13 @@ const getAdmin = (req, res) => {
     }
   });
 };
-
+    
 const regAdmin = (req, res) => {
   const { firstname, lastname, username, email, address, birthdate, pass } = req.body;
+
+  if(!firstname || !lastname || !username || !email || !address || !birthdate || !pass){
+    return res.status(401).json({message: "Please Fill all the fields"})
+  }
 
   bcrypt.hash(pass, saltRounds, (err, hash) => {
     if (err) {
@@ -54,6 +58,9 @@ const regAdmin = (req, res) => {
 const updateAdmin = (req, res) => {
   const id = req.params.id;
   const {firstname, lastname, email, address, birthdate} = req.body;
+  if(!firstname || !lastname || !email || !address || !birthdate){
+    return res.status(401).json({message: "Please Fill all the fields"})
+  }
   db.query("UPDATE admins SET  `firstname` = ?, `lastname` = ?, `email` = ?, `address` = ?, `birthdate` = ? WHERE id = ?", [firstname, lastname, email, address, birthdate, id],
     (err, result) => {
       if (err) {

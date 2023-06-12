@@ -74,7 +74,7 @@ const UserAppointments = () => {
           ),
         },
         {
-          name: "Edit",
+          name: "Accept",
           cell: row => (
             <button onClick={() => acceptAppointment(row.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               ✓

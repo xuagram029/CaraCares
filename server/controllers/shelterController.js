@@ -31,6 +31,10 @@ const getAllShelter = (req, res) => {
 const regShelter = (req, res) => {
   const { name, email, address, username, pass, number } = req.body;
 
+  if(!name || !email || address || !username || !pass || !number){
+    return res.status.json({message: "Please fill in all the fields"})
+  }
+
   bcrypt.hash(pass, saltRounds, (err, hash) => {
     if (err) {
       console.error('Error hashing password:', err);
@@ -65,8 +69,11 @@ const regShelter = (req, res) => {
 
 const updateShelter = (req, res) => {
   const id = req.params.id;
-  const {name, email, address} = req.body;
-  db.query("UPDATE shelter SET  `name` = ?, `email` = ?, `address` = ? WHERE id = ?", [name, email, address, id],
+  const {name, email, address, number} = req.body;
+  if(!name || !email || !address || !number){
+    return res.status(401).json({message: "Please fill in all the fields"})
+  }
+  db.query("UPDATE shelter SET  `name` = ?, `email` = ?, `address` = ?, `number` = ? WHERE id = ?", [name, email, address, number, id],
     (err, result) => {
       if (err) {
         console.error('Error updating shelter:', err);
@@ -75,6 +82,7 @@ const updateShelter = (req, res) => {
       return res.json({ message: "Updated successfully" });
     });
 };
+
 const deleteShelter = (req, res) => {
   const id = req.params.id;
   db.query("DELETE FROM shelter WHERE id = ?", [id],

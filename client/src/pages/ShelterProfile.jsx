@@ -41,7 +41,7 @@ const ShelterProfile = () => {
             window.location.reload()
             console.log(res)
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err.response.data.message))
     }
 
   return (

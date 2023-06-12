@@ -23,7 +23,7 @@ const UserAppointment = () => {
       console.log(res.data.message)
       navigate('/')
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.message);
     }
   }
 
@@ -108,7 +108,7 @@ const UserAppointment = () => {
         </div>
 
         <div>
-          <label for="password">Password</label>
+          <label for="password">Select Agenda</label>
   
           <div class="relative">
             <select name="" id="" className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm' value={type} onChange={(e) => {setType(e.target.value)}}>

@@ -113,7 +113,7 @@ const AdminVisitationReport = () => {
       await axios.post(`http://localhost:8000/typeofpet/${id}`, { visitnumber:number, visitor:name, confirmation, visitdate:date });
       window.location.reload()
     } catch (error) {
-      console.error('Error:', error);
+      console.log(error.response.data.message);
     }
   };
 
@@ -123,7 +123,7 @@ const AdminVisitationReport = () => {
       setModalEv(!modalEv);
       window.location.reload()
     } catch (error) {
-      console.log(error)
+      console.log(error.response.data.message)
     }
     // window.location.reload()
   };
@@ -141,7 +141,6 @@ const AdminVisitationReport = () => {
   // console.log(pet)
   return (
     <div className='flex'>
-
     <Sidebar/>
     <div className='flex flex-col w-full h-screen p-6'>
 

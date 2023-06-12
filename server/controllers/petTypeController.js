@@ -80,6 +80,10 @@ const addVisit = (req, res) => {
   const confirmation = req.body.confirmation;
   const visitdate = req.body.visitdate;
 
+  if(!visitnumber || !visitor || !confirmation || !visitdate){
+    return res.status(401).json({message: "Please fill in all the fields"})
+  }
+
   db.query(
     'INSERT INTO visitation(`visitnumber`, `visitor`, `confirmation`, `visitdate`, `petid`) VALUES (?, ?, ?, ?, ?)',
     [visitnumber, visitor, confirmation, visitdate, petid],
@@ -117,6 +121,10 @@ const editVisit = (req, res) => {
   const visitor = req.body.visitor;
   const confirmation = req.body.confirmation;
   const visitdate = req.body.visitdate;
+
+  if(!visitnumber || !visitor || !confirmation || !visitdate){
+    return res.status(401).json({message:"Please fill in all the fields"})
+  }
 
   db.query(
     'UPDATE visitation SET `visitnumber` = ?, `visitor` = ?, `confirmation` = ?, `visitdate` = ? WHERE id = ?',

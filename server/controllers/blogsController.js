@@ -30,7 +30,10 @@ const addBlog = (req, res) =>{
         const description = req.body.description
         const datecreated = req.body.datecreated
         const photo = req.file ? req.file.filename : null;
-        console.log(title, description, datecreated, photo);
+        if(!title || !description || !datecreated || !photo){
+            return res.status(401).json({message: "Please fill in all the fields"})
+        }
+        
         db.query("INSERT INTO blogs(`title`, `description`, `datecreated`, `photo`) VALUES (?, ?, ?, ?)",
         [title, description, datecreated, photo],
         (err, data) =>{
@@ -45,7 +48,9 @@ const updateBlog = (req, res) =>{
     const title = req.body.title
     const description = req.body.description
     const datecreated = req.body.datecreated
-
+    if(!title || !description || !datecreated){
+        return res.status.json({message: "Please fill in all the fields"})
+    }
     db.query("UPDATE blogs SET `title`= ?, `description` = ?, `datecreated` = ? WHERE id = ?",
     [title, description, datecreated, blogId],
     (err, data) =>{
