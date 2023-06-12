@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from "../context/AuthContext"
-// import useRedirectAdmin from '../custom hooks/useRedirectAdmin'
 import Sidebar from '../components/Sidebar'
 
 
@@ -33,9 +32,10 @@ const AdminPanelEncode = () => {
   const [shelteremail, setShelterEmail] = useState('')
   const [shelteraddress, setShelterAddress] = useState('')
   const [photo, setPhoto] = useState('')
-
+  const [vax, setVax] = useState('')
 
   const handleSubmit = async (e) =>{
+    e.preventDefault()
     try {
       const formData = new FormData()
       formData.append('name', name)
@@ -47,14 +47,14 @@ const AdminPanelEncode = () => {
       formData.append('sheltername', sheltername)
       formData.append('shelteremail', shelteremail)
       formData.append('shelteraddress', shelteraddress)
+      formData.append('vax', vax)
       formData.append('image', photo)
-      await axios.post('http://localhost:8000/admin-encode', formData)
-      window.location.reload()
+      const res = await axios.post('http://localhost:8000/admin-encode', formData)
+      console.log(res.data.message);
+      // window.location.reload()
     } catch (error) {
       console.log(error);
     }
-    // window.location.reload()
-    // navigate('/admin-panel-encode')
   }
   // const res = await axios.get('http://localhost:8000/admin-encode')
 
@@ -120,6 +120,11 @@ const AdminPanelEncode = () => {
               <label className="block text-gray-700 font-bold mb-2" for="email">Type:</label>
               <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="type" type="text"
               value={type} onChange={(e) => {setType (e.target.value)}}/>
+            </div>
+            <div className="mb-6">
+              <label className="block text-gray-700 font-bold mb-2" for="email">Vaccinated:</label>
+              <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="type" type="text"
+              value={vax} onChange={(e) => {setVax (e.target.value)}}/>
             </div>
           </form>
         </div>

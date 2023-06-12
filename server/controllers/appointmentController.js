@@ -12,7 +12,24 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 20, // Set the maximum file size (e.g., 5MB)
+  },
+  fileFilter: function (req, file, cb) {
+    // Set the allowed file types
+    if (
+      file.mimetype === 'image/jpeg' ||
+      file.mimetype === 'image/png' ||
+      file.mimetype === 'application/pdf'
+    ) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type'));
+    }
+  },
+});
 
 const vonage = new Vonage({
   apiKey: "1753cd33",
@@ -43,26 +60,58 @@ const getPendingAppointments = (req, res) => {
   });
 };
 
+// const makeAppointment = (req, res) => {
+//   upload.single('image')(req, res, (err) => {
+//     if (err) {
+//       console.error('Error uploading file:', err);
+//       return res.status(401).json({ error: 'Error uploading file.' });
+//     }
+
+//   const { fullName, date, type, number } = req.body;
+//   const photo = req.file ? req.file.filename : null;
+
+//   db.query("INSERT INTO appointment(`fullName`, `date_s`, `type`, `number`, `photo`) VALUES (?, ?, ?, ?, ?)", [fullName, date, type, number, photo], (err, data) => {
+//     if (err) {
+//       console.error('Error making appointment:', err);
+//       res.status(500).json({ error: 'Failed to make appointment.' });
+//     } else {
+//       res.json({ message: "Appointment sent" });
+//     }
+//   });
+// })
+// };
+
 const makeAppointment = (req, res) => {
-  upload.single('image')(req, res, (err) => {
+  upload.fields([
+    { name: 'image', maxCount: 1 },
+    { name: 'pdf', maxCount: 1 }
+  ])(req, res, (err) => {
     if (err) {
       console.error('Error uploading file:', err);
       return res.status(401).json({ error: 'Error uploading file.' });
     }
 
-  const { fullName, date, type, number } = req.body;
-  const photo = req.file ? req.file.filename : null;
+    const { fullName, date, type, number } = req.body;
+    const photo = req.files['image'] ? req.files['image'][0].filename : null;
+    const pdfFile = req.files['pdf'] ? req.files['pdf'][0].filename : null;
 
-  db.query("INSERT INTO appointment(`fullName`, `date_s`, `type`, `number`, `photo`) VALUES (?, ?, ?, ?, ?)", [fullName, date, type, number, photo], (err, data) => {
-    if (err) {
-      console.error('Error making appointment:', err);
-      res.status(500).json({ error: 'Failed to make appointment.' });
-    } else {
-      res.json({ message: "Appointment sent" });
-    }
+    console.log(fullName, date, type, number, pdfFile);
+
+    db.query(
+      "INSERT INTO appointment(`fullName`, `date_s`, `type`, `number`, `photo`, `pdf`) VALUES (?, ?, ?, ?, ?, ?)",
+      [fullName, date, type, number, photo, pdfFile],
+      (err, data) => {
+        if (err) {
+          console.error('Error making appointment:', err);
+          res.status(500).json({ error: 'Failed to make appointment.' });
+        } else {
+          res.json({ message: "Appointment sent" });
+        }
+      }
+    );
   });
-})
 };
+
 
 const rejectAppointment = (req, res) => {
   const { id } = req.params;

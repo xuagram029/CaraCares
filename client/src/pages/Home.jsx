@@ -13,7 +13,6 @@ function Home() {
 
 
   const { user } = useContext(AuthContext);
-  console.log(user?.resp[0]?.role);
 
   return (
     <div className='home'>

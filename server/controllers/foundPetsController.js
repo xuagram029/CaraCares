@@ -80,8 +80,6 @@ const addFoundPet = (req, res) => {
   });
 };
 
-
-
 const updateFoundPets = (req, res) =>{
     const foundPetId = req.params.id
 

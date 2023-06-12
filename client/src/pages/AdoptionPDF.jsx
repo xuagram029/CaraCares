@@ -3,8 +3,22 @@ import { jsPDF } from "jspdf";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router";
+import axios from 'axios'
 
 function AdoptionPDF() {
+  const [availablePets, setAvailablePets] = useState([])
+  useEffect(() => {
+      const getAvailablePets = async() => {
+          try {
+              const res = await axios('http://localhost:8000/admin-encode/available')
+              console.log(res.data);
+              setAvailablePets(res.data);
+          } catch (error) {
+              console.log(error);
+          }
+      }
+      getAvailablePets()
+  }, [])
   const navigate = useNavigate()
   useEffect(() => {
     const scrollToTop = () => {
@@ -506,15 +520,18 @@ function AdoptionPDF() {
 
 
             <div className="mb-4 pb-4">
-              <label htmlFor="input11">
-                Name of Pet you want to Adopt *
-              </label>
+              <label htmlFor="input11">Name of Pet you want to Adopt *</label>
               <Field
-                type="text"
+                as="select"
                 id="input11"
                 name="input11"
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
-              />
+              >
+                <option value="">Select a pet</option>
+                {availablePets.map((pet) => (
+                  <option key={pet.id} value={pet.name}>{pet.name}</option>
+                ))}
+              </Field>
             </div>
 
             <div className="mb-4 pb-4">

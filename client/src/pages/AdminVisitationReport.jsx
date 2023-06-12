@@ -110,7 +110,7 @@ const AdminVisitationReport = () => {
 
   const addVisit = async (id) => {
     try {
-      await axios.post(`http://localhost:8000/typeofpet/${id}`, { visitnumber:number, visitor:name, confirmation, visitdate:date });
+      await axios.post(`http://localhost:8000/typeofpet/${id}`, { visitor:name, confirmation, visitdate:date });
       window.location.reload()
     } catch (error) {
       console.error('Error:', error);
@@ -137,8 +137,7 @@ const AdminVisitationReport = () => {
       console.log(error)
     }
   }
-  // const petId = pet && pet.length > 0 && pet[0].id
-  // console.log(pet)
+
   return (
     <div className='flex'>
 
@@ -243,8 +242,6 @@ const AdminVisitationReport = () => {
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
                     <div className="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                       <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <label>Visit Number</label>
-                        <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={number} name='number' onChange={(e) => {setNumber(e.target.value)}}/>
                         <label>Visitor Name</label>
                         <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" value={name} name='name' onChange={(e) => {setName(e.target.value)}}/>
                         <label>Visitation Confirmation</label>

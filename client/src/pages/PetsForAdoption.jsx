@@ -19,49 +19,6 @@ const PetsForAdoption = () => {
         }
         getAvailablePets()
     }, [])
-//   const pets = [
-//     {
-//       id: 1,
-//       name: 'Max',
-//       species: 'Cat',
-//       age: 2,
-//       description: 'A playful and friendly cat looking for a loving home.',
-//       image: Max,
-//     },
-//     {
-//       id: 2,
-//       name: 'Blackie',
-//       species: 'Dog',
-//       age: 3,
-//       description: 'An energetic and loyal dog in need of an active family.',
-//       image: Blackie,
-//     },
-//     {
-//         id: 3,
-//         name: 'Blackie',
-//         species: 'Dog',
-//         age: 3,
-//         description: 'An energetic and loyal dog in need of an active family.',
-//         image: Blackie,
-//       },
-//       {
-//         id: 4,
-//         name: 'Blackie',
-//         species: 'Dog',
-//         age: 3,
-//         description: 'An energetic and loyal dog in need of an active family.',
-//         image: Blackie,
-//       },
-//       {
-//         id: 5,
-//         name: 'Blackie',
-//         species: 'Dog',
-//         age: 3,
-//         description: 'An energetic and loyal dog in need of an active family.',
-//         image: Blackie,
-//       },
-//     // Add more pet objects as needed
-//   ];
 
   return (
     <div className='m-6 bg-slate-300 p-12'>
@@ -84,6 +41,7 @@ const PetsForAdoption = () => {
               {pet.type} - {pet.age} years old
             </p>
             <p className="text-gray-800">{pet.gender}</p>
+            <p className="text-gray-800">Vaccinated: {pet.vaccine}</p>
           </div>
           <Link to="/adopt-a-pet">
           <button className="bg-rose-600 border-2 text-white hover:bg-white hover:text-rose-600 hover:border-rose-600 hover:border-2 py-2 px-4 rounded w-1/2 mx-auto m-4">
