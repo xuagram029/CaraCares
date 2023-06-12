@@ -9,9 +9,4 @@ export default defineConfig({
       overlay: false,
     },
   },
-  build: {
-    rollupOptions: {
-      external: ['styled-components'],
-    },
-  },
 });
