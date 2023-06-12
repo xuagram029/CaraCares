@@ -26,11 +26,10 @@ app.use('/uploads', express.static('uploads'));
 // middleware for cookies
 
 // routes
-// app.use('/register', require('./routes/register'))
+app.get("/", (req, res) => {
+    res.send("HELLO FROM CARA")
+})
 app.use('/admin',  require('./routes/admin'))
-// app.use('/login',  require('./routes/auth'))
-// app.use('/refresh',  require('./routes/refresh'))
-// app.use('/logout',  require('./routes/logout'))
 app.use('/blogs', require('./routes/blogs'))
 app.use('/foundpet', require('./routes/foundpet'))
 app.use('/lostpet', require('./routes/lostpet'))
