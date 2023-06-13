@@ -19,7 +19,7 @@ const handleNewUser = (req, res) => {
     console.log(firstname, lastname, email, address, birthdate, username);
     // let password;
     try {
-      const password = bcrypt.hashSync(req.body.pass, 10);
+      password = bcrypt.hashSync(req.body.pass, 10);
     } catch (error) {
       // Handle the error appropriately
       console.error('Error hashing password:', error);
