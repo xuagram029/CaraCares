@@ -33,7 +33,7 @@ const handleNewUser = (req, res) => {
     db.query("SELECT * FROM newusers WHERE username = ? ", [username], (err, result) => {
         // if(err) return res.sendStatus(500)
 
-        if(result.length > 0){
+        if(result && result.length > 0){
             return res.status(409).json({ message: 'Username already taken' });
         }
 
