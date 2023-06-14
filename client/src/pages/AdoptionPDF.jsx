@@ -1,10 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { jsPDF } from "jspdf";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router";
+import axios from 'axios'
+import { AuthContext } from '../context/AuthContext';
+
 
 function AdoptionPDF() {
+  const [availablePets, setAvailablePets] = useState([])
+  const {user} = useContext(AuthContext)
+  const fname = user ? user?.resp[0]?.firstname : ""
+  const lname = user ? user?.resp[0]?.lastname : ""
+  const fullname = fname + " " + lname
+
+  console.log(fullname);
+
+  useEffect(() => {
+      const getAvailablePets = async() => {
+          try {
+              const res = await axios('http://localhost:8000/admin-encode/available')
+              console.log(res.data);
+              setAvailablePets(res.data);
+          } catch (error) {
+              console.log(error);
+          }
+      }
+      getAvailablePets()
+  }, [])
   const navigate = useNavigate()
   useEffect(() => {
     const scrollToTop = () => {
@@ -17,7 +40,7 @@ function AdoptionPDF() {
   }, []);
 
   const initialValues = {
-    input: "",
+    input: fullname,
     input2: "",
     input3: "",
     input4: "",
@@ -269,21 +292,18 @@ function AdoptionPDF() {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
+      {/* <h1>HELLO{fullname}</h1> */}
       {(formik) => (
         <Form className="bg-slate-400">
-          <h1 className="sm:text-3xl md:text-4xl text-2xl font-bold xl:text-5xl text-slate-900 text-center pt-12">
-            ADOPT A PET APPLICATION FORM
-          </h1>
+          <div>
+            <h1 className="sm:text-3xl md:text-4xl text-2xl font-bold xl:text-5xl text-slate-900 text-center pt-12">
+              ADOPT A PET APPLICATION FORM
+            </h1>
+            <h1 className="sm:text-3xl md:text-4xl text-2xl font-bold xl:text-5xl text-slate-900 text-center pt-12">
+              WELCOME {fullname}
+            </h1>
+          </div>
           <div className="m-12 bg-primary  p-10 h-full w-[55%] mx-auto rounded-md">
-            <div className="mb-4 pb-4">
-              <label htmlFor="input">Full Name *</label>
-              <Field
-                id="input"
-                name="input"
-                className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
-                placeholder="Last Name, First Name, Middle Initial"
-              />
-            </div>
             <div className="mb-4 pb-4">
               <label htmlFor="input2">Address: *</label>
               <Field
@@ -506,15 +526,18 @@ function AdoptionPDF() {
 
 
             <div className="mb-4 pb-4">
-              <label htmlFor="input11">
-                Name of Pet you want to Adopt *
-              </label>
+              <label htmlFor="input11">Name of Pet you want to Adopt *</label>
               <Field
-                type="text"
+                as="select"
                 id="input11"
                 name="input11"
                 className="focus:outline-none focus:shadow-outline border rounded-lg py-2 px-3 w-full"
-              />
+              >
+                <option value="" hidden>Select a Pet</option>
+                {availablePets.map((pet) => (
+                  <option key={pet.id} value={pet.name}>{pet.name}</option>
+                ))}
+              </Field>
             </div>
 
             <div className="mb-4 pb-4">

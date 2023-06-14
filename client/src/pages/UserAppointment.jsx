@@ -8,6 +8,7 @@ const UserAppointment = () => {
   const [type, setType] = useState("")
   const [number, setNumber] = useState("")
   const [photo, setPhoto] = useState('')
+  const [pdf, setPdf] = useState(null)
   const navigate = useNavigate()
 
   const handleSubmit = async (e) =>{
@@ -19,16 +20,22 @@ const UserAppointment = () => {
       formData.append('type', type)
       formData.append('number', number)
       formData.append('image', photo)
+      formData.append('pdf', pdf)
+
       const res = await axios.post('http://localhost:8000/appointment', formData)
       console.log(res.data.message)
       navigate('/')
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(error);
     }
   }
 
   const handleFile = (e) => {
     setPhoto(e.target.files[0])
+  }
+
+  const handlePdfUpload = (e) => {
+    setPdf(e.target.files[0])
   }
 
   return (
@@ -77,7 +84,19 @@ const UserAppointment = () => {
   
           </div>
         </div>
-  
+
+        <div>
+            <label htmlFor="pdf">PDF File: </label>
+            <div className="relative">
+              <input
+                onChange={handlePdfUpload}
+                type="file"
+                accept=".pdf"
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              />
+            </div>
+        </div>
+
         <div>
           <label for="password">Appointment Date</label>
   
@@ -85,7 +104,7 @@ const UserAppointment = () => {
             <input
               value={date}
               onChange={(e) => {setDate(e.target.value)}}
-              type="date"
+              type="datetime-local"
               class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
             />
   
@@ -108,7 +127,7 @@ const UserAppointment = () => {
         </div>
 
         <div>
-          <label for="password">Select Agenda</label>
+          <label for="password">Password</label>
   
           <div class="relative">
             <select name="" id="" className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm' value={type} onChange={(e) => {setType(e.target.value)}}>

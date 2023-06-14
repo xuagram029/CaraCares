@@ -24,7 +24,7 @@ function FoundReport(){
         } else if (fileInput === 'photo2') {
           setPhoto2(file);
         }
-      };
+    };
 
       const handleSubmit = async (e) => {
         e.preventDefault();

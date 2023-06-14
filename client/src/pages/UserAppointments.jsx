@@ -4,6 +4,9 @@ import Sidebar from '../components/Sidebar'
 import { RiUserSearchLine } from 'react-icons/ri';
 import { AiOutlineClose } from 'react-icons/ai';
 import axios from '../api/axios';
+import { Document, Page } from 'react-pdf';
+import { useNavigate } from 'react-router';
+
 
 const UserAppointments = () => {
     
@@ -11,6 +14,9 @@ const UserAppointments = () => {
     const [ filteredAppointments, setFilteredAppointments] = useState([])
     const [ imgModal, setImgModal] = useState(false)
     const [selectedPhoto, setSelectedPhoto] = useState('');
+    const [selectedPdf, setSelectedPdf] = useState('');
+    const [pdfModal, setPdfModal] = useState(false);
+    const navigate = useNavigate()
 
     useEffect(()=>{
         const getAppointments = async() =>{
@@ -38,7 +44,11 @@ const UserAppointments = () => {
         const res = await axios.delete(`http://localhost:8000/appointment/${id}`)
         console.log(res.data.message)
     }
-    
+
+    const redirectToPdf = (pdf) => {
+      window.open(`http://localhost:8000/uploads/${pdf}`, '_blank');
+    }
+
     const columns = [
         {
             name: 'Full Name',
@@ -74,7 +84,20 @@ const UserAppointments = () => {
           ),
         },
         {
-          name: "Accept",
+          name: 'PDF',
+          cell: (row) => (
+            <button
+              className="bg-[#00DFA2] hover:bg-[#36AE7C] text-white font-bold py-2 px-4 rounded"
+              onClick={() => {
+                redirectToPdf(row.pdf)
+              }}
+            >
+              View PDF
+            </button>
+          ),
+        },
+        {
+          name: "Edit",
           cell: row => (
             <button onClick={() => acceptAppointment(row.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               ✓
@@ -131,6 +154,24 @@ const UserAppointments = () => {
             </button>
           </div>
         }
+        {pdfModal && (
+          <div className="inset-0 w-full h-screen bg-[rgba(49,49,49,0.8)] z-50 fixed flex justify-center items-center">
+            <div className="absolute bg-white p-4 rounded shadow-lg">
+              <button
+                className="bg-rose-400 text-2xl text-white rounded-sm absolute top-0 right-0 mt-2 mr-2"
+                onClick={() => {
+                  setPdfModal(false);
+                }}
+              >
+                <AiOutlineClose />
+              </button>
+              <Document file={`http://localhost:8000/uploads/${selectedPdf}`}>
+                <Page pageNumber={1} />
+              </Document>
+            </div>
+          </div>
+        )}
+
     </div>
   )
 }

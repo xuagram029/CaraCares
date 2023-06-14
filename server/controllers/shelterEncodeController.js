@@ -38,10 +38,11 @@ const addEncodedPet = (req, res) => {
     const shelteremail = req.body.shelteremail;
     const shelteraddress = req.body.shelteraddress;
     const type = req.body.type;
+    const vax = req.body.vax;
     const photo = req.file ? req.file.filename : null;
 
     db.query(
-      'INSERT INTO shelterencode(`name`, `gender`, `color`, `age`, `type`, `shelternumber`, `sheltername`, `shelteremail`, `shelteraddress`, `photo`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      'INSERT INTO shelterencode(`name`, `gender`, `color`, `age`, `type`, `shelternumber`, `sheltername`, `shelteremail`, `shelteraddress`, `photo`, `vaccine`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
       [
         name,
         gender,
@@ -53,13 +54,14 @@ const addEncodedPet = (req, res) => {
         shelteremail,
         shelteraddress,
         photo,
+        vax
       ],
       (err, data) => {
         if (err) {
           console.error('Error adding encoded pet:', err);
           return res.status(500).json({ error: 'Failed to add encoded pet.' });
         }
-        res.json(data);
+        res.json({message: "Added successfully"});
       }
     );
   });

@@ -75,27 +75,39 @@ const deletePet = (req, res) => {
 
 const addVisit = (req, res) => {
   const petid = req.params.id;
-  const visitnumber = req.body.visitnumber;
   const visitor = req.body.visitor;
   const confirmation = req.body.confirmation;
   const visitdate = req.body.visitdate;
 
-  if(!visitnumber || !visitor || !confirmation || !visitdate){
-    return res.status(401).json({message: "Please fill in all the fields"})
-  }
-
+  // Retrieve the latest visit number for the pet from the database
   db.query(
-    'INSERT INTO visitation(`visitnumber`, `visitor`, `confirmation`, `visitdate`, `petid`) VALUES (?, ?, ?, ?, ?)',
-    [visitnumber, visitor, confirmation, visitdate, petid],
+    'SELECT MAX(visitnumber) AS latestVisitNumber FROM visitation WHERE petid = ?',
+    [petid],
     (err, data) => {
       if (err) {
-        console.error('Error adding visit:', err);
+        console.error('Error retrieving latest visit number:', err);
         return res.status(500).json({ error: 'Failed to add visit.' });
       }
-      res.json({ message: 'Visitation Confirmed' });
+
+      // Calculate the new visit number based on the latest visit number
+      const visitnumber = data[0].latestVisitNumber ? data[0].latestVisitNumber + 1 : 1;
+
+      // Insert the new visit into the database
+      db.query(
+        'INSERT INTO visitation(`visitnumber`, `visitor`, `confirmation`, `visitdate`, `petid`) VALUES (?, ?, ?, ?, ?)',
+        [visitnumber, visitor, confirmation, visitdate, petid],
+        (err, data) => {
+          if (err) {
+            console.error('Error adding visit:', err);
+            return res.status(500).json({ error: 'Failed to add visit.' });
+          }
+          res.json({ message: 'Visitation Confirmed' });
+        }
+      );
     }
   );
 };
+
 
 const getVisits = (req, res) => {
   const id = req.params.id;
@@ -117,18 +129,13 @@ const getVisits = (req, res) => {
 
 const editVisit = (req, res) => {
   const id = req.params.id;
-  const visitnumber = req.body.visitnumber;
   const visitor = req.body.visitor;
   const confirmation = req.body.confirmation;
   const visitdate = req.body.visitdate;
 
-  if(!visitnumber || !visitor || !confirmation || !visitdate){
-    return res.status(401).json({message:"Please fill in all the fields"})
-  }
-
   db.query(
-    'UPDATE visitation SET `visitnumber` = ?, `visitor` = ?, `confirmation` = ?, `visitdate` = ? WHERE id = ?',
-    [visitnumber, visitor, confirmation, visitdate, id],
+    'UPDATE visitation SET `visitor` = ?, `confirmation` = ?, `visitdate` = ? WHERE id = ?',
+    [visitor, confirmation, visitdate, id],
     (err, result) => {
       if (err) {
         console.error('Error editing visit:', err);
