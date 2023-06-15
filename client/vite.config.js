@@ -7,15 +7,16 @@ export default defineConfig({
     hmr: {
       overlay: false,
     },
-  },
-  build: {
-    rollupOptions: {
-      external: ['styled-components'],
-    },
-  },
-  resolve: {
-    alias: {
-      'styled-components': 'styled-components',
-    },
-  },
+  }
+  // },
+  // build: {
+  //   rollupOptions: {
+  //     external: ['styled-components'],
+  //   },
+  // },
+  // resolve: {
+  //   alias: {
+  //     'styled-components': 'styled-components',
+  //   },
+  // },
 });
