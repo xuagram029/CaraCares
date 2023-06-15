@@ -23,7 +23,7 @@ function Adminblogs(){
             formData.append('datecreated', datecreated)
             formData.append('image', photo)
 
-            await axios.post('https://caracares.onrender.com/blogs', formData)
+            await axios.post('http://localhost:8000/blogs', formData)
             navigate('/admin-dashboard')
         } catch (error) {
             console.log(error);
