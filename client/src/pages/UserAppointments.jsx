@@ -23,6 +23,7 @@ const UserAppointments = () => {
           const res = await axios.get('http://localhost:8000/appointment/pendings')
             setAppointments(res.data)
             setFilteredAppointments(res.data)
+            console.log(res.data);
         }
         getAppointments()
       },[])
@@ -61,9 +62,13 @@ const UserAppointments = () => {
             sortable: true
         },
         {
-            name: "Date",
-            selector: row => new Date(row.date_s).toLocaleString(),
-            sortable: true
+          name: "Date",
+          selector: row => {
+              const date = new Date(row.date_s);
+              const options = { month: '2-digit', day: '2-digit', year: 'numeric' };
+              return date.toLocaleDateString('en-US', options);
+          },
+          sortable: true
         },
         {
             name: "Agenda",
@@ -97,7 +102,7 @@ const UserAppointments = () => {
           ),
         },
         {
-          name: "Edit",
+          name: "Accept",
           cell: row => (
             <button onClick={() => acceptAppointment(row.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               ✓
@@ -106,7 +111,7 @@ const UserAppointments = () => {
           button: true
         },
         {
-          name: "Delete",
+          name: "Decline",
           cell: row => (
             <button onClick={() => rejectAppointment(row.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
               X

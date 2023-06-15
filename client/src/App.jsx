@@ -63,6 +63,7 @@ import BlogAllpost from './pages/BlogsAllpost';
 import BlogSeemore from './pages/BlogSeemore';
 import Adminblogs from './pages/Adminblogs';
 import ShelterProfile from './pages/ShelterProfile';
+import SwitchLogin from './pages/SwitchLogin';
 
 function App() {
 
@@ -182,6 +183,10 @@ const Layout = () => {
     {
       path: '/available-pets',
       element: <AvailablePets />
+    },
+    {
+      path: '/login-as',
+      element: <SwitchLogin />
     },
     {
       path: "/pets-for-adoption",

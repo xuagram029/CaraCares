@@ -42,6 +42,9 @@ const PetsForAdoption = () => {
             </p>
             <p className="text-gray-800">{pet.gender}</p>
             <p className="text-gray-800">Vaccinated: {pet.vaccine}</p>
+            <Link to='https://www.petmd.com/dog/care/evr_dg_to_vaccinate_or_not_a_vets_perspective'>
+              <p className="text-red-500">To know more about vaccines</p>
+            </Link>
           </div>
           <Link to="/adopt-a-pet">
           <button className="bg-rose-600 border-2 text-white hover:bg-white hover:text-rose-600 hover:border-rose-600 hover:border-2 py-2 px-4 rounded w-1/2 mx-auto m-4">

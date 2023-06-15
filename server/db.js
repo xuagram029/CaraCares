@@ -10,7 +10,6 @@ const db = mysql.createConnection({
     user:"root",
     password:"1234",
     database:"cara_db",
-    port: "3306"
 })
 
 db.connect((err) => {

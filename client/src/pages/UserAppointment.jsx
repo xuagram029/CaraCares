@@ -9,6 +9,7 @@ const UserAppointment = () => {
   const [number, setNumber] = useState("")
   const [photo, setPhoto] = useState('')
   const [pdf, setPdf] = useState(null)
+  const [time, setTime] = useState('')
   const navigate = useNavigate()
 
   const handleSubmit = async (e) =>{
@@ -17,6 +18,7 @@ const UserAppointment = () => {
       const formData = new FormData()
       formData.append('fullName', name)
       formData.append('date', date)
+      formData.append('time', time)
       formData.append('type', type)
       formData.append('number', number)
       formData.append('image', photo)
@@ -104,10 +106,31 @@ const UserAppointment = () => {
             <input
               value={date}
               onChange={(e) => {setDate(e.target.value)}}
-              type="datetime-local"
+              type="date"
               class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
             />
   
+          </div>
+        </div>
+
+        <div>
+          <label for="password">Time</label>
+          <div class="relative">
+            <select name="" id="" 
+            onChange={(e) => {setTime(e.target.value)}}
+            className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'>
+              <option value=""> --SELECT-- </option>
+              <option value="8">8am</option>
+              <option value="9">9am</option>
+              <option value="10">10am</option>
+              <option value="11">11am</option>
+              <option value="12">12am</option>
+              <option value="1">1pm</option>
+              <option value="2">2pm</option>
+              <option value="3">3pm</option>
+              <option value="4">4pm</option>
+              <option value="5">5pm</option>
+            </select>
           </div>
         </div>
 
@@ -127,7 +150,7 @@ const UserAppointment = () => {
         </div>
 
         <div>
-          <label for="password">Password</label>
+          <label for="password">Agenda</label>
   
           <div class="relative">
             <select name="" id="" className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm' value={type} onChange={(e) => {setType(e.target.value)}}>

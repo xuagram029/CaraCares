@@ -19,7 +19,7 @@ const AdminDashboard = () => {
     // if(user?.resp[0]?.role === 'shelter'){
     //   console.log('i am shelter');
     // }
-    console.log(user?.resp[0]?.role);
+    // console.log(user?.resp[0]?.role)
 
 
     useEffect(() => {
@@ -42,8 +42,8 @@ const AdminDashboard = () => {
     }, [])
 
 
-  console.log(user?.resp[0]?.role)
-  console.log(user?.resp[0]?.name)
+  // console.log(user?.resp[0]?.role)
+  // console.log(user?.resp[0]?.name)
   
 
   return (
