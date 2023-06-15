@@ -19,7 +19,7 @@ const UserSignup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('https://caracares.onrender.com/user ', {firstname, lastname, email, address, birthdate, username, pass:password})
+        axios.post('http://localhost:8000/user ', {firstname, lastname, email, address, birthdate, username, pass:password})
         .then(res => {
             console.log(res.data.message)
             navigate('/user-login')
