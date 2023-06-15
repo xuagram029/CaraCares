@@ -94,22 +94,31 @@ const makeAppointment = (req, res) => {
     const { fullName, date, type, number, time } = req.body;
     const photo = req.files['image'] ? req.files['image'][0].filename : null;
     const pdfFile = req.files['pdf'] ? req.files['pdf'][0].filename : null;
-
-    console.log(fullName, date, type, number, pdfFile);
-
-    db.query(
-      "INSERT INTO appointment(`fullName`, `date_s`, `type`, `number`, `photo`, `pdf`, `time`) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [fullName, date, type, number, photo, pdfFile, time],
-      (err, data) => {
-        if (err) {
-          console.error('Error making appointment:', err);
-          res.status(500).json({ error: 'Failed to make appointment.' });
-        } else {
-          res.json({ message: "Appointment sent" });
-        }
+    
+    db.query("SELECT * FROM appointment WHERE time = ? AND date_s = ?", [time, date], (err, resp) => {
+      if (err) return res.status(500).json({message: "Error checking appointment availability"});
+      if (resp.length > 0) {
+        return res
+          .status(401)
+          .json({
+            message:
+              "The time you choose is not available, please book another time",
+          });
       }
-    );
-  });
+        db.query(
+          "INSERT INTO appointment(`fullName`, `date_s`, `type`, `number`, `photo`, `pdf`, `time`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+          [fullName, date, type, number, photo, pdfFile, time],
+          (err, data) => {
+            if (err) {
+              console.error('Error making appointment:', err);
+              return res.status(500).json({ error: 'Failed to make appointment.' });
+            } else {
+              return res.json({ message: "Appointment sent" });
+            }
+          }
+        );
+      });
+    })
 };
 
 

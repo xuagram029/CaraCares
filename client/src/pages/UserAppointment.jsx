@@ -14,6 +14,7 @@ const UserAppointment = () => {
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
+    console.log(name, date, time, type, number, photo, pdf);
     try {
       const formData = new FormData()
       formData.append('fullName', name)
@@ -28,7 +29,7 @@ const UserAppointment = () => {
       console.log(res.data.message)
       navigate('/')
     } catch (error) {
-      console.log(error);
+      alert(error.response.data.message);
     }
   }
 
@@ -120,16 +121,14 @@ const UserAppointment = () => {
             onChange={(e) => {setTime(e.target.value)}}
             className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'>
               <option value=""> --SELECT-- </option>
-              <option value="8">8am</option>
-              <option value="9">9am</option>
-              <option value="10">10am</option>
-              <option value="11">11am</option>
-              <option value="12">12am</option>
-              <option value="1">1pm</option>
-              <option value="2">2pm</option>
-              <option value="3">3pm</option>
-              <option value="4">4pm</option>
-              <option value="5">5pm</option>
+              <option value="8am">8am</option>
+              <option value="9am">9am</option>
+              <option value="10am">10am</option>
+              <option value="11am">11am</option>
+              <option value="1pm">1pm</option>
+              <option value="2pm">2pm</option>
+              <option value="3pm">3pm</option>
+              <option value="4pm">4pm</option>
             </select>
           </div>
         </div>

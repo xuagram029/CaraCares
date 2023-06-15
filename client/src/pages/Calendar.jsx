@@ -33,6 +33,7 @@ const Calendar = () => {
         id: event.fullname,
         title: event.type,
         start: event.date_s,
+        time: event.time,
       }));
       setEvents(transformedEvents);
     } catch (error) {
@@ -42,12 +43,12 @@ const Calendar = () => {
 
   const eventContent = (eventInfo) => {
     const formattedStart = eventInfo.timeText.toLocaleString([], { timeStyle: 'short' }) // Format the date
-
+    const eventTime = eventInfo.event.extendedProps.time;
     // eventInfo.timeText
     // console.log(eventInfo.timeText.toLocaleString([], { timeStyle: 'short' }))
     return (
       <div className='text-white w-full text-center bg-rose-500 rounded-lg p-2'>
-        <b>Time: {formattedStart}</b>
+        <b>Time: {eventTime}</b>
         <p className='-ml-1'><b>Agenda:</b> {eventInfo.event.title}</p>
         <p><b>name:</b> {eventInfo.event.id}</p>
       </div>

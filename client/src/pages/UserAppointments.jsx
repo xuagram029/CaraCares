@@ -71,8 +71,8 @@ const UserAppointments = () => {
           sortable: true
         },
         {
-            name: "Agenda",
-            selector: row => row.type,
+            name: "Time",
+            selector: row => row.time,
             sortable: true
         },
         {
