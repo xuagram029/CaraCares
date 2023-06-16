@@ -31,7 +31,7 @@ const PetsForAdoption = () => {
           className="p-4 bg-white shadow-md rounded-lg flex flex-col justify-between"
         >
           <img
-            className="w-[300px] h-[300px] object-cover mb-4 rounded-lg mx-auto"
+            className="w-[300px] h-[300px] object-cover mb-4 rounded-lg"
             src={`http://localhost:8000/uploads/${pet.photo}`}
             alt={pet.name}
           />
@@ -42,16 +42,15 @@ const PetsForAdoption = () => {
             </p>
             <p className="text-gray-800">{pet.gender}</p>
             <p className="text-gray-800">Vaccinated: {pet.vaccine}</p>
+            <Link to='https://www.petmd.com/dog/care/evr_dg_to_vaccinate_or_not_a_vets_perspective'>
+              <p className="text-red-500">To know more about vaccines</p>
+            </Link>
           </div>
-
-          <div className='p-5' >
           <Link to="/adopt-a-pet">
-          <button className="bg-rose-600 border-2 text-white hover:bg-white hover:text-rose-600 hover:border-rose-600 hover:border-2 py-2 px-4 rounded w-1/2 mx-auto">
+          <button className="bg-rose-600 border-2 text-white hover:bg-white hover:text-rose-600 hover:border-rose-600 hover:border-2 py-2 px-4 rounded w-1/2 mx-auto m-4">
             Adopt Me
           </button>
           </Link>
-          </div>
-
         </div>
       ))}
     </div>

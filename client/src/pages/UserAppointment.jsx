@@ -9,14 +9,17 @@ const UserAppointment = () => {
   const [number, setNumber] = useState("")
   const [photo, setPhoto] = useState('')
   const [pdf, setPdf] = useState(null)
+  const [time, setTime] = useState('')
   const navigate = useNavigate()
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
+    console.log(name, date, time, type, number, photo, pdf);
     try {
       const formData = new FormData()
       formData.append('fullName', name)
       formData.append('date', date)
+      formData.append('time', time)
       formData.append('type', type)
       formData.append('number', number)
       formData.append('image', photo)
@@ -26,7 +29,7 @@ const UserAppointment = () => {
       console.log(res.data.message)
       navigate('/')
     } catch (error) {
-      console.log(error);
+      alert(error.response.data.message);
     }
   }
 
@@ -104,10 +107,29 @@ const UserAppointment = () => {
             <input
               value={date}
               onChange={(e) => {setDate(e.target.value)}}
-              type="datetime-local"
+              type="date"
               class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
             />
   
+          </div>
+        </div>
+
+        <div>
+          <label for="password">Time</label>
+          <div class="relative">
+            <select name="" id="" 
+            onChange={(e) => {setTime(e.target.value)}}
+            className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'>
+              <option value=""> --SELECT-- </option>
+              <option value="8am">8am</option>
+              <option value="9am">9am</option>
+              <option value="10am">10am</option>
+              <option value="11am">11am</option>
+              <option value="1pm">1pm</option>
+              <option value="2pm">2pm</option>
+              <option value="3pm">3pm</option>
+              <option value="4pm">4pm</option>
+            </select>
           </div>
         </div>
 
@@ -127,7 +149,7 @@ const UserAppointment = () => {
         </div>
 
         <div>
-          <label for="password">Password</label>
+          <label for="password">Agenda</label>
   
           <div class="relative">
             <select name="" id="" className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm' value={type} onChange={(e) => {setType(e.target.value)}}>

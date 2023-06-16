@@ -202,7 +202,7 @@ function Navbar() {
         !user &&
           <div className="flex">
           
-            <Link to="/user-login"><button className="bg-rose-600 rounded-full text-white w-[100px] border-2 border-rose-600 p-2 mr-3">Login</button></Link>
+            <Link to="/login-as"><button className="bg-rose-600 rounded-full text-white w-[100px] border-2 border-rose-600 p-2 mr-3">Login</button></Link>
             <Link to="/user-signup"><button className="bg-white rounded-full text-rose-600 w-[100px] border-2 border-rose-600 p-2">Register</button></Link>
             
           </div>     
